@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>test2</title>
 </head>
 <body>
 	<h3>test2</h3>
 	<input type="text" name="id" id="id" placeholder="id">
 	<input type="password" name="pw" id="pw" placeholder="password">
-	<input type="text" name="addr" id="addr" placeholder="ÁÖ¼Ò ÀÔ·Â">
+	<input type="text" name="addr" id="addr" placeholder="ì£¼ì†Œ ì…ë ¥">
 </body>
-	<input type="button" value="¿Ï·á" onclick="test()">
+	<input type="button" value="ì™„ë£Œ" onclick="test()">
 </html>
