@@ -9,9 +9,11 @@ public class LoginController {
 	
 	@GetMapping("login")
 	public String login() {
-		System.out.println("client get request : ");
-		System.out.println("commit Test");
-		return "login/login";
+		return "/login/loginForm";
 	}
-
+	
+	@GetMapping("register")
+	public String register() {
+		return "/login/memberJoinForm";
+	}
 }
