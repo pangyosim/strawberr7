@@ -4,11 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HomeController {
+public class PartyController {
 	
-	@GetMapping("/")
-	public String main() {
-		return "/main/index";
+	@GetMapping("partydetail")
+	public String getPartyDetail() {
+		return "/partypage/partydetail";
 	}
-	
 }
