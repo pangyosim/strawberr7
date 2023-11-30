@@ -1,13 +1,21 @@
 package com.web.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.web.service.MemberService;
+import com.web.vo.MemberVO;
+
 @Controller
 public class LoginController {
-
+	
+	@Autowired
+	private MemberService ms;
 	
 	@GetMapping("login")
 	public String login() {
@@ -18,6 +26,16 @@ public class LoginController {
 	public String register() {
 		return "/login/memberJoinForm";
 	}
+	@GetMapping("service")
+	public String service() {
+		List<MemberVO> list = ms.doMemberList();
+		for(MemberVO vo : list) {
+			System.out.println("ID : " + vo.getId() + ", NAME : " + vo.getName() + ", ROLE : " + vo.getRole() );
+			
+		}
+		return "/main/index";
+	}
+	
 	
 	@PostMapping("memberJoinResult")
 	public void memberJoinResult(@RequestParam("loginId") String id, 
