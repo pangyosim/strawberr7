@@ -12,20 +12,16 @@
 <body style="background-color: black;">
 <c:import url="../main/header.jsp"/>
 <!-- 이름 / 연락처 / 주민번호 / 출금계좌  -->
-<form action="" method="post" style="margin-top: 150px; text-align: center;">
+<form action="groupJoinResult" method="post" style="margin-top: 150px; text-align: center;">
 	<div class="">
-		<input type="text" id="" name="" placeholder="성함">
+		<input type="text" id="name" name="name" placeholder="성함">
 	</div>
 	<div class="">
-		<input type="text" id="" name="" placeholder="주민번호">
-		<button onclick="">주민번호 확인</button>
+		<input type="text" id="bank" name="bank" placeholder="은행" >
+		<button onclick="">은행 확인</button>
 	</div>
 	<div class="">
-		<input type="text" id="" name="" placeholder="연락처" readonly>
-		<button onclick="">연락처 확인</button>
-	</div>
-	<div class="">
-		<input type="text" id="" name="" placeholder="출금계좌">
+		<input type="text" id="acount" name="acount" placeholder="출금계좌">
 	</div>
 	<input type="submit" value="완료">
 </form>

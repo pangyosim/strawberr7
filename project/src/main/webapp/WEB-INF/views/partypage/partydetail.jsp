@@ -17,5 +17,6 @@
 		</div>
 		<input type="button" onclick="location.href='/'" value="목 록"> &nbsp;&nbsp;&nbsp; <input type="submit" value="결제 요청"/>
 	</form>
+	
 </body>
 </html>
