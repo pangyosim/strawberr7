@@ -7,27 +7,46 @@
 <head>
 <meta charset="UTF-8">
 <title>memberJoinForm.jsp</title>
+<script type="text/javascript" src="resources/js/partyScript.js"></script>
+<style>
+  #toc-content {
+    display: none;
+  }
+  #toc-toggle {
+    cursor: pointer;
+    color: #2962ff;
+  }
+  #toc-toggle:hover {
+    text-decoration: underline;
+  }
+</style>
 <link href="resources/css/styles.css" rel="stylesheet" />
 </head>
 <body style="background-color: black;">
 <c:import url="../main/header.jsp"/>
 <!-- 이름 / 연락처 / 주민번호 / 출금계좌  -->
-<form action="" method="post" style="margin-top: 150px; text-align: center;">
+<form action="groupJoinResult" method="post" style="margin-top: 150px; text-align: center;">
 	<div class="">
-		<input type="text" id="" name="" placeholder="성함">
+		<input type="text" id="name" name="name" placeholder="성함">
 	</div>
 	<div class="">
-		<input type="text" id="" name="" placeholder="주민번호">
-		<button onclick="">주민번호 확인</button>
+		<input type="text" id="bank" name="bank" placeholder="은행" >
+		<button onclick="">은행 확인</button>
 	</div>
 	<div class="">
-		<input type="text" id="" name="" placeholder="연락처" readonly>
-		<button onclick="">연락처 확인</button>
-	</div>
-	<div class="">
-		<input type="text" id="" name="" placeholder="출금계좌">
+		<input type="text" id="acount" name="acount" placeholder="계좌번호">
 	</div>
 	<input type="submit" value="완료">
 </form>
-</body>
+<script>
+  function openCloseToc() {
+    if(document.getElementById('toc-content').style.display === 'block') {
+      document.getElementById('toc-content').style.display = 'none';
+      document.getElementById('toc-toggle').textContent = '약관 동의';
+    } else {
+      document.getElementById('toc-content').style.display = 'block';
+      document.getElementById('toc-toggle').textContent = '약관 동의';
+    }
+  }
+</script>
 </html>

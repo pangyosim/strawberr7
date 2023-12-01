@@ -1,4 +1,4 @@
-<!-- board/memberJoinForm.jsp -->
+<!-- login/memberJoinForm.jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -10,87 +10,20 @@
 <title>memberJoinForm.jsp</title>
 <!-- 카카오 로그인바API -->
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js"
-  integrity="sha384-kYPsUbBPlktXsY6/oNHSUDZoTX6+YI51f63jCPEIPFP09ttByAdxd2mEjKuhdqn4" crossorigin="anonymous"></script>
+  integrity="sha384-kYPsUbBPlktXsY6/oNHSUDZoTX6+YI51f63jCPEIPFP09ttByAdxd2mEjKuhdqn4" crossorigin="anonymous">
+</script>
 <script>
   Kakao.init('c089c8172def97eb00c07217cae17495'); // 사용하려는 앱의 JavaScript 키 입력
 </script>
+
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<!-- 테스트 -->
-<script type="text/javascript">
-/* 전화번호'-'자동으로 변경, 숫자외 입력 불가' */
-function oninputPhone(target) {
-    target.value = target.value
-        .replace(/[^0-9]/g, '')
-        .replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, "$1-$2-$3");
-}
 
-// 회원가입 데이터 확인(아이디, 비밀번호, 비밀번호 확인, 이메일 입력 여부 확인)
-function memberJoinFormCheck() {
-    // 아이디
-    var loginId = document.getElementById('loginId');
-    if(loginId.value == '') {
-        alert('아이디를 입력해주세요.');
-        loginId.focus();
-        return false;
-    }
-
-    // 비밀번호
-    var loginPw = document.getElementById('loginPw');
-    if(loginPw.value == '') {
-        alert('비밀번호를 입력해주세요.');
-        loginPw.focus();
-        return false;
-    }
-
-    // 비밀번호 확인
-    var loginPwConfirm = document.getElementsByName('loginPwConfirm')[0];
-    if(loginPwConfirm.value == '') {
-        alert('비밀번호 확인을 입력해주세요.');
-        loginPwConfirm.focus();
-        return false;
-    }
-
-    // 비밀번호 일치 확인
-    if(loginPw.value != loginPwConfirm.value) {
-        alert('비밀번호가 일치하지 않습니다.');
-        loginPwConfirm.focus();
-        return false;
-    }
-
-    // 이름
-    var name = document.getElementById('name');
-    if(name.value == '') {
-        alert('이름을 입력해주세요.');
-        name.focus();
-        return false;
-    }
-
-    // 이메일
-    var email_first = document.getElementsByClassName('email_first')[0];
-    var email_last = document.getElementsByClassName('email_last')[0];
-    if(email_first.value == '' || email_last.value == 'none') {
-        alert('이메일을 입력해주세요.');
-        email_first.focus();
-        return false;
-    }
-
-    // 이메일 형식 확인
-    var email = email_first.value + "@" + email_last.value;
-    var regex = /^[\w]([-_.]?[\w])*@[\w]([-_.]?[\w])*\.[a-zA-Z]{2,3}$/i;
-    if (!regex.test(email)) {
-        alert('이메일 형식이 올바르지 않습니다.');
-        email_first.focus();
-        return false;
-    }
-
-    // 모든 검증을 통과하면 form을 제출
-    document.querySelector('form').submit();
-}
-</script>
+<script type="text/javascript" src="resources/js/loginScript.js?v=1"></script>
 
 </head>
 <link href="resources/css/memberJoinForm.css" rel="stylesheet" />
 <body style="text-align: center;">
+<c:import url="../main/header.jsp"/>
 <div class="">
 	<h2>회원가입</h2>
 	<!-- 카카오~ -->
@@ -138,7 +71,7 @@ function memberJoinFormCheck() {
         <input type="text" class="form-control" id="tel" name="tel" placeholder="전화번호" oninput="oninputPhone(this)" maxlength="13">
     </div>
     <div class="textForm">
-        <input type="text" class="email_first" id="email" name="email" placeholder="이메일" name="" maxlength="20">
+        <input type="text" class="email_first" id="email" name="email" placeholder="이메일" name="" maxlength="20"> @
         <select class="email_last" id="domain" name="domain">
             <option value="none">-------이메일-------</option>
             <option value="naver.com">naver.com</option>
@@ -148,6 +81,7 @@ function memberJoinFormCheck() {
     <input type="button" value="회원가입" onclick="memberJoinFormCheck()"/>
 </form>
 </div>
+<c:import url="../main/footer.jsp"/>
 </body>
 <style type="text/css">
 /* SECTION - BIRTH */

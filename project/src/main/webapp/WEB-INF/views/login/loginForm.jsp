@@ -1,4 +1,4 @@
-<!-- board/loginForm.jsp -->
+<!-- login/loginForm.jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -53,6 +53,8 @@
 	<p id="token-result"></p>
   </form>
 </div>
+<c:import url="../main/footer.jsp"/>
+
 </body>
 <!-- 카카오 자바스크립트 -->
 <script type="text/javascript">
