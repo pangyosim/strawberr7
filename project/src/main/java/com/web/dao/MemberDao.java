@@ -11,4 +11,8 @@ import com.web.vo.MemberVO;
 @Repository
 public interface MemberDao {
 	public List<MemberVO> doMemberList();
+	
+	// 회원가입
+	public int joinMember(MemberVO memberVO);
+	
 }

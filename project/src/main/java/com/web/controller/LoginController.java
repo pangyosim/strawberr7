@@ -45,7 +45,10 @@ public class LoginController {
 		return "/main/index";
 	}
 	
+	// 로그인
+	//@PostMapping()
 	
+	// 회원가입
 	@PostMapping("memberJoinResult")
 	public String memberJoinResult(@RequestParam("loginId") String id, 
 			   					 @RequestParam("loginPw") String pw, 
@@ -77,17 +80,14 @@ public class LoginController {
 		memberVO.setBirth(year+"-"+ month +"-" + day);;
 		memberVO.setAddr(addr_1 + "/" + addr_2 + "/" + addr_3 + "/" + addr_4);
 		memberVO.setTel(tel);
-		memberVO.setEmail(email + "@" + domain);
-		System.out.println(memberVO.getNickname());
+		memberVO.setEmail(email + "@" + domain);	
+		int su = ms.joinMember(memberVO);
 		ra.addFlashAttribute("nickname", memberVO.getNickname());
 		return "redirect:memberSuccess";		
 	}
 	
 	@GetMapping("memberSuccess")
 	public String memberSuccess() {
-		
-		
-		
 		return "/login/memberSuccess";
 	}
 	

@@ -25,7 +25,7 @@
   <form>
     <div class="user-box">
       <input type="text" name="" required="">
-      <label>email</label>
+      <label>Id</label>
     </div>
     <div class="user-box">
       <input type="password" name="" required="">
