@@ -1,4 +1,4 @@
-<!-- board/memberJoinForm.jsp -->
+<!-- login/memberJoinForm.jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -8,69 +8,80 @@
 <head>
 <meta charset="UTF-8">
 <title>memberJoinForm.jsp</title>
+<!-- 카카오 로그인바API -->
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js"
+  integrity="sha384-kYPsUbBPlktXsY6/oNHSUDZoTX6+YI51f63jCPEIPFP09ttByAdxd2mEjKuhdqn4" crossorigin="anonymous">
+</script>
+<script>
+  Kakao.init('c089c8172def97eb00c07217cae17495'); // 사용하려는 앱의 JavaScript 키 입력
+</script>
+
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+<script type="text/javascript" src="resources/js/loginScript.js?v=1"></script>
+
 </head>
-<body>
-<!-- 카카오~ -->
-<div class="" id="">
-	<button type="button">
-		<span class="kakao">카카오 연동</span>
-	</button>
+<link href="resources/css/memberJoinForm.css" rel="stylesheet" />
+<body style="text-align: center;">
+<c:import url="../main/header.jsp"/>
+<div class="">
+	<h2>회원가입</h2>
+	<!-- 카카오~ -->
+	<div class="" id="" align="center">
+		<!-- 카카오 로그인 버튼 -->
+	    <a id="kakao-login-btn" href="javascript:loginWithKakao()">
+	  		<img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="122"
+	    	alt="카카오 로그인 버튼" />
+		</a>
+		<p id="token-result"></p>
+	</div>
+	
+	
+	<form action="memberJoinResult" method="post">
+    <div class="textForm">
+        <input type="text" placeholder="아이디" id="loginId" name="loginId" maxlength="20">
+        <input type="button" value="중복체크" onclick="memberJoinIdCheck()">      
+    </div>
+    <div class="textForm">
+        <input type="password" placeholder="비밀번호" id="loginPw" name="loginPw" maxlength="20"><br>
+        <input type="password" placeholder="비밀번호 확인" name="loginPwConfirm" maxlength="20">     
+    </div>
+    <div class="textForm">
+        <input type="text" placeholder="이름" id="name" name="name" maxlength="50">     
+    </div>
+    <div class="info" id="info__birth">
+      <select class="box" id="birth-year" name="birth-year">
+        <option disabled selected>출생 연도</option>
+      </select>
+      <select class="box" id="birth-month" name="birth-month">
+        <option disabled selected>월</option>
+      </select>
+      <select class="box" id="birth-day" name="birth-day">
+        <option disabled selected>일</option>
+      </select>
+    </div>
+    <div class="textForm"> 
+        <input type="hidden" id="address_1" name="address_1" placeholder="우편번호" readonly>
+        <input type="text" id="address_2" name="address_2" placeholder="주소" readonly>
+        <input type="button" onclick="checkAddress()" value="우편번호 찾기"><br>
+        <input type="text" id="address_3" name="address_3" placeholder="상세주소">
+        <input type="text" id="address_4" name="address_4" placeholder="">
+    </div>
+    <div class="textForm">
+        <input type="text" class="form-control" id="tel" name="tel" placeholder="전화번호" oninput="oninputPhone(this)" maxlength="13">
+    </div>
+    <div class="textForm">
+        <input type="text" class="email_first" id="email" name="email" placeholder="이메일" name="" maxlength="20"> @
+        <select class="email_last" id="domain" name="domain">
+            <option value="none">-------이메일-------</option>
+            <option value="naver.com">naver.com</option>
+            <option value="gmail.com">gmail.com</option>
+        </select>     
+    </div>  
+    <input type="button" value="회원가입" onclick="memberJoinFormCheck()"/>
+</form>
 </div>
-<div class="" align="center">
-	<h1>회원가입</h1>
-	<form action="#" method="post">
-		<div class="">
-			<input type="text" class="" placeholder="아이디" name="" maxlength="20">		
-		</div>
-		<div class="">
-			<input type="password" class="" placeholder="비밀번호" name="" maxlength="20">		
-		</div>
-		<div class="">
-			<input type="text" class="" placeholder="이름" name="" maxlength="50">		
-		</div>
-		
-		<!-- 출생 연도월일 -->
-		<div class="info" id="info__birth">
-		  <select class="box" id="birth-year">
-		    <option disabled selected>출생 연도</option>
-		  </select>
-		  <select class="box" id="birth-month">
-		    <option disabled selected>월</option>
-		  </select>
-		  <select class="box" id="birth-day">
-		    <option disabled selected>일</option>
-		  </select>
-		</div>
-		
-		<!-- 카카오 우편API -->
-		<input type="text" id="address_1" placeholder="우편번호" readonly>
-		<input type="button" onclick="checkAddress()" value="우편번호 찾기" readonly><br>
-		<input type="text" id="address_2" placeholder="주소" readonly><br>
-		<input type="text" id="address_3" placeholder="상세주소">
-		<input type="text" id="address_4" placeholder="동, 호">
-		
-		
-		<div class="">		
-			<input type="radio" name="gender" autocomplete="off" value="남자" checked>남자
-		    <input type="radio" name="gender" autocomplete="off" value="여자" >여자
-		</div>
-		<div class=""><!-- 본인인증API 관련 https://coolsms.co.kr/ 필요할것으로 보임 -->
-			<input type="text" class="" placeholder="010" value="010" name="" maxlength="3"> -
-			<input type="text" class="" placeholder="" value="" name="" maxlength="4"> -
-			<input type="text" class="" placeholder="" value="" name="" maxlength="4"><br/>		
-		</div>
-		<div class="">
-			<input type="text" class="email_first" placeholder="이메일" name="" maxlength="20">
-			<select class="email_last" name="domain">
-			    <option value="none">-------이메일-------</option>
-			    <option value="naver.com">naver.com</option>
-			    <option value="gmail.com">gmail.com</option>
-			</select>		
-		</div>	
-		<input type="submit" value="회원가입"/>
-	</form>
-</div>
+<c:import url="../main/footer.jsp"/>
 </body>
 <style type="text/css">
 /* SECTION - BIRTH */

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="com.web.dao.MemberDao">
+	<select id="doMemberList" resultType="com.web.vo.MemberVO">
+		select * from membertest
+	</select>
+	<insert id="joinMember">
+		INSERT INTO member(seq, id, pw, name, nickname, role, tel, addr, birth, email, tier) VALUES (member_seq.NEXTVAL,#{id},#{pw},#{name},#{nickname},USER,#{tel},#{addr},#{birth},#{email},5)
+	</insert>
+	<select id="loginResult" resultType="com.web.vo.MemberVO">
+		SELECT * FROM member WHERE id = #{id} AND pw = #{pw}
+	</select>
+</mapper>
