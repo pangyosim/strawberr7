@@ -58,11 +58,12 @@ public class PartyController {
 
 //	==================================================================
 	@GetMapping("/watchaPartyList")
-	public String watchaPartyList(Model model, GroupVO groupVO) {
+	public String watchaPartyList(Model model, GroupVO groupVO, HttpSession httpSession) {
+		httpSession.getAttribute("member");
 		String userid = "";
 		List<GroupVO> selectPartylist = partyService.selectPeoplecntList(userid);
 		List<GroupVO> send_list = new ArrayList<>();
-		System.out.println("selectPartylist : " + selectPartylist);
+		System.out.println("selectPartylist : "+selectPartylist);
 		for (GroupVO vo : selectPartylist) {
 			if (vo.getPeoplecnt() < 4) {
 				send_list.add(vo);

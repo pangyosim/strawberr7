@@ -29,10 +29,7 @@ public class PartyServiceImpl implements PartyService{
 	@Override
 	public List<GroupVO> selectPeoplecntList(String userid) {
 		// TODO Auto-generated method stub
-		
 		List<GroupVO> selectlist = partymapper.selectPeoplecntList(userid);
-		
-		
 		return selectlist;
 	}
 	

@@ -17,69 +17,7 @@
 		}
 	}
 </script> -->
-<style type="text/css">
-        body {
-            background-color: #f5f5f5;
-            font-family: Arial, sans-serif;
-        }
 
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px;
-            text-align: center;
-            border-radius: 8px 8px 0 0;
-        }
-
-        .party_table {
-            width: 100%;
-            margin-top: 20px;
-            border: 2px solid #4CAF50;
-            border-collapse: collapse;
-            color: #4CAF50;
-            text-align: center;
-        }
-
-        .party_table th, .party_table td {
-            border: 1px solid #4CAF50;
-            padding: 10px;
-        }
-
-        .party_table thead {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        .party_table tbody {
-            background-color: #f2f2f2;
-        }
-
-        input[type="submit"] {
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        input[type="checkbox"] {
-            margin-right: 5px;
-        }
-
-        h3 {
-            color: #4CAF50;
-        }
-    </style>
 <link href="resources/css/styles.css" rel="stylesheet" />
 </head>
 <body style="background-color: white;">
@@ -92,6 +30,7 @@
 				</tr>
 			</thead>
 			<tbody>
+				<p>${member.id  }</p>
 				<c:forEach var="partyInfo" items="${selectPartylist}">
 					<tr>
 						<td>${partyInfo.service}</td>
