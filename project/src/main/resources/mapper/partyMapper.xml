@@ -3,9 +3,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
   
   <mapper namespace="com.web.dao.PartyMapper" >
-  
+
   	<insert id="insertbyacount">
   		insert into account values(account_seq.NEXTVAL,#{name},#{bank},#{acount})
   	</insert>
+  	
+  	<select id="selectPeoplecntList" resultType="com.web.vo.GroupVO">
+  		 SELECT * FROM partyinfo where userid =#{userid}
+  	</select>
+  	
   
   </mapper>
+  
