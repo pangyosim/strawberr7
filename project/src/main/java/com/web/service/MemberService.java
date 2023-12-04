@@ -10,4 +10,6 @@ public interface MemberService {
 
 	int joinMember(MemberVO memberVO);
 
+	MemberVO loginResult(String id, String pw);
+
 }

@@ -14,5 +14,7 @@ public interface MemberDao {
 	
 	// 회원가입
 	public int joinMember(MemberVO memberVO);
+
+	public MemberVO loginResult(String id, String pw);
 	
 }

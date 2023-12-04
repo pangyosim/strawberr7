@@ -10,4 +10,7 @@
 	<insert id="joinMember">
 		INSERT INTO member(seq, id, pw, name, nickname, role, tel, addr, birth, email, tier) VALUES (member_seq.NEXTVAL,#{id},#{pw},#{name},#{nickname},USER,#{tel},#{addr},#{birth},#{email},5)
 	</insert>
+	<select id="loginResult" resultType="com.web.vo.MemberVO">
+		SELECT * FROM member WHERE id = #{id} AND pw = #{pw}
+	</select>
 </mapper>

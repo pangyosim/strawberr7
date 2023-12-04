@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.web.domain.Member;
 import com.web.service.MemberService;
 import com.web.vo.MemberVO;
 
@@ -45,8 +46,30 @@ public class LoginController {
 		return "/main/index";
 	}
 	
-	// 로그인
-	//@PostMapping()
+	// 로그인 						
+	@PostMapping("loginResult")
+	public String loginResult(@RequestParam("userId") String id,
+	                          @RequestParam("password") String pw, HttpSession session) {
+	    MemberVO memberVO = ms.loginResult(id, pw);
+
+	    if(memberVO != null) {
+	        session.setAttribute("member", memberVO);
+	        return "/login/loginResult";
+	    }
+	    return "redirect:loginNo";
+	}
+	
+	@GetMapping("loginNo")
+	public String loginNo() {
+		return "/login/loginNo";
+	}
+	
+	// 로그아웃
+	@GetMapping("logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "/main/index";
+	}
 	
 	// 회원가입
 	@PostMapping("memberJoinResult")
@@ -82,8 +105,12 @@ public class LoginController {
 		memberVO.setTel(tel);
 		memberVO.setEmail(email + "@" + domain);	
 		int su = ms.joinMember(memberVO);
-		ra.addFlashAttribute("nickname", memberVO.getNickname());
-		return "redirect:memberSuccess";		
+		System.out.println(su + "회원가입");
+		if(su == 1) {
+			ra.addFlashAttribute("nickname", memberVO.getNickname());
+			return "redirect:memberSuccess";					
+		}
+		return "register";
 	}
 	
 	@GetMapping("memberSuccess")
