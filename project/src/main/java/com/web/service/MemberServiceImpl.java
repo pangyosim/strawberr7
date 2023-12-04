@@ -18,4 +18,17 @@ public class MemberServiceImpl implements MemberService {
 		return memberdao.doMemberList();
 	}
 	
+	//회원가입
+	@Override
+	public int joinMember(MemberVO memberVO) {
+		int su = memberdao.joinMember(memberVO);
+		return su;
+	}
+
+	@Override
+	public MemberVO loginResult(String id, String pw) {
+		
+		return memberdao.loginResult(id, pw);
+	}
+	
 }

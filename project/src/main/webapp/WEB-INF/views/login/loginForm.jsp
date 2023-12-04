@@ -1,4 +1,4 @@
-<!-- board/loginForm.jsp -->
+<!-- login/loginForm.jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -8,12 +8,10 @@
 <head>
 <meta charset="UTF-8">
 <title>loginForm.jsp</title>
-
-<!-- 카카오 로그인바API -->
-<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js"
-  integrity="sha384-kYPsUbBPlktXsY6/oNHSUDZoTX6+YI51f63jCPEIPFP09ttByAdxd2mEjKuhdqn4" crossorigin="anonymous"></script>
-<script>
-  Kakao.init('c089c8172def97eb00c07217cae17495'); // 사용하려는 앱의 JavaScript 키 입력
+<script type="text/javascript">
+	function loginCheck()	{
+		
+	}
 </script>
 
 </head>
@@ -22,72 +20,78 @@
 <c:import url="../main/header.jsp"/>
 <div class="login-box">
   <h2>Login</h2>
-  <form>
+  <form id="loginForm" action="loginResult" method="post" onsubmit="return loginCheck()">
     <div class="user-box">
-      <input type="text" name="" required="">
-      <label>email</label>
+      <input type="text" name="userId" id="userId" required="">
+      <label>Id</label>
     </div>
     <div class="user-box">
-      <input type="password" name="" required="">
+      <input type="password" name="password" id="password" required="">
       <label>Password</label>
     </div>
-    <a href="#">
-      <span></span>
-      <span></span>
-      <span></span>
-      로그인
-    </a>
-    <a href="register">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      회원가입
-    </a>
+    <div>
+	    <input type="submit" value="로그인">
+    </div>
+    <div>
+   		<input type="button" value="회원가입" onClick="location.href='register'"/>    
+    </div>
     <br/>
-    <!-- 카카오 로그인 버튼 -->
-    <a id="kakao-login-btn" href="javascript:loginWithKakao()">
-  		<img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="122"
-    	alt="카카오 로그인 버튼" />
-	</a>
-	<p id="token-result"></p>
   </form>
+  <ul>
+	<li onclick="kakaoLogin();">
+     	<a href="javascript:void(0)">
+         	<span>카카오 로그인</span>
+     	</a>
+	</li>
+	<li onclick="kakaoLogout();">
+     	<a href="javascript:void(0)">
+       	  <span>카카오 로그아웃</span>
+     	</a>
+	</li>
+</ul>
 </div>
+<c:import url="../main/footer.jsp"/>
+
 </body>
-<!-- 카카오 자바스크립트 -->
-<script type="text/javascript">
-/*kakoScript.js*/
-
-function loginWithKakao() {
-   Kakao.Auth.authorize({
-     redirectUri: 'https://developers.kakao.com/tool/demo/oauth',
-   });
- }
-
- // 카카오 로그인 UI 코드입니다.
- displayToken()
- function displayToken() {
-   var token = getCookie('authorize-access-token');
-
-   if(token) {
-     Kakao.Auth.setAccessToken(token);
-     Kakao.Auth.getStatusInfo()
-       .then(function(res) {
-         if (res.status === 'connected') {
-           document.getElementById('token-result').innerText
-             = 'login success, token: ' + Kakao.Auth.getAccessToken();
-         }
-       })
-       .catch(function(err) {
-         Kakao.Auth.setAccessToken(null);
-       });
-   }
- }
-
- function getCookie(name) {
-   var parts = document.cookie.split(name + '=');
-   if (parts.length === 2) { return parts[1].split(';')[0]; }
- }
+<!-- 카카오 스크립트 -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+Kakao.init('4a706abbdeb8e6daae8b9e423f1752fd'); //발급받은 키 중 javascript키를 사용해준다.
+console.log(Kakao.isInitialized()); // sdk초기화여부판단
+//카카오로그인
+function kakaoLogin() {
+    Kakao.Auth.login({
+      success: function (response) {
+        Kakao.API.request({
+          url: '/v2/user/me',
+          success: function (response) {
+        	  console.log(response)
+          },
+          fail: function (error) {
+            console.log(error)
+          },
+        })
+      },
+      fail: function (error) {
+        console.log(error)
+      },
+    })
+  }
+//카카오로그아웃  
+function kakaoLogout() {
+    if (Kakao.Auth.getAccessToken()) {
+      Kakao.API.request({
+        url: '/v1/user/unlink',
+        success: function (response) {
+        	console.log(response)
+        },
+        fail: function (error) {
+          console.log(error)
+        },
+      })
+      Kakao.Auth.setAccessToken(undefined)
+    }
+  }  
 </script>
 </html>
 

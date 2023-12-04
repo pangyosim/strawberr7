@@ -8,4 +8,8 @@ public interface MemberService {
 
 	List<MemberVO> doMemberList();
 
+	int joinMember(MemberVO memberVO);
+
+	MemberVO loginResult(String id, String pw);
+
 }
