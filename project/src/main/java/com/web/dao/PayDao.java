@@ -1,14 +1,13 @@
 package com.web.dao;
 
-import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import com.web.vo.MemberVO;
+import com.web.vo.GroupVO;
 
 @Mapper
 @Repository
-public interface MemberDao {
-	public List<MemberVO> doMemberList();
+public interface PayDao {
+	
+	public GroupVO doPartyList(int seq);
 }
