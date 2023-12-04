@@ -9,7 +9,8 @@
   	</insert>
   	
   	<select id="selectPeoplecntList" resultType="com.web.vo.GroupVO">
-  		 SELECT * FROM partyinfo where userid =#{userid}
+  		<!--  SELECT * FROM partyinfo where userid =#{userid} -->
+  		 select * from partyinfo where userid = (select id from member where id =#{userid})
   	</select>
   	
   

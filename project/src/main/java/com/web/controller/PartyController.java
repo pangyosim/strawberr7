@@ -60,7 +60,8 @@ public class PartyController {
 	@GetMapping("/watchaPartyList")
 	public String watchaPartyList(Model model, GroupVO groupVO, HttpSession httpSession) {
 		httpSession.getAttribute("member");
-		String userid = "";
+		System.out.println();
+		String userid = "testA";
 		List<GroupVO> selectPartylist = partyService.selectPeoplecntList(userid);
 		List<GroupVO> send_list = new ArrayList<>();
 		System.out.println("selectPartylist : "+selectPartylist);
