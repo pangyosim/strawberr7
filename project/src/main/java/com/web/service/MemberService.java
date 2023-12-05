@@ -12,4 +12,6 @@ public interface MemberService {
 
 	MemberVO loginResult(String id, String pw);
 
+	MemberVO kakaologinResult(String kakaoid);
+
 }

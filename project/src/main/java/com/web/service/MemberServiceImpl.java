@@ -18,17 +18,25 @@ public class MemberServiceImpl implements MemberService {
 		return memberdao.doMemberList();
 	}
 	
-	//회원가입
+
+	// 회원가입
 	@Override
 	public int joinMember(MemberVO memberVO) {
 		int su = memberdao.joinMember(memberVO);
 		return su;
 	}
-
+	// 로그인 
 	@Override
 	public MemberVO loginResult(String id, String pw) {
 		
 		return memberdao.loginResult(id, pw);
+	}
+	
+	// 카카오 로그인 
+	@Override
+	public MemberVO kakaologinResult(String kakaoid) {
+		System.out.println("Test");
+		return memberdao.kakaologinResult(kakaoid);
 	}
 	
 }

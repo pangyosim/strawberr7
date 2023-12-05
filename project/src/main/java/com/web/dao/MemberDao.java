@@ -16,5 +16,7 @@ public interface MemberDao {
 	public int joinMember(MemberVO memberVO);
 
 	public MemberVO loginResult(String id, String pw);
+
+	public MemberVO kakaologinResult(String kakaoid);
 	
 }

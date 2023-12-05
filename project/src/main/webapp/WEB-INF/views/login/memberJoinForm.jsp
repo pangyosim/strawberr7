@@ -26,15 +26,17 @@
 <c:import url="../main/header.jsp"/>
 <div class="">
 	<h2>회원가입</h2>
-	<!-- 카카오~ -->
-	<div class="" id="" align="center">
-		<!-- 카카오 로그인 버튼 -->
-	    <a id="kakao-login-btn" href="javascript:loginWithKakao()">
-	  		<img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="122"
-	    	alt="카카오 로그인 버튼" />
-		</a>
-		<p id="token-result"></p>
-	</div>
+		<!-- 카카오~ -->
+	<c:if test="${kakaoid == null }">
+		<div class="" id="" align="center">
+			<!-- 카카오 로그인 버튼 -->
+		    <a id="kakao-login-btn" href="javascript:loginWithKakao()">
+		  		<img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="122"
+		    	alt="카카오 로그인 버튼" />
+			</a>
+			<p id="token-result"></p>
+		</div>	
+	</c:if>
 	
 	
 	<form action="memberJoinResult" method="post">
@@ -42,6 +44,7 @@
         <input type="text" placeholder="아이디" id="loginId" name="loginId" maxlength="20">
         <input type="button" value="중복체크" onclick="memberJoinIdCheck()">      
     </div>
+		<input type="text" id="kakaoid" name="kakaoid" value="${kakaoid }">
     <div class="textForm">
         <input type="password" placeholder="비밀번호" id="loginPw" name="loginPw" maxlength="20"><br>
         <input type="password" placeholder="비밀번호 확인" name="loginPwConfirm" maxlength="20">     
