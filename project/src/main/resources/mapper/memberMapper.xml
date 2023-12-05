@@ -17,12 +17,25 @@
 	<resultMap type="com.web.vo.MemberVO" id="memberinfo">
 		<id property="seq" column="seq"/>
 		<result property="id" column="id"/>
-		<result property="" column=""/>
+		<result property="kakaoid" column="kakaoid"/>
+		<result property="pw" column="pw"/>
+		<result property="name" column="name"/>
+		<result property="nickname" column="nickname"/>
+		<result property="role" column="role"/>
+		<result property="tel" column="tel"/>
+		<result property="addr" column="addr"/>
+		<result property="birth" column="birth"/>
+		<result property="email" column="email"/>
+		<result property="tier" column="tier"/>
 	</resultMap>
+	
 	<select id="doPartyList" resultMap="partyinfo">
 		select * from partyinfo where seq=#{seq}
 	</select>
 	
+	<select id="doMemberList" resultMap="memberinfo">
+		select * from member where seq=#{seq} 
+	</select>
 	
 </mapper>
 

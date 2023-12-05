@@ -20,6 +20,7 @@ public class PayController {
 		MemberVO mv = ps.doMemberList(session);
 		GroupVO vo = ps.doPartyList(seq);
 		model.addAttribute("vo",vo);
+		model.addAttribute("mv", mv);
 		return "/pay/payinfo";
 	}
 	

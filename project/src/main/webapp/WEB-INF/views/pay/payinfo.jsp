@@ -52,7 +52,7 @@
 	   			<td style="width: 200px">결제 정보</td><td style="width: 700px;"></td><td style="width: 300px">결제 방법</td>
 	   		</tr>
 	   		<tr>
-	   			<td>아이디</td><td>parkwait</td>
+	   			<td>아이디</td><td>${mv.id }</td>
 	   			<td rowspan="5">
 	   					<img src="resources/assets/img/tosspay.png" width="120" height="50"/> &nbsp; <input type="radio" name="pg" value="tosspayments" checked/> <label>toss</label><br/>
 	   					<img src="resources/assets/img/kakaopay.png" width="100" height="50"/> &nbsp; <input type="radio" name="pg" value="kakaopay"/> <label>kakao</label><br/>
@@ -61,7 +61,7 @@
 	   			</td>
 	   		</tr>
 	   		<tr>
-	   			<td>이름</td><td>박대기</td>
+	   			<td>이름</td><td>${mv.name }</td>
 	   		</tr>
 	   		<tr>
 	   			<td>결제 금액</td><td>${vo.price }</td>
@@ -76,7 +76,7 @@
 	   	<br/>
 	   	<br/>
 	   	<div class="input_area">
-		   	<input type="button" id="pay" value="결 제" onclick="requestPay(${vo.price*1.1},'${vo.service }')" style=" width: 300px; height: 70px; font-size: 20px; "/> &nbsp; &nbsp; &nbsp;
+		   	<input type="button" id="pay" value="결 제" onclick="requestPay(${vo.price*1.1},'${vo.service }','${mv.name }','${mv.email }','${mv.tel }','${mv.addr }')" style=" width: 300px; height: 70px; font-size: 20px; "/> &nbsp; &nbsp; &nbsp;
 		   	<input type="button" id="list" onclick="location.href='/'" value="목 록"  style="width: 300px; height: 70px; font-size: 20px;"/>
 	   	</div>
 	</form>

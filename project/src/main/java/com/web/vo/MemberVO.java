@@ -21,6 +21,7 @@ public class MemberVO {
 	
 	private int seq;
 	private String id;
+	private int kakaoid;
 	private String pw;
 	private String name;
 	private String nickname;
