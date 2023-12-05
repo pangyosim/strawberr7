@@ -37,5 +37,8 @@
 		select * from member where seq=#{seq} 
 	</select>
 	
+	<insert id="insertPayList">
+		insert into paytable values(#{userid},#{price},sysdate,#{imp_uid},#{merchant_uid},${result},#{seq})
+	</insert>
 </mapper>
 
