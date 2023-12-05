@@ -26,7 +26,7 @@
    	<c:import url="../main/header.jsp"/>
    	<form action="" name="pay_method"  style="margin-top: 150px; margin-left: 50px; ">
 	   	<h3>주문 / 결제</h3>
-	   	<input type="hidden" value="${vo.seq }"/>
+	   	<input type="hidden" id="seq" value="${vo.seq }"/>
 	   	<table style="width: 1500px; height: 70px; text-align: center; border-top: 1px solid #444444;">
 	   		<tr style="background-color:#e5ddff; height: 50px;">
 	   			<th>서비스</th><th>기간</th><th>가격</th><th>수수료</th><th>합계</th>

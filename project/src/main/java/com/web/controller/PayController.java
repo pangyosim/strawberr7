@@ -32,15 +32,16 @@ public class PayController {
 	
 	@PostMapping(value="payresult", produces="application/json; charset=utf-8")
 	@ResponseBody
-	public Map<String,Object> gethook(@RequestBody Map<String,Object> param, int seq) {
-//		System.out.println(param.get("imp_uid"));
-//		System.out.println(param.get("merchant_uid"));
-//		System.out.println(param.get("status"));
+	public Map<String,Object> gethook(@RequestBody Map<String,Object> param) {
+		System.out.println(param.get("imp_uid"));
+		System.out.println(param.get("merchant_uid"));
+		System.out.println(param.get("status"));
+		System.out.println(param.get("seq"));
 		PayVO pv = new PayVO();
 		pv.setImp_uid((String)param.get("imp_uid"));
 		pv.setMerchant_uid((String)param.get("merchant_uid"));
 		pv.setResult((String) param.get("status"));
-		System.out.println((String)param.get("seq"));
+		
 		//ps.insertPayList(pv);
 		return param;
 	}
