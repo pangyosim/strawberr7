@@ -8,13 +8,13 @@
 <title>payinfo.jsp</title>
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>MAIN</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>MAIN</title>
+<!-- Favicon-->
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+<!-- Font Awesome icons (free version)-->
+<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
 <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
 <!-- Core theme CSS (includes Bootstrap)-->
@@ -35,7 +35,10 @@
 	   			<c:if test="${vo.service eq '왓챠' }">
 	   				<td><img src="resources/assets/img/watcha.png" width="130" height="100"/></td>
 	   			</c:if>
-	   			<c:if test="${vo.service eq 'netflix' }">
+	   			<c:if test="${vo.service eq '유튜브' }">
+	   				<td><img src="resources/assets/img/youtube.png" width="120" height="100"/></td>
+	   			</c:if>
+	   			<c:if test="${vo.service eq '넷플릭스' }">
 	   				<td><img src="resources/assets/img/netflix.png" width="180" height="100"/></td>
 	   			</c:if>
 	   			<td>${vo.partyday }</td>
@@ -52,10 +55,10 @@
 	   			<td>아이디</td><td>parkwait</td>
 	   			<td rowspan="5">
 	   				<div class="pay_checkbox" >
-	   					<img src="resources/assets/img/tosspay.png" width="120" height="50"/> &nbsp; <input type="checkbox" name="page" value="tosspayments" checked/> <label for="tosspay">toss</label><br/>
-	   					<img src="resources/assets/img/kakaopay.png" width="100" height="50"/> &nbsp; <input type="checkbox" name="page" value="kakaopay"/> <label for="kakaopay">kakao</label><br/>
-	   					&nbsp; <img src="resources/assets/img/payco.png" width="100" height="50"/> &nbsp; <input type="checkbox" name="page" value="payco"/> <label for="payco">payco</label><br/>
-	   					&nbsp; <img src="resources/assets/img/account_img.png" width="100" height="100"/> &nbsp; <input type="checkbox" name="page" value="account"/> <label for="account">계좌이체</label>
+	   					<img src="resources/assets/img/tosspay.png" width="120" height="50"/> &nbsp; <input type="radio" name="page" value="tosspayments" checked/> <label for="tosspay">toss</label><br/>
+	   					<img src="resources/assets/img/kakaopay.png" width="100" height="50"/> &nbsp; <input type="radio" name="page" value="kakaopay"/> <label for="kakaopay">kakao</label><br/>
+	   					&nbsp; <img src="resources/assets/img/payco.png" width="100" height="50"/> &nbsp; <input type="radio" name="page" value="payco"/> <label for="payco">payco</label><br/>
+	   					&nbsp; <img src="resources/assets/img/account_img.png" width="100" height="100"/> &nbsp; <input type="radio" name="page" value="account"/> <label for="account">계좌이체</label>
 	   				</div>
 	   			</td>
 	   		</tr>
@@ -75,7 +78,7 @@
 	   	<br/>
 	   	<br/>
 	   	<div class="input_area">
-		   	<input type="button" id="pay" value="결 제" onclick="" style=" width: 300px; height: 70px; font-size: 20px; "/> &nbsp; &nbsp; &nbsp;
+		   	<input type="button" id="pay" value="결 제" onclick="requestPay()" style=" width: 300px; height: 70px; font-size: 20px; "/> &nbsp; &nbsp; &nbsp;
 		   	<input type="button" id="list" onclick="location.href='/'" value="목 록"  style="width: 300px; height: 70px; font-size: 20px;"/>
 	   	</div>	
 	</form>

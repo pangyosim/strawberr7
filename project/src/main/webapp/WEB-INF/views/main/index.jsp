@@ -23,7 +23,7 @@
         <!-- Masthead-->
         <header class="masthead">
             <div class="container">
-           	<input type="button" onclick="location.href='payinfo?seq=41'" value="결제페이지이동"/>
+           	<input type="button" onclick="location.href='payinfo?seq=2'" value="결제페이지이동"/>
             </div>
         </header>
         <!-- Services-->
