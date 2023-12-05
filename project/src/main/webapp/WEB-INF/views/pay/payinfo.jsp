@@ -19,7 +19,7 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="resources/css/styles.css" rel="stylesheet" />
-<script src="resources/js/pay.js"></script>
+<script type="text/javascript" src="resources/js/pay.js"></script>
 <link href="resources/css/paycss.css" rel="stylesheet"/>
 </head>
 <body style="display: flex; justify-content: center; align-content: center;">
@@ -54,12 +54,10 @@
 	   		<tr>
 	   			<td>아이디</td><td>parkwait</td>
 	   			<td rowspan="5">
-	   				<div class="pay_checkbox" >
-	   					<img src="resources/assets/img/tosspay.png" width="120" height="50"/> &nbsp; <input type="radio" name="page" value="tosspayments" checked/> <label for="tosspay">toss</label><br/>
-	   					<img src="resources/assets/img/kakaopay.png" width="100" height="50"/> &nbsp; <input type="radio" name="page" value="kakaopay"/> <label for="kakaopay">kakao</label><br/>
-	   					&nbsp; <img src="resources/assets/img/payco.png" width="100" height="50"/> &nbsp; <input type="radio" name="page" value="payco"/> <label for="payco">payco</label><br/>
-	   					&nbsp; <img src="resources/assets/img/account_img.png" width="100" height="100"/> &nbsp; <input type="radio" name="page" value="account"/> <label for="account">계좌이체</label>
-	   				</div>
+	   					<img src="resources/assets/img/tosspay.png" width="120" height="50"/> &nbsp; <input type="radio" name="pg" value="tosspayments" checked/> <label>toss</label><br/>
+	   					<img src="resources/assets/img/kakaopay.png" width="100" height="50"/> &nbsp; <input type="radio" name="pg" value="kakaopay"/> <label>kakao</label><br/>
+	   					&nbsp; <img src="resources/assets/img/payco.png" width="100" height="50"/> &nbsp; <input type="radio" name="pg" value="payco"/> <label>payco</label><br/>
+	   					&nbsp; <img src="resources/assets/img/account_img.png" width="100" height="100"/> &nbsp; <input type="radio" name="pg" value="account"/> <label>계좌이체</label>
 	   			</td>
 	   		</tr>
 	   		<tr>
@@ -78,9 +76,9 @@
 	   	<br/>
 	   	<br/>
 	   	<div class="input_area">
-		   	<input type="button" id="pay" value="결 제" onclick="requestPay()" style=" width: 300px; height: 70px; font-size: 20px; "/> &nbsp; &nbsp; &nbsp;
+		   	<input type="button" id="pay" value="결 제" onclick="requestPay(${vo.price*1.1},'${vo.service }')" style=" width: 300px; height: 70px; font-size: 20px; "/> &nbsp; &nbsp; &nbsp;
 		   	<input type="button" id="list" onclick="location.href='/'" value="목 록"  style="width: 300px; height: 70px; font-size: 20px;"/>
-	   	</div>	
+	   	</div>
 	</form>
 	<c:import url="../main/footer.jsp"></c:import>
 </body>

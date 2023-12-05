@@ -1,17 +1,16 @@
-   const page= document.querySelector('input[name="page"]:checked').value;
-   var IMP = window.IMP;
-   IMP.init("imp40114442");
-
-   function requestPay() {
+   function requestPay(price,service) {
+	  var page = document.querySelector('input[name="pg"]:checked').value;
+      var IMP = window.IMP;
+      IMP.init("imp40114442");
       IMP.request_pay(
         {
-      	  pg: page, // 반드시 "tosspayments"임을 명시해주세요.
-      	    merchant_uid: "order_id_1667634130112",
-      	    name: "${vo.service}",
+      	  	pg: page, // 반드시 "tosspayments"임을 명시해주세요.
+      	    merchant_uid: "",
+      	    name: service,
       	    pay_method: "card",
       	    escrow: false,
-      	    amount: "${vo.price*1.1}",
-      	    tax_free: 3000,
+      	    amount: Math.round(price),
+      	    tax_free: 200,
       	    buyer_name: "홍길동",
       	    buyer_email: "buyer@example.com",
       	    buyer_tel: "02-1670-5176",
@@ -37,9 +36,9 @@
           	location.href='/';
           } else {
           	console.log(rsp);
-          	alert('결제 실패~');
-          	location.href='/';
+          	alert('결제 실패,,,');
+          	location.href='payinfo?seq=2';
           }
         }
       );
-  		}
+  	}

@@ -14,7 +14,15 @@
 		<result property="price" column="price"/>
 		<result property="partydate" column="partydate"/> 
 	</resultMap>
+	<resultMap type="com.web.vo.MemberVO" id="memberinfo">
+		<id property="seq" column="seq"/>
+		<result property="id" column="id"/>
+		<result property="" column=""/>
+	</resultMap>
 	<select id="doPartyList" resultMap="partyinfo">
 		select * from partyinfo where seq=#{seq}
 	</select>
+	
+	
 </mapper>
+

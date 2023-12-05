@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.web.service.PayService;
 import com.web.vo.GroupVO;
+import com.web.vo.MemberVO;
 
 @Controller
 public class PayController {
@@ -15,7 +16,8 @@ public class PayController {
 	private PayService ps;
 	
 	@GetMapping("/payinfo")
-	public String payinfo(Model model, int seq) {
+	public String payinfo(Model model, int seq, int session) {
+		MemberVO mv = ps.doMemberList(session);
 		GroupVO vo = ps.doPartyList(seq);
 		model.addAttribute("vo",vo);
 		return "/pay/payinfo";
