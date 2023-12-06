@@ -1,5 +1,6 @@
 package com.web.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -40,6 +42,16 @@ public class LoginController {
 	public String register() {
 		return "/login/memberJoinForm";
 	}
+	
+	// 중복 아이디 방지
+	@PostMapping("/idCheck")
+	public ResponseEntity<?> idCheck(@RequestParam("loginId") String id) {
+	    System.out.println("idCheck 콘솔1번 ");
+		boolean isDuplicate = ms.isDuplicateId(id);  // 아이디 중복 확인
+	    Map<String, Boolean> response = new HashMap<>();
+	    response.put("isDuplicate", isDuplicate);
+	    return ResponseEntity.ok(response);  // 결과를 JSON 형식으로 응답합니다.
+	}	
 	
 	@GetMapping("memberJoinForm")
 	public String memberJoinForm() {

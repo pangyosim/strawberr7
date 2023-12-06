@@ -33,4 +33,10 @@
 	<select id="kakaologinResult" resultMap="kakao">
 		SELECT * FROM member WHERE kakaoid = #{kakaoid}
 	</select>
+	  <select id="isDuplicateId" resultType="int">
+        SELECT COUNT(*)
+        FROM member
+        WHERE id = #{id}
+    </select>
+	
 </mapper>

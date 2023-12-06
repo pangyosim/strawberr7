@@ -8,17 +8,76 @@
 <head>
 <meta charset="UTF-8">
 <title>memberJoinForm.jsp</title>
-<!-- 카카오 로그인바API -->
-<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js"
-  integrity="sha384-kYPsUbBPlktXsY6/oNHSUDZoTX6+YI51f63jCPEIPFP09ttByAdxd2mEjKuhdqn4" crossorigin="anonymous">
-</script>
+<!-- j쿼리 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+<!-- 카카오 로그인 스크립트 추가 -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
-  Kakao.init('c089c8172def97eb00c07217cae17495'); // 사용하려는 앱의 JavaScript 키 입력
+Kakao.init('4a706abbdeb8e6daae8b9e423f1752fd');  // 카카오 개발자 사이트에서 받은 자바스크립트 키를 넣어주세요.
+
+function kakaoLogin() {
+    Kakao.Auth.login({
+        success: function(response) {
+            Kakao.API.request({
+                url: '/v2/user/me',
+                success: function(response) {
+                    var kakaoid = String(response.id);  // 카카오ID를 문자열로 변환
+                    $.ajax({
+                        url: '/checkUser',
+                        type: 'POST',
+                        data: JSON.stringify({
+                            kakaoid: kakaoid,
+                        }),
+                        contentType: 'application/json',
+                        success: function(data) {
+                            location.href="/checkUser";
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        },
+                    });
+                },
+                fail: function(error) {
+                    console.log(error);
+                },
+            });
+        },
+        fail: function(error) {
+            console.log(error);
+        },
+    });
+}
+
+// 카카오 로그인 버튼 클릭 이벤트 추가
+$(document).ready(function() {
+    $('#kakao-login-btn').click(kakaoLogin);
+    $('#kakao-unlink-btn').click(kakaoUnlink);
+});
+
+function kakaoUnlink() {
+    Kakao.API.request({
+        url: '/v1/user/unlink',
+        success: function(response) {
+            console.log(response);
+            alert('카카오 연결 해제가 완료되었습니다.');
+        },
+        fail: function(error) {
+            console.log(error);
+            alert('카카오 연결 해제에 실패하였습니다.');
+        },
+    });
+}
 </script>
 
+<!--  카카오 집주소API -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
+<!-- 로그인.js -->
 <script type="text/javascript" src="resources/js/loginScript.js?v=1"></script>
+
+
 
 </head>
 <link href="resources/css/memberJoinForm.css" rel="stylesheet" />
@@ -28,23 +87,20 @@
 	<h2>회원가입</h2>
 		<!-- 카카오~ -->
 	<c:if test="${kakaoid == null }">
-		<div class="" id="" align="center">
-			<!-- 카카오 로그인 버튼 -->
-		    <a id="kakao-login-btn" href="javascript:loginWithKakao()">
-		  		<img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="122"
-		    	alt="카카오 로그인 버튼" />
-			</a>
-			<p id="token-result"></p>
-		</div>	
+		<div>
+			<button id="kakao-login-btn">카카오 로그인</button>
+		</div>
+ 		<button id="kakao-unlink-btn">카카오 연결 해제</button>	
 	</c:if>
 	
 	
-	<form action="memberJoinResult" method="post">
+	<form id="memberjoinForm" action="memberJoinResult" method="post">
     <div class="textForm">
         <input type="text" placeholder="아이디" id="loginId" name="loginId" maxlength="20">
-        <input type="button" value="중복체크" onclick="memberJoinIdCheck()">      
+        <input type="button" value="중복체크" id="checkBtn">
+       	<p id="message"></p>
     </div>
-		<input type="text" id="kakaoid" name="kakaoid" value="${kakaoid }">
+		<input type="hidden" id="kakaoid" name="kakaoid" value="${kakaoid }">
     <div class="textForm">
         <input type="password" placeholder="비밀번호" id="loginPw" name="loginPw" maxlength="20"><br>
         <input type="password" placeholder="비밀번호 확인" name="loginPwConfirm" maxlength="20">     
@@ -114,6 +170,7 @@
 }
 </style>
 <script type="text/javascript">
+
 
 //'출생 연도' 셀렉트 박스 option 목록 동적 생성
 const birthYearEl = document.querySelector('#birth-year')

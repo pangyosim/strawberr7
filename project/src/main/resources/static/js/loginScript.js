@@ -5,8 +5,69 @@ function oninputPhone(target) {
         .replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, "$1-$2-$3");
 }
 
+var isIdDuplicate = true;  // 아이디 중복 여부를 저장하는 변수
+// 아이디 중복 여부 확인
+$(document).ready(function(){
+    var loginId = $("#loginId");
+    var message = $("#message");  // 메시지를 표시할 요소
+
+    $("#checkBtn").click(function(){
+        // 아이디
+        if(loginId.val() == '') {
+            alert('아이디를 입력해주세요.');
+            loginId.focus();
+            return false;
+        }
+        
+        // 아이디 길이 확인
+        if(loginId.val().length < 3) {
+            alert('아이디는 최소 3글자 이상 입력해야 합니다.');
+            loginId.focus();
+            return false;
+        }
+        
+        var id = loginId.val();
+        
+        $.ajax({
+            url: "/idCheck",  // 아이디 중복 확인을 처리하는 서버의 URL
+            type: "POST",
+            data: {
+                loginId: id
+            },
+            success: function(data) {
+                if(data.isDuplicate) {
+                    loginId.css('backgroundColor', 'red');
+                    isIdDuplicate = true;
+                    message.text("중복된 Id 입니다.");
+                } else {
+                    loginId.css('backgroundColor', 'green');
+                    isIdDuplicate = false;
+                    message.text("생성 가능한 Id 입니다.");
+                }
+            }
+        });
+    });
+    
+    loginId.on('input', function() {
+        loginId.css('backgroundColor', '');
+        isIdDuplicate = true;
+        message.text("");  // 아이디 입력 필드의 내용이 변경되면 메시지 삭제
+    });
+    
+    $("#memberjoinForm").submit(function(e){
+        if(isIdDuplicate) {
+            alert("아이디 중복을 확인해주세요.");
+            loginId.focus();
+            e.preventDefault();  // form의 submit을 방지합니다.
+        }
+    });
+});
+
+
+
 // 회원가입 데이터 확인(아이디, 비밀번호, 비밀번호 확인, 이메일 입력 여부 확인)
 function memberJoinFormCheck() {
+    
     // 아이디
     var loginId = document.getElementById('loginId');
     if(loginId.value == '') {
@@ -14,6 +75,21 @@ function memberJoinFormCheck() {
         loginId.focus();
         return false;
     }
+    
+    // 아이디 길이 확인
+	if(loginId.value.length < 3) {
+	    alert('아이디는 최소 3글자 이상 입력해야 합니다.');
+	    loginId.focus();
+	    return false;
+	}
+
+    // 아이디 중복 확인
+    if(isIdDuplicate) {
+        alert("아이디 중복을 확인해주세요.");
+        loginId.focus();
+        return false;
+    }
+	
 
     // 비밀번호
     var loginPw = document.getElementById('loginPw');

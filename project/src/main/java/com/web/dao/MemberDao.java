@@ -18,5 +18,7 @@ public interface MemberDao {
 	public MemberVO loginResult(String id, String pw);
 
 	public MemberVO kakaologinResult(String kakaoid);
+
+	public int isDuplicateId(String id);
 	
 }

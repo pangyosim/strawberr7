@@ -14,4 +14,6 @@ public interface MemberService {
 
 	MemberVO kakaologinResult(String kakaoid);
 
+	boolean isDuplicateId(String id);
+
 }

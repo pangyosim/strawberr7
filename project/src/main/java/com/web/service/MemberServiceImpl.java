@@ -14,6 +14,15 @@ public class MemberServiceImpl implements MemberService {
 	MemberDao memberdao;
 	
 	@Override
+	public boolean isDuplicateId(String id) {
+		int count = memberdao.isDuplicateId(id);
+		
+		
+		return count > 0;
+	}
+
+
+	@Override
 	public List<MemberVO> doMemberList(){
 		return memberdao.doMemberList();
 	}
