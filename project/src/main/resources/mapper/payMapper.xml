@@ -28,6 +28,15 @@
 		<result property="email" column="email"/>
 		<result property="tier" column="tier"/>
 	</resultMap>
+	<resultMap type="com.web.vo.PayVO" id="paytable">
+		<result property="userid" column="userid"/>
+		<result property="price" column="price"/>
+		<result property="paydate" column="paydate"/>
+		<result property="imp_uid" column="imp_uid"/>
+		<result property="merchant_uid" column="merchant_uid"/>
+		<result property="result" column="result"/>
+		<result property="seq" column="seq"/>
+	</resultMap>
 	
 	<select id="doPartyList" resultMap="partyinfo">
 		select * from partyinfo where seq=#{seq}
@@ -37,8 +46,13 @@
 		select * from member where seq=#{seq} 
 	</select>
 	
-	<insert id="insertPayList">
-		insert into paytable values(#{userid},#{price},sysdate,#{imp_uid},#{merchant_uid},${result},#{seq})
+	<insert id="insertPayList" parameterType="com.web.vo.PayVO">
+		insert into paytable values(#{userid}, #{price}, sysdate, #{imp_uid}, #{merchant_uid}, #{result}, #{seq})
 	</insert>
+	
+	<update id="updatepartyinfo">
+		update partyinfo set seq=#{seq}, service=#{service}, title=#{title}, peoplecnt=peoplecnt+1, userid=#{userid}, partyday=#{partyday}, price=#{price}, partydate=#{partydate} where seq=#{seq}
+	</update>
+	
 </mapper>
 

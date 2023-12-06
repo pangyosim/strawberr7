@@ -28,6 +28,11 @@ public class PayServiceImpl implements PayService {
 	public void insertPayList(PayVO pv) {
 		paydao.insertPayList(pv);
 	}
+
+	@Override
+	public void updatepartyinfo(GroupVO gv) {
+		paydao.updatepartyinfo(gv);
+	}
 	
 	
 	

@@ -9,4 +9,5 @@ public interface PayService {
 	GroupVO doPartyList(int seq);
 	MemberVO doMemberList(int session);
 	void insertPayList(PayVO pv);
+	void updatepartyinfo(GroupVO gv);
 }

@@ -19,14 +19,15 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="resources/css/styles.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="resources/js/pay.js"></script>
 <link href="resources/css/paycss.css" rel="stylesheet"/>
 </head>
 <body style="display: flex; justify-content: center; align-content: center;">
    	<c:import url="../main/header.jsp"/>
-   	<form action="" name="pay_method"  style="margin-top: 150px; margin-left: 50px; ">
+   	<form action="payresult" id="pay_form" method="post" style="margin-top: 150px; margin-left: 50px; ">
+   		<input type="hidden" value="${vo.seq }"/>
 	   	<h3>주문 / 결제</h3>
-	   	<input type="hidden" id="seq" value="${vo.seq }"/>
 	   	<table style="width: 1500px; height: 70px; text-align: center; border-top: 1px solid #444444;">
 	   		<tr style="background-color:#e5ddff; height: 50px;">
 	   			<th>서비스</th><th>기간</th><th>가격</th><th>수수료</th><th>합계</th>
@@ -76,7 +77,7 @@
 	   	<br/>
 	   	<br/>
 	   	<div class="input_area">
-		   	<input type="button" id="pay" value="결 제" onclick="requestPay(${vo.price*1.1},'${vo.service }','${mv.name }','${mv.email }','${mv.tel }','${mv.addr }')" style=" width: 300px; height: 70px; font-size: 20px; "/> &nbsp; &nbsp; &nbsp;
+		   	<input type="button" id="pay" value="결 제" onclick="requestPay(${vo.price*1.1},'${vo.service }','${mv.name }','${mv.email }','${mv.tel }','${mv.addr }',${vo.seq},'${mv.id}')" style=" width: 300px; height: 70px; font-size: 20px; "/> &nbsp; &nbsp; &nbsp;
 		   	<input type="button" id="list" onclick="location.href='/'" value="목 록"  style="width: 300px; height: 70px; font-size: 20px;"/>
 	   	</div>
 	</form>

@@ -1,4 +1,4 @@
-   function requestPay(price,service,name,email,tel,addr) {
+   function requestPay(price,service,name,email,tel,addr,seq,userid) {
 	  var page = document.querySelector('input[name="pg"]:checked').value;
       var IMP = window.IMP;
       IMP.init("imp40114442");
@@ -33,22 +33,18 @@
         function (rsp) {
           if(rsp.success){
 			  jQuery.ajax({
-			    url: "https://0f92-123-142-55-115.ngrok-free.app/payresult", 
+			    url: "https://e707-123-142-55-115.ngrok-free.app/paywork?seq="+ seq + "&price="+Math.round(price)+"&userid="+ userid, 
 			    method: "POST",
-			    headers: { "Content-Type": "application/json" },
-			    data: { 
+			    headers: { "Content-Type": "application/json; charset=utf-8" },
+			    data: JSON.stringify ({ 
 					imp_uid: rsp.imp_uid, // 결제 고유 번호
 					merchant_uid : rsp.merchant_uid, // 주문번호 
-					status : rsp.status, // 결제방법
-					seq : document.getElementById("#seq").val()
-					
-			    }
+					status : rsp.status // 결제방법
+			    })
 			  });
           } else {
           	console.log(rsp);
           	alert('결제 실패,,,');
-          	history(-1);
           }
-        }
-      );
+        });
   	}
