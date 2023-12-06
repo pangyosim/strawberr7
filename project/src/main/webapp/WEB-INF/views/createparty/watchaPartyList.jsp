@@ -30,25 +30,26 @@
 				</tr>
 			</thead>
 			<tbody>
-				<p>${member.id  }</p>
-				<c:forEach var="partyInfo" items="${selectPartylist}">
+				
+				
 					<tr>
-						<td>${partyInfo.service}</td>
+						<td>${selectPartylist.service}</td>
 					</tr>
 					<tr>
-						<td>${partyInfo.peoplecnt}</td>
+						<td>${selectPartylist.peoplecnt}</td>
 					</tr>
 					<tr>
-						<td>${partyInfo.partyday}</td>
+						<td>${selectPartylist.partyday}</td>
 					</tr>
 					<tr>
-						<td>${partyInfo.price}</td>
+						<td>${selectPartylist.price}</td>
 					</tr>
 					<tr>
-						<td>${partyInfo.partydate}</td>
+						<td>${selectPartylist.partydate}</td>
 					</tr>
-
-				</c:forEach>
+					<tr>
+						<td>${selectPartylist.userid}</td>
+					</tr>
 			</tbody>
 			<tbody>
 				<tr>
@@ -68,9 +69,8 @@
 				</tr>
 			</tbody>
 		</table>
-		<input type="submit" value="목록"
-			onclick="location.href='../main/index'" /> &nbsp; <input
-			type="submit" value="동의" onclick="check()" />
+		<input type="submit" value="목록" onclick="location.href='../main/index'" /> &nbsp;
+		<input type="submit" value="동의" onclick="check()" />
 	</form>
 </body>
 </html>

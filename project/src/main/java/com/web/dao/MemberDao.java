@@ -16,5 +16,8 @@ public interface MemberDao {
 	public int joinMember(MemberVO memberVO);
 
 	public MemberVO loginResult(String id, String pw);
-	
+	//회원수정
+	public MemberVO updateMember(String id);
+
+	public void updateClient(MemberVO vo);
 }

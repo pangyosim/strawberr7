@@ -2,6 +2,7 @@ package com.web.service;
 
 import java.util.List;
 
+
 import com.web.vo.MemberVO;
 
 public interface MemberService {
@@ -12,4 +13,8 @@ public interface MemberService {
 
 	MemberVO loginResult(String id, String pw);
 
+	//정보불러오기
+	public MemberVO updateMember(String id);
+	//수정한데이터 저장
+	public void updateClient(MemberVO vo);
 }

@@ -8,11 +8,17 @@
   		insert into account values(account_seq.NEXTVAL,#{name},#{bank},#{acount})
   	</insert>
   	
+  	<insert id="groupInsert" >
+        INSERT INTO partyinfo VALUES(partyseq.NEXTVAL,#{service},#{title},#{peoplecnt},#{userid},#{partyday},#{price},SYSDATE)
+     </insert>
+  	
   	<select id="selectPeoplecntList" resultType="com.web.vo.GroupVO">
-  		<!--  SELECT * FROM partyinfo where userid =#{userid} -->
-  		 select * from partyinfo where userid = (select id from member where id =#{userid})
+  		 <!--  SELECT * FROM partyinfo where userid =#{userid} -->
+  		  select * from partyinfo where seq =#{seq}
   	</select>
   	
-  
+  	<select id="selectPeoplecnt" resultType="com.web.vo.GroupVO">
+  		  SELECT * FROM partyinfo 
+  	</select>	
+  	
   </mapper>
-  

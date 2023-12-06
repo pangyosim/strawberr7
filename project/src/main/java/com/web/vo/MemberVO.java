@@ -4,7 +4,7 @@ import lombok.Data;
 
 /*
 seq 		NUMBER 			NOT NULL,     -- 회원고유번호
-id      	VARCHAR2(30)   	PRIMARY KEY,  -- 회원ID
+id      	VARCHAR2(30)   	PRIMARY KEY,  -- 회원ID pk
 pw    		VARCHAR2(100)   NOT NULL,     -- 회원pw
 name  		VARCHAR2(10)    NOT NULL,     -- 회원이름
 nickname 	VARCHAR2(30) 	NOT NULL,     -- 닉네임
@@ -23,6 +23,7 @@ public class MemberVO {
 	private String id;
 	private String pw;
 	private String name;
+	private String kakaoid;
 	private String nickname;
 	private String role;
 	private String tel;

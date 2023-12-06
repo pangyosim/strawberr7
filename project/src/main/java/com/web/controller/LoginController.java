@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -117,8 +118,26 @@ public class LoginController {
 	public String memberSuccess() {
 		return "/login/memberSuccess";
 	}
-	
-	
+	//정보불러오기
+	@GetMapping("memberUpdate")
+	public String memberModify(Model model) {
+//		MemberVO membervo = (MemberVO) httpSession.getAttribute("member");
+		model.addAttribute("member", ms.updateMember("jsk7640@naver.com"));
+		return "/login/memberUpdate";
+	}
+	//수정한데이터 저장
+	@PostMapping("updateClient")
+	public void updateClient(MemberVO vo) {
+//		System.out.println(memberVO.toString());
+		ms.updateClient(vo);
+		System.out.println(vo.toString());
+//		ra.addAttribute("member", ms.updateMember("qwe"));		
+//		System.out.println(ms.updateMember("qwe"));
+	}
+	@PostMapping("resultUpdate")
+	public String slakf() {
+		return "/login/resultUpdate";
+	}
 	
 }
 
