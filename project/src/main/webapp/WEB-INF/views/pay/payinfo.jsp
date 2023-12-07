@@ -39,7 +39,7 @@
 	   			<c:if test="${vo.service eq 'youtube' }">
 	   				<td><img src="resources/assets/img/youtube.png" width="120" height="100"/></td>
 	   			</c:if>
-	   			<c:if test="${vo.service eq '넷플릭스' }">
+	   			<c:if test="${vo.service eq 'netflix' }">
 	   				<td><img src="resources/assets/img/netflix.png" width="180" height="100"/></td>
 	   			</c:if>
 	   			<td>${vo.partyday }</td>
