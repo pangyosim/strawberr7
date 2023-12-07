@@ -5,27 +5,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.service.MemberService;
 import com.web.vo.MemberVO;
 
-import oracle.net.aso.m;
 
 @Controller
 public class LoginController {
@@ -72,10 +66,8 @@ public class LoginController {
 	public String getCheckUser(HttpSession session) {
 	    MemberVO memberVO = (MemberVO) session.getAttribute("member");
 	    if(memberVO != null && memberVO.getId() != null) {
-	    	System.out.println("GET CHECKUSER 1번 ");
 	        return "/login/loginResult";
 	    } else {
-	    	System.out.println("GET CHECKUSER 2번 ");
 	        return "/login/memberJoinForm";        
 	    }
 	}
