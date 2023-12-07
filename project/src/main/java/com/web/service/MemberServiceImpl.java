@@ -13,6 +13,7 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	MemberDao memberdao;
 	
+	// 중복여부
 	@Override
 	public boolean isDuplicateId(String id) {
 		int count = memberdao.isDuplicateId(id);
@@ -47,5 +48,20 @@ public class MemberServiceImpl implements MemberService {
 		System.out.println("Test");
 		return memberdao.kakaologinResult(kakaoid);
 	}
+
+	// 회원 수정
+	@Override
+	public int updateMember(MemberVO memberVO) {
+		int su = memberdao.updateMember(memberVO);
+		return su;
+	}
+
+
+	@Override
+	public int notBirthUpdate(MemberVO memberVO) {
+		int su = memberdao.notBirthUpdate(memberVO);
+		return su;
+	}
+		
 	
 }

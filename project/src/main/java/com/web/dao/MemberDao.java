@@ -14,11 +14,19 @@ public interface MemberDao {
 	
 	// 회원가입
 	public int joinMember(MemberVO memberVO);
-
+	
+	// 로그인 
 	public MemberVO loginResult(String id, String pw);
 
+	// 카카오로그인 
 	public MemberVO kakaologinResult(String kakaoid);
 
+	// 중복여부 
 	public int isDuplicateId(String id);
+	
+	// 회원 수정 
+	public int updateMember(MemberVO memberVO);
+
+	public int notBirthUpdate(MemberVO memberVO);
 	
 }

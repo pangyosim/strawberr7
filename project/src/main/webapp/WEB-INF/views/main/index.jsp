@@ -35,6 +35,10 @@
         <div class="services" style="text-align: center;">
 	      	<h2> 서비스</h2>
 			<input type="button" value="파티만들기 계좌등록" onclick="location.href='groupJoinForm'"/> &nbsp; &nbsp; <input type="button" value="파티찾기" onclick="document.getElementById('party-input').focus()"/>
+			<!-- 마이페이지 회원 수정 테스트용 버튼  -->
+			<c:if test="${member != null }">
+				<input type="button" value="수정" onclick="location.href='memberUpdateForm'" />
+			</c:if>
 			<br/>
    		</div>
 		<br/>

@@ -16,4 +16,8 @@ public interface MemberService {
 
 	boolean isDuplicateId(String id);
 
+	int updateMember(MemberVO memberVO);
+
+	int notBirthUpdate(MemberVO memberVO);
+
 }

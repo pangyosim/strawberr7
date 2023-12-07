@@ -38,5 +38,12 @@
         FROM member
         WHERE id = #{id}
     </select>
+    <update id="updateMember">
+    	update member set kakaoid=#{kakaoid},nickname=#{nickname},tel=#{tel},addr=#{addr},birth=#{birth} where email=#{email}
+    </update>
+    <update id="notBirthUpdate">
+    	update member set kakaoid=#{kakaoid},nickname=#{nickname},tel=#{tel},addr=#{addr} where email=#{email}
+    </update>
+
 	
 </mapper>
