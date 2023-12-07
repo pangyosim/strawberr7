@@ -4,11 +4,27 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 
 <mapper namespace="com.web.dao.MemberDao">
+	<resultMap type="com.web.vo.MemberVO" id="kakao">
+		<id property="email" column="email"></id>
+		<result property="seq" column="seq"/>
+		<result property="id" column="id"/>
+		<result property="kakaoid" column="kakaoid"/>
+		<result property="pw" column="pw"/>
+		<result property="name" column="name"/>
+		<result property="nickname" column="nickname"/>
+		<result property="role" column="role"/>
+		<result property="tel" column="tel"/>
+		<result property="addr" column="addr"/>
+		<result property="birth" column="birth"/>
+		<result property="tier" column="tier"/>
+	</resultMap>
 	<select id="doMemberList" resultType="com.web.vo.MemberVO">
 		select * from membertest
 	</select>
-	<insert id="joinMember" >
-		INSERT INTO member(seq, id, pw, name, nickname, role, tel, addr, birth, email, tier) VALUES (member_seq.NEXTVAL,#{id},#{pw},#{name},#{nickname},USER,#{tel},#{addr},#{birth},#{email},5)
+	
+	<insert id="joinMember">
+	    INSERT INTO member(seq, id, kakaoid, pw, name, nickname, role, tel, addr, birth, email, tier) 
+	    VALUES (member_seq.NEXTVAL, #{id}, #{kakaoid}, #{pw}, #{name}, #{nickname}, 'USER', #{tel}, #{addr}, #{birth}, #{email}, 5)
 	</insert>
 	<select id="loginResult" resultType="com.web.vo.MemberVO">
 		SELECT * FROM member WHERE id = #{id} AND pw = #{pw}
@@ -21,5 +37,13 @@
  	 <update id="updateClient">
 		update member set  pw=#{pw}, name=#{name}, nickname=#{nickname}, tel=#{tel}, addr=#{addr}, birth=#{birth}, email=#{email} where email=#{email}
 	</update>   
+	<select id="kakaologinResult" resultMap="kakao">
+		SELECT * FROM member WHERE kakaoid = #{kakaoid}
+	</select>
+	  <select id="isDuplicateId" resultType="int">
+        SELECT COUNT(*)
+        FROM member
+        WHERE id = #{id}
+    </select>
 	
 </mapper>

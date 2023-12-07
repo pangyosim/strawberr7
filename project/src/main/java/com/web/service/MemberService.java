@@ -17,4 +17,7 @@ public interface MemberService {
 	public MemberVO updateMember(String id);
 	//수정한데이터 저장
 	public void updateClient(MemberVO vo);
+	MemberVO kakaologinResult(String kakaoid);
+
+	boolean isDuplicateId(String id);
 }

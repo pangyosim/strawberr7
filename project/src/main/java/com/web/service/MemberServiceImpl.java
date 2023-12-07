@@ -19,6 +19,19 @@ public class MemberServiceImpl implements MemberService {
 	public List<MemberVO> doMemberList() {
 		return memberdao.doMemberList();
 	}
+	public boolean isDuplicateId(String id) {
+		int count = memberdao.isDuplicateId(id);
+		
+		
+		return count > 0;
+	}
+
+
+	@Override
+	public List<MemberVO> doMemberList(){
+		return memberdao.doMemberList();
+	}
+	
 
 	// 회원가입
 	@Override
@@ -26,7 +39,7 @@ public class MemberServiceImpl implements MemberService {
 		int su = memberdao.joinMember(memberVO);
 		return su;
 	}
-
+	// 로그인 
 	@Override
 	public MemberVO loginResult(String id, String pw) {
 		return memberdao.loginResult(id, pw);
@@ -43,5 +56,12 @@ public class MemberServiceImpl implements MemberService {
 		memberdao.updateClient(vo);
 	}
 	
+	
+	// 카카오 로그인 
+	@Override
+	public MemberVO kakaologinResult(String kakaoid) {
+		System.out.println("Test");
+		return memberdao.kakaologinResult(kakaoid);
+	}
 	
 }

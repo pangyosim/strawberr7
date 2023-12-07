@@ -20,4 +20,9 @@ public interface MemberDao {
 	public MemberVO updateMember(String id);
 
 	public void updateClient(MemberVO vo);
+
+	public MemberVO kakaologinResult(String kakaoid);
+
+	public int isDuplicateId(String id);
+	
 }
