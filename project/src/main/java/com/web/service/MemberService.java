@@ -8,4 +8,12 @@ public interface MemberService {
 
 	List<MemberVO> doMemberList();
 
+	int joinMember(MemberVO memberVO);
+
+	MemberVO loginResult(String id, String pw);
+
+	MemberVO kakaologinResult(String kakaoid);
+
+	boolean isDuplicateId(String id);
+
 }

@@ -1,0 +1,45 @@
+< table_member_SQL.txt >
+
+DROP TABLE member; -- 테이블 삭제
+
+DROP SEQUENCE member_seq; -- 시퀀스 삭제
+
+
+CREATE TABLE member                         -- 테이블 생성
+(   seq NUMBER NOT NULL,                    -- 회원고유번호
+    id      VARCHAR2(30)   NOT NULL,     	-- 회원ID
+   	kakaoid VARCHAR2(50),	   					    -- 카카오id
+    pw    VARCHAR2(100)    NOT NULL,        -- 회원pw
+    name  VARCHAR2(10)     NOT NULL,        -- 회원이름
+    nickname VARCHAR2(30) NOT NULL,         -- 닉네임
+    role    VARCHAR2(50) NOT NULL,          -- 회원권한(user, party, admin) 기본 user
+    tel     VARCHAR2(13) NOT NULL,          -- 휴대폰번호
+    addr    VARCHAR2(200) NOT NULL,          -- 회원주소
+    birth   VARCHAR2(50) NOT NULL,          -- 회원생일
+    email   VARCHAR2(100) PRIMARY KEY,       -- 이메일
+    tier    VARCHAR2(10) NOT NULL           -- 회원등급(5 ~ 1) 기본:5
+);
+
+-- 시퀀스 생성
+CREATE SEQUENCE member_seq
+START WITH 1
+INCREMENT BY 1;
+
+-- 테이블 조회
+SELECT * FROM member;   
+
+-- 테이블 데이터 주입
+INSERT INTO member(seq, id, kakaoid ,pw, name, nickname, role, tel, addr, birth, email, tier)
+VALUES (member_seq.NEXTVAL, 
+                  'test_id',
+                  '',
+                  'test_pw', 
+                  'userName', 
+                  'userName+ramdom', 
+                  'USER', 
+                  '010-0000-0000', 
+                  '서울시 테스트 어딘가', 
+                  '19971118', 
+                  'test3@test.com',
+                  '5')
+SELECT * FROM member;   

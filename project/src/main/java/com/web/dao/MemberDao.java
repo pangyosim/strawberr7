@@ -11,4 +11,14 @@ import com.web.vo.MemberVO;
 @Repository
 public interface MemberDao {
 	public List<MemberVO> doMemberList();
+	
+	// 회원가입
+	public int joinMember(MemberVO memberVO);
+
+	public MemberVO loginResult(String id, String pw);
+
+	public MemberVO kakaologinResult(String kakaoid);
+
+	public int isDuplicateId(String id);
+	
 }

@@ -1,4 +1,4 @@
-<!-- board/memberJoinForm.jsp -->
+<!-- login/memberJoinForm.jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -8,107 +8,99 @@
 <head>
 <meta charset="UTF-8">
 <title>memberJoinForm.jsp</title>
-<!-- 카카오 로그인바API -->
-<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js"
-  integrity="sha384-kYPsUbBPlktXsY6/oNHSUDZoTX6+YI51f63jCPEIPFP09ttByAdxd2mEjKuhdqn4" crossorigin="anonymous"></script>
+<!-- j쿼리 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+<!-- 카카오 로그인 스크립트 추가 -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
-  Kakao.init('c089c8172def97eb00c07217cae17495'); // 사용하려는 앱의 JavaScript 키 입력
+Kakao.init('4a706abbdeb8e6daae8b9e423f1752fd');  // 카카오 개발자 사이트에서 받은 자바스크립트 키를 넣어주세요.
+
+function kakaoLogin() {
+    Kakao.Auth.login({
+        success: function(response) {
+            Kakao.API.request({
+                url: '/v2/user/me',
+                success: function(response) {
+                    var kakaoid = String(response.id);  // 카카오ID를 문자열로 변환
+                    $.ajax({
+                        url: '/checkUser',
+                        type: 'POST',
+                        data: JSON.stringify({
+                            kakaoid: kakaoid,
+                        }),
+                        contentType: 'application/json',
+                        success: function(data) {
+                            location.href="/checkUser";
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        },
+                    });
+                },
+                fail: function(error) {
+                    console.log(error);
+                },
+            });
+        },
+        fail: function(error) {
+            console.log(error);
+        },
+    });
+}
+
+// 카카오 로그인 버튼 클릭 이벤트 추가
+$(document).ready(function() {
+    $('#kakao-login-btn').click(kakaoLogin);
+    $('#kakao-unlink-btn').click(kakaoUnlink);
+});
+
+function kakaoUnlink() {
+    Kakao.API.request({
+        url: '/v1/user/unlink',
+        success: function(response) {
+            console.log(response);
+            alert('카카오 연결 해제가 완료되었습니다.');
+        },
+        fail: function(error) {
+            console.log(error);
+            alert('카카오 연결 해제에 실패하였습니다.');
+        },
+    });
+}
 </script>
+
+<!--  카카오 집주소API -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<!-- 테스트 -->
-<script type="text/javascript">
-/* 전화번호'-'자동으로 변경, 숫자외 입력 불가' */
-function oninputPhone(target) {
-    target.value = target.value
-        .replace(/[^0-9]/g, '')
-        .replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, "$1-$2-$3");
-}
 
-// 회원가입 데이터 확인(아이디, 비밀번호, 비밀번호 확인, 이메일 입력 여부 확인)
-function memberJoinFormCheck() {
-    // 아이디
-    var loginId = document.getElementById('loginId');
-    if(loginId.value == '') {
-        alert('아이디를 입력해주세요.');
-        loginId.focus();
-        return false;
-    }
+<!-- 로그인.js -->
+<script type="text/javascript" src="resources/js/loginScript.js?v=1"></script>
 
-    // 비밀번호
-    var loginPw = document.getElementById('loginPw');
-    if(loginPw.value == '') {
-        alert('비밀번호를 입력해주세요.');
-        loginPw.focus();
-        return false;
-    }
 
-    // 비밀번호 확인
-    var loginPwConfirm = document.getElementsByName('loginPwConfirm')[0];
-    if(loginPwConfirm.value == '') {
-        alert('비밀번호 확인을 입력해주세요.');
-        loginPwConfirm.focus();
-        return false;
-    }
-
-    // 비밀번호 일치 확인
-    if(loginPw.value != loginPwConfirm.value) {
-        alert('비밀번호가 일치하지 않습니다.');
-        loginPwConfirm.focus();
-        return false;
-    }
-
-    // 이름
-    var name = document.getElementById('name');
-    if(name.value == '') {
-        alert('이름을 입력해주세요.');
-        name.focus();
-        return false;
-    }
-
-    // 이메일
-    var email_first = document.getElementsByClassName('email_first')[0];
-    var email_last = document.getElementsByClassName('email_last')[0];
-    if(email_first.value == '' || email_last.value == 'none') {
-        alert('이메일을 입력해주세요.');
-        email_first.focus();
-        return false;
-    }
-
-    // 이메일 형식 확인
-    var email = email_first.value + "@" + email_last.value;
-    var regex = /^[\w]([-_.]?[\w])*@[\w]([-_.]?[\w])*\.[a-zA-Z]{2,3}$/i;
-    if (!regex.test(email)) {
-        alert('이메일 형식이 올바르지 않습니다.');
-        email_first.focus();
-        return false;
-    }
-
-    // 모든 검증을 통과하면 form을 제출
-    document.querySelector('form').submit();
-}
-</script>
 
 </head>
 <link href="resources/css/memberJoinForm.css" rel="stylesheet" />
 <body style="text-align: center;">
+<c:import url="../main/header.jsp"/>
 <div class="">
 	<h2>회원가입</h2>
-	<!-- 카카오~ -->
-	<div class="" id="" align="center">
-		<!-- 카카오 로그인 버튼 -->
-	    <a id="kakao-login-btn" href="javascript:loginWithKakao()">
-	  		<img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="122"
-	    	alt="카카오 로그인 버튼" />
-		</a>
-		<p id="token-result"></p>
-	</div>
+		<!-- 카카오~ -->
+	<c:if test="${kakaoid == null }">
+		<div>
+			<button id="kakao-login-btn">카카오 로그인</button>
+		</div>
+ 		<button id="kakao-unlink-btn">카카오 연결 해제</button>	
+	</c:if>
 	
 	
-	<form action="memberJoinResult" method="post">
+	<form id="memberjoinForm" action="memberJoinResult" method="post">
     <div class="textForm">
         <input type="text" placeholder="아이디" id="loginId" name="loginId" maxlength="20">
-        <input type="button" value="중복체크" onclick="memberJoinIdCheck()">      
+        <input type="button" value="중복체크" id="checkBtn">
+       	<p id="message"></p>
     </div>
+		<input type="hidden" id="kakaoid" name="kakaoid" value="${kakaoid }">
     <div class="textForm">
         <input type="password" placeholder="비밀번호" id="loginPw" name="loginPw" maxlength="20"><br>
         <input type="password" placeholder="비밀번호 확인" name="loginPwConfirm" maxlength="20">     
@@ -138,7 +130,7 @@ function memberJoinFormCheck() {
         <input type="text" class="form-control" id="tel" name="tel" placeholder="전화번호" oninput="oninputPhone(this)" maxlength="13">
     </div>
     <div class="textForm">
-        <input type="text" class="email_first" id="email" name="email" placeholder="이메일" name="" maxlength="20">
+        <input type="text" class="email_first" id="email" name="email" placeholder="이메일" name="" maxlength="20"> @
         <select class="email_last" id="domain" name="domain">
             <option value="none">-------이메일-------</option>
             <option value="naver.com">naver.com</option>
@@ -148,6 +140,7 @@ function memberJoinFormCheck() {
     <input type="button" value="회원가입" onclick="memberJoinFormCheck()"/>
 </form>
 </div>
+<c:import url="../main/footer.jsp"/>
 </body>
 <style type="text/css">
 /* SECTION - BIRTH */
@@ -177,6 +170,7 @@ function memberJoinFormCheck() {
 }
 </style>
 <script type="text/javascript">
+
 
 //'출생 연도' 셀렉트 박스 option 목록 동적 생성
 const birthYearEl = document.querySelector('#birth-year')
