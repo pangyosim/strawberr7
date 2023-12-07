@@ -33,7 +33,7 @@
 	   			<th>서비스</th><th>기간</th><th>가격</th><th>수수료</th><th>합계</th>
 	   		</tr>
 	   		<tr style="height: 150px;">
-	   			<c:if test="${vo.service eq '왓챠' }">
+	   			<c:if test="${vo.service eq 'watcha' }">
 	   				<td><img src="resources/assets/img/watcha.png" width="130" height="100"/></td>
 	   			</c:if>
 	   			<c:if test="${vo.service eq 'youtube' }">
@@ -65,10 +65,10 @@
 	   			<td>이름</td><td>${mv.name }</td>
 	   		</tr>
 	   		<tr>
-	   			<td>결제 금액</td><td>${vo.price }</td>
+	   			<td>결제 금액</td><td>${vo.price}</td>
 	   		</tr>
 	   		<tr>
-	   			<td>수수료(10%)</td><td>${vo.price*0.1 }</td>
+	   			<td>수수료 (10%)</td><td>${vo.price*0.1 }</td>
 	   		</tr>
 	   		<tr>
 	   			<td>합계</td><td>${vo.price*1.1 }</td>

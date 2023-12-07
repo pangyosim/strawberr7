@@ -51,7 +51,7 @@
 	</insert>
 	
 	<update id="updatepartyinfo">
-		update partyinfo set seq=#{seq}, service=#{service}, title=#{title}, peoplecnt=peoplecnt+1, userid=#{userid}, partyday=#{partyday}, price=#{price}, partydate=#{partydate} where seq=#{seq}
+		update partyinfo set peoplecnt=peoplecnt+1 where seq=#{seq}
 	</update>
 	
 </mapper>

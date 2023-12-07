@@ -32,11 +32,7 @@ public class MemberVO {
 	
 	private int seq;
 	private String id;
-<<<<<<< HEAD
 	private String kakaoid;
-=======
-	private int kakaoid;
->>>>>>> refs/remotes/origin/spg9468-pay
 	private String pw;
 	private String name;
 	private String nickname;
@@ -46,8 +42,4 @@ public class MemberVO {
 	private String birth;
 	private String email;
 	private String tier;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> refs/remotes/origin/spg9468-pay

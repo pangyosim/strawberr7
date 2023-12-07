@@ -75,9 +75,9 @@ public class PartyController {
 	// 이미지클릭시 해당파티 리스트로 이동
 	@GetMapping("/youtubePartyList")
 	public String youtubeParty(Model model,GroupVO vo) {
-		System.out.println(vo.getSeq());
 		GroupVO selectPartylist = partyService.selectPeoplecntList(vo.getSeq());
 		model.addAttribute("selectPartylist", selectPartylist);
+		model.addAttribute("seq", vo.getSeq());
 		return "/createparty/youtubePartyList";
 	}
 
@@ -92,10 +92,9 @@ public class PartyController {
 
 	@GetMapping("/watchaPartyList")
 	public String watchaPartyList(Model model,GroupVO vo) {
-		System.out.println(vo.getSeq());
 		GroupVO selectPartylist = partyService.selectPeoplecntList(vo.getSeq());
-		System.out.println("selectPartylist : "+selectPartylist);
 		model.addAttribute("selectPartylist", selectPartylist);
+		model.addAttribute("seq", vo.getSeq());
 		return "/createparty/watchaPartyList";
 	}
 

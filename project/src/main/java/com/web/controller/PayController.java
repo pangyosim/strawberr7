@@ -28,6 +28,7 @@ public class PayController {
 		GroupVO vo = ps.doPartyList(seq);
 		model.addAttribute("vo",vo);
 		model.addAttribute("mv", mv);
+		System.out.println(mv.getId());
 		return "/pay/payinfo";
 	}
 	
