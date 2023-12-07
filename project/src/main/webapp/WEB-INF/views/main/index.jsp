@@ -30,7 +30,14 @@
     <body id="page-top">
     	<c:import url="header.jsp"/>
         <!-- Masthead-->
+<<<<<<< HEAD
         <header class="masthead" style="width: 100%; height: 550px; margin-top: 90px;">
+=======
+        <header class="masthead">
+            <div class="container">
+           	<input type="button" onclick="location.href='payinfo?seq=2&session=21'" value="결제페이지이동"/>
+            </div>
+>>>>>>> refs/remotes/origin/spg9468-pay
         </header>
         <div class="container">
             	<input type="button" value="파티장 권한 가입"

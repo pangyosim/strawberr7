@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="com.web.dao.PayDao">
+	<resultMap type="com.web.vo.GroupVO" id="partyinfo">
+		<id property="seq" column="seq"/>
+		<result property="service" column="service"/>
+		<result property="title" column="title"/>
+		<result property="peoplecnt" column="peoplecnt"/>
+		<result property="userid" column="userid"/>
+		<result property="partyday" column="partyday"/>
+		<result property="price" column="price"/>
+		<result property="partydate" column="partydate"/> 
+	</resultMap>
+	<resultMap type="com.web.vo.MemberVO" id="memberinfo">
+		<id property="seq" column="seq"/>
+		<result property="id" column="id"/>
+		<result property="kakaoid" column="kakaoid"/>
+		<result property="pw" column="pw"/>
+		<result property="name" column="name"/>
+		<result property="nickname" column="nickname"/>
+		<result property="role" column="role"/>
+		<result property="tel" column="tel"/>
+		<result property="addr" column="addr"/>
+		<result property="birth" column="birth"/>
+		<result property="email" column="email"/>
+		<result property="tier" column="tier"/>
+	</resultMap>
+	<resultMap type="com.web.vo.PayVO" id="paytable">
+		<result property="userid" column="userid"/>
+		<result property="price" column="price"/>
+		<result property="paydate" column="paydate"/>
+		<result property="imp_uid" column="imp_uid"/>
+		<result property="merchant_uid" column="merchant_uid"/>
+		<result property="result" column="result"/>
+		<result property="seq" column="seq"/>
+	</resultMap>
+	
+	<select id="doPartyList" resultMap="partyinfo">
+		select * from partyinfo where seq=#{seq}
+	</select>
+	
+	<select id="doMemberList" resultMap="memberinfo">
+		select * from member where seq=#{seq} 
+	</select>
+	
+	<insert id="insertPayList" parameterType="com.web.vo.PayVO">
+		insert into paytable values(#{userid}, #{price}, sysdate, #{imp_uid}, #{merchant_uid}, #{result}, #{seq})
+	</insert>
+	
+	<update id="updatepartyinfo">
+		update partyinfo set seq=#{seq}, service=#{service}, title=#{title}, peoplecnt=peoplecnt+1, userid=#{userid}, partyday=#{partyday}, price=#{price}, partydate=#{partydate} where seq=#{seq}
+	</update>
+	
+</mapper>
+
