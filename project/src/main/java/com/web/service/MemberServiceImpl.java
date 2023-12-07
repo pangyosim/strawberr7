@@ -27,12 +27,6 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
-	@Override
-	public List<MemberVO> doMemberList(){
-		return memberdao.doMemberList();
-	}
-	
-
 	// 회원가입
 	@Override
 	public int joinMember(MemberVO memberVO) {
