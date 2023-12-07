@@ -26,15 +26,18 @@
     <body id="page-top">
     	<c:import url="header.jsp"/>
         <!-- Masthead-->
-        <header class="masthead">
+        <header class="masthead" style="width: 100%; height: 550px; margin-top: 90px;">
             <div class="container">
-            
+            	
             </div>
         </header>
         <!-- Services-->
-        <div class="services" style="text-align: center;">
-	      	<h2> 서비스</h2>
-			<input type="button" value="파티만들기 계좌등록" onclick="location.href='groupJoinForm'"/> &nbsp; &nbsp; <input type="button" value="파티찾기" onclick="document.getElementById('party-input').focus()"/>
+        <div class="services" style="margin-left: 150px;">
+	      	<h2>최근 만들어진 파티</h2>
+		<!-- <input type="button" value="파티만들기 계좌등록" onclick="location.href='groupJoinForm'"/> &nbsp; &nbsp; <input type="button" value="파티찾기" onclick="document.getElementById('party-input').focus()"/> -->
+			<div class="partylist">
+				
+			</div>
 			<br/>
    		</div>
 		<br/>

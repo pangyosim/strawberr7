@@ -10,6 +10,7 @@
 <title>memberJoinForm.jsp</title>
 <!-- j쿼리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link href="resources/css/styles.css" rel="stylesheet" />
 
 
 <!-- 카카오 로그인 스크립트 추가 -->
@@ -83,7 +84,7 @@ function kakaoUnlink() {
 <link href="resources/css/memberJoinForm.css" rel="stylesheet" />
 <body style="text-align: center;">
 <c:import url="../main/header.jsp"/>
-<div class="">
+<div class="" style="margin-top: 100px">
 	<h2>회원가입</h2>
 		<!-- 카카오~ -->
 	<c:if test="${kakaoid == null }">
