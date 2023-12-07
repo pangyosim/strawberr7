@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+#toss-pay-button {
+  display: inline-block;
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid #3A7BCB;
+  color: #fff;
+  background-color: #3A7BCB;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+#toss-pay-button:hover {
+  background-color: #bbbbdd; /* 호버 시 배경 컬러 변경 */
+  border-color: #bbbbdd; /* 호버 시 테두리 컬러 변경 */
+  color: #000; /* 호버 시 텍스트 컬러 변경 */
+}
+#kakao-pay-button {
+  display: inline-block;
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid #FFEB00; /* 카카오페이 컬러 */
+  color: #000; /* 텍스트 컬러 */
+  background-color: #FFEB00; /* 배경 컬러 */
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+/* 마우스 호버 시 배경 색상 변경 */
+#kakao-pay-button:hover {
+  background-color: #D4C600; /* 호버 시 배경 컬러 변경 */
+  border-color: #D4C600; /* 호버 시 테두리 컬러 변경 */
+  color: #000; /* 호버 시 텍스트 컬러 변경 */
+}
+
+#payco-button {
+  display: inline-block;
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid #FF0033; /* 페이코 컬러 */
+  color: #000; /* 텍스트 컬러 */
+  background-color: #FF0033; /* 배경 컬러 */
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+/* 마우스 호버 시 배경 색상 변경 */
+#payco-button:hover {
+  background-color: #CC002D; /* 호버 시 배경 컬러 변경 */
+  border-color: #CC002D; /* 호버 시 테두리 컬러 변경 */
+  color: #fff; /* 호버 시 텍스트 컬러 변경 */
+}
+
+.input_area {
+	display: flex;
+	align-content: center;
+	justify-content: center;
+}
+.input_area #pay {
+	background-color: #e5ddff; 
+}
