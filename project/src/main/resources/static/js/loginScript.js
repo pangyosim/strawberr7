@@ -1,3 +1,21 @@
+
+function userCheck(){
+	var IMP = window.IMP;
+	IMP.init("imp40114442");
+	IMP.certification({
+		pg : "danal",
+		merchant_uid : "",
+		m_redirect_url : "https://e707-123-142-55-115.ngrok-free.app",
+		popup : true
+		},function(rsp){
+			if(rsp.success){
+				alert("인증이 완료되었습니다");
+			}else{
+				alert("인증에 실패했습니다. 에러 내용 : " + rsp.error_msg);
+			}
+		});
+}
+
 /* 전화번호'-'자동으로 변경, 숫자외 입력 불가' */
 function oninputPhone(target) {
     target.value = target.value

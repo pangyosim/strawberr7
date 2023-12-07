@@ -78,7 +78,8 @@ function kakaoUnlink() {
 <!-- 로그인.js -->
 <script type="text/javascript" src="resources/js/loginScript.js?v=1"></script>
 
-
+<!-- 포트원 API -->
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 
 </head>
 <link href="resources/css/memberJoinForm.css" rel="stylesheet" />
@@ -107,7 +108,8 @@ function kakaoUnlink() {
         <input type="password" placeholder="비밀번호 확인" name="loginPwConfirm" maxlength="20">     
     </div>
     <div class="textForm">
-        <input type="text" placeholder="이름" id="name" name="name" maxlength="50">     
+        <input type="text" placeholder="이름" id="name" name="name" maxlength="50">   
+        <button type="button" id="check" onclick="userCheck()">본인인증</button>  
     </div>
     <div class="info" id="info__birth">
       <select class="box" id="birth-year" name="birth-year">
