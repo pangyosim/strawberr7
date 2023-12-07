@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.web.dao.PartyMapper;
 import com.web.vo.GroupVO;
@@ -16,22 +17,36 @@ public class PartyServiceImpl implements PartyService{
 	@Autowired
 	private PartyMapper partymapper;
 	
+	
 	@Override
 	public int groupjoin(PartyMember partyMember) {
 		int result= partymapper.insertbyacount(partyMember);
 		return result;
 	}
+	// youtube
 	@Override
-	public String selectPeoplecnt(GroupVO groupVO) {
+	public List<GroupVO> selectPeoplecnt(GroupVO groupVO) {
 		// TODO Auto-generated method stub
-		return partymapper.selectPeoplecnt(groupVO);
+		List<GroupVO> selectPeoplecnt = partymapper.selectPeoplecnt(groupVO);
+		return selectPeoplecnt;
 	}
+	// wacha
 	@Override
-	public List<GroupVO> selectPeoplecntList(String userid) {
+	public GroupVO selectPeoplecntList(int seq) {
 		// TODO Auto-generated method stub
-		List<GroupVO> selectlist = partymapper.selectPeoplecntList(userid);
-		return selectlist;
+		GroupVO vo = partymapper.selectPeoplecntList(seq);
+		return vo;
 	}
+	
+	@Override
+	@Transactional
+	public void groupInsert(GroupVO groupVo) {
+		// TODO Auto-generated method stub
+		partymapper.groupInsert(groupVo);
+	}
+	
+	
+	 
 	
 	
 	

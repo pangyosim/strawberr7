@@ -6,99 +6,64 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>youtubePartyList</title>
-<script type="text/javascript" src="">
+<title>watchaPartyselect</title>
+<!-- <script type="text/javascript" src="">
 	function check() {
-		if (document.youtubePartyselect.no.value == "") {
+		if (document.watchaPartyselect.no.value == "") {
 			alert("항목을 체크하세요");
-			document.youtubePartyselect.no.focus();
+			document.watchaPartyselect.no.focus();
 		} else {
-			document.youtubePartyselect.submit();
+			document.watchaPartyselect.submit();
 		}
 	}
-</script>
-<style type="text/css">
-body {
-	text-align: left;
-	margin: 100px;
-}
+</script> -->
 
-table, th, td {
-	/* border: 1px solid gray;  */
-	border-collapse: collapse;
-	color: black;
-	text-align: left;
-}
-
-.party_table {
-	margin: 0 auto;
-	width: 500px;
-	position: relative;
-	width: 600px;
-	height: 30px;
-	margin: 10px auto;
-	padding: 5px;
-}
-
-.party_data {
-	margin: 0 auto;
-	width: 500px;
-	position: relative;
-	margin: 50px;
-	padding: 100px;
-}
-</style>
 <link href="resources/css/styles.css" rel="stylesheet" />
 </head>
 <body style="background-color: white;">
 	<c:import url="../main/header.jsp" />
-	<form action="youtubePartyselect" method="get"
-		name="youtubePartyselect">
-
-		<table class="party_data">
-			
-		</table>
-		<hr>
 		<table class="party_table">
-			<div>
-				<h3>유튜브 파티목록</h3>
-			<tr>
-				<th>${groupVO.service }</th>
-			</tr>
-			<tr>
-				<th>${groupVO.partyday}</th>
-				<th>${groupVO.peoplecnt }</th>
-			</tr>
-			<hr>
-			<tr>
-				<th>${groupVO.price }</th>
-			</tr>
-			</div>
-			<tr>
-				<th><input type="checkbox" id="shareno" name="no" />1인 회선</th>
-				<br>
-			</tr>
-			<tr>
-				<th><input type="checkbox" id="shareno" name="no" />1인
-					1기기등록</th>
-				<br>
-			</tr>
-			<tr>
-				<th><input type="checkbox" id="shareno" name="no" />공유금지</th>
-				<br>
-			<tr />
-			<tr>
-				<th><input type="checkbox" id="shareno" name="no" />개인사정 환불불가</th>
-				<br>
-			</tr>
-			<tr>
-				<th><input type="checkbox" id="shareno" name="no" />계정양도 불가</th>
-				<br>
-			</tr>
-			<input type="submit" value="목록" onclick="location.href='../main/index'" />
-			&nbsp;
-			<input type="submit" value="동의" onclick="check()" />
+			<thead>
+				<tr>
+					<th colspan="2"><h3>유튜브 파티목록</h3></th>
+				</tr>
+			</thead>
+			<tbody>
+					<tr>
+						<td>${selectPartylist.service}</td>
+					</tr>
+					<tr>
+						<td>${selectPartylist.peoplecnt}</td>
+					</tr>
+					<tr>
+						<td>${selectPartylist.partyday}</td>
+					</tr>
+					<tr>
+						<td>${selectPartylist.price}</td>
+					</tr>
+					<tr>
+						<td>${selectPartylist.partydate}</td>
+					</tr>
+
+			</tbody>
+			<tbody>
+				<tr>
+					<th><input type="checkbox" name="no" />1인회선</th>
+				</tr>
+				<tr>
+					<th><input type="checkbox" name="no" />1인1기기등록</th>
+				</tr>
+				<tr>
+					<th><input type="checkbox" name="no" />공유금지</th>
+				</tr>
+				<tr>
+					<th><input type="checkbox" name="no" />개인사정환불불가</th>
+				</tr>
+				<tr>
+					<th><input type="checkbox" name="no" />계정양도불가</th>
+				</tr>
+			</tbody>
 		</table>
-	</form>
+		<input type="submit" value="목록" onclick="location.href='../main/index'"/> &nbsp; <input type="submit" value="동의" onclick="location.href='../main/index'"/>
 </body>
 </html>

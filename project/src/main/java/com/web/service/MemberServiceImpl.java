@@ -2,6 +2,8 @@ package com.web.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +14,11 @@ import com.web.vo.MemberVO;
 public class MemberServiceImpl implements MemberService {
 	@Autowired
 	MemberDao memberdao;
-	
+
 	@Override
+	public List<MemberVO> doMemberList() {
+		return memberdao.doMemberList();
+	}
 	public boolean isDuplicateId(String id) {
 		int count = memberdao.isDuplicateId(id);
 		
@@ -37,9 +42,20 @@ public class MemberServiceImpl implements MemberService {
 	// 로그인 
 	@Override
 	public MemberVO loginResult(String id, String pw) {
-		
 		return memberdao.loginResult(id, pw);
 	}
+
+	@Override
+	public MemberVO updateMember(String id) {
+		// TODO Auto-generated method stub
+		return memberdao.updateMember(id);
+	}
+
+	@Override
+	public void updateClient(MemberVO vo) {
+		memberdao.updateClient(vo);
+	}
+	
 	
 	// 카카오 로그인 
 	@Override

@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 import lombok.Data;
-import oracle.sql.DATE;
 
 @Data
 public class GroupVO {
@@ -15,7 +14,8 @@ public class GroupVO {
 	private int peoplecnt;		//파티인원
 	private String userid;		//파티장
 	private int partyday;			//파티기간
-	private String price;			//가입가격
-	private LocalDateTime partydate;     //생성일자
+	private int price;			//가입가격
+	private String partydate;     //생성일자
+//LocalDateTime
 }
 	
