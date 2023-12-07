@@ -30,6 +30,34 @@
 	padding: 4px;
 }
 
+/* mypage */
+.hidden_menu {
+    position: relative;
+    display: inline-block;
+}
+
+.hidden_menu .submenu {
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+
+.hidden_menu:hover .submenu {
+    display: block;
+}
+.hidden_menu .submenu li {
+    clear: both;
+    width: 100%;
+}
+
+.hidden_menu .submenu li:hover {
+    background-color: #f1f1f1;
+}
+.hidden_menu .submenu a {
+    color: gray;
+    font-size: 12px;
+}
+
 </style>
 </head>
 <body>
@@ -60,7 +88,19 @@
 	                        	</c:if> 	
 	                       	</c:otherwise>
                         </c:choose>
-                        <li class="nav-item"><a class="nav-link"> About </a></li>
+                        <!-- mypage hidden -->
+                        <ul class="hidden_menu">
+		                        <li class="nav-item">
+		                        <a class="nav-link" href="getmypage"> MYPAGE </a>
+		                        	<ul class="submenu">
+		                        		<li><a href="#">결제내역</a></li>
+		                        		<li><a href="#">정보설정</a></li>
+		                        		<li><a href="groupInsert">파티만들기</a></li>
+		                        		<li><a href="mygrouplist">파티보기</a></li>
+		                        		<li><a href="groupModify">파티수정</a></li>
+		                        	</ul>
+		                        </li>
+	                        </ul>
                     </ul>
                 </div>
             </div>
