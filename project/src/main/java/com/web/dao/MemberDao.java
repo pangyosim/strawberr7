@@ -28,5 +28,7 @@ public interface MemberDao {
 	public int updateMember(MemberVO memberVO);
 
 	public int notBirthUpdate(MemberVO memberVO);
+
+	public int memberDelete(String email);
 	
 }

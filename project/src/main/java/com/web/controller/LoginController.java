@@ -241,7 +241,7 @@ public class LoginController {
 				return "/login/memberUpdateResult";	
 			}
 			return "redirect:memberUpdateNo";
-		}
+		}  
 		System.out.println(memberVO.toString());
 		su = ms.updateMember(memberVO);
 		System.out.println(su + "회원수정");
@@ -258,7 +258,17 @@ public class LoginController {
 		return "/login/memberUpdateNo";
 	}
 	
-	
+	// 회원 탈퇴 
+	@GetMapping("memberDelete")
+	public String memberDelete(HttpServletRequest request) throws Exception {
+	    HttpSession session = request.getSession();
+	    MemberVO memberVO = (MemberVO) session.getAttribute("member");
+	    String email = memberVO.getEmail();
+	    int su = ms.memberDelete(email);
+	    
+	    session.invalidate();  // 세션 종료
+	    return "redirect:/";
+	}
 	
 	
 	

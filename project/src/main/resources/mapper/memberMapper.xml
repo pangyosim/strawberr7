@@ -44,6 +44,8 @@
     <update id="notBirthUpdate">
     	update member set kakaoid=#{kakaoid},nickname=#{nickname},tel=#{tel},addr=#{addr} where email=#{email}
     </update>
-
+	<delete id="memberDelete">
+		DELETE FROM member WHERE email=#{email}
+	</delete>
 	
 </mapper>

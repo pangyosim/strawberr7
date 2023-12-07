@@ -55,11 +55,18 @@ public class MemberServiceImpl implements MemberService {
 		int su = memberdao.updateMember(memberVO);
 		return su;
 	}
-
-
 	@Override
 	public int notBirthUpdate(MemberVO memberVO) {
 		int su = memberdao.notBirthUpdate(memberVO);
+		return su;
+	}
+
+
+	// 회원 삭제 
+	@Override
+	public int memberDelete(String email) {
+		int su = memberdao.memberDelete(email);
+		
 		return su;
 	}
 		

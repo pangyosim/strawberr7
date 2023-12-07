@@ -20,4 +20,6 @@ public interface MemberService {
 
 	int notBirthUpdate(MemberVO memberVO);
 
+	int memberDelete(String email);
+
 }
