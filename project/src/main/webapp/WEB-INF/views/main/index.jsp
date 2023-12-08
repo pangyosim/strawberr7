@@ -2,8 +2,8 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.web.vo.GroupVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html lang="en">
 <script type="text/javascript">
@@ -86,16 +86,26 @@
                             <p class="text-muted">Lead Designer</p>
                         </div>
                     </div>
-			</div>
-			<div class="row">
-				<div class="col-lg-8 mx-auto text-center">
-					<p class="large text-muted">Lorem ipsum dolor sit amet,
-						consectetur adipisicing elit. Aut eaque, laboriosam veritatis,
-						quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
-				</div>
-			</div>
-		</div>
-	</section>
-	<c:import url="footer.jsp"></c:import>
-</body>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 mx-auto text-center"><p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p></div>
+                </div>
+            </div>
+        </section>
+        <c:import url="footer.jsp"></c:import>
+    </body>
+    
+    <!-- 회원탈퇴 자바스크립트  -->
+    <script type="text/javascript">
+				
+				function openConfirmWindow() {
+				    var confirmWindow = window.open("", "", "width=300,height=200"); // 새 창을 열고 창 객체를 변수에 저장
+				    confirmWindow.document.write("<p>정말 탈퇴하시겠습니까?</p>"); // 새 창에 메시지 출력
+				    confirmWindow.document.write("<button onclick='opener.location.href=\"memberDelete\"; window.close();'>예</button>"); // '예' 버튼 생성. 클릭 시 부모 창의 주소를 변경하고 새 창을 닫음
+				    confirmWindow.document.write("<button onclick='window.close();'>아니오</button>"); // '아니오' 버튼 생성. 클릭 시 새 창을 닫음
+				}
+				
+				</script>
+    
 </html>

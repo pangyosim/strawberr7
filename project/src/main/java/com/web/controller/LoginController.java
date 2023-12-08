@@ -6,12 +6,14 @@ import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,8 +27,8 @@ import com.web.vo.MemberVO;
 
 @Controller
 public class LoginController implements MemberSession {
-	
-	@Autowired
+
+  @Autowired
 	private MemberService ms;
 	
 	@Autowired
@@ -131,9 +133,9 @@ public class LoginController implements MemberSession {
 			   					 @RequestParam("loginPw") String pw, 
 			   					 @RequestParam("loginPwConfirm") String pwC, 
 			   					 @RequestParam("name") String name,
-			   					 @RequestParam("birth-year") String year, 
-			   					 @RequestParam("birth-month") String month, 
-			   					 @RequestParam("birth-day") String day, 
+			   					 @RequestParam(value = "birth-year", required = false) String year, 
+			   					 @RequestParam(value = "birth-month", required = false) String month, 
+			   					 @RequestParam(value = "birth-day", required = false) String day, 
 			   					 @RequestParam("address_1") String addr_1, 
 			   					 @RequestParam("address_2") String addr_2, 
 			   					 @RequestParam("address_3") String addr_3, 
@@ -155,6 +157,8 @@ public class LoginController implements MemberSession {
 		memberVO.setName(name);
 		Random r = new Random();
 		memberVO.setNickname(name + (r.nextInt(99999)));
+		if(year == null || month == null || day == null) {	
+		}
 		memberVO.setBirth(year+"-"+ month +"-" + day);;
 		memberVO.setAddr(addr_1 + "/" + addr_2 + "/" + addr_3 + "/" + addr_4);
 		memberVO.setTel(tel);
@@ -167,7 +171,6 @@ public class LoginController implements MemberSession {
 		}
 		return "register";
 	}
-	
 	@GetMapping("memberSuccess")
 	public String memberSuccess() {
 		return "/login/memberSuccess";
@@ -193,7 +196,85 @@ public class LoginController implements MemberSession {
 		return "/login/resultUpdate";
 	}
 	
+	// 회원수정
+	@GetMapping("memberUpdateForm")
+	public String memberModifyView() {
+	
+		return "/login/memberUpdateForm";
+	}
+	
+	@PostMapping("memberUpdateResult")
+	public String memberUpdateResult(@RequestParam("loginId") String id, 
+				@RequestParam("kakaoid") String kakaoid, 
+				 @RequestParam("loginPw") String pw, 
+				 @RequestParam("loginPwConfirm") String pwC, 
+				 @RequestParam("nickname") String nickname,
+				 @RequestParam(value = "birth-year", required = false) String year, 
+				 @RequestParam(value = "birth-month", required = false) String month, 
+				 @RequestParam(value = "birth-day", required = false) String day,  
+				 @RequestParam("address_1") String addr_1, 
+				 @RequestParam("address_2") String addr_2, 
+				 @RequestParam("address_3") String addr_3, 
+				 @RequestParam("address_4") String addr_4, 
+				 @RequestParam("tel") String tel, 
+				 @RequestParam("email") String email,
+				 HttpSession session
+				) {
+		
+		
+		MemberVO memberVO = new MemberVO();
+		memberVO.setId(id);
+		if(pw.equals(pwC)) {
+			memberVO.setPw(pw);			
+		} else {
+			System.out.println("수정 비번 에러");
+			return "memberUpdateForm";
+		} 		
+		memberVO.setKakaoid(kakaoid);
+		memberVO.setNickname(nickname);		
+		memberVO.setAddr(addr_1 + "/" + addr_2 + "/" + addr_3 + "/" + addr_4);
+		memberVO.setTel(tel);
+		memberVO.setEmail(email);
+		memberVO.setBirth(year+"-"+ month +"-" + day);;
+		int su = 0;
+		System.out.println(memberVO.toString());
 
+		if(memberVO.getBirth().matches("(.*)null(.*)")) {
+			su = ms.notBirthUpdate(memberVO);
+			if(su == 1) {
+				session.invalidate();
+				return "/login/memberUpdateResult";	
+			}
+			return "redirect:memberUpdateNo";
+		}  
+		System.out.println(memberVO.toString());
+		su = ms.updateMember(memberVO);
+		System.out.println(su + "회원수정");
+		if(su == 1) {
+			session.invalidate();
+			return "/login/memberUpdateResult";			
+		}
+		
+		return "redirect:memberUpdateNo";
+	}
+	
+	@GetMapping("memberUpdateNo")
+	public String memberUpdateNo() {
+		return "/login/memberUpdateNo";
+	}
+	
+	// 회원 탈퇴 
+	@GetMapping("memberDelete")
+	public String memberDelete(HttpServletRequest request) throws Exception {
+	    HttpSession session = request.getSession();
+	    MemberVO memberVO = (MemberVO) session.getAttribute("member");
+	    String email = memberVO.getEmail();
+	    int su = ms.memberDelete(email);
+	    
+	    session.invalidate();  // 세션 종료
+	    return "redirect:/";
+	}
+	
 }
 
 

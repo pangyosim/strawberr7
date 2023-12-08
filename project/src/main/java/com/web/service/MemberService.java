@@ -19,6 +19,13 @@ public interface MemberService {
 	public void updateClient(MemberVO vo);
 	MemberVO kakaologinResult(String kakaoid);
 	boolean isDuplicateId(String id);
+
+	int updateMember(MemberVO memberVO);
+
+	int notBirthUpdate(MemberVO memberVO);
+
+	int memberDelete(String email);
+
 	// 파티장 룰 변경
 	public void updateRole(String email);
 }
