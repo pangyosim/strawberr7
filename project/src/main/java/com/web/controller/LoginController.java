@@ -5,12 +5,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,21 +17,22 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.web.domain.Member;
 import com.web.service.MemberService;
+import com.web.service.PartyService;
+import com.web.session.MemberSession;
 import com.web.vo.MemberVO;
 
-import oracle.net.aso.m;
 
 @Controller
-public class LoginController {
-		
-	@Autowired
+public class LoginController implements MemberSession {
+
+  @Autowired
 	private MemberService ms;
+	
+	@Autowired
+	private PartyService ps;
 	
 	@GetMapping("login")
 	public String login() {
@@ -60,61 +59,44 @@ public class LoginController {
 		System.out.println("GET MEMVERJOINFORM");
 		return "/login/memberJoinForm";
 	}
-	@GetMapping("service")
-	public String service() {
-		List<MemberVO> list = ms.doMemberList();
-		for(MemberVO vo : list) {
-			System.out.println("ID : " + vo.getId() + ", NAME : " + vo.getName() + ", ROLE : " + vo.getRole() );
-			
-		}
-		return "/main/index";
-	}
+	
+	//----------------------------------------------------------------
+
 	// 카카오 로그인
 	@GetMapping("/checkUser")
 	public String getCheckUser(HttpSession session) {
 	    MemberVO memberVO = (MemberVO) session.getAttribute("member");
 	    if(memberVO != null && memberVO.getId() != null) {
-	    	System.out.println("GET CHECKUSER 1번 ");
-	        return "/login/loginResult";
+	        session.setAttribute("party", ps.selectPeoplecnt());
+	        return "/main/index";
 	    } else {
-	    	System.out.println("GET CHECKUSER 2번 ");
 	        return "/login/memberJoinForm";        
 	    }
 	}
 	
 	@PostMapping("/checkUser")
 	public String checkUser(@RequestBody Map<String, String> user, HttpSession session) {
-		System.out.println("POST CHECKUSER 1번 ");
 
 		String kakaoid = user.get("kakaoid");
 	    if(kakaoid != null) {
-			System.out.println("POST CHECKUSER 2번 ");
 
 	        MemberVO VO = ms.kakaologinResult(kakaoid);
 	        if(VO != null && VO.getKakaoid() != null) {
-	    		System.out.println("POST CHECKUSER 3번 ");
 	            session.setAttribute("member", VO);
 	           
 	            return "redirect:checkUser";
 	        } else {
-	    		System.out.println("POST CHECKUSER 4번 ");
 	            session.setAttribute("kakaoid", kakaoid);
 	    		return "redirect:/memberJoinForm";
 	        }
 	    }
-		System.out.println("POST CHECKUSER 5번 ");
 	    session.setAttribute("kakaoid", kakaoid);
 	    return "redirect:register";
 	}
 	
-	
+	//----------------------------------------------------------------
+
 	// 로그인
-	@GetMapping("loginResult")
-	public String getLoginResult() {
-		System.out.println("GET LOGIN");
-		return "/login/loginResult";
-	}
-	
 	@PostMapping("loginResult")
 	public String loginResult(@RequestParam("userId") String id,
 	                          @RequestParam("password") String pw, HttpSession session) {
@@ -123,21 +105,24 @@ public class LoginController {
 		
 	    if(memberVO != null) {
 	        session.setAttribute("member", memberVO);
-	        return "/login/loginResult";
+	        session.setAttribute("party", ps.selectPeoplecnt());
+	        return "/main/index";
 	    }
-	    return "redirect:loginNo";
+	    return "/login/loginForm";
 	}
+	//----------------------------------------------------------------
 	
 	// 로그인 실패 
 	@GetMapping("loginNo")
 	public String loginNo() {
-		return "/login/loginNo";
+		return "/login/login";
 	}
 	
 	// 로그아웃
 	@GetMapping("logout")
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session, Model model) {
 		session.invalidate();
+		model.addAttribute("party", ps.selectPeoplecnt());
 		return "/main/index";
 	}
 	
@@ -189,6 +174,26 @@ public class LoginController {
 	@GetMapping("memberSuccess")
 	public String memberSuccess() {
 		return "/login/memberSuccess";
+	}
+	//정보불러오기
+	@GetMapping("memberUpdate")
+	public String memberModify(Model model) {
+//		MemberVO membervo = (MemberVO) httpSession.getAttribute("member");
+		model.addAttribute(LOGIN, ms.updateMember("jsk7640@naver.com"));
+		return "/login/memberUpdate";
+	}
+	//수정한데이터 저장
+	@PostMapping("updateClient")
+	public void updateClient(MemberVO vo) {
+//		System.out.println(memberVO.toString());
+		ms.updateClient(vo);
+		System.out.println(vo.toString());
+//		ra.addAttribute("member", ms.updateMember("qwe"));		
+//		System.out.println(ms.updateMember("qwe"));
+	}
+	@PostMapping("resultUpdate")
+	public String slakf() {
+		return "/login/resultUpdate";
 	}
 	
 	// 회원수정
@@ -269,8 +274,6 @@ public class LoginController {
 	    session.invalidate();  // 세션 종료
 	    return "redirect:/";
 	}
-	
-	
 	
 }
 

@@ -19,58 +19,61 @@
 </script> -->
 
 <link href="resources/css/styles.css" rel="stylesheet" />
+<script type="text/javascript" src="resources/js/logincheck.js"></script>
 </head>
-<body style="background-color: white;">
+<body style="background-color: white; margin-top: 150px; display: flex; justify-content: center; align-items: center;">
 	<c:import url="../main/header.jsp" />
 	<form action="watchaPartyselect" method="get" name="watchaPartyselect">
 		<table class="party_table">
 			<thead>
 				<tr>
-					<th colspan="2"><h3>유튜브 파티목록</h3></th>
+					<th colspan="2"><h3>왓챠 파티목록</h3></th>
 				</tr>
 			</thead>
 			<tbody>
-				<p>${member.id  }</p>
-				<c:forEach var="partyInfo" items="${selectPartylist}">
+				
 					<tr>
-						<td>${partyInfo.service}</td>
+						<td>${selectPartylist.service}</td>
 					</tr>
 					<tr>
-						<td>${partyInfo.peoplecnt}</td>
+						<td>${selectPartylist.peoplecnt}</td>
 					</tr>
 					<tr>
-						<td>${partyInfo.partyday}</td>
+						<td>${selectPartylist.partyday}</td>
 					</tr>
 					<tr>
-						<td>${partyInfo.price}</td>
+						<td>${selectPartylist.price}</td>
 					</tr>
 					<tr>
-						<td>${partyInfo.partydate}</td>
+						<td>${selectPartylist.partydate}</td>
 					</tr>
-
-				</c:forEach>
+					<tr>
+						<td>${selectPartylist.userid}</td>
+					</tr>
 			</tbody>
 			<tbody>
+					<tr>
+						<th>1인회선</th>
+					</tr>
+					<tr>
+						<th>1인1기기등록</th>
+					</tr>
+					<tr>
+						<th>공유금지</th>
+					</tr>
+					<tr>
+						<th>개인사정환불불가</th>
+					</tr>
+					<tr>
+						<th>계정양도불가</th>
+					</tr>
 				<tr>
-					<th><input type="checkbox" name="no" />1인회선</th>
-				</tr>
-				<tr>
-					<th><input type="checkbox" name="no" />1인1기기등록</th>
-				</tr>
-				<tr>
-					<th><input type="checkbox" name="no" />공유금지</th>
-				</tr>
-				<tr>
-					<th><input type="checkbox" name="no" />개인사정환불불가</th>
-				</tr>
-				<tr>
-					<th><input type="checkbox" name="no" />계정양도불가</th>
+					<th><input type="checkbox" value="동의" /> 동의</th>
 				</tr>
 			</tbody>
 		</table>
-		<input type="submit" value="목록"
-			onclick="location.href='../main/index'" /> &nbsp; <input
-			type="submit" value="동의" onclick="check()" />
+		<input type="button" value="목록" onclick="location.href='/'" /> &nbsp;
+        <input type="button" onclick="location.href='payinfo?seq=${seq}&session=${member.email }'" value="결제"/>
 	</form>
 </body>
 </html>

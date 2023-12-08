@@ -2,6 +2,8 @@ package com.web.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +14,11 @@ import com.web.vo.MemberVO;
 public class MemberServiceImpl implements MemberService {
 	@Autowired
 	MemberDao memberdao;
-	
-	// 중복여부
-	@Override
+
+  @Override
+	public List<MemberVO> doMemberList() {
+		return memberdao.doMemberList();
+	}
 	public boolean isDuplicateId(String id) {
 		int count = memberdao.isDuplicateId(id);
 		
@@ -22,12 +26,6 @@ public class MemberServiceImpl implements MemberService {
 		return count > 0;
 	}
 
-
-	@Override
-	public List<MemberVO> doMemberList(){
-		return memberdao.doMemberList();
-	}
-	
 
 	// 회원가입
 	@Override
@@ -38,8 +36,22 @@ public class MemberServiceImpl implements MemberService {
 	// 로그인 
 	@Override
 	public MemberVO loginResult(String id, String pw) {
-		
 		return memberdao.loginResult(id, pw);
+	}
+
+	@Override
+	public MemberVO updateMember(String id) {
+		return memberdao.updateMember(id);
+	}
+
+	@Override
+	public void updateClient(MemberVO vo) {
+		memberdao.updateClient(vo);
+	}
+	
+	
+	public void updateRole(String email) {
+		memberdao.updateRole(email);
 	}
 	
 	// 카카오 로그인 

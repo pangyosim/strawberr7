@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>loginForm.jsp</title>
+<link href="resources/css/styles.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	function loginCheck()	{
@@ -77,17 +78,16 @@ function kakaoUnlink() {
 </head>
 <link href="resources/css/loginForm.css" rel="stylesheet" />
 <body style="margin-top: 150px; background-color: black;">
-<c:import url="../main/header.jsp"/>
-<div class="login-box">
+<div class="login-box" style="margin-top: 200px;">
   <h2>Login</h2>
   <form id="loginForm" action="loginResult" method="post" onsubmit="return loginCheck()">
   	<div class="user-box">	
-  		<label for="userId">Id</label>
-  		<input type="text" name="userId" id="userId" required="">
+  		<label for="userId"></label>
+  		<input type="text" name="userId" id="userId" required="" placeholder="ID">
   	</div>
 	<div class="user-box">
- 		<label for="password">Password</label>
-  		<input type="password" name="password" id="password" required="">
+ 		<label for="password"></label>
+  		<input type="password" name="password" id="password" required="" placeholder="PASSWORD">
 	</div>
     <div>
 	    <input type="submit" value="로그인">
