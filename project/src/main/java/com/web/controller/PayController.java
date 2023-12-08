@@ -2,6 +2,8 @@ package com.web.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.web.service.MemberService;
 import com.web.service.PayService;
 import com.web.vo.GroupVO;
 import com.web.vo.MemberVO;
@@ -21,15 +24,21 @@ public class PayController {
 	
 	@Autowired
 	private PayService ps;
+	@Autowired
+	private MemberService ms;
 	
 	@GetMapping("/payinfo")
-	public String payinfo(Model model, int seq, int session) {
-		MemberVO mv = ps.doMemberList(session);
-		GroupVO vo = ps.doPartyList(seq);
-		model.addAttribute("vo",vo);
-		model.addAttribute("mv", mv);
-		System.out.println(mv.getId());
-		return "/pay/payinfo";
+	public String payinfo(Model model, int seq, HttpSession session) {
+		
+        if(session.getAttribute("member") != null) {
+			MemberVO mv = (MemberVO) session.getAttribute("member");
+			GroupVO vo = ps.doPartyList(seq);
+			model.addAttribute("vo",vo);
+			System.out.println(vo);
+			model.addAttribute("mv", mv);
+			return "/pay/payinfo";
+        }
+		return "/login/loginForm";
 	}
 	
 	@PostMapping(value="paywork", produces="application/json; charset=utf-8")

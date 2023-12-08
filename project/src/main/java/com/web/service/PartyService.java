@@ -7,9 +7,9 @@ import com.web.vo.PartyMember;
 
 public interface PartyService {
 
-	public int groupjoin(PartyMember partyMember);
+	public void groupjoin(PartyMember partyMember);
 
-	public List<GroupVO> selectPeoplecnt(GroupVO groupVO);
+	public List<GroupVO> selectPeoplecnt();
 
 	public GroupVO selectPeoplecntList(int seq);
 

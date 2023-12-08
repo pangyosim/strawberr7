@@ -25,4 +25,5 @@ public interface MemberDao {
 
 	public int isDuplicateId(String id);
 	
+	public void updateRole(String email);
 }

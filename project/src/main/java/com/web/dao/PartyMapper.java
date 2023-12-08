@@ -9,9 +9,9 @@ import com.web.vo.PartyMember;
 
 @Mapper
 public interface PartyMapper {
-	public int insertbyacount(PartyMember partyMember);
+	public void insertbyaccount(PartyMember partyMember);
 	
-	public List<GroupVO> selectPeoplecnt(GroupVO groupVO);
+	public List<GroupVO> selectPeoplecnt();
 	
 	public GroupVO selectPeoplecntList(int seq);
 	

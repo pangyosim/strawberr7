@@ -191,3 +191,4 @@ function memberJoinFormCheck() {
     // 모든 검증을 통과하면 form을 제출
     document.querySelector('form').submit();
 }
+

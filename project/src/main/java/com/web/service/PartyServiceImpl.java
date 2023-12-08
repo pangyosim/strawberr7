@@ -1,6 +1,5 @@
 package com.web.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,23 +11,19 @@ import com.web.vo.GroupVO;
 import com.web.vo.PartyMember;
 
 @Service
-public class PartyServiceImpl implements PartyService{
+public class PartyServiceImpl implements PartyService {
 	
 	@Autowired
 	private PartyMapper partymapper;
 	
-	
 	@Override
-	public int groupjoin(PartyMember partyMember) {
-		int result= partymapper.insertbyacount(partyMember);
-		return result;
+	public void groupjoin(PartyMember partyMember) {
+		partymapper.insertbyaccount(partyMember);
 	}
 	// youtube
 	@Override
-	public List<GroupVO> selectPeoplecnt(GroupVO groupVO) {
-		// TODO Auto-generated method stub
-		List<GroupVO> selectPeoplecnt = partymapper.selectPeoplecnt(groupVO);
-		return selectPeoplecnt;
+	public List<GroupVO> selectPeoplecnt() {
+		return partymapper.selectPeoplecnt();
 	}
 	// wacha
 	@Override
