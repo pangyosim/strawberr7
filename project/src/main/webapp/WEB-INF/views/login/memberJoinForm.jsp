@@ -140,6 +140,48 @@ function kakaoUnlink() {
             <option value="gmail.com">gmail.com</option>
         </select>     
     </div>  
+    <div id="mail_input" name="mail_input">
+    	<input type="text" name="mail" id="mail" placeholder="이메일 입력"/>
+    	<button type="button" id="sendBtn" name="sendBtn" onclick="sendNumber()">인증번호</button>
+    </div>
+    <br/>
+    <div id="mail_number" name="mail_number" style="display: none">
+    	<input type="text" name="number" id="number" placeholder="인증번호 입력"/>
+    	<button type="button" name="confirmBtn" id="confirmBtn" onclick="confirmNumber()">이메일 인증</button>
+    </div>
+    <br/>
+    <input type="text" id="Confirm" name="Confirm" style="display:none" value=""/>
+    <script type="text/javascript">
+    	function sendNumber(){
+    		var email = mail_input.mail
+    		var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+    		if(exptext.test(email)==true){
+    		$("#mail_number").css("display","block");
+    		$.ajax({
+    			url:"mail",
+    			type:"post",
+    			dataType:"json",
+    			data:{"mail" : $("#mail").val()},
+    			success: function(data){
+    				alert("인증번호 발송");
+    				$("#Confirm").attr("value",data);
+    			}
+    		});
+    		}else{
+    			alert("이메일 형식이 올바르지 않습니다");
+    	}
+    }
+    	function confirmNumber(){
+    		var number1 = $("#number").val();
+    		var number2 = $("#Confirm").val();
+    		
+    		if(number1 == number2){
+    			alert("인증되었습니다");
+    		}else{
+    			alert("번호가 다릅니다")
+    		}
+    	}
+    </script>
     <input type="button" value="회원가입" onclick="memberJoinFormCheck()"/>
 </form>
 </div>
