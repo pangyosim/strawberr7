@@ -32,14 +32,6 @@
         <!-- Masthead-->
         <header class="masthead" style="width: 100%; height: 550px; margin-top: 90px;">
         </header>
-        <div class="container">
-            	<input type="button" value="파티장 권한 가입"
-			onclick="location.href='groupJoinForm'" /> &nbsp; &nbsp; <input
-			type="button" value="파티찾기"
-			onclick="document.getElementById('party-input').focus()" /> <br />
-            <input type="button" value="파티만들기" onclick="location.href='partydetail'"/> <br/>
-            </div>
-            
         <!-- Services-->
         <div class="services" style="margin-left: 150px;">
 	      	<h2>최근 만들어진 파티</h2>

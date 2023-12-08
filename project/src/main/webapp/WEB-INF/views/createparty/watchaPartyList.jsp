@@ -19,6 +19,7 @@
 </script> -->
 
 <link href="resources/css/styles.css" rel="stylesheet" />
+<script type="text/javascript" src="resources/js/logincheck.js"></script>
 </head>
 <body style="background-color: white; margin-top: 150px; display: flex; justify-content: center; align-items: center;">
 	<c:import url="../main/header.jsp" />
@@ -67,12 +68,12 @@
 						<th>계정양도불가</th>
 					</tr>
 				<tr>
-					<th><input type="checkbox" value="동의" onclick="check()" /> 동의</th>
+					<th><input type="checkbox" value="동의" /> 동의</th>
 				</tr>
 			</tbody>
 		</table>
-		<input type="submit" value="목록" onclick="location.href='../main/index'" /> &nbsp;
-        <input type="button" onclick="location.href='payinfo?seq=${seq}&session=21'" value="결제"/>
+		<input type="button" value="목록" onclick="location.href='/'" /> &nbsp;
+        <input type="button" onclick="location.href='payinfo?seq=${seq}&session=${member.email }'" value="결제"/>
 	</form>
 </body>
 </html>

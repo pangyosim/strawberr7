@@ -18,6 +18,7 @@ public interface MemberService {
 	//수정한데이터 저장
 	public void updateClient(MemberVO vo);
 	MemberVO kakaologinResult(String kakaoid);
-
 	boolean isDuplicateId(String id);
+	// 파티장 룰 변경
+	public void updateRole(String email);
 }

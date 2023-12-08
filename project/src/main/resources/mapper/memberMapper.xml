@@ -45,5 +45,9 @@
         FROM member
         WHERE id = #{id}
     </select>
+    
+    <update id="updateRole">
+		update member set role='PARTYKING' where email=#{email}
+	</update>
 	
 </mapper>

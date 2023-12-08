@@ -78,7 +78,6 @@ function kakaoUnlink() {
 </head>
 <link href="resources/css/loginForm.css" rel="stylesheet" />
 <body style="margin-top: 150px; background-color: black;">
-<c:import url="../main/header.jsp"/>
 <div class="login-box" style="margin-top: 200px;">
   <h2>Login</h2>
   <form id="loginForm" action="loginResult" method="post" onsubmit="return loginCheck()">

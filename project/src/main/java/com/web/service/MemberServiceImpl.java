@@ -41,7 +41,6 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberVO updateMember(String id) {
-		// TODO Auto-generated method stub
 		return memberdao.updateMember(id);
 	}
 
@@ -50,6 +49,10 @@ public class MemberServiceImpl implements MemberService {
 		memberdao.updateClient(vo);
 	}
 	
+	
+	public void updateRole(String email) {
+		memberdao.updateRole(email);
+	}
 	
 	// 카카오 로그인 
 	@Override

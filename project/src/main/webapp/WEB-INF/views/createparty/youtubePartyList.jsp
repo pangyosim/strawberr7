@@ -68,7 +68,7 @@
 			</tbody>
 		</table>
 		
-		<input type="submit" value="목록" onclick="location.href='../main/index'" /> &nbsp;
+		<input type="button" value="목록" onclick="location.href='/'" /> &nbsp;
         <input type="button" onclick="location.href='payinfo?seq=${seq}&session=21'" value="결제"/>
         </form>
 </body>
