@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.web.dao.MemberDao">
 	<select id="doMemberList" resultType="com.web.vo.MemberVO">
 		select * from membertest
 	</select>
-	<insert id="joinMember" >
-		INSERT INTO member(seq, id, pw, name, nickname, role, tel, addr, birth, email, tier) VALUES (member_seq.NEXTVAL,#{id},#{pw},#{name},#{nickname},USER,#{tel},#{addr},#{birth},#{email},5)
+	<insert id="joinMember">
+		INSERT INTO member(seq, id, pw, name,nickname, role, tel, addr, birth, email, tier) VALUES
+		(member_seq.NEXTVAL,#{id},#{pw},#{name},#{nickname},USER,#{tel},#{addr},#{birth},#{email},5)
 	</insert>
 	<select id="loginResult" resultType="com.web.vo.MemberVO">
 		SELECT * FROM member WHERE id = #{id} AND pw = #{pw}
 	</select>
 	
-	  <select id="updateMember" resultType="com.web.vo.MemberVO">
-	 	select * from member where email=#{email}
-	 </select>  
-	 <!-- update member set seq=#{seq},id=#{id},kakaoid=#{kakaoid},pw=#{pw},name=#{name},nickname=#{nickname},role=${role},tel=#{tel},addr=#{addr},birth=#{birth},email=#{email},tier=#{tier} where id=#{id}  -->
- 	 <update id="updateClient">
-		update member set  pw=#{pw}, name=#{name}, nickname=#{nickname}, tel=#{tel}, addr=#{addr}, birth=#{birth}, email=#{email} where email=#{email}
-	</update>   
+	<update id="updateClient">
+		update member set name=#{name},nickname=#{nickname},tel=#{tel},addr=#{addr},birth=#{birth},email=#{email} where id=#{id}
+	</update>
 	
+	  <select id="updateaddr" resultType="com.web.vo.MemberVO">
+		select * from member where id=#{id}
+	</select>
 </mapper>

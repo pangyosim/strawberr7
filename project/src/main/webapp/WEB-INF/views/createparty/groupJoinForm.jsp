@@ -25,23 +25,25 @@
 <script type="text/javascript">
 function validateForm() {
   var checkbox = document.getElementById('termsCheckbox');
-  if (!checkbox.checked) {
-    alert('약관에 동의해야 합니다.');
-    return false;
-  }
-  return true;
-}
-function checkauthority(){
-	if (document.groupjoin.name.value == "") {
+  
+ 	 if (document.groupjoin.name.value == "") {
 		alert("이름을 입력하세요");
 		document.groupjoin.name.focus();
+		return false;
 	} else if (document.groupjoin.bank.value == "") {
 		alert("은행을 입력하세요");
 		document.groupjoin.bank.focus();
+		return false;
 	} else if (document.groupjoin.acount.value == "") {
 		alert("계좌정보를 입력하세요~");
 		document.groupjoin.acount.focus();
-	
+		return false;
+	} else if (!checkbox.checked) {
+	    alert('약관에 동의해야 합니다.');
+	    return false;
+	}
+	  
+		groupJoinResult.submit();
 }
 
 </script>
@@ -52,24 +54,21 @@ function checkauthority(){
 	<!-- 이름 / 연락처 / 주민번호 / 출금계좌  -->
 	<form action="groupJoinResult" name="groupjoin" method="post"
 		style="margin-top: 150px; text-align: center;"
-		onsubmit="return validateForm();">
+		onsubmit="return validateForm()">
 		<div class="">
 			<input type="text" id="name" name="name" placeholder="성함">
 		</div>
 		<div class="">
-			<select
-				class="" id="bank" name="bank">
+			<select class="" id="bank" name="bank">
 				<option value=1>하나은행</option>
 				<option value=2>국민은행</option>
 				<option value=3>새마을금고</option>
 				<option value=4>우리은행</option>
 				<option value=5>제주은행</option>
-			</select>
-			<input type="text" id="acount" name="acount" placeholder="계좌번호">
+			</select> <input type="text" id="acount" name="acount" placeholder="계좌번호">
 			<button onclick="accountcheck()">은행 확인</button>
 		</div>
-		<div class="">
-		</div>
+		<div class=""></div>
 
 		<div>
 			목차 [<span id="toc-toggle" onclick="openCloseToc()">보이기</span>]
@@ -89,8 +88,7 @@ function checkauthority(){
 				서비스 제공자의 가입약관과 상기 정보제공에 동의합니다.
 			</ol>
 		</div>
-		<input type="submit" value="완료" onclick="checkauthority()"
-			id="checktable">
+		<input type="submit" value="완료" id="checktable">
 	</form>
 	<script>
   function openCloseToc() {

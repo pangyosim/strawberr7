@@ -13,8 +13,8 @@ public interface MemberService {
 
 	MemberVO loginResult(String id, String pw);
 
-	//정보불러오기
-	public MemberVO updateMember(String id);
 	//수정한데이터 저장
-	public void updateClient(MemberVO vo);
+	public int updateClient(MemberVO vo);
+	//주소 자르기
+	public String[] updateaddr(String id);
 }

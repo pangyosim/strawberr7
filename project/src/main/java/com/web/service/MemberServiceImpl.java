@@ -32,15 +32,17 @@ public class MemberServiceImpl implements MemberService {
 		return memberdao.loginResult(id, pw);
 	}
 
+
 	@Override
-	public MemberVO updateMember(String id) {
-		// TODO Auto-generated method stub
-		return memberdao.updateMember(id);
+	public int updateClient(MemberVO vo) {
+	int result =memberdao.updateClient(vo);
+		return result;
 	}
 
 	@Override
-	public void updateClient(MemberVO vo) {
-		memberdao.updateClient(vo);
+	public String[] updateaddr(String id) {
+		MemberVO membervo = memberdao.updateaddr(id);
+		return membervo.getAddr().split("/");
 	}
 	
 	
