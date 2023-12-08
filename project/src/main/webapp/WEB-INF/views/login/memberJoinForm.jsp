@@ -132,16 +132,15 @@ function kakaoUnlink() {
     <div class="textForm">
         <input type="text" class="form-control" id="tel" name="tel" placeholder="전화번호" oninput="oninputPhone(this)" maxlength="13">
     </div>
-    <div class="textForm">
-        <input type="text" class="email_first" id="email" name="email" placeholder="이메일" name="" maxlength="20"> @
-        <select class="email_last" id="domain" name="domain">
-            <option value="none">-------이메일-------</option>
+    <div class="textForm" class="mail_input" id="mail_input" name="mail_input">
+    	<input type="text" class="mail" name="mail" id="mail" placeholder="이메일 입력" maxlength="20"/>@
+        <select class="domain" id="domain" name="domain">
+            <option value="none">---이메일---</option>
             <option value="naver.com">naver.com</option>
             <option value="gmail.com">gmail.com</option>
+            <option value="daum.net">daum.net</option>
+            <option value="nate.com">nate.com</option>
         </select>     
-    </div>  
-    <div id="mail_input" name="mail_input">
-    	<input type="text" name="mail" id="mail" placeholder="이메일 입력"/>
     	<button type="button" id="sendBtn" name="sendBtn" onclick="sendNumber()">인증번호</button>
     </div>
     <br/>
@@ -153,15 +152,22 @@ function kakaoUnlink() {
     <input type="text" id="Confirm" name="Confirm" style="display:none" value=""/>
     <script type="text/javascript">
     	function sendNumber(){
-    		var email = mail_input.mail
-    		var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
-    		if(exptext.test(email)==true){
+    		var mailf = document.getElementsByClassName('mail')[0];
+    	    var maill= document.getElementsByClassName('domain')[0];
+    	    if(mailf.value == '' || maill.value == 'none') {
+    	        alert('이메일을 입력해주세요.');
+    	        return false;
+    	    }
+    		var email = mail_input + "@" + domain;
+    		var exptext = /^[\w]([-_.]?[\w])*@[\w]([-_.]?[\w])*\.[a-zA-Z]{2,3}$/i;
+    		if(!exptext.test(email)){
     		$("#mail_number").css("display","block");
     		$.ajax({
     			url:"mail",
     			type:"post",
     			dataType:"json",
-    			data:{"mail" : $("#mail").val()},
+    			data:{"mail" : $("#mail").val()+"@"+$("#domain").val()},
+    			mail:email,
     			success: function(data){
     				alert("인증번호 발송");
     				$("#Confirm").attr("value",data);
