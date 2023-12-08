@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.web.service.MailService;
 import com.web.service.MemberService;
 import com.web.vo.MemberVO;
 
@@ -29,6 +30,9 @@ import oracle.net.aso.m;
 
 @Controller
 public class LoginController {
+	
+	@Autowired
+	private MailService ma;
 	
 	@Autowired
 	private MemberService ms;
