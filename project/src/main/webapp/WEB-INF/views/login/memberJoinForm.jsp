@@ -71,12 +71,67 @@ function kakaoUnlink() {
 }
 </script>
 
+<script type="text/javascript">
+function checkMail() {
+	// 이메일
+    var email_first = document.getElementsByClassName('email_first')[0];
+    var email_last = document.getElementsByClassName('email_last')[0];
+    if(email_first.value == '' || email_last.value == 'none') {
+        alert('이메일을 입력해주세요.');
+        email_first.focus();
+        return false;
+    }
+
+    // 이메일 형식 확인
+    var email = email_first.value + "@" + email_last.value;
+    var regex = /^[\w]([-_.]?[\w])*@[\w]([-_.]?[\w])*\.[a-zA-Z]{2,3}$/i;
+    if (!regex.test(email)) {
+        alert('이메일 형식이 올바르지 않습니다.');
+        email_first.focus();
+        return false;
+    }
+	
+	const eamil = $('#email').val() + '@' + $('#domain').val(); // 이메일 주소값 얻어오기!
+	  console.log('완성된 이메일 : ' + eamil); // 이메일 오는지 확인
+	  const checkInput = $('.mail-check-input'); // 인증번호 입력하는곳 
+	
+	  $.ajax({
+	      type : 'get',
+	      url : '<c:url value ="/mailCheck?email="/>' + eamil, // GET방식이라 Url 뒤에 email을 붙일 수 있다.
+	      success : function (data) {
+	          console.log("data : " + data);
+	          checkInput.attr('disabled',false);
+	          code = data;
+	          alert('인증번호가 전송되었습니다.');
+	      }           
+	  }); // end ajax
+}
+
+//인증번호 비교 
+//blur -> focus가 벗어나는 경우 발생
+$('.mail-check-input').blur(function () {
+ var inputCode = $(this).val();
+ var $resultMsg = $('#mail-check-warn');
+ 
+ if(inputCode === code){
+     $resultMsg.html('인증번호가 일치합니다.');
+     $resultMsg.css('color','green');
+     $('#mail-Check-Btn').attr('disabled',true);
+     $('.email_first').attr('readonly',true);
+     $('.email_last').attr('readonly',true);
+     $('.email_last').attr('onFocus', 'this.initialSelect = this.selectedIndex');
+     $('.email_last').attr('onChange', 'this.selectedIndex = this.initialSelect');
+ }else{
+     $resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!.');
+     $resultMsg.css('color','red');
+ }
+});
+</script>
 <!--  카카오 집주소API -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <!-- 로그인.js -->
-<script type="text/javascript" src="resources/js/loginScript.js?v=2"></script>
-
+<script type="text/javascript" src="resources/js/loginScript.js?v=1"></script>
 
 
 </head>
@@ -94,7 +149,7 @@ function kakaoUnlink() {
 	</c:if>
 	
 	
-	<form id="memberjoinForm" action="memberJoinResult" method="post">
+<form id="memberjoinForm" action="memberJoinResult" method="post">
     <div class="textForm">
         <input type="text" placeholder="아이디" id="loginId" name="loginId" maxlength="20">
         <input type="button" value="중복체크" id="checkBtn">
@@ -135,11 +190,26 @@ function kakaoUnlink() {
             <option value="none">-------이메일-------</option>
             <option value="naver.com">naver.com</option>
             <option value="gmail.com">gmail.com</option>
-        </select>     
-    </div>  
-    <input type="button" value="회원가입" onclick="memberJoinFormCheck()"/>
+            <option value="daum.net">daum.net</option>
+            <option value="daum.net">hanmail.com</option>
+            <option value="daum.net">yahoo.co.kr</option>      
+        </select> 
+	    
+	</div>  
+	<div class="input-group-addon">
+		<input type="button" class="btn btn-primary" id="mailCheck" name="mailCheck" value="본인인증" onclick="checkMail()">
+	</div>
+	<div class="mail-check-box">
+		<input class="form-control mail-check-input" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6">
+	</div>
+	<div>
+		<span id="mail-check-warn"></span>
+	</div>
+		
+	<div>
+    	<input type="button" value="회원가입" onclick="memberJoinFormCheck()"/>
+    </div> 
 </form>
-</div>
 <c:import url="../main/footer.jsp"/>
 </body>
 <style type="text/css">
@@ -170,6 +240,10 @@ function kakaoUnlink() {
 }
 </style>
 <script type="text/javascript">
+
+function mailCheck() {
+    alert('제');
+}
 
 
 //'출생 연도' 셀렉트 박스 option 목록 동적 생성
