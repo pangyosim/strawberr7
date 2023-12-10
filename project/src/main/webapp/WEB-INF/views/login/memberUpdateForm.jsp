@@ -78,13 +78,13 @@ function kakaoUnlink() {
 <!-- 로그인.js -->
 <script type="text/javascript" src="resources/js/loginScript.js?v=2"></script>
 
-
+<link href="resources/css/styles.css" rel="stylesheet" />
 
 </head>
 <link href="resources/css/memberJoinForm.css" rel="stylesheet" />
 <body style="text-align: center;">
 <c:import url="../main/header.jsp"/>
-<div class="">
+<div class="" style="margin-top: 130px;">
 	<h2>회원수정</h2>
 	<!-- 카카오~ -->
 	<c:if test="${Member.kakaoid == null }">

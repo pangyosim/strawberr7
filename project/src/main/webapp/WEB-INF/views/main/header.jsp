@@ -54,7 +54,7 @@
 	                        	<div class="dropdown" style="right: 30px; top: 6.8px;">
 							      <span class="dropbtn" style="color: #CA226B;">마이페이지</span>
 							      <div class="dropdown-content">
-							        <a href="#">회원수정</a>
+							        <a href="memberUpdateForm">회원수정</a>
 							        <a href="#">회원탈퇴</a>
 							        <a href="#">Q&A</a>
 							      </div>
