@@ -18,7 +18,7 @@ public interface MemberDao {
 	// 로그인 
 	public MemberVO loginResult(String id, String pw);
 	//회원수정
-	public MemberVO updateMember(String id);
+	public MemberVO selectMember(String id);
 
 	public void updateClient(MemberVO vo);
 

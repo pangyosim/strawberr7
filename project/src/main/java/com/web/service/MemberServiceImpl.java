@@ -40,8 +40,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberVO updateMember(String id) {
-		return memberdao.updateMember(id);
+	public MemberVO selectMember(String id) {
+		return memberdao.selectMember(id);
 	}
 
 	@Override

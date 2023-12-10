@@ -30,7 +30,7 @@
 		SELECT * FROM member WHERE id = #{id} AND pw = #{pw}
 	</select>
 	
-	  <select id="updateMember" resultType="com.web.vo.MemberVO">
+	  <select id="selectMember" resultType="com.web.vo.MemberVO">
 	 	select * from member where email=#{email}
 	 </select>  
 	 <!-- update member set seq=#{seq},id=#{id},kakaoid=#{kakaoid},pw=#{pw},name=#{name},nickname=#{nickname},role=${role},tel=#{tel},addr=#{addr},birth=#{birth},email=#{email},tier=#{tier} where id=#{id}  -->
