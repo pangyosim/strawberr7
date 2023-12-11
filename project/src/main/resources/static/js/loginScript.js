@@ -1,3 +1,21 @@
+
+function userCheck(){
+	var IMP = window.IMP;
+	IMP.init("imp40114442");
+	IMP.certification({
+		pg : "danal",
+		merchant_uid : "",
+		m_redirect_url : "https://e707-123-142-55-115.ngrok-free.app",
+		popup : true
+		},function(rsp){
+			if(rsp.success){
+				alert("인증이 완료되었습니다");
+			}else{
+				alert("인증에 실패했습니다. 에러 내용 : " + rsp.error_msg);
+			}
+		});
+}
+
 /* 전화번호'-'자동으로 변경, 숫자외 입력 불가' */
 function oninputPhone(target) {
     target.value = target.value
@@ -168,25 +186,6 @@ function memberJoinFormCheck() {
 	    tel.focus();
 	    return false;
 	}
-
-
-    // 이메일
-    var email_first = document.getElementsByClassName('email_first')[0];
-    var email_last = document.getElementsByClassName('email_last')[0];
-    if(email_first.value == '' || email_last.value == 'none') {
-        alert('이메일을 입력해주세요.');
-        email_first.focus();
-        return false;
-    }
-
-    // 이메일 형식 확인
-    var email = email_first.value + "@" + email_last.value;
-    var regex = /^[\w]([-_.]?[\w])*@[\w]([-_.]?[\w])*\.[a-zA-Z]{2,3}$/i;
-    if (!regex.test(email)) {
-        alert('이메일 형식이 올바르지 않습니다.');
-        email_first.focus();
-        return false;
-    }
 
     // 모든 검증을 통과하면 form을 제출
     document.querySelector('form').submit();

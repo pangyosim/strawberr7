@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.web.service.MailService;
 import com.web.service.MemberService;
 import com.web.service.PartyService;
 import com.web.session.MemberSession;
@@ -30,6 +31,10 @@ public class LoginController implements MemberSession {
 	private MemberService ms;
 	
 	@Autowired
+	private MailService ma;
+	
+	@Autowired
+	private MemberService ms;
 	private PartyService ps;
 	
 	@GetMapping("login")
@@ -139,7 +144,7 @@ public class LoginController implements MemberSession {
 			   					 @RequestParam("address_3") String addr_3, 
 			   					 @RequestParam("address_4") String addr_4, 
 			   					 @RequestParam("tel") String tel, 
-			   					 @RequestParam("email") String email,
+			   					 @RequestParam("mail") String email,
 			   					 @RequestParam("domain") String domain,
 			   					 RedirectAttributes ra) {
 		
