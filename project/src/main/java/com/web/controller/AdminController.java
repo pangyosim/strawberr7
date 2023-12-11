@@ -17,6 +17,7 @@ import com.web.service.AdminService;
 import com.web.vo.GroupVO;
 import com.web.vo.MemberVO;
 import com.web.vo.PartyMember;
+import com.web.vo.PayVO;
 
 import oracle.net.aso.m;
 
@@ -90,6 +91,25 @@ public class AdminController {
 		adminService.accountDelete(accountVO);
 	}
 		
+	// 결제 리스트 
+	@GetMapping("admin/payInfo")
+	public List<PayVO> getPayInfo() {
+		System.out.println("어드민_GET 파티 리스트 ");
+		List<PayVO> list = adminService.getPayList();
+		return list;			
+	}	
+	// 결제 수정
+	@PostMapping("adminPayUpdate")
+	public void adminPayUpdate(@RequestBody PayVO payVO) {
+		System.out.println(payVO);
+		adminService.PayUpdate(payVO);
+	}
+	// 결제 삭제
+	@DeleteMapping("adminPayDelete")
+	public void adminPayDelete(@RequestBody PayVO payVO) {
+		System.out.println(payVO);
+		adminService.PayDelete(payVO);
+	}
 		
 		
 		

@@ -9,6 +9,7 @@ import com.web.dao.AdminMapper;
 import com.web.vo.GroupVO;
 import com.web.vo.MemberVO;
 import com.web.vo.PartyMember;
+import com.web.vo.PayVO;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -75,11 +76,23 @@ public class AdminServiceImpl implements AdminService{
 		adminMapper.accountDelete(accountVO);
 
 	}
-	
-	
-	
-	
-	
+
+	// 결제 목록
+	@Override
+	public List<PayVO> getPayList() {
+		List<PayVO> list = adminMapper.getPayList();
+		return list;
+	}
+	// 결제 수정
+	@Override
+	public void PayUpdate(PayVO payVO) {
+		adminMapper.PayUpdate(payVO);
+	}
+	// 결제 삭제
+	@Override
+	public void PayDelete(PayVO payVO) {
+		adminMapper.PayDelete(payVO);
+	}
 	
 	
 }

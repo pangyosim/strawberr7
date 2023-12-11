@@ -288,6 +288,85 @@ function loadAccountInfo() {
     });
 } 
 
+/* 결제 */
+
+function loadPayInfo() {
+ 	$.ajax({
+    	url: 'admin/payInfo',
+        type: 'GET',
+        success: function(data) {
+            var payInfoDiv = $('#payInfo');
+            payInfoDiv.empty();
+            $.each(data, function(index, pay) {
+            	var payForm = $('<form class="pay"></form>'); 
+            	payForm.data('pay', pay);  
+            	payForm.append('<p>결제 seq :</p><input type="text" name="seq" value="' + pay.seq + '" readonly></input>');
+            	payForm.append('<p>결제 userid :</p><input type="text" name="userid" value="' + pay.userid + '" ></input>');
+            	payForm.append('<p>결제 price :</p><input type="text" name="price" value="' + pay.price + '" ></input>');
+            	payForm.append('<p>결제 paydate :</p><input type="text" name="paydate" value="' + pay.paydate + '" ></input>');
+            	payForm.append('<p>결제 imp_uid :</p><input type="text" name="imp_uid" value="' + pay.imp_uid + '" ></input>');
+            	payForm.append('<p>결제 merchant_uid :</p><input type="text" name="merchant_uid" value="' + pay.merchant_uid + '" ></input>');
+            	payForm.append('<p>결제 result :</p><input type="text" name="result" value="' + pay.result + '" ></input>');
+            	
+                var updateButton = $('</br><input type="submit" value="수정"/>');
+                updateButton.click(function(event) {
+                    event.preventDefault();  // form의 기본 제출 동작을 막음
+                    var payForm = $(this).closest('form');
+                    
+                    var pay = {
+                    		seq: payForm.find('input[name="seq"]').val(),
+                    		userid: payForm.find('input[name="userid"]').val(),
+                    		price: payForm.find('input[name="price"]').val(),
+                    		paydate: payForm.find('input[name="paydate"]').val(),
+                    		imp_uid: payForm.find('input[name="imp_uid"]').val(),
+                    		merchant_uid: payForm.find('input[name="merchant_uid"]').val(),
+                    		result: payForm.find('input[name="result"]').val(),
+                  
+                    };                    
+                    $.ajax({
+                        url: 'adminPayUpdate',
+                        type: 'POST',
+                        data: JSON.stringify(pay),
+                        contentType: 'application/json',
+                        success: function(response) {
+                        	alert("수정");
+                        },
+                        error: function(request, status, error) {
+                            alert('결제 정보를 수정하는 데 실패했습니다.');
+                        }
+                    });
+                });
+                payForm.append(updateButton); 
+
+                var deleteButton = $('<input type="submit" value="삭제"/>');
+                deleteButton.click(function(event) {
+                    event.preventDefault();  // form의 기본 제출 동작을 막음
+                    var payForm = $(this).closest('form');
+                    var pay = payForm.data('pay');  // form의 data 속성에서 멤버의 정보를 가져옴
+                    $.ajax({
+                        url: 'adminPayDelete',
+                        type: 'DELETE',
+                        data: JSON.stringify(pay),
+                        contentType: 'application/json',
+                        success: function(response) {
+                        	alert("삭제");
+                        },
+                        error: function(request, status, error) {
+                            alert('결제 정보를 삭제하는 데 실패했습니다.');
+                        }
+                    });
+                });
+                payForm.append(deleteButton);
+
+                payInfoDiv.append(payForm);
+            });
+        },
+        error: function(request, status, error) {
+            alert('결제 정보를 가져오는 데 실패했습니다.');
+        }
+    });
+} 
+
 
 
 </script>

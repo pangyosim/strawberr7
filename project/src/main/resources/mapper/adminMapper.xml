@@ -34,6 +34,16 @@
   	  	delete from account where seq=#{seq}  	
   	</delete>
   	
+  	<select id="getPayList" resultType="com.web.vo.PayVO">
+		select * from paytable
+	</select>
+	<update id="PayUpdate">
+  		update paytable set userid=#{userid}, imp_uid=#{imp_uid}, merchant_uid=#{merchant_uid}, result=#{result} where userid=#{userid} and 
+  	</update>
+  	<delete id="PayDelete">
+  	  	delete from paytable where seq=#{seq}  	
+  	</delete>
+  	
   	
   </mapper>
   
