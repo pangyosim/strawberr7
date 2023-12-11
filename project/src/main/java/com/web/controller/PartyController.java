@@ -101,7 +101,7 @@ public class PartyController implements MemberSession {
     
 	@GetMapping("createparty")
 	public String getpartyform(String email, HttpSession session) {
-		MemberVO mv = ms.updateMember(email);
+		MemberVO mv = ms.selectMember(email);
 		if(mv.getRole().equals("PARTYKING")) {
 			return "/createparty/groupInsert";
 		}

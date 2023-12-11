@@ -14,7 +14,7 @@ public interface MemberService {
 	MemberVO loginResult(String id, String pw);
 
 	//정보불러오기
-	public MemberVO updateMember(String id);
+	public MemberVO selectMember(String id);
 	//수정한데이터 저장
 	public void updateClient(MemberVO vo);
 	MemberVO kakaologinResult(String kakaoid);

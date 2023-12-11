@@ -42,8 +42,7 @@
                         <div class="searchBar">
                         	<i class="fa-solid fa-magnifying-glass"></i>
                         	<input type="text" class="input" onclick="" style="border: none; background: transparent; color: white;"/>
-                        </div> 
-                        
+                        </div>
                         <li class="nav-item"><a class="nav-link" href="/" style="color: #CA226B;">홈</a></li>
                         <c:choose>
 	                        <c:when test="${member == null }">
@@ -51,12 +50,20 @@
 	                        </c:when>
 	                        <c:otherwise>
 	                       	    <li class="nav-item"><a class="nav-link" href="createparty?email=${member.email }" style="color: #CA226B;">파티 만들기</a></li>
-	                        	<li class="nav-item"><a class="nav-link" href="logout" style="color: #CA226B;">로그아웃</a></li>	                        	
+	                        	<li class="nav-item"><a class="nav-link" href="logout" style="color: #CA226B;">로그아웃</a></li> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+	                        	<div class="dropdown" style="right: 30px; top: 6.8px;">
+							      <span class="dropbtn" style="color: #CA226B;">마이페이지</span>
+							      <div class="dropdown-content">
+							        <a href="memberUpdateForm">회원수정</a>
+							        <a href="memberDelete">회원탈퇴</a>
+							        <a href="#">Q&A</a>
+							      </div>
+							    </div> 
 	                       	</c:otherwise>
                         </c:choose>
                         <li class="nav-item"><a class="nav-link" style="color: #CA226B;"> About </a></li>
-                    </ul>
-                </div>
+                     </ul>
+       			</div>
             </div>
         </nav>
 </body>

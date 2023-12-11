@@ -1,24 +1,23 @@
 package com.web.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.web.service.MailService;
 import com.web.service.MemberService;
 import com.web.service.PartyService;
 import com.web.session.MemberSession;
@@ -28,7 +27,10 @@ import com.web.vo.MemberVO;
 @Controller
 public class LoginController implements MemberSession {
 
-  @Autowired
+	@Autowired
+	private MailService ma;
+	
+	@Autowired
 	private MemberService ms;
 	
 	@Autowired
@@ -141,7 +143,7 @@ public class LoginController implements MemberSession {
 			   					 @RequestParam("address_3") String addr_3, 
 			   					 @RequestParam("address_4") String addr_4, 
 			   					 @RequestParam("tel") String tel, 
-			   					 @RequestParam("email") String email,
+			   					 @RequestParam("mail") String email,
 			   					 @RequestParam("domain") String domain,
 			   					 RedirectAttributes ra) {
 		
@@ -179,7 +181,7 @@ public class LoginController implements MemberSession {
 	@GetMapping("memberUpdate")
 	public String memberModify(Model model) {
 //		MemberVO membervo = (MemberVO) httpSession.getAttribute("member");
-		model.addAttribute(LOGIN, ms.updateMember("jsk7640@naver.com"));
+		model.addAttribute(LOGIN, ms.selectMember("jsk7640@naver.com"));
 		return "/login/memberUpdate";
 	}
 	//수정한데이터 저장
@@ -274,6 +276,7 @@ public class LoginController implements MemberSession {
 	    session.invalidate();  // 세션 종료
 	    return "redirect:/";
 	}
+	
 	
 }
 

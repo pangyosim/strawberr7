@@ -30,7 +30,7 @@
 		SELECT * FROM member WHERE id = #{id} AND pw = #{pw}
 	</select>
 	
-	  <select id="updateMember" resultType="com.web.vo.MemberVO">
+	  <select id="selectMember" resultType="com.web.vo.MemberVO">
 	 	select * from member where email=#{email}
 	 </select>  
 	 <!-- update member set seq=#{seq},id=#{id},kakaoid=#{kakaoid},pw=#{pw},name=#{name},nickname=#{nickname},role=${role},tel=#{tel},addr=#{addr},birth=#{birth},email=#{email},tier=#{tier} where id=#{id}  -->
@@ -46,10 +46,10 @@
         WHERE id = #{id}
     </select>
     <update id="updateMember">
-    	update member set kakaoid=#{kakaoid},nickname=#{nickname},tel=#{tel},addr=#{addr},birth=#{birth} where email=#{email}
+    	update member set pw=#{pw}, kakaoid=#{kakaoid},nickname=#{nickname},tel=#{tel},addr=#{addr},birth=#{birth} where email=#{email}
     </update>
     <update id="notBirthUpdate">
-    	update member set kakaoid=#{kakaoid},nickname=#{nickname},tel=#{tel},addr=#{addr} where email=#{email}
+    	update member set pw=#{pw}, kakaoid=#{kakaoid},nickname=#{nickname},tel=#{tel},addr=#{addr} where email=#{email}
     </update>
 	<delete id="memberDelete">
 		DELETE FROM member WHERE email=#{email}
