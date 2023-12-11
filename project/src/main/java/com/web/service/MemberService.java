@@ -14,10 +14,18 @@ public interface MemberService {
 	MemberVO loginResult(String id, String pw);
 
 	//정보불러오기
-	public MemberVO updateMember(String id);
+	public MemberVO selectMember(String id);
 	//수정한데이터 저장
 	public void updateClient(MemberVO vo);
 	MemberVO kakaologinResult(String kakaoid);
-
 	boolean isDuplicateId(String id);
+
+	int updateMember(MemberVO memberVO);
+
+	int notBirthUpdate(MemberVO memberVO);
+
+	int memberDelete(String email);
+
+	// 파티장 룰 변경
+	public void updateRole(String email);
 }

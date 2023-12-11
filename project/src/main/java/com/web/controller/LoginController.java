@@ -1,7 +1,6 @@
 package com.web.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -9,33 +8,34 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.service.MailService;
 import com.web.service.MemberService;
+import com.web.service.PartyService;
+import com.web.session.MemberSession;
 import com.web.vo.MemberVO;
 
-import oracle.net.aso.m;
 
 @Controller
-public class LoginController {
+public class LoginController implements MemberSession {
+
+  @Autowired
+	private MemberService ms;
 	
 	@Autowired
 	private MailService ma;
 	
 	@Autowired
 	private MemberService ms;
+	private PartyService ps;
 	
 	@GetMapping("login")
 	public String login() {
@@ -62,61 +62,44 @@ public class LoginController {
 		System.out.println("GET MEMVERJOINFORM");
 		return "/login/memberJoinForm";
 	}
-	@GetMapping("service")
-	public String service() {
-		List<MemberVO> list = ms.doMemberList();
-		for(MemberVO vo : list) {
-			System.out.println("ID : " + vo.getId() + ", NAME : " + vo.getName() + ", ROLE : " + vo.getRole() );
-			
-		}
-		return "/main/index";
-	}
+	
+	//----------------------------------------------------------------
+
 	// 카카오 로그인
 	@GetMapping("/checkUser")
 	public String getCheckUser(HttpSession session) {
 	    MemberVO memberVO = (MemberVO) session.getAttribute("member");
 	    if(memberVO != null && memberVO.getId() != null) {
-	    	System.out.println("GET CHECKUSER 1번 ");
-	        return "/login/loginResult";
+	        session.setAttribute("party", ps.selectPeoplecnt());
+	        return "/main/index";
 	    } else {
-	    	System.out.println("GET CHECKUSER 2번 ");
 	        return "/login/memberJoinForm";        
 	    }
 	}
 	
 	@PostMapping("/checkUser")
 	public String checkUser(@RequestBody Map<String, String> user, HttpSession session) {
-		System.out.println("POST CHECKUSER 1번 ");
 
 		String kakaoid = user.get("kakaoid");
 	    if(kakaoid != null) {
-			System.out.println("POST CHECKUSER 2번 ");
 
 	        MemberVO VO = ms.kakaologinResult(kakaoid);
 	        if(VO != null && VO.getKakaoid() != null) {
-	    		System.out.println("POST CHECKUSER 3번 ");
 	            session.setAttribute("member", VO);
 	           
 	            return "redirect:checkUser";
 	        } else {
-	    		System.out.println("POST CHECKUSER 4번 ");
 	            session.setAttribute("kakaoid", kakaoid);
 	    		return "redirect:/memberJoinForm";
 	        }
 	    }
-		System.out.println("POST CHECKUSER 5번 ");
 	    session.setAttribute("kakaoid", kakaoid);
 	    return "redirect:register";
 	}
 	
-	
+	//----------------------------------------------------------------
+
 	// 로그인
-	@GetMapping("loginResult")
-	public String getLoginResult() {
-		System.out.println("GET LOGIN");
-		return "/login/loginResult";
-	}
-	
 	@PostMapping("loginResult")
 	public String loginResult(@RequestParam("userId") String id,
 	                          @RequestParam("password") String pw, HttpSession session) {
@@ -125,21 +108,24 @@ public class LoginController {
 		
 	    if(memberVO != null) {
 	        session.setAttribute("member", memberVO);
-	        return "/login/loginResult";
+	        session.setAttribute("party", ps.selectPeoplecnt());
+	        return "/main/index";
 	    }
-	    return "redirect:loginNo";
+	    return "/login/loginForm";
 	}
+	//----------------------------------------------------------------
 	
 	// 로그인 실패 
 	@GetMapping("loginNo")
 	public String loginNo() {
-		return "/login/loginNo";
+		return "/login/login";
 	}
 	
 	// 로그아웃
 	@GetMapping("logout")
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session, Model model) {
 		session.invalidate();
+		model.addAttribute("party", ps.selectPeoplecnt());
 		return "/main/index";
 	}
 	
@@ -150,9 +136,9 @@ public class LoginController {
 			   					 @RequestParam("loginPw") String pw, 
 			   					 @RequestParam("loginPwConfirm") String pwC, 
 			   					 @RequestParam("name") String name,
-			   					 @RequestParam("birth-year") String year, 
-			   					 @RequestParam("birth-month") String month, 
-			   					 @RequestParam("birth-day") String day, 
+			   					 @RequestParam(value = "birth-year", required = false) String year, 
+			   					 @RequestParam(value = "birth-month", required = false) String month, 
+			   					 @RequestParam(value = "birth-day", required = false) String day, 
 			   					 @RequestParam("address_1") String addr_1, 
 			   					 @RequestParam("address_2") String addr_2, 
 			   					 @RequestParam("address_3") String addr_3, 
@@ -174,6 +160,8 @@ public class LoginController {
 		memberVO.setName(name);
 		Random r = new Random();
 		memberVO.setNickname(name + (r.nextInt(99999)));
+		if(year == null || month == null || day == null) {	
+		}
 		memberVO.setBirth(year+"-"+ month +"-" + day);;
 		memberVO.setAddr(addr_1 + "/" + addr_2 + "/" + addr_3 + "/" + addr_4);
 		memberVO.setTel(tel);
@@ -186,7 +174,6 @@ public class LoginController {
 		}
 		return "register";
 	}
-	
 	@GetMapping("memberSuccess")
 	public String memberSuccess() {
 		return "/login/memberSuccess";
@@ -195,7 +182,7 @@ public class LoginController {
 	@GetMapping("memberUpdate")
 	public String memberModify(Model model) {
 //		MemberVO membervo = (MemberVO) httpSession.getAttribute("member");
-		model.addAttribute("member", ms.updateMember("jsk7640@naver.com"));
+		model.addAttribute(LOGIN, ms.selectMember("jsk7640@naver.com"));
 		return "/login/memberUpdate";
 	}
 	//수정한데이터 저장
@@ -211,6 +198,86 @@ public class LoginController {
 	public String slakf() {
 		return "/login/resultUpdate";
 	}
+	
+	// 회원수정
+	@GetMapping("memberUpdateForm")
+	public String memberModifyView() {
+	
+		return "/login/memberUpdateForm";
+	}
+	
+	@PostMapping("memberUpdateResult")
+	public String memberUpdateResult(@RequestParam("loginId") String id, 
+				@RequestParam("kakaoid") String kakaoid, 
+				 @RequestParam("loginPw") String pw, 
+				 @RequestParam("loginPwConfirm") String pwC, 
+				 @RequestParam("nickname") String nickname,
+				 @RequestParam(value = "birth-year", required = false) String year, 
+				 @RequestParam(value = "birth-month", required = false) String month, 
+				 @RequestParam(value = "birth-day", required = false) String day,  
+				 @RequestParam("address_1") String addr_1, 
+				 @RequestParam("address_2") String addr_2, 
+				 @RequestParam("address_3") String addr_3, 
+				 @RequestParam("address_4") String addr_4, 
+				 @RequestParam("tel") String tel, 
+				 @RequestParam("email") String email,
+				 HttpSession session
+				) {
+		
+		
+		MemberVO memberVO = new MemberVO();
+		memberVO.setId(id);
+		if(pw.equals(pwC)) {
+			memberVO.setPw(pw);			
+		} else {
+			System.out.println("수정 비번 에러");
+			return "memberUpdateForm";
+		} 		
+		memberVO.setKakaoid(kakaoid);
+		memberVO.setNickname(nickname);		
+		memberVO.setAddr(addr_1 + "/" + addr_2 + "/" + addr_3 + "/" + addr_4);
+		memberVO.setTel(tel);
+		memberVO.setEmail(email);
+		memberVO.setBirth(year+"-"+ month +"-" + day);;
+		int su = 0;
+		System.out.println(memberVO.toString());
+
+		if(memberVO.getBirth().matches("(.*)null(.*)")) {
+			su = ms.notBirthUpdate(memberVO);
+			if(su == 1) {
+				session.invalidate();
+				return "/login/memberUpdateResult";	
+			}
+			return "redirect:memberUpdateNo";
+		}  
+		System.out.println(memberVO.toString());
+		su = ms.updateMember(memberVO);
+		System.out.println(su + "회원수정");
+		if(su == 1) {
+			session.invalidate();
+			return "/login/memberUpdateResult";			
+		}
+		
+		return "redirect:memberUpdateNo";
+	}
+	
+	@GetMapping("memberUpdateNo")
+	public String memberUpdateNo() {
+		return "/login/memberUpdateNo";
+	}
+	
+	// 회원 탈퇴 
+	@GetMapping("memberDelete")
+	public String memberDelete(HttpServletRequest request) throws Exception {
+	    HttpSession session = request.getSession();
+	    MemberVO memberVO = (MemberVO) session.getAttribute("member");
+	    String email = memberVO.getEmail();
+	    int su = ms.memberDelete(email);
+	    
+	    session.invalidate();  // 세션 종료
+	    return "redirect:/";
+	}
+	
 	
 }
 

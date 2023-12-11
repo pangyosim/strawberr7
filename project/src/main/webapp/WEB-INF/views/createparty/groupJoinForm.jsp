@@ -41,7 +41,7 @@ function checkauthority(){
 	} else if (document.groupjoin.acount.value == "") {
 		alert("계좌정보를 입력하세요~");
 		document.groupjoin.acount.focus();
-	
+	}
 }
 
 </script>
@@ -65,7 +65,7 @@ function checkauthority(){
 				<option value=4>우리은행</option>
 				<option value=5>제주은행</option>
 			</select>
-			<input type="text" id="acount" name="acount" placeholder="계좌번호">
+			<input type="text" id="account" name="account" placeholder="계좌번호">
 			<button onclick="accountcheck()">은행 확인</button>
 		</div>
 		<div class="">
@@ -89,6 +89,7 @@ function checkauthority(){
 				서비스 제공자의 가입약관과 상기 정보제공에 동의합니다.
 			</ol>
 		</div>
+		<input type="hidden" name="email" value="${email}"/>
 		<input type="submit" value="완료" onclick="checkauthority()"
 			id="checktable">
 	</form>

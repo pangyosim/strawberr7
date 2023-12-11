@@ -1,4 +1,4 @@
-<!-- login/memberJoinForm.jsp -->
+<!-- login/memberUpdateForm.jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -7,10 +7,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>memberJoinForm.jsp</title>
+<title>memberUpdateForm.jsp</title>
 <!-- j쿼리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link href="resources/css/styles.css" rel="stylesheet" />
 
 
 <!-- 카카오 로그인 스크립트 추가 -->
@@ -33,7 +32,8 @@ function kakaoLogin() {
                         }),
                         contentType: 'application/json',
                         success: function(data) {
-                            location.href="/checkUser";
+                        	
+                            location.href="#";
                         },
                         error: function(error) {
                             console.log(error);
@@ -78,117 +78,67 @@ function kakaoUnlink() {
 <!-- 로그인.js -->
 <script type="text/javascript" src="resources/js/loginScript.js?v=2"></script>
 
-<!-- 포트원 API -->
-<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+<link href="resources/css/styles.css" rel="stylesheet" />
 
 </head>
 <link href="resources/css/memberJoinForm.css" rel="stylesheet" />
 <body style="text-align: center;">
 <c:import url="../main/header.jsp"/>
-<div class="" style="margin-top: 100px">
-	<h2>회원가입</h2>
-		<!-- 카카오~ -->
-	<c:if test="${kakaoid == null }">
+<div class="" style="margin-top: 130px;">
+	<h2>회원수정</h2>
+	<!-- 카카오~ -->
+	<c:if test="${Member.kakaoid == null }">
 		<div>
 			<button id="kakao-login-btn">카카오 로그인</button>
 		</div>
+	</c:if>
+	<c:if test="${Member.kakaoid != null }">
  		<button id="kakao-unlink-btn">카카오 연결 해제</button>	
 	</c:if>
 	
 	
-	<form id="memberjoinForm" action="memberJoinResult" method="post">
+<form id="memberUpdateForm" action="memberUpdateResult" method="post">
     <div class="textForm">
-        <input type="text" placeholder="아이디" id="loginId" name="loginId" maxlength="20">
-        <input type="button" value="중복체크" id="checkBtn">
-       	<p id="message"></p>
+        ID : <input type="text" id="loginId" name="loginId" value="${member.id }" maxlength="20" readonly>
     </div>
-		<input type="hidden" id="kakaoid" name="kakaoid" value="${kakaoid }">
+	<input type="hidden" id="kakaoid" name="kakaoid" value="${member.kakaoid }">
     <div class="textForm">
-        <input type="password" placeholder="비밀번호" id="loginPw" name="loginPw" maxlength="20"><br>
+    	<p>비밀번호</p>
+  		<input type="password" placeholder="비밀번호" id="loginPw" name="loginPw" maxlength="20"><br>
         <input type="password" placeholder="비밀번호 확인" name="loginPwConfirm" maxlength="20">     
     </div>
     <div class="textForm">
-        <input type="text" placeholder="이름" id="name" name="name" maxlength="50">   
-        <button type="button" id="check" onclick="userCheck()">본인인증</button>  
+      	성  함 : <input type="text" placeholder="이름" id="name" name="name" value="${member.name }" maxlength="50" readonly>     
+        <br/>
+        닉네임 : <input type="text" placeholder="닉네임" id="nickname" name="nickname" value="${member.nickname }" maxlength="50">     
     </div>
+  	<p>생년월일</p>
     <div class="info" id="info__birth">
-      <select class="box" id="birth-year" name="birth-year">
-        <option disabled selected>출생 연도</option>
-      </select>
-      <select class="box" id="birth-month" name="birth-month">
-        <option disabled selected>월</option>
-      </select>
-      <select class="box" id="birth-day" name="birth-day">
-        <option disabled selected>일</option>
-      </select>
+	    <select class="box" id="birth-year" name="birth-year">
+	      <option disabled selected></option>
+	    </select>
+	    <select class="box" id="birth-month" name="birth-month">
+	      <option disabled selected></option>
+	    </select>
+	    <select class="box" id="birth-day" name="birth-day">
+	      <option disabled selected></option>
+	    </select>
     </div>
+    <p>주소</p>
     <div class="textForm"> 
         <input type="hidden" id="address_1" name="address_1" placeholder="우편번호" readonly>
         <input type="text" id="address_2" name="address_2" placeholder="주소" readonly>
         <input type="button" onclick="checkAddress()" value="우편번호 찾기"><br>
         <input type="text" id="address_3" name="address_3" placeholder="상세주소">
-        <input type="text" id="address_4" name="address_4" placeholder="">
-    </div>
+        <input type="hidden" id="address_4" name="address_4" placeholder="동">
+    </div>    
     <div class="textForm">
-        <input type="text" class="form-control" id="tel" name="tel" placeholder="전화번호" oninput="oninputPhone(this)" maxlength="13">
+    휴대폰 : <input type="text" class="form-control" id="tel" name="tel" value="${member.tel }" oninput="oninputPhone(this)" maxlength="13">
     </div>
-    <div class="textForm" class="mail_input" id="mail_input" name="mail_input">
-    	<input type="text" class="mail" name="mail" id="mail" placeholder="이메일 입력" maxlength="20"/>@
-        <select class="domain" id="domain" name="domain">
-            <option value="none">---이메일---</option>
-            <option value="naver.com">naver.com</option>
-            <option value="gmail.com">gmail.com</option>
-            <option value="daum.net">daum.net</option>
-            <option value="nate.com">nate.com</option>
-        </select>     
-    	<button type="button" id="sendBtn" name="sendBtn" onclick="sendNumber()">인증번호</button>
-    </div>
-    <br/>
-    <div id="mail_number" name="mail_number" style="display: none">
-    	<input type="text" name="number" id="number" placeholder="인증번호 입력"/>
-    	<button type="button" name="confirmBtn" id="confirmBtn" onclick="confirmNumber()">이메일 인증</button>
-    </div>
-    <br/>
-    <input type="text" id="Confirm" name="Confirm" style="display:none" value=""/>
-    <script type="text/javascript">
-    	function sendNumber(){
-    		var mailf = document.getElementsByClassName('mail')[0];
-    	    var maill= document.getElementsByClassName('domain')[0];
-    	    if(mailf.value == '' || maill.value == 'none') {
-    	        alert('이메일을 입력해주세요.');
-    	        return false;
-    	    }
-    		var email = mail_input + "@" + domain;
-    		var exptext = /^[\w]([-_.]?[\w])*@[\w]([-_.]?[\w])*\.[a-zA-Z]{2,3}$/i;
-    		if(!exptext.test(email)){
-    		$("#mail_number").css("display","block");
-    		$.ajax({
-    			url:"mail",
-    			type:"post",
-    			dataType:"json",
-    			data:{"mail" : $("#mail").val()+"@"+$("#domain").val()},
-    			//mail:email,
-    			success: function(data){
-    				alert("인증번호 발송");
-    				$("#Confirm").attr("value",data);
-    			}
-    		});
-    		}else{
-    			alert("이메일 형식이 올바르지 않습니다");
-    	}
-    }
-    	function confirmNumber(){
-    		var number1 = $("#number").val();
-    		var number2 = $("#Confirm").val();
-    		
-    		if(number1 == number2){
-    			alert("인증되었습니다");
-    		}else{
-    			alert("번호가 다릅니다")
-    		}
-    	}
-    </script>
-    <input type="button" value="회원가입" onclick="memberJoinFormCheck()"/>
+    <div class="textForm"style="text-align: center;">
+        이메일 : <input type="text" id="email" name="email" value="${member.email }" maxlength="50" readonly> 
+    </div>  
+    <input type="button" value="수정완료" onclick="memberUpdateCheck()"/>
 </form>
 </div>
 <c:import url="../main/footer.jsp"/>
@@ -222,6 +172,11 @@ function kakaoUnlink() {
 </style>
 <script type="text/javascript">
 
+var birth = "${member.birth}".split('-');
+
+document.getElementById('birth-year').options[0].text = birth[0];
+document.getElementById('birth-month').options[0].text = birth[1];
+document.getElementById('birth-day').options[0].text = birth[2];
 
 //'출생 연도' 셀렉트 박스 option 목록 동적 생성
 const birthYearEl = document.querySelector('#birth-year')

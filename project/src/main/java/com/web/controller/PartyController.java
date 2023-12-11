@@ -1,10 +1,5 @@
 package com.web.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.management.relation.Role;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,37 +7,33 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.web.service.MemberService;
 import com.web.service.PartyService;
+import com.web.session.MemberSession;
 import com.web.vo.GroupVO;
 import com.web.vo.MemberVO;
 import com.web.vo.PartyMember;
 
-import oracle.jdbc.proxy.annotation.Post;
 
 @Controller
-public class PartyController {
+public class PartyController implements MemberSession {
 	@Autowired
 	private PartyService partyService;
+	
+	@Autowired
+	private MemberService ms;
 
 	@GetMapping("partydetail")
 	public String getPartyDetail() {
 		return "/partypage/partydetail";
 	}
 
-	@PostMapping("groupJoinForm")
-	public void groupJoinForm() {
-	}
-
 	@PostMapping("groupJoinResult")
-	public String result(PartyMember partyMember, HttpSession httpSession) {
-		int zu = partyService.groupjoin(partyMember);
-
-		if (zu == 1) {
-			return "/main/index";
-		}
-		return "/createparty/groupJoinForm";
+	public String result(PartyMember partyMember, String email) {
+		partyService.groupjoin(partyMember);
+		ms.updateRole(email);
+		return "redirect:/";
 	}
 
 //  ==================================================================
@@ -74,11 +65,11 @@ public class PartyController {
 
 	// 이미지클릭시 해당파티 리스트로 이동
 	@GetMapping("/youtubePartyList")
-	public String youtubeParty(Model model,GroupVO vo) {
-		GroupVO selectPartylist = partyService.selectPeoplecntList(vo.getSeq());
-		model.addAttribute("selectPartylist", selectPartylist);
-		model.addAttribute("seq", vo.getSeq());
-		return "/createparty/youtubePartyList";
+	public String youtubeParty(Model model, GroupVO vo, HttpSession session) {
+			GroupVO selectPartylist = partyService.selectPeoplecntList(vo.getSeq());
+			model.addAttribute("selectPartylist", selectPartylist);
+			model.addAttribute("seq", vo.getSeq());
+			return "/createparty/youtubePartyList";
 	}
 
 	@GetMapping("youtubePartyselect")
@@ -88,14 +79,15 @@ public class PartyController {
 	
 	
 //	==================================================================
+	
 	//와챠
 
 	@GetMapping("/watchaPartyList")
-	public String watchaPartyList(Model model,GroupVO vo) {
-		GroupVO selectPartylist = partyService.selectPeoplecntList(vo.getSeq());
-		model.addAttribute("selectPartylist", selectPartylist);
-		model.addAttribute("seq", vo.getSeq());
-		return "/createparty/watchaPartyList";
+	public String watchaPartyList(Model model, GroupVO vo, HttpSession session) {
+			GroupVO selectPartylist = partyService.selectPeoplecntList(vo.getSeq());
+			model.addAttribute("selectPartylist", selectPartylist);
+			model.addAttribute("seq", vo.getSeq());
+			return "/createparty/watchaPartyList";
 	}
 
 	@GetMapping("watchaPartyselect")
@@ -103,8 +95,19 @@ public class PartyController {
 		return "/createparty/watchaPartyselect";
 	}
 	
+	
+	
 //	--------------------------------------------------------
-        
+    
+	@GetMapping("createparty")
+	public String getpartyform(String email, HttpSession session) {
+		MemberVO mv = ms.selectMember(email);
+		if(mv.getRole().equals("PARTYKING")) {
+			return "/createparty/groupInsert";
+		}
+		session.setAttribute("email", email);
+		return "/createparty/groupJoinForm";
+	}
 
 
 }

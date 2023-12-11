@@ -15,7 +15,7 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	MemberDao memberdao;
 
-	@Override
+  @Override
 	public List<MemberVO> doMemberList() {
 		return memberdao.doMemberList();
 	}
@@ -40,9 +40,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberVO updateMember(String id) {
-		// TODO Auto-generated method stub
-		return memberdao.updateMember(id);
+	public MemberVO selectMember(String id) {
+		return memberdao.selectMember(id);
 	}
 
 	@Override
@@ -51,11 +50,37 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	
+	public void updateRole(String email) {
+		memberdao.updateRole(email);
+	}
+	
 	// 카카오 로그인 
 	@Override
 	public MemberVO kakaologinResult(String kakaoid) {
 		System.out.println("Test");
 		return memberdao.kakaologinResult(kakaoid);
 	}
+
+	// 회원 수정
+	@Override
+	public int updateMember(MemberVO memberVO) {
+		int su = memberdao.updateMember(memberVO);
+		return su;
+	}
+	@Override
+	public int notBirthUpdate(MemberVO memberVO) {
+		int su = memberdao.notBirthUpdate(memberVO);
+		return su;
+	}
+
+
+	// 회원 삭제 
+	@Override
+	public int memberDelete(String email) {
+		int su = memberdao.memberDelete(email);
+		
+		return su;
+	}
+		
 	
 }
