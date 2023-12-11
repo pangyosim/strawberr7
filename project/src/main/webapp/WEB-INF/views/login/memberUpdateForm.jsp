@@ -101,7 +101,7 @@ function kakaoUnlink() {
     <div class="textForm">
         ID : <input type="text" id="loginId" name="loginId" value="${member.id }" maxlength="20" readonly>
     </div>
-		<input type="hidden" id="kakaoid" name="kakaoid" value="${Member.kakaoid }">
+	<input type="hidden" id="kakaoid" name="kakaoid" value="${member.kakaoid }">
     <div class="textForm">
     	<p>비밀번호</p>
   		<input type="password" placeholder="비밀번호" id="loginPw" name="loginPw" maxlength="20"><br>
