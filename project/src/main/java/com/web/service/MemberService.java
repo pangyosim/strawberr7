@@ -2,6 +2,7 @@ package com.web.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 
 import com.web.vo.MemberVO;
 
@@ -20,4 +21,7 @@ public interface MemberService {
 	MemberVO kakaologinResult(String kakaoid);
 
 	boolean isDuplicateId(String id);
+
+	String searchId(String name, String tel);
+
 }

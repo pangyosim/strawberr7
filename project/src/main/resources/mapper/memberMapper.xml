@@ -45,5 +45,11 @@
         FROM member
         WHERE id = #{id}
     </select>
+    
+    <!-- 아이디 찾기 -->
+	<select id="searchId" resultType="String">
+		SELECT NVL(id, 0) FROM member
+		WHERE name=#{name} AND tel=#{tel}
+	</select>
 	
 </mapper>

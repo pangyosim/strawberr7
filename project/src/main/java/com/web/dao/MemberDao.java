@@ -3,6 +3,7 @@ package com.web.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.web.vo.MemberVO;
@@ -24,5 +25,7 @@ public interface MemberDao {
 	public MemberVO kakaologinResult(String kakaoid);
 
 	public int isDuplicateId(String id);
+
+	String searchId(@Param("name")String name, @Param("tel")String tel);
 	
 }

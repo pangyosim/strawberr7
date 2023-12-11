@@ -94,6 +94,9 @@ function kakaoUnlink() {
 	    <input type="submit" value="로그인">
     </div>
     <div>
+	    <input type="submit" value="아이디/비밀번호 찾기" onclick="location.href='userSearch'"/>
+    </div>
+    <div>
    		<input type="button" value="회원가입" onClick="location.href='register'"/>    
     </div>
     <br/>
