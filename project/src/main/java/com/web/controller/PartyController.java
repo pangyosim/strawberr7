@@ -63,36 +63,38 @@ public class PartyController implements MemberSession {
 //  =================================================================
 	
 
-	// 이미지클릭시 해당파티 리스트로 이동
-	@GetMapping("/youtubePartyList")
-	public String youtubeParty(Model model, GroupVO vo, HttpSession session) {
-			GroupVO selectPartylist = partyService.selectPeoplecntList(vo.getSeq());
-			model.addAttribute("selectPartylist", selectPartylist);
-			model.addAttribute("seq", vo.getSeq());
-			return "/createparty/youtubePartyList";
-	}
-
-	@GetMapping("youtubePartyselect")
-	public String youtubePartyselect() {
-		return "/createparty/youtubePartyselect";
-	}
-	
-	
+//	// 이미지클릭시 해당파티 리스트로 이동
+//	@GetMapping("/youtubePartyList")
+//	public String youtubeParty(Model model, GroupVO vo, HttpSession session) {
+//			GroupVO selectPartylist = partyService.selectPeoplecntList(vo.getSeq());
+//			model.addAttribute("selectPartylist", selectPartylist);
+//			model.addAttribute("seq", vo.getSeq());
+//			return "/createparty/youtubePartyList";
+//	}
+//
+//	@GetMapping("youtubePartyselect")
+//	public String youtubePartyselect() {
+//		return "/createparty/youtubePartyselect";
+//	}
+//	
+//	
 //	==================================================================
 	
 	//와챠
 
-	@GetMapping("/watchaPartyList")
+	@GetMapping("/PartyList")
 	public String watchaPartyList(Model model, GroupVO vo, HttpSession session) {
 			GroupVO selectPartylist = partyService.selectPeoplecntList(vo.getSeq());
+			MemberVO mv = ms.selectMember(selectPartylist.getUserid());
 			model.addAttribute("selectPartylist", selectPartylist);
+			model.addAttribute("mv", mv);
 			model.addAttribute("seq", vo.getSeq());
-			return "/createparty/watchaPartyList";
+			return "/createparty/PartyList";
 	}
 
-	@GetMapping("watchaPartyselect")
+	@GetMapping("Partyselect")
 	public String watchaPartyselect() {
-		return "/createparty/watchaPartyselect";
+		return "/createparty/Partyselect";
 	}
 	
 	

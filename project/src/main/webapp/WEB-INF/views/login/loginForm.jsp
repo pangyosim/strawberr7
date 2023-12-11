@@ -75,30 +75,77 @@ function kakaoUnlink() {
 }
 </script>
 
+<style type="text/css">
+body{
+	margin: 0px;
+	padding: 0px;
+}
+
+.login-box{
+	width: 300px;
+	height: 300px;
+	margin: 0 auto;
+	margin-top: 13%;
+	border: none;
+}
+.login-box h2{
+	text-align: center;
+	color: #ba77ea;
+}
+.user-box input{
+	width: 320px;
+	height: 50px;
+	border-radius: 10px;
+	font-size: 16px;
+	margin-bottom: 10px;
+	border: 1px solid black;
+}
+#register_tag{
+	margin-left: 90px;
+	text-decoration: none;
+	color: black;
+}
+
+#register_tag:hover, #find_id:hover{
+	color: #ba77ea;
+}
+
+#kakao-login-btn{
+	 width: 320px;
+	 height: 50px;
+	 background-color: #fcdc3e;
+	 border-radius: 10px;
+	 border: none;
+}
+
+#login-box {
+	width: 320px; 
+	height: 50px; 
+	border-radius: 10px; 
+	background-color: #ba77ea; 
+	color: white; 
+	font-size: 15px;
+	border: none;
+}
+
+</style>
 </head>
-<link href="resources/css/loginForm.css" rel="stylesheet" />
-<body style="margin-top: 150px; background-color: black;">
-<div class="login-box" style="margin-top: 200px;">
-  <h2>Login</h2>
-  <form id="loginForm" action="loginResult" method="post" onsubmit="return loginCheck()">
-  	<div class="user-box">	
-  		<label for="userId"></label>
-  		<input type="text" name="userId" id="userId" required="" placeholder="ID">
-  	</div>
-	<div class="user-box">
- 		<label for="password"></label>
-  		<input type="password" name="password" id="password" required="" placeholder="PASSWORD">
-	</div>
-    <div>
-	    <input type="submit" value="로그인">
-    </div>
-    <div>
-   		<input type="button" value="회원가입" onClick="location.href='register'"/>    
-    </div>
-    <br/>
-  </form>
+<body >
+<div class="login-box">
+	  <form id="loginForm" action="loginResult" method="post" onsubmit="return loginCheck()">
+	  	<h2>팀프로젝트명</h2>
+	  	<div class="user-box">	
+	  		<label for="userId"></label>
+	  		<input type="text" name="userId" id="userId" required="" placeholder="ID"/>
+	 		<label for="password"></label>
+	  		<input type="password" name="password" id="password" required="" placeholder="PASSWORD">
+		    <input type="submit" value="로그인" id="login-box"> <br/>
+		 </div>
+	   		<span id="register_tag" onclick="location.href='register'">회원가입</span> &nbsp;
+	   		<span id="find_id" onclick="location.href='findinfo'">아이디 / 비밀번호 찾기</span>
+	  </form>
 	<div>
-		<button id="kakao-login-btn">카카오 로그인</button>
+		<button id="kakao-login-btn"><img alt="" src="resources/assets/img/kakaologin.png" style="width: 20px; height: 20px;"/>카카오 로그인</button>
 	</div>
  	<button id="kakao-unlink-btn">카카오 연결 해제</button>
  	

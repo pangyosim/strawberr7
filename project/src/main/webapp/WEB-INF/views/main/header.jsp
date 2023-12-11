@@ -42,8 +42,9 @@
                         <div class="searchBar">
                         	<i class="fa-solid fa-magnifying-glass"></i>
                         	<input type="text" class="input" onclick="" style="border: none; background: transparent; color: white;"/>
-                        </div>
-                        <li class="nav-item"><a class="nav-link" href="/" style="color: #CA226B;">홈</a></li>
+                        </div> 
+                       		
+                       		<li class="nav-item"><a class="nav-link" href="/" style="color: #CA226B;">홈</a></li>
                         <c:choose>
 	                        <c:when test="${member == null }">
 	                		    <li class="nav-item"><a class="nav-link" href="login" style="color: #CA226B;">로그인</a></li>	                        	
@@ -61,7 +62,7 @@
 							    </div> 
 	                       	</c:otherwise>
                         </c:choose>
-                        <li class="nav-item"><a class="nav-link" style="color: #CA226B;"> About </a></li>
+                        <!-- <li class="nav-item"><a class="nav-link" style="color: #CA226B;"> About </a></li> -->
                      </ul>
        			</div>
             </div>

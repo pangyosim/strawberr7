@@ -36,6 +36,7 @@
 <c:import url="header.jsp"/>
    <!-- Masthead-->
    <header class="masthead" style="width: 100%; height: 550px; margin-top: 90px;">
+  
    </header>
    <!-- Services-->
    <div class="services_wrap">
@@ -51,7 +52,7 @@
 							<img
 								src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA0MTBfOTgg%2FMDAxNjE4MDU5OTE1NTM2.AOxOQcKyyzrt_TRrIJZU5nnRhfxAKaXOoiDGLzlu6TEg.QEyFA8tkSHP3szin0jvk6zVmh4PXNs7sawhrPxYylp0g.PNG.sunjoon12%2Fwatcha%25A3%25DFlogo%25A3%25DF1611108610.png&type=sc960_832"
 								style="width: 200px; height: 200px"
-								onclick="location.href='watchaPartyList?seq=${party.seq}'">
+								onclick="location.href='PartyList?seq=${party.seq}'">
 							<br>[<c:out value="${party.service}" />]<br>
 							<c:out value="${party.peoplecnt}" />명<br>
 							<c:out value="${party.partyday}" />개월<br>
@@ -61,7 +62,7 @@
 							<img
 								src="https://cdn-icons-png.flaticon.com/512/3128/3128307.png"
 								style="width: 200px; height: 200px"
-								onclick="location.href='youtubePartyList?seq=${party.seq }'">
+								onclick="location.href='PartyList?seq=${party.seq }'">
 							<br>[<c:out value="${party.service}" />]<br>
 							<c:out value="${party.peoplecnt}" />명<br>
 							<c:out value="${party.partyday}" />개월<br>
