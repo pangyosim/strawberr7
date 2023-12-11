@@ -116,11 +116,10 @@ public class LoginController {
 		
 	    if(memberVO != null) {
 	        session.setAttribute("member", memberVO);
-	        System.err.println(memberVO.getRole());
+	       //System.out.println(memberVO.getRole()); // 회원등급 확인
 	        if(memberVO.getRole().equals("ADMIN")) {
 	        	return "/main/admin";
 	        }
-        	System.out.println("안녕2");
 	        return "/login/loginResult";
 	    }
 	    return "redirect:loginNo";
