@@ -167,7 +167,7 @@ function kakaoUnlink() {
     			type:"post",
     			dataType:"json",
     			data:{"mail" : $("#mail").val()+"@"+$("#domain").val()},
-    			mail:email,
+    			//mail:email,
     			success: function(data){
     				alert("인증번호 발송");
     				$("#Confirm").attr("value",data);

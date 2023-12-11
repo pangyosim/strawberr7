@@ -187,25 +187,6 @@ function memberJoinFormCheck() {
 	    return false;
 	}
 
-
-    // 이메일
-    var email_first = document.getElementsByClassName('email_first')[0];
-    var email_last = document.getElementsByClassName('email_last')[0];
-    if(email_first.value == '' || email_last.value == 'none') {
-        alert('이메일을 입력해주세요.');
-        email_first.focus();
-        return false;
-    }
-
-    // 이메일 형식 확인
-    var email = email_first.value + "@" + email_last.value;
-    var regex = /^[\w]([-_.]?[\w])*@[\w]([-_.]?[\w])*\.[a-zA-Z]{2,3}$/i;
-    if (!regex.test(email)) {
-        alert('이메일 형식이 올바르지 않습니다.');
-        email_first.focus();
-        return false;
-    }
-
     // 모든 검증을 통과하면 form을 제출
     document.querySelector('form').submit();
 }

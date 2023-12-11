@@ -158,7 +158,7 @@ public class LoginController {
 			   					 @RequestParam("address_3") String addr_3, 
 			   					 @RequestParam("address_4") String addr_4, 
 			   					 @RequestParam("tel") String tel, 
-			   					 @RequestParam("email") String email,
+			   					 @RequestParam("mail") String email,
 			   					 @RequestParam("domain") String domain,
 			   					 RedirectAttributes ra) {
 		
