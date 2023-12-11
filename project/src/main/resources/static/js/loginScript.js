@@ -1,5 +1,6 @@
 
 function userCheck(){
+
 	var IMP = window.IMP;
 	IMP.init("imp40114442");
 	IMP.certification({
@@ -10,6 +11,7 @@ function userCheck(){
 		},function(rsp){
 			if(rsp.success){
 				alert("인증이 완료되었습니다");
+				isNameCheck= true;				
 			}else{
 				alert("인증에 실패했습니다. 에러 내용 : " + rsp.error_msg);
 			}
@@ -24,6 +26,9 @@ function oninputPhone(target) {
 }
 
 var isIdDuplicate = true;  // 아이디 중복 여부를 저장하는 변수
+var isNameCheck = false;
+var isEmailCheck = false;
+
 // 아이디 중복 여부 확인
 $(document).ready(function(){
     var loginId = $("#loginId");
@@ -64,6 +69,7 @@ $(document).ready(function(){
                 }
             }
         });
+        
     });
     
     loginId.on('input', function() {
@@ -186,7 +192,18 @@ function memberJoinFormCheck() {
 	    tel.focus();
 	    return false;
 	}
-
+	
+	// 이메일 인증, 본인인증 확인
+	if( isNameCheck != true){
+		alert('본인인증 해주세요.');
+		return false;
+	}
+	
+	if( isEmailCheck != true){
+		alert('이메일 인증 해주세요.')
+		return false;
+	}
+	
     // 모든 검증을 통과하면 form을 제출
     document.querySelector('form').submit();
 }    
@@ -274,4 +291,42 @@ function memberJoinFormCheck() {
 	    // 모든 검증을 통과하면 form을 제출
 	    document.querySelector('form').submit();
 	}
-    
+ 
+ 
+ function sendNumber(){
+    		var mailf = document.getElementsByClassName('mail')[0];
+    	    var maill= document.getElementsByClassName('domain')[0];
+    	    if(mailf.value == '' || maill.value == 'none') {
+    	        alert('이메일을 입력해주세요.');
+    	        return false;
+    	    }
+    		var email = mail_input + "@" + domain;
+    		var exptext = /^[\w]([-_.]?[\w])*@[\w]([-_.]?[\w])*\.[a-zA-Z]{2,3}$/i;
+    		if(!exptext.test(email)){
+    		$("#mail_number").css("display","block");
+    		$.ajax({
+    			url:"mail",
+    			type:"post",
+    			dataType:"json",
+    			data:{"mail" : $("#mail").val()+"@"+$("#domain").val()},
+    			//mail:email,
+    			success: function(data){
+    				alert("인증번호 발송");
+    				$("#Confirm").attr("value",data);
+    			}
+    		});
+    		} else{
+    			alert("이메일 형식이 올바르지 않습니다");
+    	}
+    }
+    	function confirmNumber(){
+    		var number1 = $("#number").val();
+    		var number2 = $("#Confirm").val();
+    		
+    		if(number1 == number2){
+    			alert("인증되었습니다");
+    			isEmailCheck=true;
+    		} else{
+    			alert("번호가 다릅니다")
+    		}
+    	}

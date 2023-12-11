@@ -27,14 +27,13 @@ import com.web.vo.MemberVO;
 @Controller
 public class LoginController implements MemberSession {
 
-  @Autowired
-	private MemberService ms;
-	
 	@Autowired
 	private MailService ma;
 	
 	@Autowired
 	private MemberService ms;
+	
+	@Autowired
 	private PartyService ps;
 	
 	@GetMapping("login")

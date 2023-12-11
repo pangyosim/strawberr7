@@ -109,7 +109,7 @@ function kakaoUnlink() {
     </div>
     <div class="textForm">
         <input type="text" placeholder="이름" id="name" name="name" maxlength="50">   
-        <button type="button" id="check" onclick="userCheck()">본인인증</button>  
+        <button type="button" id="check" onclick="userCheck()">본인인증</button>
     </div>
     <div class="info" id="info__birth">
       <select class="box" id="birth-year" name="birth-year">
@@ -150,44 +150,6 @@ function kakaoUnlink() {
     </div>
     <br/>
     <input type="text" id="Confirm" name="Confirm" style="display:none" value=""/>
-    <script type="text/javascript">
-    	function sendNumber(){
-    		var mailf = document.getElementsByClassName('mail')[0];
-    	    var maill= document.getElementsByClassName('domain')[0];
-    	    if(mailf.value == '' || maill.value == 'none') {
-    	        alert('이메일을 입력해주세요.');
-    	        return false;
-    	    }
-    		var email = mail_input + "@" + domain;
-    		var exptext = /^[\w]([-_.]?[\w])*@[\w]([-_.]?[\w])*\.[a-zA-Z]{2,3}$/i;
-    		if(!exptext.test(email)){
-    		$("#mail_number").css("display","block");
-    		$.ajax({
-    			url:"mail",
-    			type:"post",
-    			dataType:"json",
-    			data:{"mail" : $("#mail").val()+"@"+$("#domain").val()},
-    			//mail:email,
-    			success: function(data){
-    				alert("인증번호 발송");
-    				$("#Confirm").attr("value",data);
-    			}
-    		});
-    		}else{
-    			alert("이메일 형식이 올바르지 않습니다");
-    	}
-    }
-    	function confirmNumber(){
-    		var number1 = $("#number").val();
-    		var number2 = $("#Confirm").val();
-    		
-    		if(number1 == number2){
-    			alert("인증되었습니다");
-    		}else{
-    			alert("번호가 다릅니다")
-    		}
-    	}
-    </script>
     <input type="button" value="회원가입" onclick="memberJoinFormCheck()"/>
 </form>
 </div>
