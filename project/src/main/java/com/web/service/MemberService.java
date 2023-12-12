@@ -24,4 +24,7 @@ public interface MemberService {
 
 	String searchId(String name, String tel);
 
+	public void updatePassword(String pw, String email);
+
+
 }

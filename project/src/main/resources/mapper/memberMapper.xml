@@ -52,4 +52,9 @@
 		WHERE name=#{name} AND tel=#{tel}
 	</select>
 	
+	
+	<update id="updatePassword">
+		update member set pw=#{pw} where email=#{email}
+	</update>
+	
 </mapper>

@@ -215,6 +215,7 @@ public class LoginController {
 		return "/login/resultUpdate";
 	}
 	
+	// 아이디 비밀번호 찾기
 	@GetMapping("userSearch")
 	public String userSearch() {
 		return "/login/userSearch";
@@ -230,6 +231,14 @@ public class LoginController {
 		return result;
 	}
 
+	@PostMapping("changePwResult")
+	public String changePwResult(@RequestParam("changePw") String pw, 
+								@RequestParam("umail")String email,
+								Model model) {
+		ms.updatePassword(pw,email);
+        model.addAttribute("successMessage", "비밀번호가 성공적으로 변경되었습니다.");
+        return "/login/loginForm";
+	}
 	
 }
 

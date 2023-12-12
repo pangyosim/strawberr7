@@ -80,5 +80,11 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return result;
 	}
+	@Override
+	public void updatePassword(String pw, String email) {
+		memberdao.updatePassword(pw,email);
+	}
+	
+	
 	
 }
