@@ -10,6 +10,7 @@
 <title>memberJoinForm.jsp</title>
 <!-- j쿼리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link href="resources/css/styles.css" rel="stylesheet" />
 
 
 <!-- 카카오 로그인 스크립트 추가 -->
@@ -131,14 +132,16 @@ $('.mail-check-input').blur(function () {
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <!-- 로그인.js -->
-<script type="text/javascript" src="resources/js/loginScript.js?v=1"></script>
+<script type="text/javascript" src="resources/js/loginScript.js?v=2"></script>
 
+<!-- 포트원 API -->
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 
 </head>
 <link href="resources/css/memberJoinForm.css" rel="stylesheet" />
 <body style="text-align: center;">
 <c:import url="../main/header.jsp"/>
-<div class="">
+<div class="" style="margin-top: 100px">
 	<h2>회원가입</h2>
 		<!-- 카카오~ -->
 	<c:if test="${kakaoid == null }">
@@ -161,7 +164,8 @@ $('.mail-check-input').blur(function () {
         <input type="password" placeholder="비밀번호 확인" name="loginPwConfirm" maxlength="20">     
     </div>
     <div class="textForm">
-        <input type="text" placeholder="이름" id="name" name="name" maxlength="50">     
+        <input type="text" placeholder="이름" id="name" name="name" maxlength="50">   
+        <button type="button" id="check" onclick="userCheck()">본인인증</button>
     </div>
     <div class="info" id="info__birth">
       <select class="box" id="birth-year" name="birth-year">
@@ -184,10 +188,10 @@ $('.mail-check-input').blur(function () {
     <div class="textForm">
         <input type="text" class="form-control" id="tel" name="tel" placeholder="전화번호" oninput="oninputPhone(this)" maxlength="13">
     </div>
-    <div class="textForm">
-        <input type="text" class="email_first" id="email" name="email" placeholder="이메일" name="" maxlength="20"> @
-        <select class="email_last" id="domain" name="domain">
-            <option value="none">-------이메일-------</option>
+    <div class="textForm" class="mail_input" id="mail_input" name="mail_input">
+    	<input type="text" class="mail" name="mail" id="mail" placeholder="이메일 입력" maxlength="20"/>@
+        <select class="domain" id="domain" name="domain">
+            <option value="none">---이메일---</option>
             <option value="naver.com">naver.com</option>
             <option value="gmail.com">gmail.com</option>
             <option value="daum.net">daum.net</option>
@@ -209,6 +213,18 @@ $('.mail-check-input').blur(function () {
 	<div>
     	<input type="button" value="회원가입" onclick="memberJoinFormCheck()"/>
     </div> 
+  <!--          <option value="nate.com">nate.com</option>
+        </select>     
+    	<button type="button" id="sendBtn" name="sendBtn" onclick="sendNumber()">인증번호</button>
+    </div>
+    <br/>
+    <div id="mail_number" name="mail_number" style="display: none">
+    	<input type="text" name="number" id="number" placeholder="인증번호 입력"/>
+    	<button type="button" name="confirmBtn" id="confirmBtn" onclick="confirmNumber()">이메일 인증</button>
+    </div>
+    <br/>
+    <input type="text" id="Confirm" name="Confirm" style="display:none" value=""/>
+    <input type="button" value="회원가입" onclick="memberJoinFormCheck()"/> -->
 </form>
 <c:import url="../main/footer.jsp"/>
 </body>

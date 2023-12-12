@@ -1,6 +1,5 @@
 package com.web.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -10,11 +9,13 @@ import com.web.vo.PartyMember;
 
 @Mapper
 public interface PartyMapper {
-	public int insertbyacount(PartyMember partyMember);
+	public void insertbyaccount(PartyMember partyMember);
 	
-	public String selectPeoplecnt(GroupVO groupVO);
+	public List<GroupVO> selectPeoplecnt();
 	
-	public List<GroupVO> selectPeoplecntList(String userid);
+	public GroupVO selectPeoplecntList(int seq);
 	
+	public void groupInsert(GroupVO groupVO);
 	
+
 }
