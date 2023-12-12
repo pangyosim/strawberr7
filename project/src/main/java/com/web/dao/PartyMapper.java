@@ -16,8 +16,6 @@ public interface PartyMapper {
 	
 	public GroupVO selectPeoplecntList(int seq);
 	
-	public void groupInsert(GroupVO groupVO);
-	
 	public int updatePartyKing(String id);
 	
 	//내파티 보기

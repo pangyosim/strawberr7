@@ -11,11 +11,11 @@ public class GroupServiceImpl implements GroupService{
 	@Autowired
 	private GroupMapper groupMapper;
 	   
-//	@Override
-//	@Transactional
-//	public void groupInsert(GroupVO groupVo) {
-//		// TODO Auto-generated method stub
-//		groupMapper.groupInsert(groupVo);
-//	}
+	@Override
+	@Transactional
+	public void groupInsert(GroupVO groupVo) {
+		// TODO Auto-generated method stub
+		groupMapper.groupInsert(groupVo);
+	}
 
 }

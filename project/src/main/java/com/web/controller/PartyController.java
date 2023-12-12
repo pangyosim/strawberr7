@@ -37,66 +37,43 @@ public class PartyController {
 	@PostMapping("groupJoinResult")
 	public String result(PartyMember partyMember, HttpSession httpSession) {
 		int zu = partyService.groupjoin(partyMember);
-		MemberVO memebvo =(MemberVO)httpSession.getAttribute("member");
+		MemberVO memebvo = (MemberVO) httpSession.getAttribute("member");
 		System.out.println(memebvo.toString());
-			partyService.updatePartyKing(memebvo.getId());
-			System.out.println(memebvo.getId());
+		partyService.updatePartyKing(memebvo.getId());
+		System.out.println(memebvo.getId());
 //			memebvo.getRole()=="PARTYKING";
-		if (zu!=0) {
+		if (zu != 0) {
 			return "/createparty/groupRegistrationForm";
 		}
 		return "/createparty/groupJoinForm";
 	}
 //  ==================================================================
-	@GetMapping("groupJoinForm")
-	public String groupJoinView() {
-		return "/createparty/groupJoinForm";
-	}
 
-	// 동의폼
-	@GetMapping("groupRegistrationForm")
-	public String groupRegistrationView() {
-		return "/createparty/groupRegistrationForm";
-	}
-
-	// 파티만들기폼
-	@GetMapping("groupInsert")
-	public String groupInsert() {
-		return "/createparty/groupInsert";
-	}
-
-	// 파티만들기 등록
-	@PostMapping("groupOk")
-	public String groupInsertpost(GroupVO groupVo) {
-		partyService.groupInsert(groupVo);
-		return "/main/index";
-	}
 //  =================================================================
-	
 
 	// 이미지클릭시 해당파티 리스트로 이동
 	@GetMapping("/youtubePartyList")
-	public String youtubeParty(Model model,GroupVO vo) {
+	public String youtubeParty(Model model, GroupVO vo) {
 		System.out.println(vo.getSeq());
 		GroupVO selectPartylist = partyService.selectPeoplecntList(vo.getSeq());
 		model.addAttribute("selectPartylist", selectPartylist);
 		return "/createparty/youtubePartyList";
 	}
-	//리스트 전체
+
+	// 리스트 전체
 	@GetMapping("youtubePartyselect")
 	public String youtubePartyselect() {
 		return "/createparty/youtubePartyselect";
 	}
-	
-	
+
 //	==================================================================
-	//와챠
-	//하나씩
+	// 와챠
+	// 하나씩
 	@GetMapping("/watchaPartyList")
-	public String watchaPartyList(Model model,GroupVO vo) {
+	public String watchaPartyList(Model model, GroupVO vo) {
 		System.out.println(vo.getSeq());
 		GroupVO selectPartylist = partyService.selectPeoplecntList(vo.getSeq());
-		System.out.println("selectPartylist : "+selectPartylist);
+		System.out.println("selectPartylist : " + selectPartylist);
 		model.addAttribute("selectPartylist", selectPartylist);
 		return "/createparty/watchaPartyList";
 	}
@@ -105,36 +82,36 @@ public class PartyController {
 	public String watchaPartyselect() {
 		return "/createparty/watchaPartyselect";
 	}
-	
+
 //	--------------------------------------------------------
-	//파티 수정
-     @GetMapping("partyUpdateForm")
-     public String partyinfo(Model model,@ModelAttribute("member")MemberVO memberVO) {	
-    	 if(memberVO.getRole().equals("PARTYKING")) {
+	// 파티 수정
+	@GetMapping("partyUpdateForm")
+	public String partyinfo(Model model, @ModelAttribute("member") MemberVO memberVO) {
+		if (memberVO.getRole().equals("PARTYKING")) {
 //    		 List<GroupVO> list = new ArrayList<>();
 //    		 list=partyService.es(memberVO.getId());
-    		 System.out.println(memberVO.getId());
-    		 model.addAttribute("partylist",partyService.es(memberVO.getId()));
+			System.out.println(memberVO.getId());
+			model.addAttribute("partylist", partyService.es(memberVO.getId()));
 //    		 System.out.println(partyService.es(memberVO.getId()));
-    		 return "/createparty/partyUpdate";
-    	 } else{
-    		 return "redirect:/";
-    	 }
-     }
-     //유저가 만든 정보 보기	
-     @GetMapping("/createparty/partyUpdate")
-     public String partyUpdateF() {
-    	 return "/createparty/partyUpdate";
-     }
-    //유저가 만든 파티 업데이트
-     @PostMapping("Update")
-     public String partyUpdate(GroupVO groupVO) {
-    	 System.out.println(groupVO);
-    	 int zu =partyService.partyUpdate(groupVO);
-    	 System.out.println(zu);
-    	 return "redirect:partyUpdateForm";
-     }
-     
-     
+			return "/createparty/partyUpdate";
+		} else {
+			return "redirect:/";
+		}
+	}
+
+	// 유저가 만든 정보 보기
+	@GetMapping("/createparty/partyUpdate")
+	public String partyUpdateF() {
+		return "/createparty/partyUpdate";
+	}
+
+	// 유저가 만든 파티 업데이트
+	@PostMapping("Update")
+	public String partyUpdate(GroupVO groupVO) {
+		System.out.println(groupVO);
+		int zu = partyService.partyUpdate(groupVO);
+		System.out.println(zu);
+		return "redirect:partyUpdateForm";
+	}
 
 }

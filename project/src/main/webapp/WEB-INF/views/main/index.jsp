@@ -45,6 +45,7 @@
 		<input type="button" value="파티만들기폼" onclick="location.href='groupRegistrationForm'" /> 
 		<input type="button" value="수정" onclick="location.href='memberUpdate'" />
 		<input type="button" value="파티수정" onclick="location.href='partyUpdateForm'"/>
+		<input type="button" value="리뷰" onclick="location.href='reviewForm'"/>
 	</div>
 	<br />
 	<!-- Party list-->

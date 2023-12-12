@@ -8,10 +8,6 @@
   		insert into account values(account_seq.NEXTVAL,#{name},#{bank},#{acount})
   	</insert>
   	
-  	<insert id="groupInsert" >
-        INSERT INTO partyinfo VALUES(partyseq.NEXTVAL,#{service},#{title},#{peoplecnt},#{userid},#{partyday},#{price},SYSDATE)
-     </insert>
-  	
   	<select id="selectPeoplecntList" resultType="com.web.vo.GroupVO">
   		 <!--  SELECT * FROM partyinfo where userid =#{userid} -->
   		  select * from partyinfo where seq =#{seq}
@@ -34,4 +30,5 @@
   	 <update id="partyUpdate">
   		update partyinfo set service=#{service},title=#{title},peoplecnt=#{peoplecnt},partyday=#{partyday},price=#{price} where seq=#{seq} and userid=#{userid}
   	</update> 
+  	
   </mapper>

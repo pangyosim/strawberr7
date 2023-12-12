@@ -14,8 +14,6 @@ public interface PartyService {
 
 	public GroupVO selectPeoplecntList(int seq);
 
-	public void groupInsert(GroupVO groupVo);
-
 	public int updatePartyKing(String id);
 	
 	// 유저가 만든 파티 정보 가져오기

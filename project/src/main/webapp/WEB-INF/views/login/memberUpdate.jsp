@@ -67,8 +67,7 @@ function userCheck(){
 				<td>이름 :<input type="text" name="name" value="${member.name}" /></td>
 			</tr>
 			<tr>
-				<td>닉네임 :<input type="text" name="nickname"
-					value="${member.nickname}" /></td>
+				<td>닉네임 :<input type="text" name="nickname"value="${member.nickname}" /></td>
 			</tr>
 			<tr>
 				<td>주소 :

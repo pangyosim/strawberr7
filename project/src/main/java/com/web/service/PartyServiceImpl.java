@@ -38,13 +38,7 @@ public class PartyServiceImpl implements PartyService{
 		GroupVO vo = partymapper.selectPeoplecntList(seq);
 		return vo;
 	}
-	
-	@Override
-	@Transactional
-	public void groupInsert(GroupVO groupVo) {
-		// TODO Auto-generated method stub
-		partymapper.groupInsert(groupVo);
-	}
+
 	@Override
 	public int updatePartyKing(String id) {
 		// TODO Auto-generated method stub

@@ -8,5 +8,5 @@ import com.web.vo.GroupVO;
 @Repository
 @Mapper
 public interface GroupMapper {
-//	public void groupInsert(GroupVO groupVO);
+	public void groupInsert(GroupVO groupVO);
 }
