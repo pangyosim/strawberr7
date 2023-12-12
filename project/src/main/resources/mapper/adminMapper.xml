@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+  
+  <mapper namespace="com.web.dao.AdminMapper" >
+
+	<select id="getMemberList" resultType="com.web.vo.MemberVO">
+		select * from member
+	</select>
+  	<update id="memberUpdate">
+  		update member set id=#{id},pw=#{pw},name=#{name},nickname=#{nickname},role=#{role},tel=#{tel},addr=#{addr},birth=#{birth},email=#{email},tier=#{tier} where seq=#{seq}
+  	</update>
+  	<delete id="memberDelete">
+  		delete from member where seq=#{seq}
+  	</delete>
+  
+  	<select id="getPartyList" resultType="com.web.vo.GroupVO">
+		select * from partyinfo
+	</select>
+	<update id="partyUpdate">
+  		update partyinfo set service=#{service},title=#{title},peoplecnt=#{peoplecnt},partyday=#{partyday},price=#{price} where seq=#{seq} and userid=#{userid}
+  	</update>
+  	<delete id="partyDelete">
+  	  	delete from partyinfo where seq=#{seq}  	
+  	</delete>
+  	
+  	<select id="getAccountList" resultType="com.web.vo.PartyMember">
+		select * from account
+	</select>
+	<update id="accountUpdate">
+  		update account set account=#{account}, bank=#{bank}, name=#{name} where seq=#{seq}
+  	</update>
+  	<delete id="accountDelete">
+  	  	delete from account where seq=#{seq}  	
+  	</delete>
+  	
+  	<select id="getPayList" resultType="com.web.vo.PayVO">
+		select * from paytable
+	</select>
+	<update id="PayUpdate">
+  		update paytable set userid=#{userid}, imp_uid=#{imp_uid}, merchant_uid=#{merchant_uid}, result=#{result} where userid=#{userid} and 
+  	</update>
+  	<delete id="PayDelete">
+  	  	delete from paytable where seq=#{seq}  	
+  	</delete>
+  	
+  	
+  </mapper>
+  

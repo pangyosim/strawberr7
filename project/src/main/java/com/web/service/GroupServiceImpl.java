@@ -56,30 +56,4 @@ public class GroupServiceImpl implements GroupService{
 		return groupMapper.JoinList(seq,userid);
 	}
 
-
-
-	
-	
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
-
-	
-
-	
-	
-	
-
-	
-	
-	
-	
-
 }

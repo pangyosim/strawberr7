@@ -13,14 +13,14 @@
 /* 페이지 로딩 10초 후 자동으로 이동 */
     setTimeout(function(){
         window.location.href = '/';
-    }, 10000);
+    }, 3000);
 </script>
 </head>
 <body>
 <c:import url="../main/header.jsp"/>
 <h3>${nickname} 님 환영합니다~</h3>
 <br>
-<p>10초 후 메인으로 이동 됩니다.</p>
+<p>3초 후 메인으로 이동 됩니다.</p>
 
 
 
