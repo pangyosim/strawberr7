@@ -1,7 +1,5 @@
 package com.web.dao;
 
-
-
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -33,7 +31,5 @@ public interface GroupMapper {
 //	GroupVO agetGroup(int seq,String userid);
 	//리스트테스트
 	List<GroupVO> JoinList(int seq,String userid);
-
-	
 	
 }

@@ -17,6 +17,7 @@ public interface MemberDao {
 	
 	// 로그인 
 	public MemberVO loginResult(String id, String pw);
+  
 	//회원수정
 	public MemberVO selectMember(String id);
 

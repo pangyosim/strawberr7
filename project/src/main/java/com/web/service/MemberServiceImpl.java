@@ -39,14 +39,19 @@ public class MemberServiceImpl implements MemberService {
 		return memberdao.loginResult(id, pw);
 	}
 
+
 	@Override
+	public int updateClient(MemberVO vo) {
+	int result =memberdao.updateClient(vo);
+		return result;
 	public MemberVO selectMember(String id) {
 		return memberdao.selectMember(id);
 	}
 
 	@Override
-	public void updateClient(MemberVO vo) {
-		memberdao.updateClient(vo);
+	public String[] updateaddr(String id) {
+		MemberVO membervo = memberdao.updateaddr(id);
+		return membervo.getAddr().split("/");
 	}
 	
 	

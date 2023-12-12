@@ -10,8 +10,8 @@ import com.web.vo.PartyMember;
 import com.web.vo.PayVO;
 
 public interface GroupService {
-	
-	void groupInsert(GroupVO groupVo);
+  
+  public void groupInsert(GroupVO groupVo);
 	
 	//파티수정
 	void groupUpdate(GroupVO groupVo);

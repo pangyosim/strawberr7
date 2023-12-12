@@ -18,6 +18,8 @@
 		<select class="sevice_form" id="service" name="service">
             <option value="youtube">youtube</option>
             <option value="watcha">watcha</option>
+            <option value="coupangplay">coupangplay</option>
+            <option value="laftel">laftel</option>
             <option value="netflix">netflix</option>
             <option value="tving">tving</option>
             <option value="wavve">wavve</option>

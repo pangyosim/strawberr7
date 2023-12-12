@@ -44,12 +44,17 @@ function checkauthority(){
 	if (document.groupjoin.name.value == "") {
 		alert("이름을 입력하세요");
 		document.groupjoin.name.focus();
+		return false;
 	} else if (document.groupjoin.bank.value == "") {
 		alert("은행을 입력하세요");
 		document.groupjoin.bank.focus();
+		return false;
 	} else if (document.groupjoin.acount.value == "") {
 		alert("계좌정보를 입력하세요~");
 		document.groupjoin.acount.focus();
+		return false;
+	} 
+		groupJoinResult.submit();
 	}
 }
 
