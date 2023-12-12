@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,6 +44,7 @@ public class LoginController implements MemberSession {
 	public String register() {
 		return "/login/memberJoinForm";
 	}
+	
 	
 	// 중복 아이디 방지
 	@PostMapping("/idCheck")
@@ -107,8 +107,12 @@ public class LoginController implements MemberSession {
 		
 	    if(memberVO != null) {
 	        session.setAttribute("member", memberVO);
+	       //System.out.println(memberVO.getRole()); // 회원등급 확인
+	        if(memberVO.getRole().equals("ADMIN")) {
+	        	return "/main/admin";
+	        }
 	        session.setAttribute("party", ps.selectPeoplecnt());
-	        return "/main/index";
+          return "/main/index";
 	    }
 	    return "/login/loginForm";
 	}

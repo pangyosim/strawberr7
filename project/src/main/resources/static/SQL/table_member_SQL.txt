@@ -10,7 +10,7 @@ CREATE TABLE member                         -- 테이블 생성
     id      VARCHAR2(30)   NOT NULL,     	-- 회원ID
    	kakaoid VARCHAR2(50),	   					    -- 카카오id
     pw    VARCHAR2(100)    NOT NULL,        -- 회원pw
-    name  VARCHAR2(10)     NOT NULL,        -- 회원이름
+    name  VARCHAR2(20)     NOT NULL,        -- 회원이름
     nickname VARCHAR2(30) NOT NULL,         -- 닉네임
     role    VARCHAR2(50) NOT NULL,          -- 회원권한(user, party, admin) 기본 user
     tel     VARCHAR2(13) NOT NULL,          -- 휴대폰번호
