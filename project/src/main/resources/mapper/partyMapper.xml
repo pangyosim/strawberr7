@@ -4,8 +4,8 @@
   
   <mapper namespace="com.web.dao.PartyMapper" >
 
-  	<insert id="insertbyacount">
-  		insert into account values(account_seq.NEXTVAL,#{name},#{bank},#{acount})
+  	<insert id="insertbyaccount">
+  		insert into account values(account_seq.NEXTVAL,#{name},#{bank},#{account})
   	</insert>
   	
   	<select id="selectPeoplecntList" resultType="com.web.vo.GroupVO">

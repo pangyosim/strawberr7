@@ -1,5 +1,4 @@
 @charset "UTF-8";
-
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
@@ -123,6 +122,27 @@ dd {
   margin-left: 0;
 }
 
+.dropdown{
+  position : relative;
+  display : inline-block;
+}
+
+.dropdown-content{
+  display : none;
+  position : absolute;
+  z-index : 1; /*다른 요소들보다 앞에 배치*/
+}
+
+.dropdown-content a{
+  margin-top: 10px;
+  display : block;
+  color: slateblue;
+  text-decoration: none;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 
 .container,
 .container-fluid,
@@ -6566,7 +6586,7 @@ header.masthead {
   padding-bottom: 6rem;
   text-align: center;
   color: #fff;
-  background-image: url("../assets/img/header-bg.jpg");
+  background-image: url("../assets/img/main_logo.png");
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;

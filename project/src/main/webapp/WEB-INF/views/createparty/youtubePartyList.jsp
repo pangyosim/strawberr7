@@ -20,8 +20,9 @@
 
 <link href="resources/css/styles.css" rel="stylesheet" />
 </head>
-<body style="background-color: white;">
+<body style="background-color: white; margin-top: 150px; display: flex; justify-content: center; align-items: center;">
 	<c:import url="../main/header.jsp" />
+	<form action="youtubePartyselect" method="get" name="youtubePartyselect">
 		<table class="party_table">
 			<thead>
 				<tr>
@@ -44,26 +45,31 @@
 					<tr>
 						<td>${selectPartylist.partydate}</td>
 					</tr>
-
 			</tbody>
 			<tbody>
 				<tr>
-					<th><input type="checkbox" name="no" />1인회선</th>
+					<th>1인회선</th>
 				</tr>
 				<tr>
-					<th><input type="checkbox" name="no" />1인1기기등록</th>
+					<th>1인1기기등록</th>
 				</tr>
 				<tr>
-					<th><input type="checkbox" name="no" />공유금지</th>
+					<th>공유금지</th>
 				</tr>
 				<tr>
-					<th><input type="checkbox" name="no" />개인사정환불불가</th>
+					<th>개인사정환불불가</th>
 				</tr>
 				<tr>
-					<th><input type="checkbox" name="no" />계정양도불가</th>
+					<th>계정양도불가</th>
+				</tr>
+				<tr>
+					<th><input type="checkbox" value="동의" onclick="check()" /> 동의</th>
 				</tr>
 			</tbody>
 		</table>
-		<input type="submit" value="목록" onclick="location.href='../main/index'"/> &nbsp; <input type="submit" value="동의" onclick="location.href='../main/index'"/>
+		
+		<input type="button" value="목록" onclick="location.href='/'" /> &nbsp;
+        <input type="button" onclick="location.href='payinfo?seq=${seq}&session=21'" value="결제"/>
+        </form>
 </body>
 </html>
