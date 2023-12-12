@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import com.web.vo.GroupVO;
 import com.web.vo.MemberVO;
 import com.web.vo.PartyMember;
-import com.web.vo.PaytableVO;
+import com.web.vo.PayVO;
 
 public interface GroupService {
 	

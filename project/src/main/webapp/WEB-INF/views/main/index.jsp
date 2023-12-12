@@ -50,7 +50,7 @@
 					<td>
 						<c:if test="${party.service =='watcha'}">
 							<img
-								src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA0MTBfOTgg%2FMDAxNjE4MDU5OTE1NTM2.AOxOQcKyyzrt_TRrIJZU5nnRhfxAKaXOoiDGLzlu6TEg.QEyFA8tkSHP3szin0jvk6zVmh4PXNs7sawhrPxYylp0g.PNG.sunjoon12%2Fwatcha%25A3%25DFlogo%25A3%25DF1611108610.png&type=sc960_832"
+								src="resources/assets/img/watcha.png"
 								style="width: 200px; height: 200px"
 								onclick="location.href='PartyList?seq=${party.seq}'">
 							<br>[<c:out value="${party.service}" />]<br>
@@ -60,8 +60,18 @@
 						</c:if> 
 						<c:if test="${party.service =='youtube'}">
 							<img
-								src="https://cdn-icons-png.flaticon.com/512/3128/3128307.png"
+								src="resources/assets/img/youtube.png"
 								style="width: 200px; height: 200px"
+								onclick="location.href='PartyList?seq=${party.seq }'">
+							<br>[<c:out value="${party.service}" />]<br>
+							<c:out value="${party.peoplecnt}" />명<br>
+							<c:out value="${party.partyday}" />개월<br>
+							<c:out value="${party.partydate}" />
+						</c:if>
+						<c:if test="${party.service =='netflix'}">
+							<img
+								src="resources/assets/img/netflix.png"
+								style="width: 150px; height: 150px"
 								onclick="location.href='PartyList?seq=${party.seq }'">
 							<br>[<c:out value="${party.service}" />]<br>
 							<c:out value="${party.peoplecnt}" />명<br>

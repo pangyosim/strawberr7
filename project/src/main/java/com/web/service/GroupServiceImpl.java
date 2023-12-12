@@ -1,8 +1,5 @@
 package com.web.service;
 
-
-
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +13,7 @@ import com.web.dao.GroupMapper;
 import com.web.vo.GroupVO;
 import com.web.vo.MemberVO;
 import com.web.vo.PartyMember;
-import com.web.vo.PaytableVO;
+import com.web.vo.PayVO;
 
 @Service
 public class GroupServiceImpl implements GroupService{

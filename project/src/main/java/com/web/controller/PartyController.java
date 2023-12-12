@@ -85,9 +85,11 @@ public class PartyController implements MemberSession {
 	@GetMapping("/PartyList")
 	public String watchaPartyList(Model model, GroupVO vo, HttpSession session) {
 			GroupVO selectPartylist = partyService.selectPeoplecntList(vo.getSeq());
+			System.out.println(selectPartylist.getUserid());
 			MemberVO mv = ms.selectMember(selectPartylist.getUserid());
 			model.addAttribute("selectPartylist", selectPartylist);
 			model.addAttribute("mv", mv);
+			System.out.println(mv);
 			model.addAttribute("seq", vo.getSeq());
 			return "/createparty/PartyList";
 	}
