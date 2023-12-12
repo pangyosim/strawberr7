@@ -54,5 +54,8 @@
 		update partyinfo set peoplecnt=peoplecnt+1 where seq=#{seq}
 	</update>
 	
+	<select id="selectPeoplecnt" resultType="int">
+		select count(*) from paytable where seq=#{seq}
+	</select>
 </mapper>
 

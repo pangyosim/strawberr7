@@ -1,5 +1,7 @@
 package com.web.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,18 +10,27 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.web.service.GroupService;
 import com.web.service.MemberService;
 import com.web.service.PartyService;
+import com.web.service.PayService;
 import com.web.session.MemberSession;
 import com.web.vo.GroupVO;
 import com.web.vo.MemberVO;
 import com.web.vo.PartyMember;
+import com.web.vo.PayVO;
 
 
 @Controller
 public class PartyController implements MemberSession {
 	@Autowired
 	private PartyService partyService;
+	
+	@Autowired
+	private GroupService groupService;
+	
+	@Autowired
+	private PayService payService;
 	
 	@Autowired
 	private MemberService ms;
@@ -83,12 +94,19 @@ public class PartyController implements MemberSession {
 	//와챠
 
 	@GetMapping("/PartyList")
-	public String watchaPartyList(Model model, GroupVO vo, HttpSession session) {
+	public String watchaPartyList(Model model, GroupVO vo, HttpSession session,PayVO payVO) {
+			int count=0;
 			GroupVO selectPartylist = partyService.selectPeoplecntList(vo.getSeq());
+			count = payService.selectPeoplecnt(payVO.getSeq());
 			MemberVO mv = ms.selectMember(selectPartylist.getUserid());
 			model.addAttribute("selectPartylist", selectPartylist);
 			model.addAttribute("mv", mv);
 			model.addAttribute("seq", vo.getSeq());
+			model.addAttribute("PeopleList",count);
+			System.out.println(count);
+//			while(selectPeoplecnt){
+//				
+//			}
 			return "/createparty/PartyList";
 	}
 

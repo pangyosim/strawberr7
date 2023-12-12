@@ -4,7 +4,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <html lang="en">
 <script type="text/javascript">
 	function watchaPartyList() {
@@ -51,7 +50,7 @@
 						<c:if test="${party.service =='watcha'}">
 							<img
 								src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA0MTBfOTgg%2FMDAxNjE4MDU5OTE1NTM2.AOxOQcKyyzrt_TRrIJZU5nnRhfxAKaXOoiDGLzlu6TEg.QEyFA8tkSHP3szin0jvk6zVmh4PXNs7sawhrPxYylp0g.PNG.sunjoon12%2Fwatcha%25A3%25DFlogo%25A3%25DF1611108610.png&type=sc960_832"
-								style="width: 200px; height: 200px"
+								style="width: 100px; height: 100px"
 								onclick="location.href='PartyList?seq=${party.seq}'">
 							<br>[<c:out value="${party.service}" />]<br>
 							<c:out value="${party.peoplecnt}" />명<br>
@@ -61,7 +60,7 @@
 						<c:if test="${party.service =='youtube'}">
 							<img
 								src="https://cdn-icons-png.flaticon.com/512/3128/3128307.png"
-								style="width: 200px; height: 200px"
+								style="width: 100px; height: 100px"
 								onclick="location.href='PartyList?seq=${party.seq }'">
 							<br>[<c:out value="${party.service}" />]<br>
 							<c:out value="${party.peoplecnt}" />명<br>

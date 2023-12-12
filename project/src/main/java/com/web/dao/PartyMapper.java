@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.web.service.PayService;
 import com.web.vo.GroupVO;
 import com.web.vo.PartyMember;
 
@@ -17,5 +18,5 @@ public interface PartyMapper {
 	
 	public void groupInsert(GroupVO groupVO);
 	
-
+	
 }

@@ -6,6 +6,9 @@
 <head>
 <meta charset="EUC-KR">
 <title>groupInsert</title>
+<style type="text/css">
+
+</style>
 <link href="resources/css/styles.css" rel="stylesheet" />
 </head>
 <body align="center">
@@ -22,7 +25,7 @@
             <option value="tving">tving</option>
             <option value="wavve">wavve</option>
         </select>
-        </label><br>
+        </label><br><br>
         <label for="title">파티 제목:</label>
         <input type="text" id="title" name="title" required><br/>
 
@@ -30,7 +33,7 @@
         <input type="number" id="peoplecnt" name="peoplecnt" required><br/>
 
         <label for="userid">파티장 아이디:</label>
-        <input type="text" id="userid" name="userid" required><br/>
+        <input type="text" id="userid" name="userid" value="${member.id }" required><br/>
 
         <label for="partyday">파티 기간:</label>
         <input type="text" id="partyday" name="partyday" required><br/>
