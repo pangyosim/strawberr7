@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.web.vo.Criteria;
 import com.web.vo.ReviewVO;
 
 @Mapper
@@ -22,8 +21,10 @@ public interface ReviewMapper {
 	//페이징
 	
 	/* 게시판 총 개수 */
-	
+	public int getTotal();
 	
 	//유튜브 페이징
-	public List<ReviewVO> getListWithpaging(Criteria cri);
+	public List<ReviewVO> getListWithpaging(int start,int last);
+	
+	public void updateHit(String reviewid);
 }

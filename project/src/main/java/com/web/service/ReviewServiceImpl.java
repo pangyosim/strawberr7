@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.web.dao.ReviewMapper;
-import com.web.vo.Criteria;
 import com.web.vo.MemberVO;
 import com.web.vo.ReviewVO;
 
@@ -29,12 +28,11 @@ public class ReviewServiceImpl implements ReviewService{
 		List<ReviewVO> list = reviewMapper.reviewList(reviewVO);
 		return list;
 	}
-	
-//	페이징
-
+//	내용 조회수 
 	@Override
-	public ReviewVO getReviewByuserId(ReviewVO reviewVO) {
+	public ReviewVO getReviewByuserId(ReviewVO reviewVO,String reviewid) {
 		// TODO Auto-generated method stub
+		reviewMapper.updateHit(reviewid);
 		ReviewVO reviewvo = reviewMapper.getReviewByuserId(reviewVO);
 		return reviewvo;
 	}
@@ -60,9 +58,19 @@ public class ReviewServiceImpl implements ReviewService{
 
 	//페이징
 	@Override
-	public List<ReviewVO> getList(Criteria cri) {
+	public List<ReviewVO> getList(int start,int last) {
 		// TODO Auto-generated method stub
-		return reviewMapper.getListWithpaging(cri);
+		List<ReviewVO> list = new ArrayList<>();
+		list = reviewMapper.getListWithpaging(start,last);
+		System.out.println(list);
+		return list;
+	}
+
+	@Override
+	public int getTotalArticle() {
+		// TODO Auto-generated method stub
+		int total = reviewMapper.getTotal();
+		return total;
 	}
 	
 

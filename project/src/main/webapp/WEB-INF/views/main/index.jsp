@@ -43,9 +43,9 @@
 		<input type="button" value="파티만들기 계좌등록" onclick="location.href='groupJoinForm'" /> &nbsp; &nbsp; 
 		<input type="button" value="파티찾기" onclick="document.getElementById('party-input').focus()" /> <br />
 		<input type="button" value="파티만들기폼" onclick="location.href='groupRegistrationForm'" /> 
-		<input type="button" value="수정" onclick="location.href='memberUpdate'" />
+		<input type="button" value="개인정보수정" onclick="location.href='memberUpdate'" />
 		<input type="button" value="파티수정" onclick="location.href='partyUpdateForm'"/>
-		<input type="button" value="리뷰" onclick="location.href='reviewForm'"/>
+		<input type="button" value="리뷰" onclick="location.href='reviewForm?page=1'"/>
 	</div>
 	<br />
 	<!-- Party list-->

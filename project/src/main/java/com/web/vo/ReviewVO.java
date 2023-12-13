@@ -1,6 +1,7 @@
 package com.web.vo;
 
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 import lombok.Data;
@@ -10,7 +11,7 @@ import lombok.Data;
 //USERID VARCHAR2(20), -- 유저정보 획득용아이디
 //TITLE VARCHAR2(30), -- 리뷰 제목
 //CONTENT VARCHAR2(200), --내용
-//scope NUMBER, -- 별점
+//hit NUMBER DEFAULT 0,-- 조회수
 //WRITEDATE DATE DEFAULT SYSDATE
 //);
 @Data
@@ -21,6 +22,6 @@ public class ReviewVO {
 	private String nickname;
 	private String title;
 	private String content;
-	private int starrating;
-	private LocalDateTime writedate;
+	private int hit;
+	private Date writedate;
 }

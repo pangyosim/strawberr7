@@ -7,25 +7,13 @@
 <meta charset="UTF-8">
 <title>reviewForm</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.4.min.js">
-$(document).ready(function(){
-	 
-	var actionForm = $("#actionForm");
-	
-	$(".page-link").on("click", function() {
-		
-		/* e.preventDefault(); */
-		
-		var targetPage = $(this).attr("href");
-		
-		console.log(targetPage);
-		
-		actionForm.find("input[name='pageNum']").val(targetPage);
-		
-		actionForm.submit(); 
-	});
-});	
+
 </script>
 <style type="text/css">
+*{
+	padding: 0;
+	margin: 0;
+}
 table, th, td {
 	border: 1px solid gray;
 	border-collapse: collapse;
@@ -34,8 +22,10 @@ table, th, td {
 td {
 	text-align: center;
 }
-
-.review_table {
+#board_list{
+	padding: 300px;
+}
+/* .review_table {
 	margin: 0 auto;
 	width: 500px;
 }
@@ -43,96 +33,67 @@ td {
 #wrapper {
 	width: 100px;
 	margin: auto;
+} */
+
+#paging_block{
+	text-align : center;
 }
 
-.pageInfo {
-	list-style: none;
-	display: inline-block;
-	margin: 50px 0 0 100px;
-}
 
-.pageInfo li {
-	float: left;
-	font-size: 20px;
-	margin-left: 18px;
-	padding: 7px;
-	font-weight: 500;
-}
 
-a:link {
-	color: black;
-	text-decoration: none;
-}
-
-a:visited {
-	color: black;
-	text-decoration: none;
-}
-
-a:hover {
-	color: black;
-	text-decoration: underline;
-}
-
-.active {
-	background-color: #cdd5ec;
-}
 </style>
 </head>
 <body >
 
 	<h1>리뷰 목록</h1>
 
-	<div id="wrapper">
-		<c:if test="${member.id}">
+	<div id="wrapper" style="text-align: center;">
 			<button type="button" onclick="location.href='reviewInsert'">새글작성</button>
-		</c:if>
+			<button type="button" onclick="location.href='/'">홈</button>
 	</div>
-	<div>
-		<table class="review_table" >
+	<div id="board_list">
+        <div class="container">
+		<table class="review_table">
+			<thead>
 			<tr>
-				<th>글번호</th>
-				<th>아이디</th>
-				<th>닉네임</th>
-				<th>제목</th>
-				<th>작성일</th>
+				<th scope="col" class="th-num">글번호</th>
+				<th scope="col" class="th-date">닉네임</th>
+				<th scope="col" class="th-title">제목</th>
+				<th scope="col" class="th-date">조회수</th>
+				<th scope="col" class="th-date">작성일</th>
 			</tr>
-
+			</thead>
+			<tbody>
 			<c:forEach var="reviewlist" items="${list}">
 				<tr>
-					<td>${reviewlist.seq}</td>
-					<td>${reviewlist.userid}</td>
-					<td>${reviewlist.nickname}</td>
-					<td><a href="reviewContent?reviewid=${reviewlist.reviewid}">${reviewlist.title}</a></td>
-					<td>${reviewlist.writedate}</td>
+					<td style="width: 100px;">${reviewlist.seq}</td>
+					<td style="width: 150px;">${reviewlist.nickname}</td>
+					<td style="width: 300px;"><a href="reviewContent?reviewid=${reviewlist.reviewid}">${reviewlist.title}</a></td>
+					<td style="width: 150px;">${reviewlist.hit}</td>
+					<td style="width: 150px;">${reviewlist.writedate}</td>
 					<%-- <td>${reviewlist}</td> 조회수는 해야됨 --%>
 				</tr>
 			</c:forEach>
+			 </tbody>		
 		</table>
-		<h2>${pageMaker }</h2>
-		<div class='pull-right'>
-			<ul class="pagination">
-				<c:if test="${pageMaker.prev}">
-					<li class="page-item">
-						<a class="page-link" href="${pageMaker.startPage - 1 }"tabindex="-1">Previous</a>
-					</li>
+		<!-- 페이징 -->
+		<div id="paging_block">
+			<c:if test="${startPage > block }">
+				[ <a href="/reviewForm?page=${startPage-1 }" id="paging"> 이전 </a> ]
+			</c:if>
+			<c:forEach var="i" begin="${startPage }" end="${endPage }" step="1">
+				<c:if test="${i == page }">
+					[ <a href="/reviewForm?page=${i }" id="currentPaging"> ${i } </a> ]
 				</c:if>
-				<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="num">
-					<li class="page-item ${pageMaker.cri.pageNum eq num?"active":""}">
-						<a class="page-link" href="${num }">${num }</a></li>
-				</c:forEach>
-				<c:if test="${pageMaker.next}">
-					<li class="page-item">
-						<a class="page-link" href="${pageMaker.endPage +1 }"tabindex="+1">Next</a>
-					</li>
+				<c:if test="${i != page }">
+					[ <a href="/reviewForm?page=${i }" id="paging"> ${i } </a> ]
 				</c:if>
-			</ul>
+			</c:forEach>
+			<c:if test="${endPage < totalPage }">
+				[ <a href="/reviewForm?page=${endPage+1 }" id="paging"> 다음 </a> ]
+			</c:if>
 		</div>
-		<form id='actionForm' action="review/reviewForm" method='get'>
-			<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum }' />
-			<input type='hidden' name='amount' value='${pageMaker.cri.amount }' />
-		</form>
-
+		</div>
 	</div>
 </body>
 </html>
