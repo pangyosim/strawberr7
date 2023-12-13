@@ -34,8 +34,8 @@
 <body id="page-top">
 <c:import url="header.jsp"/>
    <!-- Masthead-->
-   <header class="masthead" style="width: 100%; height: 550px; margin-top: 90px;">
-  
+   <header class="" style="width: 100%; height: 550px; margin-top: 90px;">
+  		
    </header>
    <!-- Services-->
    <div class="services_wrap">
@@ -86,9 +86,6 @@
 	</div>
 <br/>
 <br/>
-     <!-- Party list-->
-     <section class="page-section bg-light" id="portfolio">
-     </section>
      <!-- Team-->
      <section class="page-section bg-light" id="team">
          <div class="container">

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.web.vo.GroupVO;
 import com.web.vo.MemberVO;
-import com.web.vo.PaytableVO;
+import com.web.vo.PayVO;
 @Repository
 @Mapper
 public interface GroupMapper {

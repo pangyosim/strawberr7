@@ -44,6 +44,8 @@ public class MemberServiceImpl implements MemberService {
 	public int updateClient(MemberVO vo) {
 	int result =memberdao.updateClient(vo);
 		return result;
+	}
+	
 	public MemberVO selectMember(String id) {
 		return memberdao.selectMember(id);
 	}

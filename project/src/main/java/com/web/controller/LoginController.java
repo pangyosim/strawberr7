@@ -1,6 +1,7 @@
 package com.web.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -12,18 +13,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.service.MailService;
 import com.web.service.MemberService;
 import com.web.service.PartyService;
-import com.web.session.MemberSession;
 import com.web.vo.MemberVO;
 
 
@@ -59,20 +58,6 @@ public class LoginController {
 		return "/main/index";
 	}
 
-	// 로그인
-	@PostMapping("loginResult")
-	public String loginResult(@RequestParam("userId") String id, @RequestParam("password") String pw, Model model) {
-		MemberVO memberVO = ms.loginResult(id, pw);
-
-		if (memberVO != null) {
-			model.addAttribute("member", memberVO);
-//	        session.setAttribute("member", memberVO);
-			return "/login/loginResult";
-		}
-		return "redirect:loginNo";
-	}
-
-	
 	
 	// 중복 아이디 방지
 	@PostMapping("/idCheck")
@@ -305,16 +290,5 @@ public class LoginController {
 	    return "redirect:/";
 	}
 	
-	
-}
-
-	// 수정한데이터 저장
-	@RequestMapping(value = "updateClientDate")
-	public String updateClient(MemberVO vo) {
-		System.out.println("정보 : " + vo);
-		int su = ms.updateClient(vo);
-		System.out.println(su);
-		return "/main/index";
-	}
 
 }

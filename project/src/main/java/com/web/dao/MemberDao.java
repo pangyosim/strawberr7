@@ -21,7 +21,7 @@ public interface MemberDao {
 	//회원수정
 	public MemberVO selectMember(String id);
 
-	public void updateClient(MemberVO vo);
+	public int updateClient(MemberVO vo);
 
 	// 카카오로그인 
 	public MemberVO kakaologinResult(String kakaoid);
@@ -37,4 +37,6 @@ public interface MemberDao {
 	public int memberDelete(String email);
 	
 	public void updateRole(String email);
+
+	public MemberVO updateaddr(String id);
 }

@@ -1,9 +1,5 @@
 package com.web.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
 import com.web.service.MemberService;
 import com.web.service.PartyService;
 import com.web.session.MemberSession;
@@ -36,15 +33,12 @@ public class PartyController implements MemberSession {
 
 	@PostMapping("groupJoinResult")
 	public String result(PartyMember partyMember, HttpSession httpSession) {
-		int zu = partyService.groupjoin(partyMember);
+		partyService.groupjoin(partyMember);
 		MemberVO memebvo = (MemberVO) httpSession.getAttribute("member");
 		System.out.println(memebvo.toString());
 		partyService.updatePartyKing(memebvo.getId());
 		System.out.println(memebvo.getId());
 //			memebvo.getRole()=="PARTYKING";
-		if (zu != 0) {
-			return "/createparty/groupRegistrationForm";
-		}
 		return "/createparty/groupJoinForm";
 // 	public String result(PartyMember partyMember, String email) {
 // 		partyService.groupjoin(partyMember);
@@ -55,7 +49,6 @@ public class PartyController implements MemberSession {
 
 //  =================================================================
 
-=======
 //	// 이미지클릭시 해당파티 리스트로 이동
 //	@GetMapping("/youtubePartyList")
 //	public String youtubeParty(Model model, GroupVO vo, HttpSession session) {
@@ -112,7 +105,8 @@ public class PartyController implements MemberSession {
 	@GetMapping("/createparty/partyUpdate")
 	public String partyUpdateF() {
 		return "/createparty/partyUpdate";
-	
+	}
+		
 	
 	
 //	--------------------------------------------------------

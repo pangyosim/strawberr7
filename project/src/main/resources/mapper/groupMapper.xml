@@ -1,43 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
-  <mapper namespace="com.web.dao.GroupMapper">
-  	<insert id="groupInsert" >
-  		INSERT INTO partyinfo VALUES(partyseq.NEXTVAL,#{service},#{title},#{peoplecnt},#{userid},#{partyday},#{price},SYSDATE)
-  	</insert>
-  	
-  	<!-- 파티 수정하기 -->
-  	<select id="getGroupById" resultType="com.web.vo.GroupVO">
-        SELECT * FROM partyinfo WHERE groupId = #{groupId}
-    </select>
-  	
-  	<update id="groupUpdate" parameterType="com.web.vo.GroupVO">
-  		UPDATE partyinfo set
-  		service=#{service},title=#{title},peoplecnt=#{peoplecnt},userid=#{userid},partyday=#{partyday},price=#{price},SYSDATE
-  		WHERE groupid = #{groupid}
-  	</update>
-  	
-  	<!-- 파티게시글 목록 -->
-  	<select id="getGroupList" resultType="com.web.vo.GroupVO">
-  		SELECT * FROM partyinfo
-  	</select>
- 	
- 	<!-- 방장리스트 -->
- 	<select id="MyKingList" resultType="com.web.vo.GroupVO">
- 		SELECT * FROM partyinfo where userid=#{id}
- 	</select>
- 	<!-- 참여리스트 -->
- 	<select id="JoinList" resultType="com.web.vo.GroupVO">
-	 	SELECT * FROM partyinfo
-		WHERE seq IN (SELECT seq FROM paytable WHERE seq=#{seq} AND userid=#{userid})
-	 	
- 		<!-- SELECT * FROM partyinfo WHERE seq IN(
- 		SELECT seq FROM paytable where seq=#{seq} or userid=#{userid}) -->
- 	</select>
-  	
- 	<!-- 리스트테스트 -->
- 	<!-- SELECT * FROM paytable where seq=#{seq} or userid=#{userid} -->
- 	<!-- SELECT * FROM partyinfo
-	WHERE seq IN (SELECT seq FROM paytable WHERE seq = 23 and userid='qwer'); -->
-  </mapper>
-  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.dao.GroupMapper">
+	<insert id="groupInsert"> INSERT INTO partyinfo
+		VALUES(partyseq.NEXTVAL,#{service},#{title},#{peoplecnt},#{userid},#{partyday},#{price},SYSDATE) 
+	</insert>
+	
+</mapper>
