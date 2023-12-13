@@ -26,7 +26,7 @@
 <body >
 <c:import url="header.jsp"/>
    <!-- Masthead-->
-   <div class="" style="width: 70%; height: 80%; margin-top: 100px; margin-left: 13%; border: 1px solid black; border-radius: 15px">
+   <div class="" style="width: 70%; height: 85%; margin-top: 100px; margin-left: 13%; border: 1px solid black; border-radius: 15px">
    		<div style="margin-left: 40%;">
    		<h1>Netfilx Top10</h1>
    		<c:forEach var="netflix" items="${netflix_list}" varStatus="status">
@@ -35,7 +35,9 @@
    			<br>
    		</c:forEach>
    		</div>
+   		<br>
    </div>
+   
    
    <!-- Services-->
    <div class="services_wrap" style="width: 75%; margin-left: 15%; margin-top: 50px;" >
