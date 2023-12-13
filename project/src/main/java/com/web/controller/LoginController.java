@@ -29,12 +29,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.web.service.MailService;
 import com.web.service.MemberService;
 import com.web.service.PartyService;
+import com.web.session.MemberSession;
 import com.web.vo.MemberVO;
 
 
 @Controller
-@SessionAttributes("member")
-public class LoginController {
+public class LoginController implements MemberSession{
 	@Autowired
 	private MailService ma;
 	
@@ -61,7 +61,7 @@ public class LoginController {
 			System.out.println("ID : " + vo.getId() + ", NAME : " + vo.getName() + ", ROLE : " + vo.getRole());
 
 		}
-		return "/main/index";
+		return "forward:/";
 	}
 
 	
@@ -89,7 +89,7 @@ public class LoginController {
 	    MemberVO memberVO = (MemberVO) session.getAttribute("member");
 	    if(memberVO != null && memberVO.getId() != null) {
 	        session.setAttribute("party", ps.selectPeoplecnt());
-	        return "/main/index";
+	        return "forward:/";
 	    } else {
 	        return "/login/memberJoinForm";        
 	    }
@@ -104,7 +104,6 @@ public class LoginController {
 	        MemberVO VO = ms.kakaologinResult(kakaoid);
 	        if(VO != null && VO.getKakaoid() != null) {
 	            session.setAttribute("member", VO);
-	           
 	            return "redirect:checkUser";
 	        } else {
 	            session.setAttribute("kakaoid", kakaoid);
@@ -130,8 +129,7 @@ public class LoginController {
 	        if(memberVO.getRole().equals("ADMIN")) {
 	        	return "/main/admin";
 	        }
-	        session.setAttribute("party", ps.selectPeoplecnt());
-          return "/main/index";
+          return "redirect:/";
 	    }
 	    return "/login/loginForm";
 	}
@@ -147,8 +145,7 @@ public class LoginController {
 	@GetMapping("logout")
 	public String logout(HttpSession session, Model model) {
 		session.invalidate();
-		model.addAttribute("party", ps.selectPeoplecnt());
-		return "/main/index";
+		return "forward:/";
 	}
 
 	// 회원가입
@@ -242,7 +239,6 @@ public class LoginController {
         return "/login/loginForm";
 	}
 	
-}
 
 	// 회원수정
 	@GetMapping("memberUpdateForm")

@@ -16,24 +16,40 @@ import com.web.vo.Top;
 
 @Service
 public class TopService {
-	private static String News_URL = "https://flixpatrol.com/top10/netflix/";
+	private static String Top_URL = "https://flixpatrol.com/top10/netflix/";
 
     @PostConstruct
     public List<Top> getTopDatas() throws IOException {
-        List<Top> newsList = new ArrayList<>();
-        Document document = Jsoup.connect(News_URL).get();
+        List<Top> TopList = new ArrayList<>();
+        Document document = Jsoup.connect(Top_URL).get();
 
-        Elements contents = document.select("div ul.type2 li");
-
-        for (Element content : contents) {
-            Top news = Top.builder()
-                    .image(content.select("a img").attr("abs:src")) // 이미지
-                    .subject(content.select("h4 a").text())		    // 제목
-                    .url(content.select("a").attr("abs:href"))		// 링크
-                    .build();
-            newsList.add(news);
+        Elements contents = document.select("tr");
+        for(Element content : contents) {
+        	Top top = Top.builder()
+        			.image(content.select("img").attr("abs:src"))
+        			.subject(content.select("a").text())
+        			.url(content.select("a").attr("abs:href"))
+        			.build();
+        	TopList.add(top);
         }
-
-        return newsList;
+        return TopList.subList(0, 10);
     }
+    
+//    @PostConstruct
+//    public List<Top> getTopWhacha() throws IOException {
+//        List<Top> TopList = new ArrayList<>();
+//        Document document = Jsoup.connect(Top_URL).get();
+//
+//        Elements contents = document.select("section ul.type2 li");
+//        System.out.println(contents);
+//        for(Element content : contents) {
+//        	Top top = Top.builder()
+//        			.image(content.select("img").attr("abs:src"))
+//        			.subject(content.select("a").text())
+//        			.url(content.select("a").attr("abs:href"))
+//        			.build();
+//        	TopList.add(top);
+//        }
+//        return TopList.subList(0, 3);
+    //}
 }

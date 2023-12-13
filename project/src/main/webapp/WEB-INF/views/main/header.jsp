@@ -75,34 +75,25 @@
                        		<li class="nav-item"><a class="nav-link" href="/" style="color: #CA226B;">홈</a></li>
                         <c:choose>
 	                        <c:when test="${member == null }">
-	                		    <li class="nav-item"><a class="nav-link" href="login" style="color: #CA226B;">로그인</a></li>	                        	
+	                		    <li class="nav-item"><a class="nav-link" href="login" style="color: #CA226B;">로그인</a></li>
+        		    	        <li class="nav-item"><a class="nav-link" href="#" style="color: #CA226B;">About</a></li>	                        	
 	                        </c:when>
 	                        <c:otherwise>
-	                       	    <li class="nav-item"><a class="nav-link" href="createparty?email=${member.email }" style="color: #CA226B;">파티 만들기</a></li>
 	                        	<li class="nav-item"><a class="nav-link" href="logout" style="color: #CA226B;">로그아웃</a></li> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 	                        	<div class="dropdown" style="right: 30px; top: 6.8px;">
 							      <span class="dropbtn" style="color: #CA226B;">마이페이지</span>
 							      <div class="dropdown-content">
 							        <a href="memberUpdateForm">회원수정</a>
 							        <a href="memberDelete">회원탈퇴</a>
+							        <a href="createparty?email=${member.email }">파티만들기</a>
+							        <a href="mygrouplist">파티보기</a>
+							        <a href="groupModify">파티수정</a>
 							        <a href="#">Q&A</a>
 							      </div>
 							    </div> 
 	                       	</c:otherwise>
                         </c:choose>
                         <!-- mypage hidden -->
-                        <ul class="hidden_menu">
-		                        <li class="nav-item">
-		                        <a class="nav-link" href="getmypage"> MYPAGE </a>
-		                        	<ul class="submenu">
-		                        		<li><a href="#">결제내역</a></li>
-		                        		<li><a href="#">정보설정</a></li>
-		                        		<li><a href="groupInsert">파티만들기</a></li>
-		                        		<li><a href="mygrouplist">파티보기</a></li>
-		                        		<li><a href="groupModify">파티수정</a></li>
-		                        	</ul>
-		                        </li>
-	                        </ul>
                     </ul>
                 </div>
             </div>
