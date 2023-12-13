@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,9 +15,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -211,6 +217,33 @@ public class LoginController {
 		return "/login/resultUpdate";
 	}
 	
+	// 아이디 비밀번호 찾기
+	@GetMapping("userSearch")
+	public String userSearch() {
+		return "/login/userSearch";
+	}
+	
+	@RequestMapping(value = "/login/userSearch", method = RequestMethod.POST)
+	@ResponseBody
+	public String userIdSearch(@RequestParam("name") String name,
+								@RequestParam("tel") String tel) {
+		
+		String result = ms.searchId(name, tel);
+		
+		return result;
+	}
+
+	@PostMapping("changePwResult")
+	public String changePwResult(@RequestParam("changePw") String pw, 
+								@RequestParam("umail")String email,
+								Model model) {
+		ms.updatePassword(pw,email);
+        model.addAttribute("successMessage", "비밀번호가 성공적으로 변경되었습니다.");
+        return "/login/loginForm";
+	}
+	
+}
+
 	// 회원수정
 	@GetMapping("memberUpdateForm")
 	public String memberModifyView() {

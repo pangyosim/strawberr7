@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +15,14 @@ import com.web.vo.MemberVO;
 public class MemberServiceImpl implements MemberService {
 	@Autowired
 	MemberDao memberdao;
+	
+	@Autowired
+	private MailService ma;
 
-  @Override
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
+	@Override
 	public List<MemberVO> doMemberList() {
 		return memberdao.doMemberList();
 	}
@@ -89,5 +96,27 @@ public class MemberServiceImpl implements MemberService {
 		return su;
 	}
 		
+	
+	// 아이디 찾기
+	@Override
+	public String searchId(String name, String tel) {
+		
+		memberdao =sqlSession.getMapper(MemberDao.class);
+		
+		String result = "";
+		
+		try {
+			result = memberdao.searchId(name, tel);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	@Override
+	public void updatePassword(String pw, String email) {
+		memberdao.updatePassword(pw,email);
+	}
+	
+	
 	
 }

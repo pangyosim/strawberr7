@@ -45,6 +45,16 @@
         FROM member
         WHERE id = #{id}
     </select>
+    
+    <!-- 아이디 찾기 -->
+	<select id="searchId" resultType="String">
+		SELECT NVL(id, 0) FROM member
+		WHERE name=#{name} AND tel=#{tel}
+	</select>
+	
+	
+	<update id="updatePassword">
+		update member set pw=#{pw} where email=#{email}
     <update id="updateMember">
     	update member set pw=#{pw}, kakaoid=#{kakaoid},nickname=#{nickname},tel=#{tel},addr=#{addr},birth=#{birth} where email=#{email}
     </update>

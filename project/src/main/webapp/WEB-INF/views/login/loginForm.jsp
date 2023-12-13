@@ -142,7 +142,7 @@ body{
 		    <input type="submit" value="로그인" id="login-box"> <br/>
 		 </div>
 	   		<span id="register_tag" onclick="location.href='register'">회원가입</span> &nbsp;
-	   		<span id="find_id" onclick="location.href='findinfo'">아이디 / 비밀번호 찾기</span>
+	   		<span id="find_id" onclick="location.href='userSearch'">아이디 / 비밀번호 찾기</span>
 	  </form>
 	<div>
 		<button id="kakao-login-btn"><img alt="" src="resources/assets/img/kakaologin.png" style="width: 20px; height: 20px;"/>카카오 로그인</button>
