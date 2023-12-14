@@ -12,6 +12,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.web.dao.ReviewMapper;
 import com.web.vo.MemberVO;
@@ -73,7 +74,6 @@ public class ReviewServiceImpl implements ReviewService{
 		return total;
 	}
 	
-
 	
 	
 	

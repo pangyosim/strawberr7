@@ -2,6 +2,8 @@ package com.web.service;
 
 import java.util.List;
 
+import org.springframework.ui.Model;
+
 import com.web.vo.ReviewVO;
 
 public interface ReviewService {
@@ -19,4 +21,5 @@ public interface ReviewService {
 
 	public List<ReviewVO> getList(int start, int last);
 	
+
 }

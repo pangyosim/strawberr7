@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -61,7 +62,8 @@ public class ReviewController {
 	}
 
 	@GetMapping("reviewInsert")
-	public String reviewInsert() {
+	public String reviewInsert(RedirectAttributes ra) {
+		ra.addAttribute("page", 1);
 		return "/review/reviewInsert";
 	}
 
@@ -78,4 +80,6 @@ public class ReviewController {
 		reviewService.deleteReview(reviewVO);
 		return "redirect:reviewForm";
 	}
+	
+	
 }

@@ -24,7 +24,7 @@
 
 	<select id="getListWithpaging" resultType="com.web.vo.ReviewVO">
 		select * from (select tt.* from (select rownum rn, rv.* from review rv
-		order by seq desc) tt where rn <![CDATA[ > #{start} and rn <=]]>#{last})
+		order by seq desc) tt where rn <![CDATA[ >= #{start} and rn <=]]>#{last})
 	</select>
 
 	<!-- 조회수 -->
