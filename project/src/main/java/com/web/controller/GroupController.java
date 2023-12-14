@@ -1,34 +1,23 @@
 package com.web.controller;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.web.service.GroupService;
+import com.web.service.PayService;
 import com.web.vo.GroupVO;
 import com.web.vo.MemberVO;
-import com.web.vo.PartyMember;
-import com.web.vo.PayVO;
-import org.springframework.web.bind.annotation.PostMapping;
 
-import com.web.service.GroupService;
-import com.web.vo.GroupVO;
-
-import oracle.net.aso.m;
 
 
 @SessionAttributes({"member","paytable"})
@@ -36,6 +25,8 @@ import oracle.net.aso.m;
 public class GroupController {
 @Autowired
 private GroupService groupService;
+@Autowired
+private PayService ps;
 
 @GetMapping("groupJoinForm")
 public String groupJoinView() {
@@ -51,11 +42,7 @@ public String groupInsert() {
 @PostMapping("groupOk")
 public String groupInsertpost(GroupVO groupVo) {
   groupService.groupInsert(groupVo);
-
-//		String vv;
-//		vv=groupVo.getPartydate();
-//		System.out.println(vv);
-  return "/main/index";
+  return "redirect:/";
 }
 //=======================================================================
 //파티리스트
@@ -88,15 +75,16 @@ public String KingModify() {
 public String getmypage(Model model,HttpSession session,
             @ModelAttribute("member") MemberVO memberVo) {
 
-//		//참여 joingroup
-//		PartyMember partymember = (PartyMember)session.getAttribute("accout");
-//		if(partymember !=null) {
-//		List<PartyMember> account = groupService.Account(partymember.getSeq());
-//		model.addAttribute("joinlist",account);	
-//		}
+//	//참여 joingroup
+//	PartyMember partymember = (PartyMember)session.getAttribute("accout");
+//	if(partymember !=null) {
+//	List<PartyMember> account = groupService.Account(partymember.getSeq());
+//	model.addAttribute("joinlist",account);	
+//	}
   //방장 Creategroup
   MemberVO memberVO = (MemberVO)session.getAttribute("member");
-  List<GroupVO> mykinglist = groupService.MyKingList(memberVO.getId());
+  System.out.println(memberVO);
+  List<GroupVO> mykinglist = groupService.MyKingList(memberVO.getEmail());
   model.addAttribute("mykinglist",mykinglist);
   //전체 Allgroup
   List<GroupVO> groupList = groupService.getGroupList();

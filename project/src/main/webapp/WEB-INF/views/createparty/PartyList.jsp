@@ -28,30 +28,36 @@
 	
 		<table>
 			<tr>
-				<td colspan="3" style="border-bottom: 1px solid black; width: 700px;">${selectPartylist.title }</td>
+				<td colspan="3" style="border-bottom: 1px solid black; width: 700px;">${selectParty.title }</td>
 			</tr>
 			<tr>
 				<td rowspan="2">
-					<c:if test="${selectPartylist.service eq 'watcha' }">
+					<c:if test="${selectParty.service eq 'watcha' }">
 						<img src="resources/assets/img/watcha.png" width="80" height="100" style="width: 150px;"/>
 					</c:if>
-					<c:if test="${selectPartylist.service eq 'netflix' }">
+					<c:if test="${selectParty.service eq 'netflix' }">
 						<img src="resources/assets/img/netflix.png" width="80" height="100" style="width: 150px;"/>
 					</c:if>
-					<c:if test="${selectPartylist.service eq 'youtube' }">
+					<c:if test="${selectParty.service eq 'youtube' }">
 						<img src="resources/assets/img/youtube.png" width="80" height="100" style="width: 150px;"/>
+					</c:if>
+					<c:if test="${selectParty.service eq 'tving' }">
+						<img src="resources/assets/img/tving.png" width="80" height="100" style="width: 150px;"/>
+					</c:if>
+					<c:if test="${selectParty.service eq 'wavve' }">
+						<img src="resources/assets/img/wavve.png" width="80" height="100" style="width: 150px;"/>
 					</c:if>
 				</td>					
 				<td>
-					<a>${selectPartylist.service}</a>
+					<a>${selectParty.service}</a>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					${selectPartylist.partyday }
+					${selectParty.partydate } ~ ${selectParty.enddate } (${selectParty.partyday } 개월)
 				</td>
 				<td>
-					파티 인원 : ${PeopleList } / ${selectPartylist.peoplecnt }
+					파티 인원 : ${selectParty.peoplecnt } / ${selectParty.peoplecnt_max }
 				</td>
 			</tr>
 			<tr>
@@ -62,7 +68,7 @@
 					${mv. tier } 등급
 				</td>
 				<td>
-					비용 : ${selectPartylist.price } 원
+					비용 : ${selectParty.price / selectParty.peoplecnt_max } 원
 				</td>
 			</tr>
 			<tr>

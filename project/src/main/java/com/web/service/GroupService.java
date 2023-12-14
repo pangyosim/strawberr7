@@ -11,7 +11,7 @@ import com.web.vo.PayVO;
 
 public interface GroupService {
   
-  public void groupInsert(GroupVO groupVo);
+	public void groupInsert(GroupVO groupVo);
 	
 	//파티수정
 	void groupUpdate(GroupVO groupVo);
@@ -19,7 +19,7 @@ public interface GroupService {
 	//파티리스트
 	List<GroupVO> getGroupList();
 	//방장리스트
-	List<GroupVO> MyKingList(String userId);
+	List<GroupVO> MyKingList(String partykingid);
 	//참여리스트
 //	List<PartyMember> Account(int account);
 //==============================================================

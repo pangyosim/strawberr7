@@ -42,10 +42,10 @@
 	   			<c:if test="${vo.service eq 'netflix' }">
 	   				<td><img src="resources/assets/img/netflix.png" width="180" height="100"/></td>
 	   			</c:if>
-	   			<td>${vo.partyday }</td>
-	   			<td>${vo.price }</td>
-	   			<td>${vo.price*0.1 }</td>
-	   			<td>${vo.price*1.1 }</td>
+	   			<td>${vo.partydate }~${vo.enddate } (${vo.partyday }개월)</td>
+	   			<td>${vo.price / vo.peoplecnt_max }</td>
+	   			<td>${(vo.price / vo.peoplecnt_max)*0.1 }</td>
+	   			<td>${(vo.price / vo.peoplecnt_max)*1.1 }</td>
 	   		</tr>
 	   	</table>
 	   	<table>
@@ -65,19 +65,19 @@
 	   			<td>이름</td><td>${mv.name }</td>
 	   		</tr>
 	   		<tr>
-	   			<td>결제 금액</td><td>${vo.price}</td>
+	   			<td>참여 금액</td><td>${vo.price / vo.peoplecnt_max }</td>
 	   		</tr>
 	   		<tr>
-	   			<td>수수료 (10%)</td><td>${vo.price*0.1 }</td>
+	   			<td>수수료 (10%)</td><td>${(vo.price / vo.peoplecnt_max)*0.1 }</td>
 	   		</tr>
 	   		<tr>
-	   			<td>합계</td><td>${vo.price*1.1 }</td>
+	   			<td>합계</td><td>${(vo.price / vo.peoplecnt_max)*1.1 }</td>
 	   		</tr>
 	   	</table>
 	   	<br/>
 	   	<br/>
 	   	<div class="input_area">
-		   	<input type="button" id="pay" value="결 제" onclick="requestPay(${vo.price*1.1},'${vo.service }','${mv.name }','${mv.email }','${mv.tel }','${mv.addr }',${vo.seq},'${mv.id}')" style=" width: 300px; height: 70px; font-size: 20px; "/> &nbsp; &nbsp; &nbsp;
+		   	<input type="button" id="pay" value="결 제" onclick="requestPay(${(vo.price / vo.peoplecnt_max)*1.1 },'${vo.service }','${mv.name }','${mv.email }','${mv.tel }','${mv.addr }',${vo.seq},'${mv.email}')" style=" width: 300px; height: 70px; font-size: 20px; "/> &nbsp; &nbsp; &nbsp;
 		   	<input type="button" id="list" onclick="location.href='/'" value="목 록"  style="width: 300px; height: 70px; font-size: 20px;"/>
 	   	</div>
 	</form>

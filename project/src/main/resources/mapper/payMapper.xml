@@ -39,7 +39,7 @@
 	</resultMap>
 	
 	<select id="doPartyList" resultMap="partyinfo">
-		select * from partyinfo where seq=#{seq}
+		select * from partytable where seq=#{seq}
 	</select>
 	
 	<select id="doMemberList" resultMap="memberinfo">
@@ -51,7 +51,7 @@
 	</insert>
 	
 	<update id="updatepartyinfo">
-		update partyinfo set peoplecnt=peoplecnt+1 where seq=#{seq}
+		update partytable set peoplecnt=peoplecnt+1 where seq=#{seq}
 	</update>
 	
 	<select id="selectPeoplecnt" resultType="int">

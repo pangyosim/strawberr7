@@ -58,39 +58,35 @@
 				<c:if test="${party.peoplecnt < 5 }">
 					<td>
 						<c:if test="${party.service =='watcha'}">
-							<img
-
-								src="resources/assets/img/watcha.png"
+							<img src="resources/assets/img/watcha.png"
 								style="width: 200px; height: 200px"
-
 								onclick="location.href='PartyList?seq=${party.seq}'">
-							<br>[<c:out value="${party.service}" />]<br>
-							<c:out value="${party.peoplecnt}" />명<br>
-							<c:out value="${party.partyday}" />개월<br>
-							<c:out value="${party.partydate}" />
 						</c:if> 
 						<c:if test="${party.service =='youtube'}">
-							<img
-
-								src="resources/assets/img/youtube.png"
+							<img src="resources/assets/img/youtube.png"
 								style="width: 200px; height: 200px"
 
 								onclick="location.href='PartyList?seq=${party.seq }'">
-							<br>[<c:out value="${party.service}" />]<br>
-							<c:out value="${party.peoplecnt}" />명<br>
-							<c:out value="${party.partyday}" />개월<br>
-							<c:out value="${party.partydate}" />
 						</c:if>
 						<c:if test="${party.service =='netflix'}">
-							<img
-								src="resources/assets/img/netflix.png"
+							<img src="resources/assets/img/netflix.png"
 								style="width: 150px; height: 150px"
 								onclick="location.href='PartyList?seq=${party.seq }'">
-							<br>[<c:out value="${party.service}" />]<br>
-							<c:out value="${party.peoplecnt}" />명<br>
-							<c:out value="${party.partyday}" />개월<br>
-							<c:out value="${party.partydate}" />
 						</c:if>
+						<c:if test="${party.service =='wavve'}">
+							<img src="resources/assets/img/wavve.png"
+								style="width: 150px; height: 150px"
+								onclick="location.href='PartyList?seq=${party.seq }'">
+						</c:if>
+						<c:if test="${party.service =='tving'}">
+							<img src="resources/assets/img/tving.png"
+								style="width: 150px; height: 150px"
+								onclick="location.href='PartyList?seq=${party.seq }'">
+						</c:if>
+						<br>[<c:out value="${party.service}" />]<br>
+							<c:out value="${party.peoplecnt}" />명<br>
+							<c:out value="${party.partydate}~${party.enddate}"/><br>
+							<c:out value="${party.partyday}" />개월
 					</td>
 				</c:if>
 			</c:forEach>

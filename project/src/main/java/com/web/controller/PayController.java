@@ -45,7 +45,7 @@ public class PayController {
 	@ResponseBody
 	public Map<String,Object> gethook(@RequestBody Map<String,Object> param,
 									  @RequestParam int seq,
-									  @RequestParam String userid,
+									  @RequestParam String email,
 									  @RequestParam int price) {
 		PayVO pv = new PayVO();
 		pv.setImp_uid((String)param.get("imp_uid"));
@@ -53,7 +53,7 @@ public class PayController {
 		pv.setResult((String) param.get("status"));
 		pv.setSeq(seq);
 		pv.setPrice(price);
-		pv.setUserid(userid);
+		pv.setUserid(email);
 		ps.insertPayList(pv);
 		GroupVO gv = ps.doPartyList(seq);
 		ps.updatepartyinfo(gv);
