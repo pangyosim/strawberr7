@@ -12,37 +12,50 @@
 <meta name="author" content="" />
 <title>MAIN</title>
 <!-- 페이징 -->
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	  <!-- Link Swiper's CSS -->
-	  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-	  <!-- Demo styles -->
-	  <style>
-	    .swiper-wrapper{
-	    height:40%;
-	    }
-		.swiper{
-		
-		}
-		element.style{
-		margin-right: 0px;
-		}
-	    .swiper-slide {
-	      font-size: 12px;
-	      background: #fff;
-	    }
-	    
-	    @media (max-width: 100px) {
-	      .swiper-button-next {
-	        transform: rotate(90deg);
-	      }
+	<style type="text/css">
+    #slider-container {
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    #slider-content {
+        display: inline-block;
+        transition: transform 0.5s ease;
+    }
+
+    .slide {
+	width: 150px; 
+	height: 300px;
+	margin-right: 10px;
+	display: inline-block;
+	background-color: white;
+	text-align: center;
+	line-height: 10px;
+    }
+    .slider-button {
+        margin-top:10px;
+        position: absolute;
+        top: 40%;
+        transform: translateY(-50%);
+        font-size: 18px;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        background-color: #87CEFA;
+        border-radius: 25px; /* 둥근 모양을 위해 추가한 속성 */
+    }
+
+	#prev-button {
+	    left: 10px;
+	}
 	
-	      .swiper-button-prev {
-	        transform: rotate(90deg);
-	      }
-	    }
-	    
-	  </style>
-<!-- 페이징 -->
+	#next-button {
+	    right: 10px;
+	}
+	</style>
+	<!-- 페이징 -->
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 <!-- Font Awesome icons (free version)-->
@@ -86,68 +99,67 @@
    <div class="services_wrap" style="width: 75%; margin-left: 15%; margin-top: 50px;" >
     <div class="services_div" style="">
    	<h2>최근 만들어진 파티</h2>
-	<!-- <input type="button" value="파티만들기 계좌등록" onclick="location.href='groupJoinForm'"/> &nbsp; &nbsp; <input type="button" value="파티찾기" onclick="document.getElementById('party-input').focus()"/> -->
-	<!-- Swiper -->
-	  <div class="swiper">
-					<div class="swiper-wrapper">
-						<table border="1">
-							<tbody>
-								<c:forEach var="group" items="${party}">
-									<div class="swiper-slide">
-										<div class="box">
-											<c:choose>
-												<c:when test="${group.service eq 'watcha'}">
-												<img
-									               src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA0MTBfOTgg%2FMDAxNjE4MDU5OTE1NTM2.AOxOQcKyyzrt_TRrIJZU5nnRhfxAKaXOoiDGLzlu6TEg.QEyFA8tkSHP3szin0jvk6zVmh4PXNs7sawhrPxYylp0g.PNG.sunjoon12%2Fwatcha%25A3%25DFlogo%25A3%25DF1611108610.png&type=sc960_832"
-									               style="width: 80px; height: 80px"
-									               onclick="location.href80px='PartyList?seq=${group.seq}'"
-									               />
-									            <P> [${group.service}]</P>
-												<p> ${group.peoplecnt}명</p>
-												<p> ${group.partyday} 개월</p>
-												<p> ${group.partydate}</p>
-												</c:when>
-												<c:when test="${group.service eq 'youtube'}">
-												<img
-									               src="https://cdn-icons-png.flaticon.com/512/3128/3128307.png"
-									               style="width: 80px; height: 80px"
-									               onclick="location.href='PartyList?seq=${group.seq}'"/>
-												<P> [${group.service}]</P>
-												<p> ${group.peoplecnt}명</p>
-												<p> ${group.partyday} 개월</p>
-												<p> ${group.partydate}</p>
-												</c:when>
-												<c:when test="${group.service eq 'netflix'}">
-												<img
-									               src="https://cdn.eyesmag.com/content/uploads/posts/2021/12/10/Netflix-launches-website-Tudum-main-765db0bf-51ce-45c0-8a30-e49bd0e6af47.jpg"
-									               style="width: 80px; height: 80px"
-									               onclick="location.href='PartyList?seq=${group.seq}'"/>
-												<P> [${group.service}]</P>
-												<p> ${group.peoplecnt}명</p>
-												<p> ${group.partyday} 개월</p>
-												<p> ${group.partydate}</p>
-												</c:when>
-												<c:otherwise>
-												<img
-									               src="https://developer.apple.com/wwdc23/hero/endframes/p3-startframe-large_2x.jpg"
-									               style="width: 80px; height: 80px"
-									               onclick="location.href='PartyList?seq=${group.seq}'"/>
-												<P> [${group.service}]</P>
-												<p> ${group.peoplecnt}명</p>
-												<p> ${group.partyday} 개월</p>
-												<p> ${group.partydate}</p>
-												
-												</c:otherwise>
-											</c:choose>
-										</div>
-									</div>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
-				<div class="swiper-button-next" style="margin-right: 100px"></div>
-			   	<div class="swiper-button-prev"></div>
-			</div>												
+<!-- <input type="button" value="파티만들기 계좌등록" onclick="location.href='groupJoinForm'"/> &nbsp; &nbsp; <input type="button" value="파티찾기" onclick="document.getElementById('party-input').focus()"/> -->
+		<!-- 페이징 -->
+		<div id="slider-container">
+			<div id="slider-content">
+				<table border="1">
+					<tbody>
+						<c:forEach var="group" items="${party}">
+							<div class="slide">
+								<c:choose>
+									<c:when test="${group.service eq 'watcha'}">
+										<img
+											src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA0MTBfOTgg%2FMDAxNjE4MDU5OTE1NTM2.AOxOQcKyyzrt_TRrIJZU5nnRhfxAKaXOoiDGLzlu6TEg.QEyFA8tkSHP3szin0jvk6zVmh4PXNs7sawhrPxYylp0g.PNG.sunjoon12%2Fwatcha%25A3%25DFlogo%25A3%25DF1611108610.png&type=sc960_832"
+											style="width: 80px; height: 80px"
+											onclick="location.href='PartyList?seq=${group.seq}'" />
+										<P>[${group.service}]</P>
+										<p>${group.peoplecnt}명</p>
+										<p>${group.partyday}개월</p>
+										<p>${group.partydate}</p>
+									</c:when>
+									<c:when test="${group.service eq 'youtube'}">
+										<img
+											src="https://cdn-icons-png.flaticon.com/512/3128/3128307.png"
+											style="width: 80px; height: 80px"
+											onclick="location.href='PartyList?seq=${group.seq}'" />
+										<P>[${group.service}]</P>
+										<p>${group.peoplecnt}명</p>
+										<p>${group.partyday}개월</p>
+										<p>${group.partydate}</p>
+									</c:when>
+									<c:when test="${group.service eq 'netflix'}">
+										<img
+											src="https://cdn.eyesmag.com/content/uploads/posts/2021/12/10/Netflix-launches-website-Tudum-main-765db0bf-51ce-45c0-8a30-e49bd0e6af47.jpg"
+											style="width: 80px; height: 80px"
+											onclick="location.href='PartyList?seq=${group.seq}'" />
+										<P>[${group.service}]</P>
+										<p>${group.peoplecnt}명</p>
+										<p>${group.partyday}개월</p>
+										<p>${group.partydate}</p>
+									</c:when>
+									<c:otherwise>
+										<img
+											src="https://developer.apple.com/wwdc23/hero/endframes/p3-startframe-large_2x.jpg"
+											style="width: 80px; height: 80px"
+											onclick="location.href='PartyList?seq=${group.seq}'" />
+										<P>[${group.service}]</P>
+										<p>${group.peoplecnt}명</p>
+										<p>${group.partyday}개월</p>
+										<p>${group.partydate}</p>
+
+									</c:otherwise>
+								</c:choose>
+							</div>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<button id="prev-button" class="slider-button" onclick="slidePrev()">&#60;</button>
+		<button id="next-button" class="slider-button" onclick="slideNext()">&#62;</button>
+
+		<!-- 페이징 -->
 		<!-- 파티리스트 -->
 	<%-- <table >
 		<tr>
@@ -285,32 +297,35 @@
 	}
 </script>
 <!-- 페이징 -->
-<!-- Swiper JS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    var sliderContent = document.getElementById('slider-content');
+    var slideWidth = document.querySelector('.slide').offsetWidth;
+    var currentIndex = 0;
 
-  <!-- Initialize Swiper -->
-  <script>
-    var swiper = new Swiper('.swiper', {
-      slidesPerView: 10,
-      direction: getDirection(),
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      on: {
-        resize: function () {
-          swiper.changeDirection(getDirection());
-        },
-      },
-    });
-
-    function getDirection() {
-      var windowWidth = window.innerWidth;
-      var direction = window.innerWidth <= 760 ? 'vertical' : 'horizontal';
-
-      return direction;
+    function slideNext() {
+        currentIndex = (currentIndex + 3) % sliderContent.children.length;
+        updateSlider();
     }
-  </script>
+
+    function slidePrev() {
+        currentIndex = (currentIndex - 5 + sliderContent.children.length) % sliderContent.children.length;
+        updateSlider();
+    }
+
+    function updateSlider() {
+        var transformValue = -1 * currentIndex * slideWidth + 'px';
+        sliderContent.style.transform = 'translateX(' + transformValue + ')';
+    }
+    function startAutoSlide() {
+        intervalId = setInterval(slideNext, 5000);//5초
+    }
+
+    function stopAutoSlide() {
+        clearInterval(intervalId);
+    }
+
+    startAutoSlide();
+</script>
  <!-- 페이징 -->
 
 </html>
