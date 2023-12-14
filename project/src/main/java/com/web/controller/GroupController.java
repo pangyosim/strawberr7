@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.web.service.GroupService;
+import com.web.service.PartyService;
 import com.web.service.PayService;
 import com.web.vo.GroupVO;
 import com.web.vo.MemberVO;
+import com.web.vo.PayVO;
 
 
 
@@ -83,12 +85,17 @@ public String getmypage(Model model,HttpSession session,
 //	}
   //방장 Creategroup
   MemberVO memberVO = (MemberVO)session.getAttribute("member");
-  System.out.println(memberVO);
   List<GroupVO> mykinglist = groupService.MyKingList(memberVO.getEmail());
   model.addAttribute("mykinglist",mykinglist);
   //전체 Allgroup
   List<GroupVO> groupList = groupService.getGroupList();
   model.addAttribute("groupList",groupList);
+  // 참여 joingroup
+  PayVO pv = new PayVO();
+  pv.setUserid(memberVO.getEmail());
+  PayVO pv_res = ps.getuserpaidparty(pv);
+  List<GroupVO> joinList = groupService.JoinList(pv_res.getSeq());
+  model.addAttribute("joinList",joinList);
   return "/createparty/getmypage";
 }
 //방장리스트
@@ -110,23 +117,23 @@ public String MyKingList(Model model, HttpSession session) {
 //=======================================================================
 //테스트리스트
 //리스트 이미지
-
-@GetMapping("listtest")
-public String listtest(Model model,HttpSession session,
-            @Param("pseq")Integer pseq,@Param("userid") String userid){
-  //전체 Allgroup
-  List<GroupVO> groupList = groupService.getGroupList();
-  model.addAttribute("groupList",groupList);
-//		
-//		//참여파티 불러오기
-  MemberVO memberVO = (MemberVO)session.getAttribute("member");
-  int seq = memberVO.getSeq();
-  String id = memberVO.getId();
-  model.addAttribute("joinlist", groupService.JoinList(seq,id));
-
-
-  return"/createparty/listtest";
-}
+//
+//@GetMapping("listtest")
+//public String listtest(Model model,HttpSession session,
+//            @Param("pseq")Integer pseq,@Param("userid") String userid){
+//  //전체 Allgroup
+//  List<GroupVO> groupList = groupService.getGroupList();
+//  model.addAttribute("groupList",groupList);
+////		
+////		//참여파티 불러오기
+//  MemberVO memberVO = (MemberVO)session.getAttribute("member");
+//  int seq = memberVO.getSeq();
+//  String id = memberVO.getId();
+//  model.addAttribute("joinlist", groupService.JoinList(seq,id));
+//
+//
+//  return"/createparty/listtest";
+//}
 
 
 //	@Autowired

@@ -30,6 +30,6 @@ public interface GroupMapper {
 	//참여리스트
 //	GroupVO agetGroup(int seq,String userid);
 	//리스트테스트
-	List<GroupVO> JoinList(int seq, String userid);
+	List<GroupVO> JoinList(int seq);
 	
 }

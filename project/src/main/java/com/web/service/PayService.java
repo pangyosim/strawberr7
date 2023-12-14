@@ -13,4 +13,5 @@ public interface PayService {
 	void insertPayList(PayVO pv);
 	void updatepartyinfo(GroupVO gv);
 	int selectPeoplecnt(int seq);
+	PayVO getuserpaidparty(PayVO pv);
 }

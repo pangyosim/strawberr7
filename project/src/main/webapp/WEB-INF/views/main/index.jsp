@@ -55,7 +55,7 @@
 	<table >
 		<tr>
 			<c:forEach var="party" items="${party }" varStatus="status">
-				<c:if test="${party.peoplecnt < 5 }">
+				<c:if test="${party.peoplecnt < party.peoplecnt_max }">
 					<td>
 						<c:if test="${party.service =='watcha'}">
 							<img src="resources/assets/img/watcha.png"

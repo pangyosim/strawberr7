@@ -28,8 +28,7 @@
  	</select>
  	<!-- 참여리스트 -->
  	<select id="JoinList" resultType="com.web.vo.GroupVO">
-	 	SELECT * FROM paytable
-		WHERE seq IN (SELECT seq FROM paytable WHERE seq=#{seq} AND userid=#{userid})
+	 	SELECT * FROM partytable WHERE seq=#{seq}
 	 	
  		<!-- SELECT * FROM partyinfo WHERE seq IN(
  		SELECT seq FROM paytable where seq=#{seq} or userid=#{userid}) -->

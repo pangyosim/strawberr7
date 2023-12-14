@@ -40,7 +40,13 @@
 	   				<td><img src="resources/assets/img/youtube.png" width="120" height="100"/></td>
 	   			</c:if>
 	   			<c:if test="${vo.service eq 'netflix' }">
-	   				<td><img src="resources/assets/img/netflix.png" width="180" height="100"/></td>
+	   				<td><img src="resources/assets/img/netflix.png" width="100" height="100"/></td>
+	   			</c:if>
+	   			<c:if test="${vo.service eq 'tving' }">
+	   				<td><img src="resources/assets/img/tving.png" width="100" height="100"/></td>
+	   			</c:if>
+	   			<c:if test="${vo.service eq 'wavve' }">
+	   				<td><img src="resources/assets/img/wavve.png" width="100" height="100"/></td>
 	   			</c:if>
 	   			<td>${vo.partydate }~${vo.enddate } (${vo.partyday }개월)</td>
 	   			<td>${vo.price / vo.peoplecnt_max }</td>
@@ -55,11 +61,12 @@
 	   		<tr>
 	   			<td>아이디</td><td>${mv.id }</td>
 	   			<td rowspan="5">
-	   					<img src="resources/assets/img/tosspay.png" width="120" height="50"/> &nbsp; <input type="radio" name="pg" value="tosspayments" checked/> <label>toss</label><br/>
+	   					<img src="resources/assets/img/tosspay.png" width="100" height="50"/> &nbsp; <input type="radio" name="pg" value="tosspayments" checked/> <label>toss</label><br/>
 	   					<img src="resources/assets/img/kakaopay.png" width="100" height="50"/> &nbsp; <input type="radio" name="pg" value="kakaopay"/> <label>kakao</label><br/>
-	   					&nbsp; <img src="resources/assets/img/payco.png" width="100" height="50"/> &nbsp; <input type="radio" name="pg" value="payco"/> <label>payco</label><br/>
-	   					&nbsp; <img src="resources/assets/img/account_img.png" width="100" height="100"/> &nbsp; <input type="radio" name="pg" value="account"/> <label>계좌이체</label>
-	   			</td>
+	   					<img src="resources/assets/img/payco.png" width="100" height="50"/> &nbsp; <input type="radio" name="pg" value="payco"/> <label>payco</label><br/>
+	   					
+<!-- 	   					&nbsp; <img src="resources/assets/img/account_img.png" width="100" height="100"/> &nbsp; <input type="radio" name="pg" value="account"/> <label>계좌이체</label>
+ -->	   			</td>
 	   		</tr>
 	   		<tr>
 	   			<td>이름</td><td>${mv.name }</td>

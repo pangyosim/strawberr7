@@ -17,6 +17,6 @@ public interface PayDao {
 	public MemberVO doMemberList(int session);
 	public void insertPayList(PayVO pv);
 	public void updatepartyinfo(GroupVO gv);
-	
 	public int selectPeoplecnt(int seq);
+	public PayVO getuserpaidparty(PayVO pv);
 }

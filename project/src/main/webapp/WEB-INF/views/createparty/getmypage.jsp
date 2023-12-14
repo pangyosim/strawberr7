@@ -67,7 +67,7 @@
         .party-box {
             width: 100%;
             max-width: 400px;
-            height: 370px;
+            height: 495px;
             margin-top: 20px;
         }
         .party-nav {
@@ -146,7 +146,7 @@
 		    display: flex;
 		    transition-property: transform;
 		    transition-timing-function: var(--swiper-wrapper-transition-timing-function,initial);
-		    box-sizing: content-box
+		    box-sizing: content-box;
 		}
 		.ara{
 		text-align: left;
@@ -167,7 +167,7 @@
     <div class="bottom">
     	<div>아이디</div><nav>${member.id}</nav>
         
-        <div>회원등급</div><nav>${member.role}</nav>
+        <div>회원등급</div><nav>${member.tier}등급</nav>
         <div>이름</div>	<nav>${member.name}</nav>
         <div>이메일</div>	<nav>${member.email}</nav>
         <div>닉네임</div>	<nav>${member.nickname}</nav>
@@ -194,7 +194,7 @@
 						<div class="swiper-wrapper">
 							<table border="1">
 								<tbody>
-									<c:forEach var="group" items="${joinlist}">
+									<c:forEach var="group" items="${joinList}">
 									<div class="swiper-slide">
 									<div class="box">
 									<!--  -->
@@ -233,7 +233,7 @@
 										<p> ${group.service}</p>
 										<p> ${group.peoplecnt} 명</p>
 										<p> ${group.partyday} 개월</p>
-										<p> ${group.partydate}</p>
+										<p> ${group.partydate}~ ${group.enddate }</p>
 									<!--  -->
 									</div>
 									</div>
@@ -291,7 +291,7 @@
 										<p> ${group.service}</p>
 										<p> ${group.peoplecnt} 명</p>
 										<p> ${group.partyday} 개월</p>
-										<p> ${group.partydate}</p>
+										<p> ${group.partydate}~ ${group.enddate }</p>
 									</div>
 									</div>
 									</c:forEach>
@@ -308,11 +308,9 @@
 						<div class="swiper-wrapper">
 							<table border="1">
 								<tbody>
-									<c:forEach var="group" items="${mykinglist}">
+									<c:forEach var="group" items="${groupList}">
 									<div class="swiper-slide">
 									<div class="box">
-									<img src="https://e7.pngegg.com/pngimages/55/143/png-clipart-crown-crown.png"
-										style="width:50px; padding-left: 10px;"/>
 										<c:choose>
 											<c:when test="${group.service eq 'watcha'}">
 											<img
@@ -348,7 +346,7 @@
 										<p> ${group.service}</p>
 										<p> ${group.peoplecnt} 명</p>
 										<p> ${group.partyday} 개월</p>
-										<p> ${group.partydate}</p>
+										<p> ${group.partydate}~ ${group.enddate }</p>
 									</div>
 									</div>
 									</c:forEach>

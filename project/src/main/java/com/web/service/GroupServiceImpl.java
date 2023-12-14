@@ -48,8 +48,8 @@ public class GroupServiceImpl implements GroupService{
 //	}
 	//리스트테스트
 	@Override
-	public List<GroupVO> JoinList(int seq,String userid) {
-		return groupMapper.JoinList(seq,userid);
+	public List<GroupVO> JoinList(int seq) {
+		return groupMapper.JoinList(seq);
 	}
 
 }

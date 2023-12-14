@@ -31,7 +31,15 @@ public class PayController {
 	public String payinfo(Model model, int seq, HttpSession session) {
 		
         if(session.getAttribute("member") != null) {
-			MemberVO mv = (MemberVO) session.getAttribute("member");
+        	// 이미 참여중인 파티 index로 보내기
+    		MemberVO mv = (MemberVO) session.getAttribute("member");
+    		GroupVO gv = ps.doPartyList(seq);
+    		PayVO pv = new PayVO();
+    		pv.setUserid(mv.getEmail());
+    		PayVO pv_res = ps.getuserpaidparty(pv);
+    		if(gv.getSeq() == pv_res.getSeq()) {
+    			return "redirect:/";
+    		}
 			GroupVO vo = ps.doPartyList(seq);
 			model.addAttribute("vo",vo);
 			System.out.println(vo);

@@ -25,7 +25,7 @@ public interface GroupService {
 //==============================================================
 	
 //	//리스트테스트
-	List<GroupVO> JoinList(int seq,String userid);
+	List<GroupVO> JoinList(int seq);
 //	
 
 	

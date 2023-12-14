@@ -9,10 +9,13 @@
 		<result property="service" column="service"/>
 		<result property="title" column="title"/>
 		<result property="peoplecnt" column="peoplecnt"/>
+		<result property="peoplecnt_max" column="peoplecnt_max"/>
 		<result property="userid" column="userid"/>
+		<result property="partykingid" column="partykingid"/>
 		<result property="partyday" column="partyday"/>
 		<result property="price" column="price"/>
 		<result property="partydate" column="partydate"/> 
+		<result property="enddate" column="enddate"/>
 	</resultMap>
 	<resultMap type="com.web.vo.MemberVO" id="memberinfo">
 		<id property="seq" column="seq"/>
@@ -57,5 +60,9 @@
 	<select id="selectPeoplecnt" resultType="int">
 		select count(*) from paytable where seq=#{seq}
 	</select>
+	<select id="getuserpaidparty" resultType="com.web.vo.PayVO">
+		select * from paytable where userid=#{userid} and result='paid'
+	</select>
+	
 </mapper>
 
