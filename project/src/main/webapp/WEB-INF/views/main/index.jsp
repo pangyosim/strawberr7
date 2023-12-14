@@ -26,8 +26,10 @@
 <body >
 <c:import url="header.jsp"/>
    <!-- Masthead-->
-   <div class="" style="width: 70%; height: 150%; margin-top: 100px; margin-left: 13%; border: 1px solid black; border-radius: 15px">
-   		<div class="netflix-top" style="margin-left: 40%;">
+   <!-- 메인 이미지  -->
+   <div id="visual" class="" style="width: 50%; height: 100%; margin-top: 100px; margin-left: 13%; border: 1px solid black; border-radius: 15px">
+   	<div id="pic">
+   		<div class="netflix-top" style="margin-left: 20%;">
    		<h1>Netfilx Top10</h1>
 	   		<c:forEach var="netflix" items="${netflix_list}" varStatus="status">
 	   			<img src="${netflix.image}" style="width: 50px; height: 50px;">  			
@@ -35,7 +37,7 @@
 	   			<br>
 	   		</c:forEach>
    		</div>
-   		<div class="watcha-top" style="margin-left: 40%;">
+   		<div class="watcha-top" style="margin-left: 20%;">
    		<h1>Whacha Top10</h1>
    			<c:forEach var="whacha" items="${whacha_list}" varStatus="status">
    			<img src="${whacha.image}" style="width: 50px; height: 50px;">  			
@@ -44,6 +46,7 @@
    			</c:forEach>
    		</div>
    		<br>
+   	</div>
    </div>
    
    
@@ -135,5 +138,57 @@
 				}
 				
 				</script>
-    
+<!-- 메인리스트슬라이드 자바스크립트 -->
+<script type="text/javascript">
+	var slideIndex = 0;
+	var slideInterval = 7000; //7cho
+	var intervalId;
+
+	function showSlides() {
+		var i;
+		var slides = document.getElementById("pic").getElementsByTagName("div");
+		var dots = document.getElementById("control").getElementsByTagName("a");
+
+		for (i = 0; i < slides.length; i++) {
+			slides[i].style.display = "none";
+			dots[i].className = dots[i].className.replace(" on", "");
+		}
+
+		slideIndex++;
+
+		if (slideIndex > slides.length) {
+			slideIndex = 1;
+		}
+
+		slides[slideIndex - 1].style.display = "block";
+		dots[slideIndex - 1].className += " on";
+	}
+
+	function currentSlide(n) {
+		clearInterval(intervalId); 
+		slideIndex = n - 1;
+		showSlides();
+		intervalId = setInterval(showSlides, slideInterval); 
+	}
+	// 페이지 로드 시 슬라이드 시작
+	window.onload = function() {
+		intervalId = setInterval(showSlides, slideInterval);
+	};
+
+	//로고글씨들
+	function showText(platform) {
+		var textElement = document.getElementById(platform.toLowerCase()
+				+ 'Text');
+		textElement.style.display = 'inline';
+	}
+
+	function hideText() {
+		var textElements = document.querySelectorAll('#control span');
+		textElements.forEach(function(element) {
+			element.style.display = 'none';
+		});
+
+	}
+</script>
+
 </html>

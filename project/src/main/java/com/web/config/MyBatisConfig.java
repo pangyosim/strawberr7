@@ -21,7 +21,7 @@ public class MyBatisConfig {
 	
 	@Value("${mybatis.mapper-locations}")
 	String mPath;
-	
+
 	@Bean(name="dataSource")
 	@ConfigurationProperties(prefix="spring.datasource")
 	public DataSource DataSource() {
