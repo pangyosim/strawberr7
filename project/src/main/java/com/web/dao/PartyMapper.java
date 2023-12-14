@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.web.service.PayService;
 import com.web.vo.GroupVO;
 import com.web.vo.MemberVO;
 import com.web.vo.PartyMember;
@@ -22,4 +23,5 @@ public interface PartyMapper {
 	public List<GroupVO> Findid(String userid);
 	//내파티 수정하기
 	public int partyUpdate(GroupVO groupVO);
+
 }

@@ -1,5 +1,7 @@
 package com.web.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -15,4 +17,6 @@ public interface PayDao {
 	public MemberVO doMemberList(int session);
 	public void insertPayList(PayVO pv);
 	public void updatepartyinfo(GroupVO gv);
+	
+	public int selectPeoplecnt(int seq);
 }

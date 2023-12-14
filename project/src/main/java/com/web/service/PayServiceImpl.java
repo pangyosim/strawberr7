@@ -1,5 +1,7 @@
 package com.web.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +34,12 @@ public class PayServiceImpl implements PayService {
 	@Override
 	public void updatepartyinfo(GroupVO gv) {
 		paydao.updatepartyinfo(gv);
+	}
+
+	@Override
+	public int selectPeoplecnt(int seq) {
+		// TODO Auto-generated method stub
+		return paydao.selectPeoplecnt(seq);
 	}
 	
 	

@@ -51,7 +51,7 @@
 					${selectPartylist.partyday }
 				</td>
 				<td>
-					파티 인원 : ${selectPartylist.peoplecnt }
+					파티 인원 : ${PeopleList } / ${selectPartylist.peoplecnt }
 				</td>
 			</tr>
 			<tr>

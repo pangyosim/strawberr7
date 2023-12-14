@@ -59,8 +59,10 @@
 					<td>
 						<c:if test="${party.service =='watcha'}">
 							<img
+
 								src="resources/assets/img/watcha.png"
 								style="width: 200px; height: 200px"
+
 								onclick="location.href='PartyList?seq=${party.seq}'">
 							<br>[<c:out value="${party.service}" />]<br>
 							<c:out value="${party.peoplecnt}" />명<br>
@@ -69,8 +71,10 @@
 						</c:if> 
 						<c:if test="${party.service =='youtube'}">
 							<img
+
 								src="resources/assets/img/youtube.png"
 								style="width: 200px; height: 200px"
+
 								onclick="location.href='PartyList?seq=${party.seq }'">
 							<br>[<c:out value="${party.service}" />]<br>
 							<c:out value="${party.peoplecnt}" />명<br>
