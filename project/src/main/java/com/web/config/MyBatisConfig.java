@@ -39,4 +39,5 @@ public class MyBatisConfig {
 	public SqlSessionTemplate SqlSessionTemplate(@Qualifier("SqlSessionFactory") SqlSessionFactory firestSqlSessionFactory) {
 		return new SqlSessionTemplate(firestSqlSessionFactory);
 	}
+	
 }

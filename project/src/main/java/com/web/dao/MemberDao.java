@@ -3,6 +3,7 @@ package com.web.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.web.vo.MemberVO;
@@ -17,16 +18,23 @@ public interface MemberDao {
 	
 	// 로그인 
 	public MemberVO loginResult(String id, String pw);
+  
 	//회원수정
 	public MemberVO selectMember(String id);
 
-	public void updateClient(MemberVO vo);
+	public int updateClient(MemberVO vo);
 
 	// 카카오로그인 
 	public MemberVO kakaologinResult(String kakaoid);
 
 	// 중복여부 
 	public int isDuplicateId(String id);
+
+	String searchId(@Param("name")String name, @Param("tel")String tel);
+
+	public void updatePassword(String pw, String email);
+	
+	
 	
 	// 회원 수정 
 	public int updateMember(MemberVO memberVO);
@@ -36,4 +44,6 @@ public interface MemberDao {
 	public int memberDelete(String email);
 	
 	public void updateRole(String email);
+
+	public MemberVO updateaddr(String id);
 }

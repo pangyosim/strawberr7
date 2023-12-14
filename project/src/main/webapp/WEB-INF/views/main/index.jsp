@@ -5,14 +5,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
-<script type="text/javascript">
-	function watchaPartyList() {
-		location.href = "/watchaPartyList?seq=''"
-	}
-	$(document).ready(function(){
-		  $('.services_div').slick();
-		});
-</script>
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -31,26 +23,46 @@
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 </head>
-<body id="page-top">
+<body >
 <c:import url="header.jsp"/>
    <!-- Masthead-->
-   <header class="masthead" style="width: 100%; height: 550px; margin-top: 90px;">
-  
-   </header>
+   <div class="" style="width: 70%; height: 150%; margin-top: 100px; margin-left: 13%; border: 1px solid black; border-radius: 15px">
+   		<div class="netflix-top" style="margin-left: 40%;">
+   		<h1>Netfilx Top10</h1>
+	   		<c:forEach var="netflix" items="${netflix_list}" varStatus="status">
+	   			<img src="${netflix.image}" style="width: 50px; height: 50px;">  			
+	   			<a href="${netflix.url }">${netflix.subject }</a>
+	   			<br>
+	   		</c:forEach>
+   		</div>
+   		<div class="watcha-top" style="margin-left: 40%;">
+   		<h1>Whacha Top10</h1>
+   			<c:forEach var="whacha" items="${whacha_list}" varStatus="status">
+   			<img src="${whacha.image}" style="width: 50px; height: 50px;">  			
+   			<a href="${whacha.url }">${whacha.subject }</a>
+   			<br>
+   			</c:forEach>
+   		</div>
+   		<br>
+   </div>
+   
+   
    <!-- Services-->
-   <div class="services_wrap">
-    <div class="services_div" style="margin-left: 150px;">
+   <div class="services_wrap" style="width: 75%; margin-left: 15%; margin-top: 50px;" >
+    <div class="services_div" style="">
    	<h2>최근 만들어진 파티</h2>
 	<!-- <input type="button" value="파티만들기 계좌등록" onclick="location.href='groupJoinForm'"/> &nbsp; &nbsp; <input type="button" value="파티찾기" onclick="document.getElementById('party-input').focus()"/> -->
-	<table>
+	<table >
 		<tr>
-			<c:forEach var="party" items="${party }">
+			<c:forEach var="party" items="${party }" varStatus="status">
 				<c:if test="${party.peoplecnt < 5 }">
 					<td>
 						<c:if test="${party.service =='watcha'}">
 							<img
-								src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA0MTBfOTgg%2FMDAxNjE4MDU5OTE1NTM2.AOxOQcKyyzrt_TRrIJZU5nnRhfxAKaXOoiDGLzlu6TEg.QEyFA8tkSHP3szin0jvk6zVmh4PXNs7sawhrPxYylp0g.PNG.sunjoon12%2Fwatcha%25A3%25DFlogo%25A3%25DF1611108610.png&type=sc960_832"
-								style="width: 100px; height: 100px"
+
+								src="resources/assets/img/watcha.png"
+								style="width: 200px; height: 200px"
+
 								onclick="location.href='PartyList?seq=${party.seq}'">
 							<br>[<c:out value="${party.service}" />]<br>
 							<c:out value="${party.peoplecnt}" />명<br>
@@ -59,8 +71,20 @@
 						</c:if> 
 						<c:if test="${party.service =='youtube'}">
 							<img
-								src="https://cdn-icons-png.flaticon.com/512/3128/3128307.png"
-								style="width: 100px; height: 100px"
+
+								src="resources/assets/img/youtube.png"
+								style="width: 200px; height: 200px"
+
+								onclick="location.href='PartyList?seq=${party.seq }'">
+							<br>[<c:out value="${party.service}" />]<br>
+							<c:out value="${party.peoplecnt}" />명<br>
+							<c:out value="${party.partyday}" />개월<br>
+							<c:out value="${party.partydate}" />
+						</c:if>
+						<c:if test="${party.service =='netflix'}">
+							<img
+								src="resources/assets/img/netflix.png"
+								style="width: 150px; height: 150px"
 								onclick="location.href='PartyList?seq=${party.seq }'">
 							<br>[<c:out value="${party.service}" />]<br>
 							<c:out value="${party.peoplecnt}" />명<br>
@@ -76,9 +100,6 @@
 	</div>
 <br/>
 <br/>
-     <!-- Party list-->
-     <section class="page-section bg-light" id="portfolio">
-     </section>
      <!-- Team-->
      <section class="page-section bg-light" id="team">
          <div class="container">
