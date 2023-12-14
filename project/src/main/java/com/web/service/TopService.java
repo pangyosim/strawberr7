@@ -42,7 +42,6 @@ public class TopService {
         List<Top> TopList = new ArrayList<>();
         Document document = Jsoup.connect(Top_WhaCha_URL).get();
         Elements contents = document.select("section div ul li");
-        System.out.println(contents);
         for(Element content : contents) {
         	Top top = Top.builder()
         			.image(content.select("img").attr("abs:src"))

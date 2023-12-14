@@ -13,7 +13,6 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 @Configuration
 @MapperScan(value="com.web.dao",sqlSessionFactoryRef = "SqlSessionFactory")
@@ -40,5 +39,5 @@ public class MyBatisConfig {
 	public SqlSessionTemplate SqlSessionTemplate(@Qualifier("SqlSessionFactory") SqlSessionFactory firestSqlSessionFactory) {
 		return new SqlSessionTemplate(firestSqlSessionFactory);
 	}
-
+	
 }
