@@ -26,14 +26,22 @@
 <body >
 <c:import url="header.jsp"/>
    <!-- Masthead-->
-   <div class="" style="width: 70%; height: 85%; margin-top: 100px; margin-left: 13%; border: 1px solid black; border-radius: 15px">
-   		<div style="margin-left: 40%;">
+   <div class="" style="width: 70%; height: 150%; margin-top: 100px; margin-left: 13%; border: 1px solid black; border-radius: 15px">
+   		<div class="netflix-top" style="margin-left: 40%;">
    		<h1>Netfilx Top10</h1>
-   		<c:forEach var="netflix" items="${netflix_list}" varStatus="status">
-   			<img src="${netflix.image}" style="width: 50px; height: 50px;">  			
-   			<a href="${netflix.url }">${netflix.subject }</a>
+	   		<c:forEach var="netflix" items="${netflix_list}" varStatus="status">
+	   			<img src="${netflix.image}" style="width: 50px; height: 50px;">  			
+	   			<a href="${netflix.url }">${netflix.subject }</a>
+	   			<br>
+	   		</c:forEach>
+   		</div>
+   		<div class="watcha-top" style="margin-left: 40%;">
+   		<h1>Whacha Top10</h1>
+   			<c:forEach var="whacha" items="${whacha_list}" varStatus="status">
+   			<img src="${whacha.image}" style="width: 50px; height: 50px;">  			
+   			<a href="${whacha.url }">${whacha.subject }</a>
    			<br>
-   		</c:forEach>
+   			</c:forEach>
    		</div>
    		<br>
    </div>

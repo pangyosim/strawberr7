@@ -16,15 +16,14 @@ import com.web.vo.Top;
 
 @Service
 public class TopService {
-	private static String Top_URL = "https://www.netflix.com/tudum/top10/south-korea";
-
+	private static String Top_Netflix_URL = "https://www.netflix.com/tudum/top10/south-korea";
+	private static String Top_WhaCha_URL ="https://pedia.watcha.com/";
     @PostConstruct
     public List<Top> getTopDatas() throws IOException {
         List<Top> TopList = new ArrayList<>();
-        Document document = Jsoup.connect(Top_URL).get();
+        Document document = Jsoup.connect(Top_Netflix_URL).get();
 
         Elements contents = document.select("section ul div");
-        System.out.println(contents);
         for(Element content : contents) {
         	Top top = Top.builder()
         			.image(content.select("picture source").attr("abs:srcset"))
@@ -38,21 +37,20 @@ public class TopService {
         return TopList;
     }
     
-//    @PostConstruct
-//    public List<Top> getTopWhacha() throws IOException {
-//        List<Top> TopList = new ArrayList<>();
-//        Document document = Jsoup.connect(Top_URL).get();
-//
-//        Elements contents = document.select("section ul.type2 li");
-//        System.out.println(contents);
-//        for(Element content : contents) {
-//        	Top top = Top.builder()
-//        			.image(content.select("img").attr("abs:src"))
-//        			.subject(content.select("a").text())
-//        			.url(content.select("a").attr("abs:href"))
-//        			.build();
-//        	TopList.add(top);
-//        }
-//        return TopList.subList(0, 3);
-    //}
+    @PostConstruct
+    public List<Top> getTopWhacha() throws IOException {
+        List<Top> TopList = new ArrayList<>();
+        Document document = Jsoup.connect(Top_WhaCha_URL).get();
+        Elements contents = document.select("section div ul li");
+        System.out.println(contents);
+        for(Element content : contents) {
+        	Top top = Top.builder()
+        			.image(content.select("img").attr("abs:src"))
+        			.subject(content.select("a").text())
+        			.url(content.select("a").attr("abs:href"))
+        			.build();
+        	TopList.add(top);
+        }
+        return TopList.subList(0, 10);
+    }
 }

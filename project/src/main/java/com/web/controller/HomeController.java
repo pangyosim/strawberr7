@@ -25,6 +25,7 @@ public class HomeController {
 		model.addAttribute("party", pysc.selectPeoplecnt());
 		try {
 			model.addAttribute("netflix_list", ts.getTopDatas());
+			model.addAttribute("whacha_list", ts.getTopWhacha());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
