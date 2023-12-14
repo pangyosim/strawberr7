@@ -18,8 +18,10 @@ public interface ReviewService {
 	public void deleteReview(ReviewVO reviewVO);
 
 	public int getTotalArticle();
+	public int getTotalArticle2(String keyword);
 
 	public List<ReviewVO> getList(int start, int last);
 	
-
+	public List<ReviewVO> getListForKeyword(int start, int last,String keyword);
+	
 }

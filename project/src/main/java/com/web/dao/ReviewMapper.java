@@ -23,10 +23,16 @@ public interface ReviewMapper {
 	//페이징
 	
 	public int getTotal();
-	/* 게시판 총 개수 */
+	
+	public int getTotal2(String keyword);
+	/* 게시판 검색 */
+	
+	
 	
 	//유튜브 페이징
 	public List<ReviewVO> getListWithpaging(int start,int last);
+
+	public List<ReviewVO> getListWithpaging2(int start,int last,String keyword);
 	
 	public void updateHit(String reviewid);
 	

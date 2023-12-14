@@ -138,6 +138,15 @@ button {
 		alert("글쓰기 페이지로 이동합니다");
 		window.location.href = "reviewInsert";
 	}
+	function notSelect() {
+		  var keyword = document.getElementById('keyword').value.trim(); 
+		    if (keyword === '') {
+		        alert('검색결과가 없습니다.');
+		        document.getElementById('keyword').focus();
+		        return false;
+		    }
+		    return true;
+	}
 </script>
 
 <link href="resources/css/styles.css" rel="stylesheet" />
@@ -145,21 +154,17 @@ button {
 
 <body>
 	<c:import url="../main/header.jsp" />
-	<form action="${contextPath }/review/reviewSelect" method="get"
-		id="searchFoam" name="search-form">
-		<select name="type" class="type-box">
-			<option value="">검색 유형 선택</option>
-			<option value="title">제목</option>
-			<option value="writer">작성자</option>
-		</select>
-		<td colspan="2"><input class="inputId" type="text" name="keyword"
-			placeholder="검색어 입력"></td>
-		<td><input class="submitBtn" type="submit" value="검색하기">
-		</td>
-	</form>
+
 
 
 	<div id="board_list">
+		<form action="/reviewForm" method="get" id="searchForm"
+			name="search-form" onsubmit="return notSelect()">
+			<td colspan="2"><input type="text" name="keyword" id="keyword"
+				placeholder="검색어 입력"> <input type="hidden" name="page"
+				value="${param.page }"></td>
+			<td><input type="submit" value="검색하기"></td>
+		</form>
 		<span class="right" id="wrapper" style="text-align: center;">
 			<h3>리뷰 게시판</h3>
 			<hr> <c:forEach var="list" items="${list}">
@@ -203,10 +208,12 @@ button {
 				</c:if>
 				<c:forEach var="i" begin="${startPage }" end="${endPage }" step="1">
 					<c:if test="${i == page }">
-						<a href="/reviewForm?page=${i }" id="currentPaging"> ${i } </a>
+						<a href="/reviewForm?page=${i }&keyword=${param.keyword}"
+							id="currentPaging"> ${i } </a>
 					</c:if>
 					<c:if test="${i != page }">
-						<a href="/reviewForm?page=${i }" id="paging"> ${i } </a>
+						<a href="/reviewForm?page=${i }&keyword=${param.keyword}"
+							id="paging"> ${i } </a>
 					</c:if>
 				</c:forEach>
 				<c:if test="${endPage < totalPage }">

@@ -73,6 +73,20 @@ public class ReviewServiceImpl implements ReviewService{
 		int total = reviewMapper.getTotal();
 		return total;
 	}
+	@Override
+	public int getTotalArticle2(String keyword) {
+		// TODO Auto-generated method stub
+		int total = reviewMapper.getTotal2(keyword);
+		return total;
+	}
+	@Override
+	public List<ReviewVO> getListForKeyword(int start, int last ,String keyword) {
+		// TODO Auto-generated method stub
+		List<ReviewVO> list = new ArrayList<>();
+		list = reviewMapper.getListWithpaging2(start,last,keyword);
+		System.out.println(list);
+		return list;
+	}
 	
 	
 	

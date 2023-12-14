@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.web.dao.ReviewMapper;
 import com.web.service.ReviewService;
 import com.web.vo.ReviewVO;
 
@@ -24,19 +25,29 @@ public class ReviewController {
 //	
 	@Autowired
 	private ReviewService reviewService;
-
+	
 	@GetMapping("/reviewForm")
-	public String ReviewForm(Model model, ReviewVO reviewVO, int page) {
+	public String ReviewForm(Model model, ReviewVO reviewVO, int page, String keyword) {
+		
 		// 조회수
-		int article = 10; // 한페이지 글 목록수
+		int article = 5; // 한페이지 글 목록수
 		int currentPage = page; // 현재 페이지 넘버
 		int start = (currentPage - 1) * article + 1; // 글 번호
 		int last = start + article - 1; // 마지막 글번호
+		int totalArticle = 0; // 전체 글수
 		List<ReviewVO> list = new ArrayList<>();
-		list = reviewService.getList(start, last);
-
+		// 게시판 검색
+		if(keyword==null) {
+			// 키워드가 없을때
+			list = reviewService.getList(start, last);	
+			totalArticle = reviewService.getTotalArticle();
+		} else {
+			// 검색 했을때
+			list = reviewService.getListForKeyword(start,last,keyword);
+			totalArticle = reviewService.getTotalArticle2(keyword);
+		}
+		
 		// 페이징
-		int totalArticle = reviewService.getTotalArticle(); // 전체 글수
 		int totalPage = (totalArticle - 1) / article + 1; // 전체 페이지 수
 
 		int block = 4; // 페이지 블록
@@ -60,20 +71,20 @@ public class ReviewController {
 		model.addAttribute("reviewContent", reviewService.getReviewByuserId(reviewVO,reviewid));
 		return "/review/reviewContent";
 	}
-
+	// 리뷰 글등록
 	@GetMapping("reviewInsert")
 	public String reviewInsert(RedirectAttributes ra) {
 		ra.addAttribute("page", 1);
 		return "/review/reviewInsert";
 	}
-
+	//작성정보 뷰 페이지
 	@PostMapping("reviewInsertContent")
 	public String reviewInsertContent(ReviewVO reviewVO, RedirectAttributes ra) {
 		reviewService.ReviewInsert(reviewVO);
 		ra.addAttribute("page", 1);
 		return "redirect:reviewForm";
 	}
-
+	// 리뷰 삭제
 	@RequestMapping("deleteReview")
 	public String deleteReview(ReviewVO reviewVO, RedirectAttributes ra) {
 		ra.addAttribute("page", 1);

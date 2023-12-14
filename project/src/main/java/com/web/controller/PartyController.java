@@ -113,5 +113,5 @@ public class PartyController {
 		System.out.println(zu);
 		return "redirect:partyUpdateForm";
 	}
-
+	
 }

@@ -21,9 +21,17 @@
 	<select id="getTotal" resultType="int">
 		select count(*) from review
 	</select>
+	<select id="getTotal2" resultType="int">
+		select count(*) from review where title LIKE '%'||#{keyword}||'%'
+	</select>
 
 	<select id="getListWithpaging" resultType="com.web.vo.ReviewVO">
 		select * from (select tt.* from (select rownum rn, rv.* from review rv
+		order by seq desc) tt where rn <![CDATA[ >= #{start} and rn <=]]>#{last})
+	</select>
+	
+	<select id="getListWithpaging2" resultType="com.web.vo.ReviewVO">
+		select * from (select tt.* from (select rownum rn, rv.* from review rv where title LIKE '%'||#{keyword}||'%'
 		order by seq desc) tt where rn <![CDATA[ >= #{start} and rn <=]]>#{last})
 	</select>
 
@@ -31,4 +39,7 @@
 	 <update id="updateHit">
 		UPDATE review SET hit = hit + 1 WHERE reviewid=#{reviewid}
 	</update> 
+	
+	
+	
 </mapper>

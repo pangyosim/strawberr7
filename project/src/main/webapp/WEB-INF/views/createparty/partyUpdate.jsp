@@ -46,21 +46,21 @@ tr:last-child>td {
 }
 </style>
 <script>
-    function updateparty() {
-        // Display a confirmation dialog
-        var confirmUpdate = confirm("정보를 수정하시겠습니까?");
+	function updateparty() {
+		// Display a confirmation dialog
+		var confirmUpdate = confirm("파티정보를 수정하시겠습니까?");
 
-        // Check the user's choice
-        if (confirmUpdate) {
-            // If the user clicks OK, submit the form
-            document.getElementById("update").submit();
-            alert('정보가 수정되었습니다');
-        } else {
-            // If the user clicks Cancel, do nothing or handle accordingly
-            // For example, you can add custom logic or show a message
-            console.log("User canceled the update.");
-        }
-    }
+		// Check the user's choice
+		if (confirmUpdate) {
+			// If the user clicks OK, submit the form
+			document.getElementById("update").submit();
+			alert('정보가 수정되었습니다');
+		} else {
+			// If the user clicks Cancel, do nothing or handle accordingly
+			// For example, you can add custom logic or show a message
+			console.log("User canceled the update.");
+		}
+	}
 </script>
 </head>
 <body>
@@ -69,15 +69,28 @@ tr:last-child>td {
 	<table>
 		<tr>
 			<td><c:forEach var="party" items="${partylist}">
-					<form action="Update" method="post" id="update" onsubmit="return updateparty()">
+					<form action="Update" method="post" id="update"
+						onsubmit="return updateparty()">
+						<input type="hidden" name="seq" value="${party.seq}" />
 						<table>
 							<tr>
-								<td><input type="hidden" name="seq" value="${party.seq}" />
-								</td>
-							</tr>
-							<tr>
-								<td>서비스 :<input type="text" name="service"
-									value="${party.service}" />
+								<td>서비스 : <select class="service_form" name="service"
+									value="${party.service}">
+										<option value="youtube"
+											${party.service eq 'youtube'?'selected':''}>youtube</option>
+										<option value="watcha"
+											${party.service eq 'watcha'?'selected':''}>watcha</option>
+										<option value="coupangplay"
+											${party.service eq 'coupangplay'?'selected':''}>coupangplay</option>
+										<option value="laftel"
+											${party.service eq 'laftel'?'selected':''}>laftel</option>
+										<option value="netflix"
+											${party.service eq 'netflix'?'selected':''}>netflix</option>
+										<option value="tving"
+											${party.service eq 'tving'?'selected':''}>tving</option>
+										<option value="wavve"
+											${party.service eq 'wavve'?'selected':''}>wavve</option>
+								</select>
 								</td>
 							</tr>
 							<tr>
@@ -86,7 +99,7 @@ tr:last-child>td {
 							</tr>
 							<tr>
 								<td>id :<input type="text" name="userid"
-									value="${party.userid}" /></td>
+									value="${party.userid}" readonly /></td>
 							</tr>
 							<tr>
 								<td>인원수 :<input type="text" name="peoplecnt"
@@ -94,12 +107,12 @@ tr:last-child>td {
 							</tr>
 						</table>
 						<hr>
-						<input type="button" value="취소" onclick="location.href='/'" /> 
-						<input type="submit" value="수정" />
+						<input type="button" value="취소" onclick="location.href='/'" /> <input
+							type="submit" value="수정" />
 					</form>
 				</c:forEach></td>
 		</tr>
 	</table>
-<!-- location.href='Update?seq=${party.seq}' -->
+	<!-- location.href='Update?seq=${party.seq}' -->
 </body>
 </html>
