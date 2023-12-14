@@ -16,11 +16,12 @@ public class AdminServiceImpl implements AdminService{
 
 	@Autowired
 	AdminMapper adminMapper;
-	
+	//~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-
+
 	// 멤버 목록
 	@Override
-	public List<MemberVO> getMemberList() {
-		List<MemberVO> list = adminMapper.getMemberList();
+	public List<MemberVO> getMemberList(int pageStart, int pageLast) {
+		List<MemberVO> list = adminMapper.getMemberList(pageStart, pageLast);
 		return list;
 	}
 	
@@ -35,13 +36,13 @@ public class AdminServiceImpl implements AdminService{
 	public void memberDelete(MemberVO memberVO) {
 		adminMapper.memberDelete(memberVO);
 	}
+	//~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-
 
-	
 	// 파티 목록
 	@Override
-	public List<GroupVO> getPartyList() {
-		List<GroupVO> list = adminMapper.getPartyList();
-		return list;	
+	public List<GroupVO> getPartyList(int pageStart, int pageLast) {
+		List<GroupVO> list = adminMapper.getPartyList(pageStart, pageLast);
+		return list;		
 	}
 	
 	//파티 수정
@@ -57,10 +58,12 @@ public class AdminServiceImpl implements AdminService{
 
 	}
 
+	//~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-
+
 	//계좌 목록
 	@Override
-	public List<PartyMember> getAccountList() {
-		List<PartyMember> list = adminMapper.getAccountList();
+	public List<PartyMember> getAccountList(int pageStart, int pageLast) {
+		List<PartyMember> list = adminMapper.getAccountList(pageStart, pageLast);
 		return list;
 	}
 	
@@ -76,11 +79,12 @@ public class AdminServiceImpl implements AdminService{
 		adminMapper.accountDelete(accountVO);
 
 	}
+	//~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-
 
 	// 결제 목록
 	@Override
-	public List<PayVO> getPayList() {
-		List<PayVO> list = adminMapper.getPayList();
+	public List<PayVO> getPayList(int pageStart, int pageLast) {
+		List<PayVO> list = adminMapper.getPayList(pageStart, pageLast);
 		return list;
 	}
 	// 결제 수정
@@ -93,6 +97,13 @@ public class AdminServiceImpl implements AdminService{
 	public void PayDelete(PayVO payVO) {
 		adminMapper.PayDelete(payVO);
 	}
-	
+	//~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-
+
+	// 테이블 데이터 수
+	@Override
+	public int getCountTable(String table) {
+		return adminMapper.getCountTable(table);
+	}
+
 	
 }
