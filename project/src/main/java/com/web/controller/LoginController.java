@@ -141,7 +141,7 @@ public class LoginController implements MemberSession{
 
 	// 로그아웃
 	@GetMapping("logout")
-	public String logout(HttpSession session, Model model) {
+	public String logout(HttpSession session) {
 		session.invalidate();
 		return "forward:/";
 	}
