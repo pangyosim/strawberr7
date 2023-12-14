@@ -11,6 +11,38 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>MAIN</title>
+<!-- 페이징 -->
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	  <!-- Link Swiper's CSS -->
+	  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+	  <!-- Demo styles -->
+	  <style>
+	    .swiper-wrapper{
+	    height:40%;
+	    }
+		.swiper{
+		
+		}
+		element.style{
+		margin-right: 0px;
+		}
+	    .swiper-slide {
+	      font-size: 12px;
+	      background: #fff;
+	    }
+	    
+	    @media (max-width: 100px) {
+	      .swiper-button-next {
+	        transform: rotate(90deg);
+	      }
+	
+	      .swiper-button-prev {
+	        transform: rotate(90deg);
+	      }
+	    }
+	    
+	  </style>
+<!-- 페이징 -->
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 <!-- Font Awesome icons (free version)-->
@@ -55,7 +87,69 @@
     <div class="services_div" style="">
    	<h2>최근 만들어진 파티</h2>
 	<!-- <input type="button" value="파티만들기 계좌등록" onclick="location.href='groupJoinForm'"/> &nbsp; &nbsp; <input type="button" value="파티찾기" onclick="document.getElementById('party-input').focus()"/> -->
-	<table >
+	<!-- Swiper -->
+	  <div class="swiper">
+					<div class="swiper-wrapper">
+						<table border="1">
+							<tbody>
+								<c:forEach var="group" items="${party}">
+									<div class="swiper-slide">
+										<div class="box">
+											<c:choose>
+												<c:when test="${group.service eq 'watcha'}">
+												<img
+									               src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA0MTBfOTgg%2FMDAxNjE4MDU5OTE1NTM2.AOxOQcKyyzrt_TRrIJZU5nnRhfxAKaXOoiDGLzlu6TEg.QEyFA8tkSHP3szin0jvk6zVmh4PXNs7sawhrPxYylp0g.PNG.sunjoon12%2Fwatcha%25A3%25DFlogo%25A3%25DF1611108610.png&type=sc960_832"
+									               style="width: 80px; height: 80px"
+									               onclick="location.href80px='PartyList?seq=${group.seq}'"
+									               />
+									            <P> [${group.service}]</P>
+												<p> ${group.peoplecnt}명</p>
+												<p> ${group.partyday} 개월</p>
+												<p> ${group.partydate}</p>
+												</c:when>
+												<c:when test="${group.service eq 'youtube'}">
+												<img
+									               src="https://cdn-icons-png.flaticon.com/512/3128/3128307.png"
+									               style="width: 80px; height: 80px"
+									               onclick="location.href='PartyList?seq=${group.seq}'"/>
+												<P> [${group.service}]</P>
+												<p> ${group.peoplecnt}명</p>
+												<p> ${group.partyday} 개월</p>
+												<p> ${group.partydate}</p>
+												</c:when>
+												<c:when test="${group.service eq 'netflix'}">
+												<img
+									               src="https://cdn.eyesmag.com/content/uploads/posts/2021/12/10/Netflix-launches-website-Tudum-main-765db0bf-51ce-45c0-8a30-e49bd0e6af47.jpg"
+									               style="width: 80px; height: 80px"
+									               onclick="location.href='PartyList?seq=${group.seq}'"/>
+												<P> [${group.service}]</P>
+												<p> ${group.peoplecnt}명</p>
+												<p> ${group.partyday} 개월</p>
+												<p> ${group.partydate}</p>
+												</c:when>
+												<c:otherwise>
+												<img
+									               src="https://developer.apple.com/wwdc23/hero/endframes/p3-startframe-large_2x.jpg"
+									               style="width: 80px; height: 80px"
+									               onclick="location.href='PartyList?seq=${group.seq}'"/>
+												<P> [${group.service}]</P>
+												<p> ${group.peoplecnt}명</p>
+												<p> ${group.partyday} 개월</p>
+												<p> ${group.partydate}</p>
+												
+												</c:otherwise>
+											</c:choose>
+										</div>
+									</div>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				<div class="swiper-button-next" style="margin-right: 100px"></div>
+			   	<div class="swiper-button-prev"></div>
+			</div>												
+		<!-- 파티리스트 -->
+	<%-- <table >
 		<tr>
 			<c:forEach var="party" items="${party }" varStatus="status">
 				<c:if test="${party.peoplecnt < 5 }">
@@ -98,7 +192,7 @@
 				</c:if>
 			</c:forEach>
 		</tr>
-	</table>
+	</table> --%>
 	</div>
 	</div>
 <br/>
@@ -190,5 +284,33 @@
 
 	}
 </script>
+<!-- 페이징 -->
+<!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <!-- Initialize Swiper -->
+  <script>
+    var swiper = new Swiper('.swiper', {
+      slidesPerView: 10,
+      direction: getDirection(),
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      on: {
+        resize: function () {
+          swiper.changeDirection(getDirection());
+        },
+      },
+    });
+
+    function getDirection() {
+      var windowWidth = window.innerWidth;
+      var direction = window.innerWidth <= 760 ? 'vertical' : 'horizontal';
+
+      return direction;
+    }
+  </script>
+ <!-- 페이징 -->
 
 </html>
