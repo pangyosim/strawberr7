@@ -134,8 +134,6 @@
                 left: 20px;
                 transform: rotate(90deg);
             }
-            
-            
         }
         
         .swiper-wrapper {
@@ -154,26 +152,22 @@
 		.ble{
 		text-align: right;
 		}
-        
-        
 </style>
 <link href="resources/css/styles.css" rel="stylesheet" />
 </head>
 <body>
 	<c:import url="../main/header.jsp"/>
  	<div class="info-box">
- 	
-    <h3>회원정보</h3><br/>
-    <div class="bottom">
-    	<div>아이디</div><nav>${member.id}</nav>
-        
-        <div>회원등급</div><nav>${member.tier}등급</nav>
-        <div>이름</div>	<nav>${member.name}</nav>
-        <div>이메일</div>	<nav>${member.email}</nav>
-        <div>닉네임</div>	<nav>${member.nickname}</nav>
-        <div></div>
-        <br/>
-        <br/>
+	    <h3>회원정보</h3><br/>
+	    <div class="bottom">
+	    	<div>아이디</div><nav>${member.id}</nav>
+	        <div>회원등급</div><nav>${member.tier}등급</nav>
+	        <div>이름</div>	<nav>${member.name}</nav>
+	        <div>이메일</div>	<nav>${member.email}</nav>
+	        <div>닉네임</div>	<nav>${member.nickname}</nav>
+	        <div></div>
+	        <br/>
+	        <br/>
     </div>
         
         <!-- 추가적인 내 정보 표시 -->
@@ -198,38 +192,16 @@
 									<div class="swiper-slide">
 									<div class="box">
 									<!--  -->
-										<c:choose>
-											<c:when test="${group.service eq 'watcha'}">
+									<%-- 	<c:choose> --%>
 											<img
-								               src="resources/assets/img/watcha.png"
+								               src="resources/assets/img/${group.service}.png"
 								               style="width: 70px; height: 70px"/>
-											</c:when>
-											<c:when test="${group.service eq 'youtube'}">
-											<img
-								               src="resources/assets/img/youtube.png"
-								               style="width: 70px; height: 70px"/>
-											</c:when>
-											<c:when test="${group.service eq 'netflix'}">
-											<img
-								               src="resources/assets/img/netflix.png"
-								               style="width: 70px; height: 70px"/>
-											</c:when>
-											<c:when test="${group.service eq 'wavve'}">
-											<img
-								               src="resources/assets/img/wavve.png"
-								               style="width: 70px; height: 70px"/>
-											</c:when>
-											<c:when test="${group.service eq 'tving'}">
-											<img
-								               src="resources/assets/img/tving.png"
-								               style="width: 70px; height: 70px"/>
-											</c:when>
-											<c:otherwise>
+							<%-- 				<c:otherwise>
 											<img
 								               src="https://developer.apple.com/wwdc23/hero/endframes/p3-startframe-large_2x.jpg"
 								               style="width: 70px; height: 70px"/>
 											</c:otherwise>
-										</c:choose>
+										</c:choose> --%>
 										<p> ${group.service}</p>
 										<p> ${group.peoplecnt} 명</p>
 										<p> ${group.partyday} 개월</p>
@@ -256,38 +228,9 @@
 									<div class="box">
 									<img src="https://e7.pngegg.com/pngimages/55/143/png-clipart-crown-crown.png"
 										style="width:50px; padding-left: 10px;"/>
-										<c:choose>
-											<c:when test="${group.service eq 'watcha'}">
-											<img
-								               src="resources/assets/img/watcha.png"
-								               style="width: 80px; height: 80px"/>
-											</c:when>
-											<c:when test="${group.service eq 'youtube'}">
-											<img
-								               src="resources/assets/img/youtube.png"
-								               style="width: 80px; height: 80px"/>
-											</c:when>
-											<c:when test="${group.service eq 'netflix'}">
-											<img
-								               src="resources/assets/img/netflix.png"
-								               style="width: 70px; height: 70px"/>
-											</c:when>
-											<c:when test="${group.service eq 'wavve'}">
-											<img
-								               src="resources/assets/img/wavve.png"
-								               style="width: 70px; height: 70px"/>
-											</c:when>
-											<c:when test="${group.service eq 'tving'}">
-											<img
-								               src="resources/assets/img/tving.png"
-								               style="width: 70px; height: 70px"/>
-											</c:when>
-											<c:otherwise>
-											<img
-								               src="https://developer.apple.com/wwdc23/hero/endframes/p3-startframe-large_2x.jpg"
-								               style="width: 70px; height: 70px"/>
-											</c:otherwise>
-										</c:choose>
+										<img
+							               src="resources/assets/img/${group.service}.png"
+							               style="width: 70px; height: 70px"/>
 										<p> ${group.service}</p>
 										<p> ${group.peoplecnt} 명</p>
 										<p> ${group.partyday} 개월</p>
@@ -311,38 +254,9 @@
 									<c:forEach var="group" items="${groupList}">
 									<div class="swiper-slide">
 									<div class="box">
-										<c:choose>
-											<c:when test="${group.service eq 'watcha'}">
-											<img
-								               src="resources/assets/img/watcha.png"
-								               style="width: 80px; height: 80px"/>
-											</c:when>
-											<c:when test="${group.service eq 'youtube'}">
-											<img
-								               src="resources/assets/img/youtube.png"
-								               style="width: 80px; height: 80px"/>
-											</c:when>
-											<c:when test="${group.service eq 'netflix'}">
-											<img
-								               src="resources/assets/img/netflix.png"
-								               style="width: 70px; height: 70px"/>
-											</c:when>
-											<c:when test="${group.service eq 'wavve'}">
-											<img
-								               src="resources/assets/img/wavve.png"
-								               style="width: 70px; height: 70px"/>
-											</c:when>
-											<c:when test="${group.service eq 'tving'}">
-											<img
-								               src="resources/assets/img/tving.png"
-								               style="width: 70px; height: 70px"/>
-											</c:when>
-											<c:otherwise>
-											<img
-								               src="https://developer.apple.com/wwdc23/hero/endframes/p3-startframe-large_2x.jpg"
-								               style="width: 70px; height: 70px"/>
-											</c:otherwise>
-										</c:choose>
+										<img
+							               src="resources/assets/img/${group.service}.png"
+							               style="width: 70px; height: 70px"/>
 										<p> ${group.service}</p>
 										<p> ${group.peoplecnt} 명</p>
 										<p> ${group.partyday} 개월</p>

@@ -22,22 +22,29 @@
 <link href="resources/css/styles.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+	function topclick(){
+		$.ajax
+	}
+</script>
 </head>
 <body >
 <c:import url="header.jsp"/>
    <!-- Masthead-->
    <div class="" style="width: 70%; height: 150%; margin-top: 100px; margin-left: 13%; border: 1px solid black; border-radius: 15px">
-   		<div class="netflix-top" style="margin-left: 40%;">
-   		<h1>Netfilx Top10</h1>
-	   		<c:forEach var="netflix" items="${netflix_list}" varStatus="status">
-	   			<img src="${netflix.image}" style="width: 50px; height: 50px;">  			
-	   			<a href="${netflix.url }">${netflix.subject }</a>
-	   			<br>
-	   		</c:forEach>
-   		</div>
-   		<div class="watcha-top" style="margin-left: 40%;">
-   		<h1>Whacha Top10</h1>
-   			<c:forEach var="whacha" items="${whacha_list}" varStatus="status">
+   		<div class="top-nav" style="margin-left: 45%;">
+   			<h1>TOP10</h1>
+   			<a>Netflix</a> &nbsp; &nbsp;
+   			<a href="#">Whacha</a><br>
+   			<div class="top-list" style="margin-left: -10%;">
+	   			<c:forEach var="netflix" items="${netflix_list}" varStatus="status">
+		   			<img src="${netflix.image}" style="width: 50px; height: 50px;">  			
+		   			<a href="${netflix.url }">${netflix.subject }</a>
+		   			<br>
+		   		</c:forEach>
+	   		</div>
+	   		
+	   		<c:forEach var="whacha" items="${whacha_list}" varStatus="status">
    			<img src="${whacha.image}" style="width: 50px; height: 50px;">  			
    			<a href="${whacha.url }">${whacha.subject }</a>
    			<br>
@@ -57,40 +64,20 @@
 			<c:forEach var="party" items="${party }" varStatus="status">
 				<c:if test="${party.peoplecnt < party.peoplecnt_max }">
 					<td>
-						<c:if test="${party.service =='watcha'}">
-							<img src="resources/assets/img/watcha.png"
-								style="width: 200px; height: 200px"
-								onclick="location.href='PartyList?seq=${party.seq}'">
-						</c:if> 
-						<c:if test="${party.service =='youtube'}">
-							<img src="resources/assets/img/youtube.png"
-								style="width: 200px; height: 200px"
-
-								onclick="location.href='PartyList?seq=${party.seq }'">
-						</c:if>
-						<c:if test="${party.service =='netflix'}">
-							<img src="resources/assets/img/netflix.png"
+						<img src="resources/assets/img/${party.service }.png"
 								style="width: 150px; height: 150px"
-								onclick="location.href='PartyList?seq=${party.seq }'">
-						</c:if>
-						<c:if test="${party.service =='wavve'}">
-							<img src="resources/assets/img/wavve.png"
-								style="width: 150px; height: 150px"
-								onclick="location.href='PartyList?seq=${party.seq }'">
-						</c:if>
-						<c:if test="${party.service =='tving'}">
-							<img src="resources/assets/img/tving.png"
-								style="width: 150px; height: 150px"
-								onclick="location.href='PartyList?seq=${party.seq }'">
-						</c:if>
+								onclick="location.href='PartyList?seq=${party.seq }'"><br>
 						<br>[<c:out value="${party.service}" />]<br>
 							<c:out value="${party.peoplecnt}" />명<br>
-							<c:out value="${party.partydate}~${party.enddate}"/><br>
+							<c:out value="${party.partydate}~"/><br>
+							<c:out value="${party.enddate}"/><br>
 							<c:out value="${party.partyday}" />개월
 					</td>
+					<td>&nbsp; &nbsp; &nbsp; &nbsp;</td>
 				</c:if>
 			</c:forEach>
-		</tr>
+			
+		</tr> 
 	</table>
 	</div>
 	</div>
