@@ -11,6 +11,51 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>MAIN</title>
+<!-- 페이징 -->
+	<style type="text/css">
+    #slider-container {
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    #slider-content {
+        display: inline-block;
+        transition: transform 0.5s ease;
+    }
+
+    .slide {
+	width: 150px; 
+	height: 300px;
+	margin-right: 10px;
+	display: inline-block;
+	background-color: white;
+	text-align: center;
+	line-height: 10px;
+    }
+    .slider-button {
+        margin-top:10px;
+        position: absolute;
+        top: 40%;
+        transform: translateY(-50%);
+        font-size: 18px;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        background-color: #87CEFA;
+        border-radius: 25px; /* 둥근 모양을 위해 추가한 속성 */
+    }
+
+	#prev-button {
+	    left: 10px;
+	}
+	
+	#next-button {
+	    right: 10px;
+	}
+	</style>
+	<!-- 페이징 -->
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 <!-- Font Awesome icons (free version)-->
@@ -118,6 +163,7 @@
    			</c:forEach>
    		</div>
    		<br>
+   	</div>
    </div>
    
    
@@ -125,8 +171,69 @@
    <div class="services_wrap" style="width: 75%; margin-left: 15%; margin-top: 50px;" >
     <div class="services_div" style="">
    	<h2>최근 만들어진 파티</h2>
-	<!-- <input type="button" value="파티만들기 계좌등록" onclick="location.href='groupJoinForm'"/> &nbsp; &nbsp; <input type="button" value="파티찾기" onclick="document.getElementById('party-input').focus()"/> -->
-	<table >
+<!-- <input type="button" value="파티만들기 계좌등록" onclick="location.href='groupJoinForm'"/> &nbsp; &nbsp; <input type="button" value="파티찾기" onclick="document.getElementById('party-input').focus()"/> -->
+		<!-- 페이징 -->
+		<div id="slider-container">
+			<div id="slider-content">
+				<table border="1">
+					<tbody>
+						<c:forEach var="group" items="${party}">
+							<div class="slide">
+								<c:choose>
+									<c:when test="${group.service eq 'watcha'}">
+										<img
+											src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA0MTBfOTgg%2FMDAxNjE4MDU5OTE1NTM2.AOxOQcKyyzrt_TRrIJZU5nnRhfxAKaXOoiDGLzlu6TEg.QEyFA8tkSHP3szin0jvk6zVmh4PXNs7sawhrPxYylp0g.PNG.sunjoon12%2Fwatcha%25A3%25DFlogo%25A3%25DF1611108610.png&type=sc960_832"
+											style="width: 80px; height: 80px"
+											onclick="location.href='PartyList?seq=${group.seq}'" />
+										<P>[${group.service}]</P>
+										<p>${group.peoplecnt}명</p>
+										<p>${group.partyday}개월</p>
+										<p>${group.partydate}</p>
+									</c:when>
+									<c:when test="${group.service eq 'youtube'}">
+										<img
+											src="https://cdn-icons-png.flaticon.com/512/3128/3128307.png"
+											style="width: 80px; height: 80px"
+											onclick="location.href='PartyList?seq=${group.seq}'" />
+										<P>[${group.service}]</P>
+										<p>${group.peoplecnt}명</p>
+										<p>${group.partyday}개월</p>
+										<p>${group.partydate}</p>
+									</c:when>
+									<c:when test="${group.service eq 'netflix'}">
+										<img
+											src="https://cdn.eyesmag.com/content/uploads/posts/2021/12/10/Netflix-launches-website-Tudum-main-765db0bf-51ce-45c0-8a30-e49bd0e6af47.jpg"
+											style="width: 80px; height: 80px"
+											onclick="location.href='PartyList?seq=${group.seq}'" />
+										<P>[${group.service}]</P>
+										<p>${group.peoplecnt}명</p>
+										<p>${group.partyday}개월</p>
+										<p>${group.partydate}</p>
+									</c:when>
+									<c:otherwise>
+										<img
+											src="https://developer.apple.com/wwdc23/hero/endframes/p3-startframe-large_2x.jpg"
+											style="width: 80px; height: 80px"
+											onclick="location.href='PartyList?seq=${group.seq}'" />
+										<P>[${group.service}]</P>
+										<p>${group.peoplecnt}명</p>
+										<p>${group.partyday}개월</p>
+										<p>${group.partydate}</p>
+
+									</c:otherwise>
+								</c:choose>
+							</div>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<button id="prev-button" class="slider-button" onclick="slidePrev()">&#60;</button>
+		<button id="next-button" class="slider-button" onclick="slideNext()">&#62;</button>
+
+		<!-- 페이징 -->
+		<!-- 파티리스트 -->
+	<%-- <table >
 		<tr>
 			<c:forEach var="party" items="${party }" varStatus="status">
 				<c:if test="${party.peoplecnt < party.peoplecnt_max }">
@@ -143,9 +250,7 @@
 					<td>&nbsp; &nbsp; &nbsp; &nbsp;</td>
 				</c:if>
 			</c:forEach>
-			
-		</tr> 
-	</table>
+	</table> --%>
 	</div>
 	</div>
 <br/>
@@ -185,5 +290,88 @@
 				}
 				
 				</script>
-    
+<!-- 메인리스트슬라이드 자바스크립트 -->
+<script type="text/javascript">
+	var slideIndex = 0;
+	var slideInterval = 7000; //7cho
+	var intervalId;
+
+	function showSlides() {
+		var i;
+		var slides = document.getElementById("pic").getElementsByTagName("div");
+		var dots = document.getElementById("control").getElementsByTagName("a");
+
+		for (i = 0; i < slides.length; i++) {
+			slides[i].style.display = "none";
+			dots[i].className = dots[i].className.replace(" on", "");
+		}
+
+		slideIndex++;
+
+		if (slideIndex > slides.length) {
+			slideIndex = 1;
+		}
+
+		slides[slideIndex - 1].style.display = "block";
+		dots[slideIndex - 1].className += " on";
+	}
+
+	function currentSlide(n) {
+		clearInterval(intervalId); 
+		slideIndex = n - 1;
+		showSlides();
+		intervalId = setInterval(showSlides, slideInterval); 
+	}
+	// 페이지 로드 시 슬라이드 시작
+	window.onload = function() {
+		intervalId = setInterval(showSlides, slideInterval);
+	};
+
+	//로고글씨들
+	function showText(platform) {
+		var textElement = document.getElementById(platform.toLowerCase()
+				+ 'Text');
+		textElement.style.display = 'inline';
+	}
+
+	function hideText() {
+		var textElements = document.querySelectorAll('#control span');
+		textElements.forEach(function(element) {
+			element.style.display = 'none';
+		});
+
+	}
+</script>
+<!-- 페이징 -->
+<script>
+    var sliderContent = document.getElementById('slider-content');
+    var slideWidth = document.querySelector('.slide').offsetWidth;
+    var currentIndex = 0;
+
+    function slideNext() {
+        currentIndex = (currentIndex + 3) % sliderContent.children.length;
+        updateSlider();
+    }
+
+    function slidePrev() {
+        currentIndex = (currentIndex - 5 + sliderContent.children.length) % sliderContent.children.length;
+        updateSlider();
+    }
+
+    function updateSlider() {
+        var transformValue = -1 * currentIndex * slideWidth + 'px';
+        sliderContent.style.transform = 'translateX(' + transformValue + ')';
+    }
+    function startAutoSlide() {
+        intervalId = setInterval(slideNext, 5000);//5초
+    }
+
+    function stopAutoSlide() {
+        clearInterval(intervalId);
+    }
+
+    startAutoSlide();
+</script>
+ <!-- 페이징 -->
+
 </html>
