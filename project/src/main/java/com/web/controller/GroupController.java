@@ -94,8 +94,10 @@ public String getmypage(Model model,HttpSession session,
   PayVO pv = new PayVO();
   pv.setUserid(memberVO.getEmail());
   PayVO pv_res = ps.getuserpaidparty(pv);
-  List<GroupVO> joinList = groupService.JoinList(pv_res.getSeq());
-  model.addAttribute("joinList",joinList);
+  if(pv_res != null) {
+	  List<GroupVO> joinList = groupService.JoinList(pv_res.getSeq());
+	  model.addAttribute("joinList",joinList);
+  }
   return "/createparty/getmypage";
 }
 //방장리스트
@@ -107,61 +109,6 @@ public String MyKingList(Model model, HttpSession session) {
   model.addAttribute("mykinglist",mykinglist);
   return "/createparty/MyKingList";
 }
-//	System.out.println(memberVO.toString());
-//	System.out.println(memberVO.getId());
-//	return "0";
-
-
-
-
-//=======================================================================
-//테스트리스트
-//리스트 이미지
-//
-//@GetMapping("listtest")
-//public String listtest(Model model,HttpSession session,
-//            @Param("pseq")Integer pseq,@Param("userid") String userid){
-//  //전체 Allgroup
-//  List<GroupVO> groupList = groupService.getGroupList();
-//  model.addAttribute("groupList",groupList);
-////		
-////		//참여파티 불러오기
-//  MemberVO memberVO = (MemberVO)session.getAttribute("member");
-//  int seq = memberVO.getSeq();
-//  String id = memberVO.getId();
-//  model.addAttribute("joinlist", groupService.JoinList(seq,id));
-//
-//
-//  return"/createparty/listtest";
-//}
-
-
-//	@Autowired
-//	private GroupService groupService;
-//	
-//	@GetMapping("groupJoinForm")
-//	public String groupJoinView() {
-//		return "/createparty/groupJoinForm";
-//	}
-//
-//	// 동의폼
-//	@GetMapping("groupRegistrationForm")
-//	public String groupRegistrationView() {
-//		return "/createparty/groupRegistrationForm";
-//	}
-//
-//	// 파티만들기폼
-//	@GetMapping("groupInsert")
-//	public String groupInsert() {
-//		return "/createparty/groupInsert";
-//	}
-//
-//	// 파티만들기 등록
-//	@PostMapping("groupOk")
-//	public String groupInsertpost(GroupVO groupVo) {
-//		groupService.groupInsert(groupVo);
-//		return "/main/index";
-//	}
 
 }
 
