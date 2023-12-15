@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+#memberjoinForm {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    padding: 20px;
+    margin: 0 auto;
+    border-radius: 5px;
+    width: 60%;
+}
+
+#memberjoinForm .textForm {
+    margin-bottom: 10px;
+}
+
+#memberjoinForm input[type=text],
+#memberjoinForm input[type=password] {
+    width: calc(100% - 20px); /* 버튼 너비를 뺀 나머지 사용 */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#memberjoinForm input[type=button] {
+    padding: 10px 15px;
+    background-color: #888;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#memberjoinForm input[type=button]:hover {
+    background-color: #555;
+}
+
+#memberjoinForm .checkboxForm {
+    margin-bottom: 10px;
+}
+
+#memberjoinForm input[type=checkbox] {
+    margin-right: 5px;
+}
+
+#memberjoinForm input[type=submit] {
+    padding: 10px 20px;
+    background-color: #5c7cfa;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: not-allowed; /* 초기에는 비활성화 */
+}
+
+#message {
+    color: red;
+}
+.info#info
+
+.info#info__birth {
+  display: flex;
+  text-align: center;
+}
+
+.info#info__birth select {
+  margin-left : 7px;
+}
+
+.info#info__birth select:first-child {
+  margin-left : 0px;
+}
+.info#info__birth select::-webkit-scrollbar {
+  width: 10px;
+}
+
+.info#info__birth select::-webkit-scrollbar-thumb {
+  background-color: #b6b6b6;
+  border-radius: 3px;
+}
+
+.info#info__birth select::-webkit-scrollbar-track {
+  background-color: #ebe9e9;
+  border-radius: 6px;
+}
+#memberjoinForm input[type=text].specific, 
+#memberjoinForm input[type=password].specific {
+    /* 원하는 사이즈로 재정의 */
+    width: 150px;
+}
+
+input[type="text"].mail {
+  width: 200px; /* 너비 설정 */
+  height: 30px; /* 높이 설정 */
+  padding: 5px 10px; /* 내부 패딩으로 입력 텍스트와 테두리 사이 여백을 줍니다. */
+  font-size: 14px; /* 텍스트 크기 설정 */
+  border: 1px solid #ddd; /* 테두리 설정 */
+  border-radius: 4px; /* 테두리 모서리를 둥글게 만듭니다. */
+  box-sizing: border-box; /* box-sizing을 border-box로 설정해 width와 height가 padding과 border를 포함하도록 만듭니다. */
+}
+
+input[type="text"].mail::placeholder {
+  color: #888; /* placeholder 텍스트 색상을 변경합니다. */
+}
+
+input[type="text"].mail:focus {
+  border-color: #5c7cfa; /* 입력란에 포커스가 되면 테두리 색상을 변경합니다. */
+  outline: none; /* 브라우저 기본 아웃라인을 제거합니다. */
+}
+
+
