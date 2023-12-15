@@ -1,7 +1,11 @@
 package com.web.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.web.service.MemberService;
+import com.web.service.PartyService;
 import com.web.service.PayService;
 import com.web.vo.GroupVO;
 import com.web.vo.MemberVO;
@@ -23,6 +28,8 @@ import com.web.vo.PayVO;
 public class PayController {
 	
 	@Autowired
+	private PartyService pas;
+	@Autowired
 	private PayService ps;
 	@Autowired
 	private MemberService ms;
@@ -31,18 +38,28 @@ public class PayController {
 	public String payinfo(Model model, int seq, HttpSession session) {
 		
         if(session.getAttribute("member") != null) {
-        	// 이미 참여중인 파티 index로 보내기
+        	// 이미 참여중인 파티 우회
     		MemberVO mv = (MemberVO) session.getAttribute("member");
     		GroupVO gv = ps.doPartyList(seq);
     		PayVO pv = new PayVO();
     		pv.setUserid(mv.getEmail());
     		PayVO pv_res = ps.getuserpaidparty(pv);
-    		if(gv.getSeq() == pv_res.getSeq()) {
-    			return "redirect:/";
+    		if(pv_res !=null) {
+    			if(gv.getSeq() == pv_res.getSeq()) {
+        			return "redirect:/";
+        		}
+    		}
+    		// 파티장 파티 결제 우회
+    		List<GroupVO> pk_party = pas.myparty(mv.getEmail());
+    		if( pk_party != null) {
+	    		for(GroupVO party : pk_party) {
+	    			if(party.getSeq() == gv.getSeq()) {
+	    				return "redirect:/";
+	    			}
+	    		}
     		}
 			GroupVO vo = ps.doPartyList(seq);
 			model.addAttribute("vo",vo);
-			System.out.println(vo);
 			model.addAttribute("mv", mv);
 			return "/pay/payinfo";
         }

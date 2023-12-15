@@ -171,7 +171,7 @@
     </div>
         
         <!-- 추가적인 내 정보 표시 -->
-        <input type="button" value="정보수정하기" onclick="location.href='groupModify'"/>
+        <input type="button" value="정보수정하기" onclick="location.href='memberUpdateForm'"/>
 		<input type="button" value="탈퇴하기" onclick="location.href='Memberdelete'"/>    
     </div>
 
@@ -196,7 +196,7 @@
 											<img
 								               src="resources/assets/img/${group.service}.png"
 								               style="width: 70px; height: 70px"/>
-							<%-- 				<c:otherwise>
+							<%-- 		<c:otherwise>
 											<img
 								               src="https://developer.apple.com/wwdc23/hero/endframes/p3-startframe-large_2x.jpg"
 								               style="width: 70px; height: 70px"/>
@@ -253,15 +253,15 @@
 								<tbody>
 									<c:forEach var="group" items="${groupList}">
 									<div class="swiper-slide">
-									<div class="box">
-										<img
-							               src="resources/assets/img/${group.service}.png"
-							               style="width: 70px; height: 70px"/>
-										<p> ${group.service}</p>
-										<p> ${group.peoplecnt} 명</p>
-										<p> ${group.partyday} 개월</p>
-										<p> ${group.partydate}~ ${group.enddate }</p>
-									</div>
+										<div class="box" onclick="location.href='PartyList?seq=${group.seq}'">
+											<img
+								               src="resources/assets/img/${group.service}.png"
+								               style="width: 70px; height: 70px"/>
+											<p> ${group.service}</p>
+											<p> ${group.peoplecnt} 명</p>
+											<p> ${group.partyday} 개월</p>
+											<p> ${group.partydate}~ ${group.enddate }</p>
+										</div>
 									</div>
 									</c:forEach>
 								</tbody>

@@ -55,7 +55,7 @@
 	    right: 10px;
 	}
 	</style>
-	<style type="text/css">
+<style type="text/css">
 .searchBar{
 	position: relative;
 	width: 200px;
@@ -188,7 +188,7 @@ display: block; /* 마우스가 올라갔을 때 텍스트를 표시합니다. *
 			<a href="#" onclick="currentSlide(1)">
 			<img src="https://images.ctfassets.net/4cd45et68cgf/Rx83JoRDMkYNlMC9MKzcB/2b14d5a59fc3937afd3f03191e19502d/Netflix-Symbol.png" 
 			alt="netflix"
-			style="height: 30px;width: 30px;"/>
+			style="height: 30px; width: 30px;"/>
 			<span>Netflix</span>
 			</a>
 			 <a href="#" onclick="currentSlide(2)">
@@ -253,26 +253,26 @@ display: block; /* 마우스가 올라갔을 때 텍스트를 표시합니다. *
 					<tbody>
 						<c:forEach var="group" items="${party}">
 							<c:if test="${group.peoplecnt < group.peoplecnt_max }">
-							<div class="slide">
+							<div class="slide" style="border: 1px solid black; border-radius: 10px; width: 200px;" onclick="location.href='PartyList?seq=${group.seq}'">
 								<c:choose>
 									<c:when test="${group.service != null}">
 										<img
 											src="resources/assets/img/${group.service }.png"
 											style="width: 80px; height: 80px"
-											onclick="location.href='PartyList?seq=${group.seq}'" />
+											/>
 									</c:when>
 									<c:otherwise>
 										<img
 											src="https://developer.apple.com/wwdc23/hero/endframes/p3-startframe-large_2x.jpg"
 											style="width: 80px; height: 80px"
-											onclick="location.href='PartyList?seq=${group.seq}'" />
+											/>
 									</c:otherwise>
 								</c:choose>
-									<P>[${group.service}]</P>
-									<p>${group.peoplecnt}명</p>
-									<p>${group.partydate}~</p>
-									<p>${group.enddate }</p>
-									<p>${group.partyday}개월</p>
+								<P>[${group.service}]</P>
+								<p>${group.peoplecnt}명</p>
+								<p>${group.partydate}~</p>
+								<p>${group.enddate }</p>
+								<p>${group.partyday}개월</p>
 							</div>
 							</c:if>
 						</c:forEach>
