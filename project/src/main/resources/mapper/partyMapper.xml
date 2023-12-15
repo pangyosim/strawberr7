@@ -4,17 +4,17 @@
   
   <mapper namespace="com.web.dao.PartyMapper" >
 
-  	<insert id="insertbyacount">
-  		insert into account values(account_seq.NEXTVAL,#{name},#{bank},#{acount})
+  	<insert id="insertbyaccount">
+  		insert into account values(account_seq.NEXTVAL,#{name},#{bank},#{account})
   	</insert>
   	
   	<select id="selectPeoplecntList" resultType="com.web.vo.GroupVO">
   		 <!--  SELECT * FROM partyinfo where userid =#{userid} -->
-  		  select * from partyinfo where seq =#{seq}
+  		  select * from partytable where seq =#{seq}
   	</select>
   	
   	<select id="selectPeoplecnt" resultType="com.web.vo.GroupVO">
-  		  SELECT * FROM partyinfo 
+  		  SELECT * FROM partytable 
   	</select>	
   	
   	<update id="updatePartyKing">
@@ -23,12 +23,12 @@
   	
   	<!-- 로그인시 파티수정가능 내가만든 파티 들어가서 보기 -->
   	<select id="Findid" resultType="com.web.vo.GroupVO">
-  		select * from partyinfo where userid=#{userid}
+  		select * from partytable where partykingid=#{partykingid}
   	</select>
   	
   	<!-- 로그인시 내가만든 파티수정 -->
   	 <update id="partyUpdate">
-  		update partyinfo set service=#{service},title=#{title},peoplecnt=#{peoplecnt},partyday=#{partyday},price=#{price} where seq=#{seq} and userid=#{userid}
+  		update partytable set service=#{service},userid=#{userid},title=#{title},partyday=#{partyday},price=#{price} where seq=#{seq} and partykingid=#{partykingid}
   	</update> 
   	
   </mapper>

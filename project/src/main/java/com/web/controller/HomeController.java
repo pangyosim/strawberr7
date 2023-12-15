@@ -1,19 +1,14 @@
 package com.web.controller;
 
-import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
+import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.web.service.PartyService;
-import com.web.vo.GroupVO;
-import com.web.vo.MemberVO;
+import com.web.service.TopService;
 
 
 @Controller
@@ -21,11 +16,19 @@ public class HomeController {
 
 	@Autowired
 	private PartyService pysc;
+	@Autowired
+	private TopService ts;
 
 	
 	@GetMapping("/")
-	public String main(GroupVO vo, Model model,HttpSession httpSession) {
-		model.addAttribute("party", pysc.selectPeoplecnt(vo));
+	public String main(Model model) {
+		model.addAttribute("party", pysc.selectPeoplecnt());
+		try {
+			model.addAttribute("netflix_list", ts.getTopDatas());
+			model.addAttribute("whacha_list", ts.getTopWhacha());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return "/main/index";
 	}
 

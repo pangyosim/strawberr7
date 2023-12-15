@@ -1,6 +1,5 @@
 package com.web.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,23 +12,19 @@ import com.web.vo.MemberVO;
 import com.web.vo.PartyMember;
 
 @Service
-public class PartyServiceImpl implements PartyService{
+public class PartyServiceImpl implements PartyService {
 	
 	@Autowired
 	private PartyMapper partymapper;
 	
-	
 	@Override
-	public int groupjoin(PartyMember partyMember) {
-		int result= partymapper.insertbyacount(partyMember);
-		return result;
+	public void groupjoin(PartyMember partyMember) {
+		partymapper.insertbyaccount(partyMember);
 	}
 	// youtube
 	@Override
-	public List<GroupVO> selectPeoplecnt(GroupVO groupVO) {
-		// TODO Auto-generated method stub
-		List<GroupVO> selectPeoplecnt = partymapper.selectPeoplecnt(groupVO);
-		return selectPeoplecnt;
+	public List<GroupVO> selectPeoplecnt() {
+		return partymapper.selectPeoplecnt();
 	}
 	// wacha
 	@Override
@@ -40,17 +35,17 @@ public class PartyServiceImpl implements PartyService{
 	}
 
 	@Override
-	public int updatePartyKing(String id) {
+	public int updatePartyKing(String partykingid) {
 		// TODO Auto-generated method stub
 		
-		int result = partymapper.updatePartyKing(id);
+		int result = partymapper.updatePartyKing(partykingid);
 		return result;
 	}
 	//내파티 보기
 	@Override
-	public List<GroupVO> es(String userid) {
+	public List<GroupVO> myparty(String partykingid) {
 		// TODO Auto-generated method stub
-		List<GroupVO> list = partymapper.Findid(userid);
+		List<GroupVO> list = partymapper.Findid(partykingid);
 		return list;
 	}
 	//내파티 수정하기
