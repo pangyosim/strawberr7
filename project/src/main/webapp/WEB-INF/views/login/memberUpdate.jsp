@@ -32,12 +32,174 @@ function userCheck(){
 	}
 </script>
 </head>
+<style type="text/css">
+#kakao-login-btn {
+	width: 320px;
+	height: 50px;
+	background-color: #fcdc3e;
+	border-radius: 10px;
+	border: none;
+}
+/* 여기에 CSS 스타일을 추가 */
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.4);
+	padding-top: 60px;
+}
+
+.modal-content {
+	background-color: #fefefe;
+	margin: 5% auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
+}
+
+.close-btn {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close-btn:hover, .close-btn:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.modal-footer {
+	text-align: right;
+}
+
+/* 스크롤이 가능한 박스를 설정합니다 */
+.scrollable-box {
+	width: 100%; /* 또는 고정된 너비를 사용할 수 있습니다 */
+	max-height: 300px; /* 필요에 따라 높이 조절 */
+	margin: auto;
+	overflow-y: scroll; /* 세로 스크롤바를 추가합니다 */
+	background: #f1f1f1; /* 배경색 설정 */
+	border: 1px solid #ddd; /* 테두리 설정 */
+	padding: 10px; /* 안쪽 여백 설정 */
+}
+</style>
+
+<script type="text/javascript">
+//페이지가 로드될 때 init 함수를 호출하여 이벤트 리스너를 설정합니다.
+window.onload = function init() {
+    // 체크박스와 버튼 요소를 가져옵니다.
+    var checkbox1 = document.getElementById("modalNuber1");
+    var checkbox2 = document.getElementById("modalNuber2");
+    var agreeButton = document.getElementById("agreeModal");
+
+    // 체크박스 클릭 이벤트에 대한 리스너를 추가합니다.
+    checkbox1.onclick = toggleAgreeButton;
+    checkbox2.onclick = toggleAgreeButton;
+
+    function toggleAgreeButton() {
+        // 두 체크박스가 모두 체크되었는지를 검사합니다.
+        if(checkbox1.checked && checkbox2.checked) {
+            // 체크박스가 모두 선택되면 '동의' 버튼을 활성화합니다.
+            agreeButton.disabled = false;
+        } else {
+            // 하나라도 선택되지 않으면 '동의' 버튼을 비활성화합니다.
+            agreeButton.disabled = true;
+        }
+    }
+};
+
+</script>
+<!-- j쿼리 -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link href="resources/css/styles.css" rel="stylesheet" />
+
+
+<!-- 카카오 로그인 스크립트 추가 -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+	Kakao.init('4a706abbdeb8e6daae8b9e423f1752fd'); // 카카오 개발자 사이트에서 받은 자바스크립트 키를 넣어주세요.
+
+	function kakaoLogin() {
+		Kakao.Auth.login({
+			success : function(response) {
+				Kakao.API.request({
+					url : '/v2/user/me',
+					success : function(response) {
+						var kakaoid = String(response.id); // 카카오ID를 문자열로 변환
+						$.ajax({
+							url : '/checkUser',
+							type : 'POST',
+							data : JSON.stringify({
+								kakaoid : kakaoid,
+							}),
+							contentType : 'application/json',
+							success : function(data) {
+								location.href = "/checkUser";
+								kakaoid.reset()
+							},
+							error : function(error) {
+								console.log(error);
+							},
+						});
+					},
+					fail : function(error) {
+						console.log(error);
+					},
+				});
+			},
+			fail : function(error) {
+				console.log(error);
+			},
+		});
+	}
+
+	// 카카오 로그인 버튼 클릭 이벤트 추가
+	$(document).ready(function() {
+		$('#kakao-login-btn').click(kakaoLogin);
+		$('#kakao-unlink-btn').click(kakaoUnlink);
+	});
+
+	function kakaoUnlink() {
+		Kakao.API.request({
+			url : '/v1/user/unlink',
+			success : function(response) {
+				console.log(response);
+				alert('카카오 연결 해제가 완료되었습니다.');
+			},
+			fail : function(error) {
+				console.log(error);
+				alert('카카오 연결 해제에 실패하였습니다.');
+			},
+		});
+	}
+</script>
+
+
+
+<!--  카카오 집주소API -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!-- 로그인.js -->
+<script type="text/javascript" src="resources/js/loginScript.js?v=2"></script>
+
+<!— 포트원 API —>
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+<link href="resources/css/memberJoinForm.css" rel="stylesheet" />
 <body>
+<script type="text/javascript" src="resources/js/memberScript.js?v=1" /></script>
 	<h2>수정</h2>
 	<%-- <p>${loginModify.name}</p> --%>
 
 	<form action="updateClientDate" method="post">
-		<table>
+		<table class="middle">
 			<tr>
 				<td><input type="hidden" name="seq" value="${member.seq}" /></td>
 				<td><input type="hidden" name="pw" value="${member.pw}" /></td>
@@ -58,8 +220,7 @@ function userCheck(){
 				</tr>
 			</div>
 			<tr>
-				<td>휴대폰 번호 :<input type="text" name="tel" value="${member.tel}" />
-					<button type="button" id="check" onclick="userCheck()">본인인증</button>
+				<td>휴대폰 번호 :<input type="text" name="tel" value="${member.tel}" red/>
 				</td>
 			</tr>
 

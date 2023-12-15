@@ -9,15 +9,71 @@
 <title>memberJoinForm.jsp</title>
 <script type="text/javascript" src="resources/js/partyScript.js"></script>
 <style>
+body {
+	background-color: #f4f4f4; /* Light background color */
+	color: black; /* Black text color */
+	text-align: center;
+}
+
+form {
+	margin-top: 150px;
+	text-align: center;
+	background-color: #fff; /* White background color */
+	padding: 20px; /* Add some padding for better readability */
+	border-radius: 10px; /* Rounded corners */
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	/* Box shadow for a subtle effect */
+}
+
+div.form-section {
+	margin-bottom: 20px; /* Add space between form sections */
+}
+
+input[type="text"] {
+	width: calc(100% - 400px); /* Adjust width as needed */
+	padding: 8px;
+	margin-bottom: 10px;
+	box-sizing: border-box;
+}
+select {
+	width: calc(100% - 400px); /* Adjust width as needed */
+	padding: 8px;
+	margin-bottom: 10px;
+	box-sizing: border-box;
+}
+
 #toc-content {
-	display: none;
+	text-align: left;
+	list-style-type: none;
+	padding-left: 0;
 }
 
-#toc-toggle {
+#termsCheckbox {
+	margin-right: 5px;
+}
+
+#checktable {
+	background-color: #3498db; /* Blue button color */
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
 	cursor: pointer;
-	color: #2962ff;
 }
 
+#checktable:hover {
+	background-color: #2980b9; /* Darker blue on hover */
+}
+div {
+    text-align: center;
+    margin: auto;
+    width: 60%; /* Adjust the width as needed */
+}
+
+#toc-content {
+    text-align: center;
+    list-style-type: none;
+    padding-left: 0;
 #toc-toggle:hover {
 	text-decoration: #ba77ea;
 }
@@ -32,36 +88,31 @@
 
 </style>
 <script type="text/javascript">
-function validateForm() {
-  var checkbox = document.getElementById('termsCheckbox');
-  if (!checkbox.checked) {
-    alert('약관에 동의해야 합니다.');
-    return false;
-  }
-}
+	function validateForm() {
+		var checkbox = document.getElementById('termsCheckbox');
 
-function checkauthority(){
-	if (document.groupjoin.name.value == "") {
-		alert("이름을 입력하세요");
-		document.groupjoin.name.focus();
-		return false;
-	} else if (document.groupjoin.bank.value == "") {
-		alert("은행을 입력하세요");
-		document.groupjoin.bank.focus();
-		return false;
-	} else if (document.groupjoin.acount.value == "") {
-		alert("계좌정보를 입력하세요~");
-		document.groupjoin.acount.focus();
-		return false;
-	} 
+		if (document.groupjoin.name.value == "") {
+			alert("이름을 입력하세요");
+			document.groupjoin.name.focus();
+			return false;
+		} else if (document.groupjoin.bank.value == "") {
+			alert("은행을 입력하세요");
+			document.groupjoin.bank.focus();
+			return false;
+		} else if (document.groupjoin.acount.value == "") {
+			alert("계좌정보를 입력하세요~");
+			document.groupjoin.acount.focus();
+			return false;
+		} else if (!checkbox.checked) {
+			alert('약관에 동의해야 합니다.');
+			return false;
+		}
 		groupJoinResult.submit();
 	}
-}
-
 </script>
 <link href="resources/css/styles.css" rel="stylesheet" />
 </head>
-<body style="">
+<body>
 	<c:import url="../main/header.jsp" />
 	<!-- 이름 / 연락처 / 주민번호 / 출금계좌  -->
 	<form action="groupJoinResult" name="groupjoin" id="groupjoin" method="post"
@@ -75,11 +126,11 @@ function checkauthority(){
 				<option value=3>새마을금고</option>
 				<option value=4>우리은행</option>
 				<option value=5>제주은행</option>
-				<option value=6>신한은행</option>
-			</select>
-			<input type="text" id="account" name="account" placeholder="계좌번호">
-			<button onclick="accountcheck()">은행 확인</button>
-			목차 [<span id="toc-toggle" onclick="openCloseToc()">보이기</span>]
+			</select> <input type="text" id="acount" name="acount" placeholder="계좌번호">
+		</div>
+		<div class=""></div>
+
+		<div>
 				<ol id="toc-content" style="list-style: none;">
 					<li>- 파티(상품) 권한 및 관리 책임은 판매자에게 있습니다</li>
 					<li>- 판매자 귀책사유로 분쟁이 발생된 경우 해결해야 할 책임이 있으면,</li>
@@ -100,15 +151,14 @@ function checkauthority(){
 		<input type="submit" value="완료" onclick="checkauthority()" id="checktable">
 	</form>
 	<script>
-  function openCloseToc() {
-    if(document.getElementById('toc-content').style.display === 'block') {
-      document.getElementById('toc-content').style.display = 'none';
-      document.getElementById('toc-toggle').textContent = '약관 동의';
-    } else {
-      document.getElementById('toc-content').style.display = 'block';
-      document.getElementById('toc-toggle').textContent = '약관 동의';
-    }
-  }
-
-</script>
+		function openCloseToc() {
+			if (document.getElementById('toc-content').style.display === 'block') {
+				document.getElementById('toc-content').style.display = 'none';
+				document.getElementById('toc-toggle').textContent = '약관 동의';
+			} else {
+				document.getElementById('toc-content').style.display = 'block';
+				document.getElementById('toc-toggle').textContent = '약관 동의';
+			}
+		}
+	</script>
 </html>

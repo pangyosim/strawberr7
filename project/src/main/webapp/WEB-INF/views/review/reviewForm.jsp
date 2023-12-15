@@ -6,133 +6,222 @@
 <head>
 <meta charset="UTF-8">
 <title>reviewForm</title>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.4.min.js">
-$(document).ready(function(){
-	 
-	var actionForm = $("#actionForm");
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.6.4.min.js">
 	
-	$(".page-link").on("click", function() {
-		
-		/* e.preventDefault(); */
-		
-		var targetPage = $(this).attr("href");
-		
-		console.log(targetPage);
-		
-		actionForm.find("input[name='pageNum']").val(targetPage);
-		
-		actionForm.submit(); 
-	});
-});	
 </script>
 <style type="text/css">
-table, th, td {
-	border: 1px solid gray;
-	border-collapse: collapse;
+#board_list {
+	padding: 300px;
 }
 
-td {
+#paging_block {
 	text-align: center;
 }
 
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f2f2f2;
+	margin: 0;
+	padding: 0;
+}
+
+#board_list {
+	margin: 200px;
+	padding: 70px;
+	background-color: #ffffff;
+	border-radius: 50px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
 .review_table {
-	margin: 0 auto;
-	width: 500px;
+	width: 100%;
+	border-collapse: collapse;
 }
 
-#wrapper {
-	width: 100px;
-	margin: auto;
+.review_table th, .review_table td {
+	padding: 10px;
+	text-align: center;
+	border: 1px solid #d4d4d4;
 }
 
-.pageInfo {
-	list-style: none;
-	display: inline-block;
-	margin: 50px 0 0 100px;
+.review_table th {
+	background-color: #4285f4;
+	color: #ffffff;
 }
 
-.pageInfo li {
-	float: left;
-	font-size: 20px;
-	margin-left: 18px;
-	padding: 7px;
-	font-weight: 500;
+.review_table tbody tr:nth-child(even) {
+	background-color: #f9f9f9;
 }
 
-a:link {
-	color: black;
+.review_table tbody tr:hover {
+	background-color: #e0e0e0;
+}
+
+#paging_block {
+	margin-top: 50px;
+}
+
+#paging_block a {
+	padding: 5px 10px;
 	text-decoration: none;
+	color: #333;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	margin-right: 5px;
 }
 
-a:visited {
-	color: black;
-	text-decoration: none;
+a {
+	text-decoration-line: none;
 }
 
-a:hover {
-	color: black;
-	text-decoration: underline;
+#paging_block a#currentPaging {
+	background-color: #4285f4;
+	color: #ffffff;
+	border: 1px solid #4285f4;
 }
 
-.active {
-	background-color: #cdd5ec;
+.container {
+	position: relative;
+}
+
+.right button {
+	position: absolute;
+	top: 70px; /* Adjust the value as needed */
+	right: 0;
+	margin-top: -60px;
+	margin-right: 20px;
+}
+
+.review_table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 250px;
+	/* Add other styles as needed */
+}
+
+.right {
+	position: relative;
+}
+
+.container {
+	margin-top: 10px; /* Adjust the value as needed */
+}
+
+.review_table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 10px;
+}
+
+button {
+	margin-top: 10px;
+	margin-right: 10px;
+	background-color: #4285f4; /* Change to your preferred color */
+	color: #ffffff;
+	padding: 8px 16px;
+	border: none;
+	border-radius: 4px;
+	margin-top: 10px;
+	margin-right: 10px;
+	cursor: pointer;
 }
 </style>
+<script>
+	function loginForm() {
+		alert("로그인이 필요합니다.");
+		window.location.href = "/login";
+
+	}
+
+	function reviewInsert() {
+		alert("글쓰기 페이지로 이동합니다");
+		window.location.href = "reviewInsert";
+	}
+	function notSelect() {
+		  var keyword = document.getElementById('keyword').value.trim(); 
+		    if (keyword === '') {
+		        alert('검색결과가 없습니다.');
+		        document.getElementById('keyword').focus();
+		        return false;
+		    }
+		    return true;
+	}
+</script>
+
+<link href="resources/css/styles.css" rel="stylesheet" />
 </head>
-<body >
 
-	<h1>리뷰 목록</h1>
+<body>
+	<c:import url="../main/header.jsp" />
 
-	<div id="wrapper">
-		<c:if test="${member.id}">
-			<button type="button" onclick="location.href='reviewInsert'">새글작성</button>
-		</c:if>
-	</div>
-	<div>
-		<table class="review_table" >
-			<tr>
-				<th>글번호</th>
-				<th>아이디</th>
-				<th>닉네임</th>
-				<th>제목</th>
-				<th>작성일</th>
-			</tr>
 
-			<c:forEach var="reviewlist" items="${list}">
-				<tr>
-					<td>${reviewlist.seq}</td>
-					<td>${reviewlist.userid}</td>
-					<td>${reviewlist.nickname}</td>
-					<td><a href="reviewContent?reviewid=${reviewlist.reviewid}">${reviewlist.title}</a></td>
-					<td>${reviewlist.writedate}</td>
-					<%-- <td>${reviewlist}</td> 조회수는 해야됨 --%>
-				</tr>
-			</c:forEach>
-		</table>
-		<h2>${pageMaker }</h2>
-		<div class='pull-right'>
-			<ul class="pagination">
-				<c:if test="${pageMaker.prev}">
-					<li class="page-item">
-						<a class="page-link" href="${pageMaker.startPage - 1 }"tabindex="-1">Previous</a>
-					</li>
-				</c:if>
-				<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="num">
-					<li class="page-item ${pageMaker.cri.pageNum eq num?"active":""}">
-						<a class="page-link" href="${num }">${num }</a></li>
-				</c:forEach>
-				<c:if test="${pageMaker.next}">
-					<li class="page-item">
-						<a class="page-link" href="${pageMaker.endPage +1 }"tabindex="+1">Next</a>
-					</li>
-				</c:if>
-			</ul>
-		</div>
-		<form id='actionForm' action="review/reviewForm" method='get'>
-			<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum }' />
-			<input type='hidden' name='amount' value='${pageMaker.cri.amount }' />
+
+	<div id="board_list">
+		<form action="/reviewForm" method="get" id="searchForm"
+			name="search-form" onsubmit="return notSelect()">
+			<td colspan="2"><input type="text" name="keyword" id="keyword"
+				placeholder="검색어 입력"> <input type="hidden" name="page"
+				value="${param.page }"></td>
+			<td><input type="submit" value="검색하기"></td>
 		</form>
-
+		<span class="right" id="wrapper" style="text-align: center;">
+			<h3>리뷰 게시판</h3>
+			<hr> <c:forEach var="list" items="${list}">
+				<c:if test="${list.userid == member.id}">
+					<button type="button" onclick="reviewInsert()">글쓰기</button>
+				</c:if>
+				<c:if test="${list.userid != member.id}">
+					<button type="button" onclick="loginForm()">글쓰기</button>
+				</c:if>
+			</c:forEach>
+		</span>
+		<div class="container">
+			<table class="review_table">
+				<thead>
+					<tr>
+						<th scope="col" class="th-num">글번호</th>
+						<th scope="col" class="th-date">닉네임</th>
+						<th scope="col" class="th-title">제목</th>
+						<th scope="col" class="th-date">조회수</th>
+						<th scope="col" class="th-date">작성일</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="reviewlist" items="${list}">
+						<tr>
+							<td style="width: 100px;">${reviewlist.seq}</td>
+							<td style="width: 150px;">${reviewlist.nickname}</td>
+							<td style="width: 300px;"><a
+								href="reviewContent?reviewid=${reviewlist.reviewid}">${reviewlist.title}</a></td>
+							<td style="width: 150px;">${reviewlist.hit}</td>
+							<td style="width: 150px;">${reviewlist.writedate}</td>
+							<%-- <td>${reviewlist}</td> 조회수는 해야됨 --%>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			<!-- 페이징 -->
+			<div id="paging_block">
+				<c:if test="${startPage > block }">
+					<a href="/reviewForm?page=${startPage-1 }" id="paging"> ◀ 이전 </a>
+				</c:if>
+				<c:forEach var="i" begin="${startPage }" end="${endPage }" step="1">
+					<c:if test="${i == page }">
+						<a href="/reviewForm?page=${i }&keyword=${param.keyword}"
+							id="currentPaging"> ${i } </a>
+					</c:if>
+					<c:if test="${i != page }">
+						<a href="/reviewForm?page=${i }&keyword=${param.keyword}"
+							id="paging"> ${i } </a>
+					</c:if>
+				</c:forEach>
+				<c:if test="${endPage < totalPage }">
+					<a href="/reviewForm?page=${endPage+1 }" id="paging">다음 ▶ </a>
+				</c:if>
+			</div>
+		</div>
 	</div>
+	<c:import url="../main/footer.jsp" />
 </body>
 </html>

@@ -12,9 +12,9 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.web.dao.ReviewMapper;
-import com.web.vo.Criteria;
 import com.web.vo.MemberVO;
 import com.web.vo.ReviewVO;
 
@@ -29,12 +29,11 @@ public class ReviewServiceImpl implements ReviewService{
 		List<ReviewVO> list = reviewMapper.reviewList(reviewVO);
 		return list;
 	}
-	
-//	페이징
-
+//	내용 조회수 
 	@Override
-	public ReviewVO getReviewByuserId(ReviewVO reviewVO) {
+	public ReviewVO getReviewByuserId(ReviewVO reviewVO,String reviewid) {
 		// TODO Auto-generated method stub
+		reviewMapper.updateHit(reviewid);
 		ReviewVO reviewvo = reviewMapper.getReviewByuserId(reviewVO);
 		return reviewvo;
 	}
@@ -60,12 +59,35 @@ public class ReviewServiceImpl implements ReviewService{
 
 	//페이징
 	@Override
-	public List<ReviewVO> getList(Criteria cri) {
+	public List<ReviewVO> getList(int start,int last) {
 		// TODO Auto-generated method stub
-		return reviewMapper.getListWithpaging(cri);
+		List<ReviewVO> list = new ArrayList<>();
+		list = reviewMapper.getListWithpaging(start,last);
+		System.out.println(list);
+		return list;
+	}
+
+	@Override
+	public int getTotalArticle() {
+		// TODO Auto-generated method stub
+		int total = reviewMapper.getTotal();
+		return total;
+	}
+	@Override
+	public int getTotalArticle2(String keyword) {
+		// TODO Auto-generated method stub
+		int total = reviewMapper.getTotal2(keyword);
+		return total;
+	}
+	@Override
+	public List<ReviewVO> getListForKeyword(int start, int last ,String keyword) {
+		// TODO Auto-generated method stub
+		List<ReviewVO> list = new ArrayList<>();
+		list = reviewMapper.getListWithpaging2(start,last,keyword);
+		System.out.println(list);
+		return list;
 	}
 	
-
 	
 	
 	

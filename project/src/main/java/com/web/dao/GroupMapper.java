@@ -26,10 +26,10 @@ public interface GroupMapper {
 	List<GroupVO> selectPeoplecnt();
 	
 	//방장리스트
-	List<GroupVO> MyKingList(String userId);
+	List<GroupVO> MyKingList(String partykingid);
 	//참여리스트
 //	GroupVO agetGroup(int seq,String userid);
 	//리스트테스트
-	List<GroupVO> JoinList(int seq,String userid);
+	List<GroupVO> JoinList(int seq);
 	
 }

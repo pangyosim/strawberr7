@@ -14,10 +14,10 @@ public interface PartyService {
 
 	public GroupVO selectPeoplecntList(int seq);
 
-	public int updatePartyKing(String id);
+	public int updatePartyKing(String partykingid);
 	
 	// 유저가 만든 파티 정보 가져오기
-	public List<GroupVO> es(String userid);
+	public List<GroupVO> myparty(String partykingid);
 	// 유저정보 업데이트 수정
 	public int partyUpdate(GroupVO groupVO);
 	

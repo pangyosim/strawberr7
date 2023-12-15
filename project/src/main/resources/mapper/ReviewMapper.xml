@@ -7,44 +7,39 @@
 	</select>
 
 	<select id="getReviewByuserId" resultType="com.web.vo.ReviewVO">
-		select * from review
-		where REVIEWID = #{reviewid }
+		select * from review where REVIEWID = #{reviewid }
 	</select>
 
 	<insert id="ReviewInsert">
-		insert into review
-		values(review_seq.NEXTVAL,#{reviewid},#{userid},#{nickname},#{title},#{content},#{starrating},SYSDATE)
+		insert into review values(review_seq.NEXTVAL,#{reviewid},#{userid},#{nickname},#{title},#{content},#{hit},SYSDATE)
 	</insert>
 
 	<delete id="deleteReview">
 		delete from review where reviewid=#{reviewid}
 	</delete>
 
-
-	<!-- 페이징 -->
-	 <select id="getBoardList" resultType="com.web.vo.ReviewVO">
-		SELECT * FROM (
-		SELECT rownum as rn, seq, reviewid, userid, nickname, title, content, starrating, writedate
-		FROM review
-		)
-		WHERE rn BETWEEN 1 AND 10
-	</select> 
-
 	<select id="getTotal" resultType="int">
 		select count(*) from review
 	</select>
-	
-	
-	<select id="getListWithpaging" resultType="com.web.vo.ReviewVO">
-		 <![CDATA[   
-		select * from (
-		select /*+ INDEX_DESC(REVIEW) */ ROWNUM as rn,seq,reviewid, userid, nickname, title, content, starrating, writedate
-		from review
-		where seq > 0 and rownum >0 and rownum <=(#{pageNum} * #{amount}) 
-		)
-		where rn >(#{pageNum} -1) * #{amount}
-		]]>
+	<select id="getTotal2" resultType="int">
+		select count(*) from review where title LIKE '%'||#{keyword}||'%'
 	</select>
+
+	<select id="getListWithpaging" resultType="com.web.vo.ReviewVO">
+		select * from (select tt.* from (select rownum rn, rv.* from review rv
+		order by seq desc) tt where rn <![CDATA[ >= #{start} and rn <=]]>#{last})
+	</select>
+	
+	<select id="getListWithpaging2" resultType="com.web.vo.ReviewVO">
+		select * from (select tt.* from (select rownum rn, rv.* from review rv where title LIKE '%'||#{keyword}||'%'
+		order by seq desc) tt where rn <![CDATA[ >= #{start} and rn <=]]>#{last})
+	</select>
+
+	<!-- 조회수 -->
+	 <update id="updateHit">
+		UPDATE review SET hit = hit + 1 WHERE reviewid=#{reviewid}
+	</update> 
+	
 	
 	
 </mapper>

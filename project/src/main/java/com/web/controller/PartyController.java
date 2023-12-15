@@ -1,6 +1,5 @@
 package com.web.controller;
 
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.web.service.GroupService;
 import com.web.service.MemberService;
 import com.web.service.PartyService;
 import com.web.service.PayService;
@@ -29,9 +27,6 @@ public class PartyController implements MemberSession {
 	private PartyService partyService;
 	
 	@Autowired
-	private GroupService groupService;
-	
-	@Autowired
 	private PayService payService;
 	
 	@Autowired
@@ -46,9 +41,7 @@ public class PartyController implements MemberSession {
 	public String result(PartyMember partyMember, HttpSession httpSession) {
 		partyService.groupjoin(partyMember);
 		MemberVO memebvo = (MemberVO) httpSession.getAttribute("member");
-		System.out.println(memebvo.toString());
-		partyService.updatePartyKing(memebvo.getId());
-		System.out.println(memebvo.getId());
+		partyService.updatePartyKing(memebvo.getEmail());
 //			memebvo.getRole()=="PARTYKING";
 		return "/createparty/groupJoinForm";
 // 	public String result(PartyMember partyMember, String email) {
@@ -76,23 +69,19 @@ public class PartyController implements MemberSession {
 //	
 //	
 //	==================================================================
-	
-	//와챠
-
+	// main 파티 리스트
 	@GetMapping("/PartyList")
-	public String watchaPartyList(Model model, GroupVO vo, HttpSession session,PayVO payVO) {
+	public String PartyList(Model model, GroupVO vo, HttpSession session, PayVO payVO) {
 			int count=0;
-			GroupVO selectPartylist = partyService.selectPeoplecntList(vo.getSeq());
+			GroupVO selectParty = partyService.selectPeoplecntList(vo.getSeq());
 
 			count = payService.selectPeoplecnt(payVO.getSeq());
 
-			MemberVO mv = ms.selectMember(selectPartylist.getUserid());
-			model.addAttribute("selectPartylist", selectPartylist);
+			MemberVO mv = ms.selectMember(selectParty.getPartykingid());
+			model.addAttribute("selectParty", selectParty);
 			model.addAttribute("mv", mv);
-			System.out.println(mv);
 			model.addAttribute("seq", vo.getSeq());
 			model.addAttribute("PeopleList",count);
-			System.out.println(count);
 //			while(selectPeoplecnt){
 //				
 //			}
@@ -100,7 +89,7 @@ public class PartyController implements MemberSession {
 	}
 
 	@GetMapping("Partyselect")
-	public String watchaPartyselect() {
+	public String Partyselect() {
 		return "/createparty/Partyselect";
 	}
 
@@ -109,11 +98,7 @@ public class PartyController implements MemberSession {
 	@GetMapping("partyUpdateForm")
 	public String partyinfo(Model model, @ModelAttribute("member") MemberVO memberVO) {
 		if (memberVO.getRole().equals("PARTYKING")) {
-//    		 List<GroupVO> list = new ArrayList<>();
-//    		 list=partyService.es(memberVO.getId());
-			System.out.println(memberVO.getId());
-			model.addAttribute("partylist", partyService.es(memberVO.getId()));
-//    		 System.out.println(partyService.es(memberVO.getId()));
+			model.addAttribute("partylist", partyService.myparty(memberVO.getEmail()));
 			return "/createparty/partyUpdate";
 		} else {
 			return "redirect:/";
@@ -143,10 +128,8 @@ public class PartyController implements MemberSession {
 	// 유저가 만든 파티 업데이트
 	@PostMapping("Update")
 	public String partyUpdate(GroupVO groupVO) {
-		System.out.println(groupVO);
 		int zu = partyService.partyUpdate(groupVO);
-		System.out.println(zu);
 		return "redirect:partyUpdateForm";
 	}
-
+	
 }

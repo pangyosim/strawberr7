@@ -68,7 +68,6 @@ public class LoginController implements MemberSession{
 	// 중복 아이디 방지
 	@PostMapping("/idCheck")
 	public ResponseEntity<?> idCheck(@RequestParam("loginId") String id) {
-	    System.out.println("idCheck 콘솔1번 ");
 		boolean isDuplicate = ms.isDuplicateId(id);  // 아이디 중복 확인
 	    Map<String, Boolean> response = new HashMap<>();
 	    response.put("isDuplicate", isDuplicate);
@@ -120,7 +119,6 @@ public class LoginController implements MemberSession{
 	@PostMapping("loginResult")
 	public String loginResult(@RequestParam("userId") String id,
 	                          @RequestParam("password") String pw, HttpSession session) {
-		System.out.println("POST LOGIN");
 		MemberVO memberVO = ms.loginResult(id, pw);
 		
 	    if(memberVO != null) {
@@ -143,7 +141,7 @@ public class LoginController implements MemberSession{
 
 	// 로그아웃
 	@GetMapping("logout")
-	public String logout(HttpSession session, Model model) {
+	public String logout(HttpSession session) {
 		session.invalidate();
 		return "forward:/";
 	}

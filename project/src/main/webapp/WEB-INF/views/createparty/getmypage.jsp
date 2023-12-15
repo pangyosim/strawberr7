@@ -67,7 +67,7 @@
         .party-box {
             width: 100%;
             max-width: 400px;
-            height: 370px;
+            height: 495px;
             margin-top: 20px;
         }
         .party-nav {
@@ -134,8 +134,6 @@
                 left: 20px;
                 transform: rotate(90deg);
             }
-            
-            
         }
         
         .swiper-wrapper {
@@ -146,7 +144,7 @@
 		    display: flex;
 		    transition-property: transform;
 		    transition-timing-function: var(--swiper-wrapper-transition-timing-function,initial);
-		    box-sizing: content-box
+		    box-sizing: content-box;
 		}
 		.ara{
 		text-align: left;
@@ -154,27 +152,22 @@
 		.ble{
 		text-align: right;
 		}
-        
-        
 </style>
-
-		
+<link href="resources/css/styles.css" rel="stylesheet" />
 </head>
 <body>
-	
+	<c:import url="../main/header.jsp"/>
  	<div class="info-box">
- 	
-    <h3>회원정보</h3><br/>
-    <div class="bottom">
-    	<div>아이디</div><nav>${member.id}</nav>
-        
-        <div>회원등급</div><nav>${member.role}</nav>
-        <div>이름</div>	<nav>${member.name}</nav>
-        <div>이메일</div>	<nav>${member.email}</nav>
-        <div>닉네임</div>	<nav>${member.nickname}</nav>
-        <div></div>
-        <br/>
-        <br/>
+	    <h3>회원정보</h3><br/>
+	    <div class="bottom">
+	    	<div>아이디</div><nav>${member.id}</nav>
+	        <div>회원등급</div><nav>${member.tier}등급</nav>
+	        <div>이름</div>	<nav>${member.name}</nav>
+	        <div>이메일</div>	<nav>${member.email}</nav>
+	        <div>닉네임</div>	<nav>${member.nickname}</nav>
+	        <div></div>
+	        <br/>
+	        <br/>
     </div>
         
         <!-- 추가적인 내 정보 표시 -->
@@ -195,49 +188,24 @@
 						<div class="swiper-wrapper">
 							<table border="1">
 								<tbody>
-									<c:forEach var="group" items="${joinlist}">
+									<c:forEach var="group" items="${joinList}">
 									<div class="swiper-slide">
 									<div class="box">
 									<!--  -->
-										<c:choose>
-											<c:when test="${group.service eq 'watcha'}">
+									<%-- 	<c:choose> --%>
 											<img
-								               src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA0MTBfOTgg%2FMDAxNjE4MDU5OTE1NTM2.AOxOQcKyyzrt_TRrIJZU5nnRhfxAKaXOoiDGLzlu6TEg.QEyFA8tkSHP3szin0jvk6zVmh4PXNs7sawhrPxYylp0g.PNG.sunjoon12%2Fwatcha%25A3%25DFlogo%25A3%25DF1611108610.png&type=sc960_832"
+								               src="resources/assets/img/${group.service}.png"
 								               style="width: 70px; height: 70px"/>
-											<p> ${group.service}</p>
-											<p> ${group.peoplecnt} 명</p>
-											<p> ${group.partyday} 개월</p>
-											<p> ${group.partydate}</p>
-											</c:when>
-											<c:when test="${group.service eq 'youtube'}">
-											<img
-								               src="https://cdn-icons-png.flaticon.com/512/3128/3128307.png"
-								               style="width: 70px; height: 70px"/>
-											<p> ${group.service}</p>
-											<p> ${group.peoplecnt} 명</p>
-											<p> ${group.partyday} 개월</p>
-											<p> ${group.partydate}</p>
-											</c:when>
-											<c:when test="${group.service eq 'netflix'}">
-											<img
-								               src="https://cdn.eyesmag.com/content/uploads/posts/2021/12/10/Netflix-launches-website-Tudum-main-765db0bf-51ce-45c0-8a30-e49bd0e6af47.jpg"
-								               style="width: 70px; height: 70px"/>
-											<p> ${group.service}</p>
-											<p> ${group.peoplecnt} 명</p>
-											<p> ${group.partyday} 개월</p>
-											<p> ${group.partydate}</p>
-											</c:when>
-											<c:otherwise>
+							<%-- 				<c:otherwise>
 											<img
 								               src="https://developer.apple.com/wwdc23/hero/endframes/p3-startframe-large_2x.jpg"
 								               style="width: 70px; height: 70px"/>
-											<p> ${group.service}</p>
-											<p> ${group.peoplecnt} 명</p>
-											<p> ${group.partyday} 개월</p>
-											<p> ${group.partydate}</p>
-											
 											</c:otherwise>
-										</c:choose>
+										</c:choose> --%>
+										<p> ${group.service}</p>
+										<p> ${group.peoplecnt} 명</p>
+										<p> ${group.partyday} 개월</p>
+										<p> ${group.partydate}~ ${group.enddate }</p>
 									<!--  -->
 									</div>
 									</div>
@@ -260,45 +228,13 @@
 									<div class="box">
 									<img src="https://e7.pngegg.com/pngimages/55/143/png-clipart-crown-crown.png"
 										style="width:50px; padding-left: 10px;"/>
-										<c:choose>
-											<c:when test="${group.service eq 'watcha'}">
-											<img
-								               src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA0MTBfOTgg%2FMDAxNjE4MDU5OTE1NTM2.AOxOQcKyyzrt_TRrIJZU5nnRhfxAKaXOoiDGLzlu6TEg.QEyFA8tkSHP3szin0jvk6zVmh4PXNs7sawhrPxYylp0g.PNG.sunjoon12%2Fwatcha%25A3%25DFlogo%25A3%25DF1611108610.png&type=sc960_832"
-								               style="width: 70px; height: 70px"/>
-											<p> ${group.service}</p>
-											<p> ${group.peoplecnt} 명</p>
-											<p> ${group.partyday} 개월</p>
-											<p> ${group.partydate}</p>
-											</c:when>
-											<c:when test="${group.service eq 'youtube'}">
-											<img
-								               src="https://cdn-icons-png.flaticon.com/512/3128/3128307.png"
-								               style="width: 70px; height: 70px"/>
-											<p> ${group.service}</p>
-											<p> ${group.peoplecnt} 명</p>
-											<p> ${group.partyday} 개월</p>
-											<p> ${group.partydate}</p>
-											</c:when>
-											<c:when test="${group.service eq 'netflix'}">
-											<img
-								               src="https://cdn.eyesmag.com/content/uploads/posts/2021/12/10/Netflix-launches-website-Tudum-main-765db0bf-51ce-45c0-8a30-e49bd0e6af47.jpg"
-								               style="width: 70px; height: 70px"/>
-											<p> ${group.service}</p>
-											<p> ${group.peoplecnt} 명</p>
-											<p> ${group.partyday} 개월</p>
-											<p> ${group.partydate}</p>
-											</c:when>
-											<c:otherwise>
-											<img
-								               src="https://developer.apple.com/wwdc23/hero/endframes/p3-startframe-large_2x.jpg"
-								               style="width: 70px; height: 70px"/>
-											<p> ${group.service}</p>
-											<p> ${group.peoplecnt} 명</p>
-											<p> ${group.partyday} 개월</p>
-											<p> ${group.partydate}</p>
-											
-											</c:otherwise>
-										</c:choose>
+										<img
+							               src="resources/assets/img/${group.service}.png"
+							               style="width: 70px; height: 70px"/>
+										<p> ${group.service}</p>
+										<p> ${group.peoplecnt} 명</p>
+										<p> ${group.partyday} 개월</p>
+										<p> ${group.partydate}~ ${group.enddate }</p>
 									</div>
 									</div>
 									</c:forEach>
@@ -310,54 +246,22 @@
 				</div>
 			</div>
 			<div id="allGroups" class="party-content">
-				<p>리스트Test</p>
+				<p>전체파티</p>
 					<div class="swiper">
 						<div class="swiper-wrapper">
 							<table border="1">
 								<tbody>
 									<c:forEach var="group" items="${groupList}">
 									<div class="swiper-slide">
-										<div class="box">
-											<c:choose>
-												<c:when test="${group.service eq 'watcha'}">
-												<img
-									               src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA0MTBfOTgg%2FMDAxNjE4MDU5OTE1NTM2.AOxOQcKyyzrt_TRrIJZU5nnRhfxAKaXOoiDGLzlu6TEg.QEyFA8tkSHP3szin0jvk6zVmh4PXNs7sawhrPxYylp0g.PNG.sunjoon12%2Fwatcha%25A3%25DFlogo%25A3%25DF1611108610.png&type=sc960_832"
-									               style="width: 70px; height: 70px"/>
-												<p> ${group.service}</p>
-												<p> ${group.peoplecnt} 명</p>
-												<p> ${group.partyday} 개월</p>
-												<p> ${group.partydate}</p>
-												</c:when>
-												<c:when test="${group.service eq 'youtube'}">
-												<img
-									               src="https://cdn-icons-png.flaticon.com/512/3128/3128307.png"
-									               style="width: 70px; height: 70px"/>
-												<p> ${group.service}</p>
-												<p> ${group.peoplecnt} 명</p>
-												<p> ${group.partyday} 개월</p>
-												<p> ${group.partydate}</p>
-												</c:when>
-												<c:when test="${group.service eq 'netflix'}">
-												<img
-									               src="https://cdn.eyesmag.com/content/uploads/posts/2021/12/10/Netflix-launches-website-Tudum-main-765db0bf-51ce-45c0-8a30-e49bd0e6af47.jpg"
-									               style="width: 70px; height: 70px"/>
-												<p> ${group.service}</p>
-												<p> ${group.peoplecnt} 명</p>
-												<p> ${group.partyday} 개월</p>
-												<p> ${group.partydate}</p>
-												</c:when>
-												<c:otherwise>
-												<img
-									               src="https://developer.apple.com/wwdc23/hero/endframes/p3-startframe-large_2x.jpg"
-									               style="width: 70px; height: 70px"/>
-												<p> ${group.service}</p>
-												<p> ${group.peoplecnt} 명</p>
-												<p> ${group.partyday} 개월</p>
-												<p> ${group.partydate}</p>
-												
-												</c:otherwise>
-											</c:choose>
-										</div>
+									<div class="box">
+										<img
+							               src="resources/assets/img/${group.service}.png"
+							               style="width: 70px; height: 70px"/>
+										<p> ${group.service}</p>
+										<p> ${group.peoplecnt} 명</p>
+										<p> ${group.partyday} 개월</p>
+										<p> ${group.partydate}~ ${group.enddate }</p>
+									</div>
 									</div>
 									</c:forEach>
 								</tbody>

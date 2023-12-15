@@ -17,10 +17,10 @@ public interface PartyMapper {
 	
 	public GroupVO selectPeoplecntList(int seq);
 	
-	public int updatePartyKing(String id);
+	public int updatePartyKing(String partykingid);
 	
 	//내파티 보기
-	public List<GroupVO> Findid(String userid);
+	public List<GroupVO> Findid(String partykingid);
 	//내파티 수정하기
 	public int partyUpdate(GroupVO groupVO);
 

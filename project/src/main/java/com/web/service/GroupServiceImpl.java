@@ -21,7 +21,6 @@ public class GroupServiceImpl implements GroupService{
 	private GroupMapper groupMapper;
 	
 	@Override
-	@Transactional
 	public void groupInsert(GroupVO groupVo) {
 		groupMapper.groupInsert(groupVo);
 	}
@@ -39,8 +38,8 @@ public class GroupServiceImpl implements GroupService{
 	}
 	//방장리스트
 	@Override
-	public List<GroupVO> MyKingList(String userId) {
-		return groupMapper.MyKingList(userId);
+	public List<GroupVO> MyKingList(String partykingid) {
+		return groupMapper.MyKingList(partykingid);
 	}
 //	//참여리스트
 //	@Override
@@ -49,8 +48,8 @@ public class GroupServiceImpl implements GroupService{
 //	}
 	//리스트테스트
 	@Override
-	public List<GroupVO> JoinList(int seq,String userid) {
-		return groupMapper.JoinList(seq,userid);
+	public List<GroupVO> JoinList(int seq) {
+		return groupMapper.JoinList(seq);
 	}
 
 }
