@@ -230,7 +230,7 @@
 										style="width:50px; padding-left: 10px;"/>
 										<img
 							               src="resources/assets/img/${group.service}.png"
-							               style="width: 70px; height: 70px"/>
+							               style="width: 70px; height: 70px" onclick=""/>
 										<p> ${group.service}</p>
 										<p> ${group.peoplecnt} 명</p>
 										<p> ${group.partyday} 개월</p>

@@ -31,6 +31,7 @@ public class TopService {
         			.url(content.select("a").attr("abs:href"))
         			.build();
         	if(top.getImage() != "" && top.getSubject() != "" && top.getUrl() != "") {
+            	top.setSubject(top.getSubject().substring(0,top.getSubject().length()-3));
         		TopList.add(top);
         	}
         }
@@ -48,7 +49,10 @@ public class TopService {
         			.subject(content.select("a").text())
         			.url(content.select("a").attr("abs:href"))
         			.build();
-        	TopList.add(top);
+        	if(top.getImage() != "" && top.getSubject() != "" && top.getUrl() != "") {
+            	//top.setSubject(top.getSubject().substring(2,top.getSubject().indexOf("\\·")));
+        		TopList.add(top);
+        	}
         }
         return TopList.subList(0, 10);
     }

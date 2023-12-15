@@ -55,6 +55,104 @@
 	    right: 10px;
 	}
 	</style>
+	<style type="text/css">
+.searchBar{
+	position: relative;
+	width: 200px;
+	height: 30px;
+	margin: 10px auto;
+	padding: 5px;
+	
+}
+.fa-magnifying-glass{
+	position: absolute;
+	top: 8px;
+	left: 12px;
+}
+.searchBar input{
+	position: absolute;
+	top: 3px;
+	left: 30px;
+	width: 150px;
+	border: none;
+	padding: 4px;
+}
+
+/* mypage */
+.hidden_menu {
+    position: relative;
+    display: inline-block;
+}
+
+.hidden_menu .submenu {
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+
+.hidden_menu:hover .submenu {
+    display: block;
+}
+.hidden_menu .submenu li {
+    clear: both;
+    width: 100%;
+}
+
+.hidden_menu .submenu li:hover {
+    background-color: #f1f1f1;
+}
+.hidden_menu .submenu a {
+    color: gray;
+    font-size: 12px;
+}
+
+/* 리스트로고 */
+#control {
+    width: 100%;
+    bottom: 20px;
+    text-align: center;
+    border-redius: 50px;
+    padding:10px;
+}
+
+#control a {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin: 0 4px;
+    position: relative;
+    color: white;
+}
+
+#control a img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#control a span {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    display: none;
+    white-space: nowrap;
+    background-color: black;
+    padding: 5px;
+    border-radius: 5px;
+    z-index:1;
+	}
+
+#control a:hover span {
+display: block; /* 마우스가 올라갔을 때 텍스트를 표시합니다. */
+}
+
+#control a.on {
+    background-color: black;
+}
+
+</style>
 	<!-- 페이징 -->
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -82,42 +180,79 @@
 		<input type="button" value="리뷰" onclick="location.href='reviewForm?page=1'"/>
 	</div>
 	<br /> -->
+	
    <!-- Masthead-->
-   <div class="" style="width: 70%; height: 150%; margin-top: 100px; margin-left: 13%; border: 1px solid black; border-radius: 15px">
-   		<div class="top-nav" style="margin-left: 45%;">
-   			<h1>TOP10</h1>
-   			<a>Netflix</a> &nbsp; &nbsp;
-   			<a href="#">Whacha</a><br>
-   			<div class="top-list" style="margin-left: -10%;">
-	   			<c:forEach var="netflix" items="${netflix_list}" varStatus="status">
-		   			<img src="${netflix.image}" style="width: 50px; height: 50px;">  			
-		   			<a href="${netflix.url }">${netflix.subject }</a>
+   <div class="" style="width: 70%; height: 85%; margin-top: 100px; margin-left: 14%; border: 1px solid black; border-radius: 15px">
+   		<h1 style="margin-left: 45%;">TOP10</h1>
+   		<div id="control">
+			<a href="#" onclick="currentSlide(1)">
+			<img src="https://images.ctfassets.net/4cd45et68cgf/Rx83JoRDMkYNlMC9MKzcB/2b14d5a59fc3937afd3f03191e19502d/Netflix-Symbol.png" 
+			alt="netflix"
+			style="height: 30px;width: 30px;"/>
+			<span>Netflix</span>
+			</a>
+			 <a href="#" onclick="currentSlide(2)">
+			 <img src="https://oopy.lazyrockets.com/api/rest/cdn/image/99453fde-4624-457f-8471-2393b96ccdbb.jpeg" 
+			 alt="disney"
+			 style="height: 30px;width: 30px;"/>
+	        <span>Watcha</span>
+	        </a>
+<!-- 	        <a href="#" onclick="currentSlide(3)">
+	        <img src="https://www.tving.com/img/tving-favicon-160@3x.png" 
+	        alt="tiving"
+	        style="height: 30px;width: 30px;"/>
+	        <span>Tving</span>
+	        </a>
+	        <a href="#" onclick="currentSlide(4)">
+	        <img src="https://play-lh.googleusercontent.com/7cuI7bdCeZbmc9anRXqpmxZPH92t5NEEbhTnj5by6skhZK_dlUg9kx--gqtLf-8c2K12=w240-h480-rw" 
+	        alt="wavve"
+	        style="height: 30px;width: 30px;"/>
+	        <span>Wavve</span>
+	        </a> -->
+		</div>
+		<div id="visual">
+			<div id="pic">
+	   			<div class="top-list" style="margin-left: 35%;">
+		   			<c:forEach var="netflix" items="${netflix_list}" varStatus="status">
+			   			<img src="${netflix.image}" style="width: 50px; height: 50px;">  			
+			   			<a href="${netflix.url }">${netflix.subject }</a>
+			   			<br>
+			   		</c:forEach>
+		   		</div>
+	   			<div class="top-list" style="margin-left: 35%;">
+					<c:forEach var="whacha" items="${whacha_list}" varStatus="status">
+		   			<img src="${whacha.image}" style="width: 50px; height: 50px;">  			
+		   			<a href="${whacha.url }">${whacha.subject }</a>
 		   			<br>
-		   		</c:forEach>
-	   		</div>
-	   		
-	   		<c:forEach var="whacha" items="${whacha_list}" varStatus="status">
-   			<img src="${whacha.image}" style="width: 50px; height: 50px;">  			
-   			<a href="${whacha.url }">${whacha.subject }</a>
-   			<br>
-   			</c:forEach>
-   		</div>
+		   			</c:forEach>
+				</div>
+<!-- 				<div>
+					<a href="#"> 
+					</a>
+				</div>
+				<div>
+					<a href="#"> 
+					</a>
+				</div> -->
+			</div>
+		</div>
    		<br>
    	</div>
-   </div>
    
    
    <!-- Services-->
    <div class="services_wrap" style="width: 75%; margin-left: 15%; margin-top: 50px;" >
-    <div class="services_div" style="">
+    <div class="services_div">
+    
    	<h2>최근 만들어진 파티</h2>
-<!-- <input type="button" value="파티만들기 계좌등록" onclick="location.href='groupJoinForm'"/> &nbsp; &nbsp; <input type="button" value="파티찾기" onclick="document.getElementById('party-input').focus()"/> -->
+    <button id="prev-button" class="slider-button" onclick="slidePrev()">&#60;</button>
 		<!-- 페이징 -->
 		<div id="slider-container">
 			<div id="slider-content">
 				<table border="1">
 					<tbody>
 						<c:forEach var="group" items="${party}">
+							<c:if test="${group.peoplecnt < group.peoplecnt_max }">
 							<div class="slide">
 								<c:choose>
 									<c:when test="${group.service != null}">
@@ -125,52 +260,27 @@
 											src="resources/assets/img/${group.service }.png"
 											style="width: 80px; height: 80px"
 											onclick="location.href='PartyList?seq=${group.seq}'" />
-										<P>[${group.service}]</P>
-										<p>${group.peoplecnt}명</p>
-										<p>${group.partyday}개월</p>
-										<p>${group.partydate}~</p><br>
-										<p>${group.enddate }</p>
 									</c:when>
 									<c:otherwise>
 										<img
 											src="https://developer.apple.com/wwdc23/hero/endframes/p3-startframe-large_2x.jpg"
 											style="width: 80px; height: 80px"
 											onclick="location.href='PartyList?seq=${group.seq}'" />
-										<P>[${group.service}]</P>
-										<p>${group.peoplecnt}명</p>
-										<p>${group.partyday}개월</p>
-										<p>${group.partydate}</p>
 									</c:otherwise>
 								</c:choose>
+									<P>[${group.service}]</P>
+									<p>${group.peoplecnt}명</p>
+									<p>${group.partydate}~</p>
+									<p>${group.enddate }</p>
+									<p>${group.partyday}개월</p>
 							</div>
+							</c:if>
 						</c:forEach>
 					</tbody>
 				</table>
 			</div>
 		</div>
-		<button id="prev-button" class="slider-button" onclick="slidePrev()">&#60;</button>
 		<button id="next-button" class="slider-button" onclick="slideNext()">&#62;</button>
-
-		<!-- 페이징 -->
-		<!-- 파티리스트 -->
-	<%-- <table >
-		<tr>
-			<c:forEach var="party" items="${party }" varStatus="status">
-				<c:if test="${party.peoplecnt < party.peoplecnt_max }">
-					<td>
-						<img src="resources/assets/img/${party.service }.png"
-								style="width: 150px; height: 150px"
-								onclick="location.href='PartyList?seq=${party.seq }'"><br>
-						<br>[<c:out value="${party.service}" />]<br> -->
-							<c:out value="${party.peoplecnt}" />명<br>
-							<c:out value="${party.partydate}~"/><br>
-							<c:out value="${party.enddate}"/><br>
-							<c:out value="${party.partyday}" />개월
-					</td>
-					<td>&nbsp; &nbsp; &nbsp; &nbsp;</td>
-				</c:if>
-			</c:forEach>
-	</table> --%>
 	</div>
 	</div>
 <br/>
@@ -209,7 +319,7 @@
 				    confirmWindow.document.write("<button onclick='window.close();'>아니오</button>"); // '아니오' 버튼 생성. 클릭 시 새 창을 닫음
 				}
 				
-				</script>
+	</script>
 <!-- 메인리스트슬라이드 자바스크립트 -->
 <script type="text/javascript">
 	var slideIndex = 0;
@@ -245,6 +355,7 @@
 	// 페이지 로드 시 슬라이드 시작
 	window.onload = function() {
 		intervalId = setInterval(showSlides, slideInterval);
+		currentSlide(1);
 	};
 
 	//로고글씨들
