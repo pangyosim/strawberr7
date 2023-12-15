@@ -1,6 +1,5 @@
 package com.web.controller;
 
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,9 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.web.service.GroupService;
 import com.web.service.MemberService;
 import com.web.service.PartyService;
 import com.web.service.PayService;
@@ -20,14 +20,11 @@ import com.web.vo.MemberVO;
 import com.web.vo.PartyMember;
 import com.web.vo.PayVO;
 
-
+@SessionAttributes("member")
 @Controller
 public class PartyController implements MemberSession {
 	@Autowired
 	private PartyService partyService;
-	
-	@Autowired
-	private GroupService groupService;
 	
 	@Autowired
 	private PayService payService;
@@ -41,38 +38,20 @@ public class PartyController implements MemberSession {
 	}
 
 	@PostMapping("groupJoinResult")
-	public String result(PartyMember partyMember, String email) {
+	public String result(PartyMember partyMember, HttpSession httpSession) {
 		partyService.groupjoin(partyMember);
-		ms.updateRole(email);
-		return "redirect:/";
-	}
-
-//  ==================================================================
-	@GetMapping("groupJoinForm")
-	public String groupJoinView() {
+		MemberVO memebvo = (MemberVO) httpSession.getAttribute("member");
+		partyService.updatePartyKing(memebvo.getEmail());
+//			memebvo.getRole()=="PARTYKING";
 		return "/createparty/groupJoinForm";
+// 	public String result(PartyMember partyMember, String email) {
+// 		partyService.groupjoin(partyMember);
+// 		ms.updateRole(email);
+// 		return "redirect:/";
 	}
+//  ==================================================================
 
-	// 동의폼
-	@GetMapping("groupRegistrationForm")
-	public String groupRegistrationView() {
-		return "/createparty/groupRegistrationForm";
-	}
-
-	// 파티만들기폼
-	@GetMapping("groupInsert")
-	public String groupInsert() {
-		return "/createparty/groupInsert";
-	}
-
-	// 파티만들기 등록
-	@PostMapping("groupOk")
-	public String groupInsertpost(GroupVO groupVo) {
-		partyService.groupInsert(groupVo);
-		return "/main/index";
-	}
 //  =================================================================
-	
 
 //	// 이미지클릭시 해당파티 리스트로 이동
 //	@GetMapping("/youtubePartyList")
@@ -90,20 +69,19 @@ public class PartyController implements MemberSession {
 //	
 //	
 //	==================================================================
-	
-	//와챠
-
+	// main 파티 리스트
 	@GetMapping("/PartyList")
-	public String watchaPartyList(Model model, GroupVO vo, HttpSession session,PayVO payVO) {
+	public String PartyList(Model model, GroupVO vo, HttpSession session, PayVO payVO) {
 			int count=0;
-			GroupVO selectPartylist = partyService.selectPeoplecntList(vo.getSeq());
+			GroupVO selectParty = partyService.selectPeoplecntList(vo.getSeq());
+
 			count = payService.selectPeoplecnt(payVO.getSeq());
-			MemberVO mv = ms.selectMember(selectPartylist.getUserid());
-			model.addAttribute("selectPartylist", selectPartylist);
+
+			MemberVO mv = ms.selectMember(selectParty.getPartykingid());
+			model.addAttribute("selectParty", selectParty);
 			model.addAttribute("mv", mv);
 			model.addAttribute("seq", vo.getSeq());
 			model.addAttribute("PeopleList",count);
-			System.out.println(count);
 //			while(selectPeoplecnt){
 //				
 //			}
@@ -111,10 +89,28 @@ public class PartyController implements MemberSession {
 	}
 
 	@GetMapping("Partyselect")
-	public String watchaPartyselect() {
+	public String Partyselect() {
 		return "/createparty/Partyselect";
 	}
-	
+
+//	--------------------------------------------------------
+	// 파티 수정
+	@GetMapping("partyUpdateForm")
+	public String partyinfo(Model model, @ModelAttribute("member") MemberVO memberVO) {
+		if (memberVO.getRole().equals("PARTYKING")) {
+			model.addAttribute("partylist", partyService.myparty(memberVO.getEmail()));
+			return "/createparty/partyUpdate";
+		} else {
+			return "redirect:/";
+		}
+	}
+
+	// 유저가 만든 정보 보기
+	@GetMapping("/createparty/partyUpdate")
+	public String partyUpdateF() {
+		return "/createparty/partyUpdate";
+	}
+		
 	
 	
 //	--------------------------------------------------------
@@ -129,5 +125,11 @@ public class PartyController implements MemberSession {
 		return "/createparty/groupJoinForm";
 	}
 
-
+	// 유저가 만든 파티 업데이트
+	@PostMapping("Update")
+	public String partyUpdate(GroupVO groupVO) {
+		int zu = partyService.partyUpdate(groupVO);
+		return "redirect:partyUpdateForm";
+	}
+	
 }

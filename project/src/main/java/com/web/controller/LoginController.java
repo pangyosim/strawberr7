@@ -1,8 +1,10 @@
 package com.web.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,8 +15,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.service.MailService;
@@ -25,8 +34,7 @@ import com.web.vo.MemberVO;
 
 
 @Controller
-public class LoginController implements MemberSession {
-
+public class LoginController implements MemberSession{
 	@Autowired
 	private MailService ma;
 	
@@ -40,16 +48,26 @@ public class LoginController implements MemberSession {
 	public String login() {
 		return "/login/loginForm";
 	}
-	
+
 	@GetMapping("register")
 	public String register() {
 		return "/login/memberJoinForm";
 	}
+
+	@GetMapping("service")
+	public String service() {
+		List<MemberVO> list = ms.doMemberList();
+		for (MemberVO vo : list) {
+			System.out.println("ID : " + vo.getId() + ", NAME : " + vo.getName() + ", ROLE : " + vo.getRole());
+
+		}
+		return "forward:/";
+	}
+
 	
 	// 중복 아이디 방지
 	@PostMapping("/idCheck")
 	public ResponseEntity<?> idCheck(@RequestParam("loginId") String id) {
-	    System.out.println("idCheck 콘솔1번 ");
 		boolean isDuplicate = ms.isDuplicateId(id);  // 아이디 중복 확인
 	    Map<String, Boolean> response = new HashMap<>();
 	    response.put("isDuplicate", isDuplicate);
@@ -70,7 +88,7 @@ public class LoginController implements MemberSession {
 	    MemberVO memberVO = (MemberVO) session.getAttribute("member");
 	    if(memberVO != null && memberVO.getId() != null) {
 	        session.setAttribute("party", ps.selectPeoplecnt());
-	        return "/main/index";
+	        return "forward:/";
 	    } else {
 	        return "/login/memberJoinForm";        
 	    }
@@ -85,7 +103,6 @@ public class LoginController implements MemberSession {
 	        MemberVO VO = ms.kakaologinResult(kakaoid);
 	        if(VO != null && VO.getKakaoid() != null) {
 	            session.setAttribute("member", VO);
-	           
 	            return "redirect:checkUser";
 	        } else {
 	            session.setAttribute("kakaoid", kakaoid);
@@ -102,13 +119,15 @@ public class LoginController implements MemberSession {
 	@PostMapping("loginResult")
 	public String loginResult(@RequestParam("userId") String id,
 	                          @RequestParam("password") String pw, HttpSession session) {
-		System.out.println("POST LOGIN");
 		MemberVO memberVO = ms.loginResult(id, pw);
 		
 	    if(memberVO != null) {
 	        session.setAttribute("member", memberVO);
-	        session.setAttribute("party", ps.selectPeoplecnt());
-	        return "/main/index";
+	       //System.out.println(memberVO.getRole()); // 회원등급 확인
+	        if(memberVO.getRole().equals("ADMIN")) {
+	        	return "/main/admin";
+	        }
+          return "redirect:/";
 	    }
 	    return "/login/loginForm";
 	}
@@ -119,15 +138,14 @@ public class LoginController implements MemberSession {
 	public String loginNo() {
 		return "/login/login";
 	}
-	
+
 	// 로그아웃
 	@GetMapping("logout")
-	public String logout(HttpSession session, Model model) {
+	public String logout(HttpSession session) {
 		session.invalidate();
-		model.addAttribute("party", ps.selectPeoplecnt());
-		return "/main/index";
+		return "forward:/";
 	}
-	
+
 	// 회원가입
 	@PostMapping("memberJoinResult")
 	public String memberJoinResult(@RequestParam("loginId") String id, 
@@ -149,8 +167,8 @@ public class LoginController implements MemberSession {
 		
 		MemberVO memberVO = new MemberVO();
 		memberVO.setId(id);
-		if(pw.equals(pwC)) {
-			memberVO.setPw(pw);			
+		if (pw.equals(pwC)) {
+			memberVO.setPw(pw);
 		} else {
 			System.out.println("에러");
 			return "register";
@@ -164,12 +182,12 @@ public class LoginController implements MemberSession {
 		memberVO.setBirth(year+"-"+ month +"-" + day);;
 		memberVO.setAddr(addr_1 + "/" + addr_2 + "/" + addr_3 + "/" + addr_4);
 		memberVO.setTel(tel);
-		memberVO.setEmail(email + "@" + domain);	
+		memberVO.setEmail(email + "@" + domain);
 		int su = ms.joinMember(memberVO);
 		System.out.println(su + "회원가입");
-		if(su == 1) {
+		if (su == 1) {
 			ra.addFlashAttribute("nickname", memberVO.getNickname());
-			return "redirect:memberSuccess";					
+			return "redirect:memberSuccess";
 		}
 		return "register";
 	}
@@ -177,13 +195,9 @@ public class LoginController implements MemberSession {
 	public String memberSuccess() {
 		return "/login/memberSuccess";
 	}
-	//정보불러오기
+
+	// 정보불러오기
 	@GetMapping("memberUpdate")
-	public String memberModify(Model model) {
-//		MemberVO membervo = (MemberVO) httpSession.getAttribute("member");
-		model.addAttribute(LOGIN, ms.selectMember("jsk7640@naver.com"));
-		return "/login/memberUpdate";
-	}
 	//수정한데이터 저장
 	@PostMapping("updateClient")
 	public void updateClient(MemberVO vo) {
@@ -198,6 +212,32 @@ public class LoginController implements MemberSession {
 		return "/login/resultUpdate";
 	}
 	
+	// 아이디 비밀번호 찾기
+	@GetMapping("userSearch")
+	public String userSearch() {
+		return "/login/userSearch";
+	}
+	
+	@RequestMapping(value = "/login/userSearch", method = RequestMethod.POST)
+	@ResponseBody
+	public String userIdSearch(@RequestParam("name") String name,
+								@RequestParam("tel") String tel) {
+		
+		String result = ms.searchId(name, tel);
+		
+		return result;
+	}
+
+	@PostMapping("changePwResult")
+	public String changePwResult(@RequestParam("changePw") String pw, 
+								@RequestParam("umail")String email,
+								Model model) {
+		ms.updatePassword(pw,email);
+        model.addAttribute("successMessage", "비밀번호가 성공적으로 변경되었습니다.");
+        return "/login/loginForm";
+	}
+	
+
 	// 회원수정
 	@GetMapping("memberUpdateForm")
 	public String memberModifyView() {
@@ -277,28 +317,5 @@ public class LoginController implements MemberSession {
 	    return "redirect:/";
 	}
 	
-	
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

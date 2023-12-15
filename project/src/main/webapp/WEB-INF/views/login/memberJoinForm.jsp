@@ -159,9 +159,62 @@ window.onload = function init() {
 		});
 	}
 </script>
+<script type="text/javascript">
+function checkMail() {
+	// 이메일
+    var email_first = document.getElementsByClassName('email_first')[0];
+    var email_last = document.getElementsByClassName('email_last')[0];
+    if(email_first.value == '' || email_last.value == 'none') {
+        alert('이메일을 입력해주세요.');
+        email_first.focus();
+        return false;
+    }
 
+    // 이메일 형식 확인
+    var email = email_first.value + "@" + email_last.value;
+    var regex = /^[\w]([-_.]?[\w])*@[\w]([-_.]?[\w])*\.[a-zA-Z]{2,3}$/i;
+    if (!regex.test(email)) {
+        alert('이메일 형식이 올바르지 않습니다.');
+        email_first.focus();
+        return false;
+    }
+	
+	const eamil = $('#email').val() + '@' + $('#domain').val(); // 이메일 주소값 얻어오기!
+	  console.log('완성된 이메일 : ' + eamil); // 이메일 오는지 확인
+	  const checkInput = $('.mail-check-input'); // 인증번호 입력하는곳 
+	
+	  $.ajax({
+	      type : 'get',
+	      url : '<c:url value ="/mailCheck?email="/>' + eamil, // GET방식이라 Url 뒤에 email을 붙일 수 있다.
+	      success : function (data) {
+	          console.log("data : " + data);
+	          checkInput.attr('disabled',false);
+	          code = data;
+	          alert('인증번호가 전송되었습니다.');
+	      }           
+	  }); // end ajax
+}
 
-
+//인증번호 비교 
+//blur -> focus가 벗어나는 경우 발생
+$('.mail-check-input').blur(function () {
+ var inputCode = $(this).val();
+ var $resultMsg = $('#mail-check-warn');
+ 
+ if(inputCode === code){
+     $resultMsg.html('인증번호가 일치합니다.');
+     $resultMsg.css('color','green');
+     $('#mail-Check-Btn').attr('disabled',true);
+     $('.email_first').attr('readonly',true);
+     $('.email_last').attr('readonly',true);
+     $('.email_last').attr('onFocus', 'this.initialSelect = this.selectedIndex');
+     $('.email_last').attr('onChange', 'this.selectedIndex = this.initialSelect');
+ }else{
+     $resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!.');
+     $resultMsg.css('color','red');
+ }
+});
+</script>
 <!--  카카오 집주소API -->
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -190,6 +243,91 @@ window.onload = function init() {
 		<div>
 			<input type="checkbox" id="agreeTerms"> 서비스 이용 약관에 동의합니다.
 		</div>
+ 		<button id="kakao-unlink-btn">카카오 연결 해제</button>	
+	</c:if>
+	
+	
+<form id="memberjoinForm" action="memberJoinResult" method="post">
+    <div class="textForm">
+        <input type="text" placeholder="아이디" id="loginId" name="loginId" maxlength="20">
+        <input type="button" value="중복체크" id="checkBtn">
+       	<p id="message"></p>
+    </div>
+		<input type="hidden" id="kakaoid" name="kakaoid" value="${kakaoid }">
+    <div class="textForm">
+        <input type="password" placeholder="비밀번호" id="loginPw" name="loginPw" maxlength="20"><br>
+        <input type="password" placeholder="비밀번호 확인" name="loginPwConfirm" maxlength="20">     
+    </div>
+    <div class="textForm">
+        <input type="text" placeholder="이름" id="name" name="name" maxlength="50">   
+        <button type="button" id="check" onclick="userCheck()">본인인증</button>
+    </div>
+    <div class="info" id="info__birth">
+      <select class="box" id="birth-year" name="birth-year">
+        <option disabled selected>출생 연도</option>
+      </select>
+      <select class="box" id="birth-month" name="birth-month">
+        <option disabled selected>월</option>
+      </select>
+      <select class="box" id="birth-day" name="birth-day">
+        <option disabled selected>일</option>
+      </select>
+    </div>
+    <div class="textForm"> 
+        <input type="hidden" id="address_1" name="address_1" placeholder="우편번호" readonly>
+        <input type="text" id="address_2" name="address_2" placeholder="주소" readonly>
+        <input type="button" onclick="checkAddress()" value="우편번호 찾기"><br>
+        <input type="text" id="address_3" name="address_3" placeholder="상세주소">
+        <input type="text" id="address_4" name="address_4" placeholder="">
+    </div>
+    <div class="textForm">
+        <input type="text" class="form-control" id="tel" name="tel" placeholder="전화번호" oninput="oninputPhone(this)" maxlength="13">
+    </div>
+    <div class="textForm" class="mail_input" id="mail_input" name="mail_input">
+    	<input type="text" class="mail" name="mail" id="mail" placeholder="이메일 입력" maxlength="20"/>@
+        <select class="domain" id="domain" name="domain">
+            <option value="none">---이메일---</option>
+            <option value="naver.com">naver.com</option>
+            <option value="gmail.com">gmail.com</option>
+            <option value="daum.net">daum.net</option>
+            <option value="daum.net">hanmail.com</option>
+            <option value="daum.net">yahoo.co.kr</option>      
+        </select> 
+	    
+	</div>  
+	<div class="input-group-addon">
+		<input type="button" class="btn btn-primary" id="mailCheck" name="mailCheck" value="본인인증" onclick="checkMail()">
+	</div>
+	<div class="mail-check-box">
+		<input class="form-control mail-check-input" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6">
+	</div>
+	<div>
+		<span id="mail-check-warn"></span>
+	</div>
+		
+	<div>
+    	<input type="button" value="회원가입" onclick="memberJoinFormCheck()"/>
+    </div> 
+  <!--          <option value="nate.com">nate.com</option>
+        </select>     
+    	<button type="button" id="sendBtn" name="sendBtn" onclick="sendNumber()">인증번호</button>
+    </div>
+    <br/>
+    <div id="mail_number" name="mail_number" style="display: none">
+    	<input type="text" name="number" id="number" placeholder="인증번호 입력"/>
+    	<button type="button" name="confirmBtn" id="confirmBtn" onclick="confirmNumber()">이메일 인증</button>
+    </div>
+    <br/>
+    <input type="text" id="Confirm" name="Confirm" style="display:none" value=""/>
+    <input type="button" value="회원가입" onclick="memberJoinFormCheck()"/> -->
+</form>
+<c:import url="../main/footer.jsp"/>
+</body>
+<style type="text/css">
+/* SECTION - BIRTH */
+.info#info__birth {
+  display: flex;
+}
 
 		<!--모달 창-->
 		<div id="termsModal" class="modal">
@@ -203,10 +341,13 @@ window.onload = function init() {
 
 
 						<div class="article-title" style="padding-top: 0px;">제1조 목적</div>
-
 						<p>이 약관은 OYES 회사(전자상거래 사업자로 이하 "회사"라 한다)가 운영하는 OYES 쇼핑몰(이하
 							"몰"이라 한다)에서 제공하는 인터넷 관련 서비스(이하 "서비스"라 한다)를 이용함에 있어 사이버 몰과 이용자의
 							권리·의무 및 책임사항을 규정함을 목적으로 합니다.</p>
+function mailCheck() {
+    alert('제');
+}
+
 
 						※「PC통신, 무선 등을 이용하는 전자상거래에 대해서도 그 성질에 반하지 않는 한 이 약관을 준용합니다.」
 

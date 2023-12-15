@@ -1,7 +1,5 @@
 package com.web.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +38,11 @@ public class PayServiceImpl implements PayService {
 	public int selectPeoplecnt(int seq) {
 		// TODO Auto-generated method stub
 		return paydao.selectPeoplecnt(seq);
+	}
+
+	@Override
+	public PayVO getuserpaidparty(PayVO pv) {
+		return paydao.getuserpaidparty(pv);
 	}
 	
 	

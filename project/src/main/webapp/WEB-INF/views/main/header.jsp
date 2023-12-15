@@ -7,29 +7,6 @@
 <head>
 <meta charset="UTF-8">
 <title>header</title>
-<style type="text/css">
-.searchBar{
-	position: relative;
-	width: 200px;
-	height: 30px;
-	margin: 10px auto;
-	padding: 5px;
-	
-}
-.fa-magnifying-glass{
-	position: absolute;
-	top: 8px;
-	left: 12px;
-}
-.searchBar input{
-	position: absolute;
-	top: 3px;
-	left: 30px;
-	width: 150px;
-	border: none;
-	padding: 4px;
-}
-</style>
 </head>
 <body>
 	<!-- Navigation-->
@@ -47,24 +24,27 @@
                        		<li class="nav-item"><a class="nav-link" href="/" style="color: #CA226B;">홈</a></li>
                         <c:choose>
 	                        <c:when test="${member == null }">
-	                		    <li class="nav-item"><a class="nav-link" href="login" style="color: #CA226B;">로그인</a></li>	                        	
+	                		    <li class="nav-item"><a class="nav-link" href="login" style="color: #CA226B;">로그인</a></li>
+        		    	        <li class="nav-item"><a class="nav-link" href="#" style="color: #CA226B;">About</a></li>	                        	
 	                        </c:when>
 	                        <c:otherwise>
-	                       	    <li class="nav-item"><a class="nav-link" href="createparty?email=${member.email }" style="color: #CA226B;">파티 만들기</a></li>
-	                        	<li class="nav-item"><a class="nav-link" href="logout" style="color: #CA226B;">로그아웃</a></li> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-	                        	<div class="dropdown" style="right: 30px; top: 6.8px;">
+	                        	<li class="nav-item"><a class="nav-link" href="logout" style="color: #CA226B;">로그아웃</a></li> &nbsp;
+	                        	<li class="nav-item"><a class="nav-link" href="createparty?email=${member.email }" style="color: #CA226B;">파티만들기</a></li> &nbsp;
+	                        	<li class="nav-item"><a class="nav-link" href="getmypage" style="color: #CA226B;">마이페이지</a></li> &nbsp; 
+	                        	<!-- <div class="dropdown" style="right: 30px; top: 6.8px;">
 							      <span class="dropbtn" style="color: #CA226B;">마이페이지</span>
 							      <div class="dropdown-content">
 							        <a href="memberUpdateForm">회원수정</a>
 							        <a href="memberDelete">회원탈퇴</a>
+							        <a href="partyUpdateForm">내파티보기</a>
 							        <a href="#">Q&A</a>
 							      </div>
-							    </div> 
+							    </div>  -->
 	                       	</c:otherwise>
                         </c:choose>
-                        <!-- <li class="nav-item"><a class="nav-link" style="color: #CA226B;"> About </a></li> -->
-                     </ul>
-       			</div>
+                        <!-- mypage hidden -->
+                    </ul>
+                </div>
             </div>
         </nav>
 </body>

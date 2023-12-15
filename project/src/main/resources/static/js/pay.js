@@ -1,4 +1,4 @@
-   function requestPay(price,service,name,email,tel,addr,seq,userid) {
+   function requestPay(price,service,name,email,tel,addr,seq,email) {
 	  var page = document.querySelector('input[name="pg"]:checked').value;
       var IMP = window.IMP;
       IMP.init("imp40114442");
@@ -33,7 +33,7 @@
         function (rsp) {
           if(rsp.success){
 			  jQuery.ajax({
-			    url: "https://e707-123-142-55-115.ngrok-free.app/paywork?seq="+ seq + "&price="+Math.round(price)+"&userid="+ userid, 
+			    url: "https://8406-123-142-55-115.ngrok-free.app/paywork?seq="+ seq + "&price="+Math.round(price)+"&email="+ email, 
 			    method: "POST",
 			    headers: { "Content-Type": "application/json; charset=utf-8" },
 			    data: JSON.stringify ({ 
@@ -42,6 +42,7 @@
 					status : rsp.status // 결제방법
 			    })
 			  });
+			  location.href='/';
           } else {
           	console.log(rsp);
           	alert('결제 실패,,,');

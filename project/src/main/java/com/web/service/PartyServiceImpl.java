@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.web.dao.PartyMapper;
 import com.web.vo.GroupVO;
+import com.web.vo.MemberVO;
 import com.web.vo.PartyMember;
 
 @Service
@@ -32,14 +33,28 @@ public class PartyServiceImpl implements PartyService {
 		GroupVO vo = partymapper.selectPeoplecntList(seq);
 		return vo;
 	}
-	
+
 	@Override
-	@Transactional
-	public void groupInsert(GroupVO groupVo) {
+	public int updatePartyKing(String partykingid) {
 		// TODO Auto-generated method stub
-		partymapper.groupInsert(groupVo);
+		
+		int result = partymapper.updatePartyKing(partykingid);
+		return result;
 	}
-	
+	//내파티 보기
+	@Override
+	public List<GroupVO> myparty(String partykingid) {
+		// TODO Auto-generated method stub
+		List<GroupVO> list = partymapper.Findid(partykingid);
+		return list;
+	}
+	//내파티 수정하기
+	@Override
+	public int partyUpdate(GroupVO groupVO) {
+		// TODO Auto-generated method stub
+		int result = partymapper.partyUpdate(groupVO);
+		return result;
+	}
 	
 	 
 	

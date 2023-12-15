@@ -9,10 +9,13 @@
 		<result property="service" column="service"/>
 		<result property="title" column="title"/>
 		<result property="peoplecnt" column="peoplecnt"/>
+		<result property="peoplecnt_max" column="peoplecnt_max"/>
 		<result property="userid" column="userid"/>
+		<result property="partykingid" column="partykingid"/>
 		<result property="partyday" column="partyday"/>
 		<result property="price" column="price"/>
 		<result property="partydate" column="partydate"/> 
+		<result property="enddate" column="enddate"/>
 	</resultMap>
 	<resultMap type="com.web.vo.MemberVO" id="memberinfo">
 		<id property="seq" column="seq"/>
@@ -39,7 +42,7 @@
 	</resultMap>
 	
 	<select id="doPartyList" resultMap="partyinfo">
-		select * from partyinfo where seq=#{seq}
+		select * from partytable where seq=#{seq}
 	</select>
 	
 	<select id="doMemberList" resultMap="memberinfo">
@@ -51,11 +54,15 @@
 	</insert>
 	
 	<update id="updatepartyinfo">
-		update partyinfo set peoplecnt=peoplecnt+1 where seq=#{seq}
+		update partytable set peoplecnt=peoplecnt+1 where seq=#{seq}
 	</update>
 	
 	<select id="selectPeoplecnt" resultType="int">
 		select count(*) from paytable where seq=#{seq}
 	</select>
+	<select id="getuserpaidparty" resultType="com.web.vo.PayVO">
+		select * from paytable where userid=#{userid} and result='paid'
+	</select>
+	
 </mapper>
 

@@ -2,6 +2,7 @@ package com.web.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 
 import com.web.vo.MemberVO;
 
@@ -13,12 +14,18 @@ public interface MemberService {
 
 	MemberVO loginResult(String id, String pw);
 
+	//주소 자르기
+	public String[] updateaddr(String id);
 	//정보불러오기
 	public MemberVO selectMember(String id);
 	//수정한데이터 저장
-	public void updateClient(MemberVO vo);
+	public int updateClient(MemberVO vo);
 	MemberVO kakaologinResult(String kakaoid);
 	boolean isDuplicateId(String id);
+
+	String searchId(String name, String tel);
+
+	public void updatePassword(String pw, String email);
 
 	int updateMember(MemberVO memberVO);
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.web.dao.MemberDao">
 	<resultMap type="com.web.vo.MemberVO" id="kakao">
@@ -45,6 +45,17 @@
         FROM member
         WHERE id = #{id}
     </select>
+    
+    <!-- 아이디 찾기 -->
+	<select id="searchId" resultType="String">
+		SELECT NVL(id, 0) FROM member
+		WHERE name=#{name} AND tel=#{tel}
+	</select>
+	
+	
+	<update id="updatePassword">
+		update member set pw=#{pw} where email=#{email}
+	</update>
     <update id="updateMember">
     	update member set pw=#{pw}, kakaoid=#{kakaoid},nickname=#{nickname},tel=#{tel},addr=#{addr},birth=#{birth} where email=#{email}
     </update>
@@ -59,4 +70,7 @@
 		update member set role='PARTYKING' where email=#{email}
 	</update>
 	
+ 	<select id="updateaddr" resultType="com.web.vo.MemberVO">
+		select * from member where id=#{id}
+	</select>
 </mapper>
