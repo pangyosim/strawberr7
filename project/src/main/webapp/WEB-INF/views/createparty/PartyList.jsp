@@ -159,7 +159,7 @@ button {
 				<th>&nbsp;</th>
 			</tr>
 		</table>
-		<c:if test="${pc != null}">
+		<c:if test="${pc != null && selectParty.peoplecnt == selectParty.peoplecnt_max}">
 			<a>공유한 아이디 : ${pc }</a>
 		</c:if>
 		<br/>

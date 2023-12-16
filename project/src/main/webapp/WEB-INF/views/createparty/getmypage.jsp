@@ -201,9 +201,11 @@
 								               style="width: 70px; height: 70px"/>
 											</c:otherwise>
 										</c:choose> --%>
-										<p> 공유한 아이디 : ${group.userid }</p>
+										<c:if test="${group.peoplecnt == group.peoplecnt_max }">
+											<p> 공유한 아이디 : ${group.userid }</p>
+										</c:if>
 										<p> ${group.service}</p>
-										<p> ${group.peoplecnt} 명</p>
+										<p> ${group.peoplecnt} / ${group.peoplecnt_max } 명</p>
 										<p> ${group.partyday} 개월</p>
 										<p> <fmt:formatDate value="${group.partydate}" pattern="yyyy년 MM월"/>~<fmt:formatDate value="${group.enddate}" pattern="yyyy년 MM월"/></p>
 									<!--  -->
@@ -231,7 +233,7 @@
 							               src="resources/assets/img/${group.service}.png"
 							               style="width: 70px; height: 70px" onclick=""/>
 										<p> ${group.service}</p>
-										<p> ${group.peoplecnt} 명</p>
+										<p> ${group.peoplecnt} / ${group.peoplecnt_max } 명</p>
 										<p> ${group.partyday} 개월</p>
 										<p> <fmt:formatDate value="${group.partydate}" pattern="yyyy년 MM월"/>~<fmt:formatDate value="${group.enddate}" pattern="yyyy년 MM월"/></p>
 									</div>
@@ -256,7 +258,7 @@
 								               src="resources/assets/img/${group.service}.png"
 								               style="width: 70px; height: 70px"/>
 											<p> ${group.service}</p>
-											<p> ${group.peoplecnt} 명</p>
+											<p> ${group.peoplecnt} / ${group.peoplecnt_max } 명</p>
 											<p> <fmt:formatDate value="${group.partydate}" pattern="yyyy년 MM월"/>~<fmt:formatDate value="${group.enddate}" pattern="yyyy년 MM월"/></p>
 											<p> ${group.partyday} 개월</p>
 										</div>
