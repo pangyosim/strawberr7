@@ -2,6 +2,7 @@ package com.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -43,11 +44,13 @@ public class PayController {
     		GroupVO gv = ps.doPartyList(seq);
     		PayVO pv = new PayVO();
     		pv.setUserid(mv.getEmail());
-    		PayVO pv_res = ps.getuserpaidparty(pv);
+    		List<PayVO> pv_res = ps.getuserpaidparty(pv);
     		if(pv_res !=null) {
-    			if(gv.getSeq() == pv_res.getSeq()) {
-        			return "redirect:/";
-        		}
+    			for(PayVO pv_get : pv_res) {
+    				if(gv.getSeq() == pv_get.getSeq()) {
+            			return "redirect:/";
+            		}
+    			}
     		}
     		// 파티장 파티 결제 우회
     		List<GroupVO> pk_party = pas.myparty(mv.getEmail());

@@ -1,6 +1,8 @@
 package com.web.controller;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,20 +73,24 @@ public class PartyController implements MemberSession {
 //	==================================================================
 	// main 파티 리스트
 	@GetMapping("/PartyList")
-	public String PartyList(Model model, GroupVO vo, HttpSession session, PayVO payVO) {
-			int count=0;
-			GroupVO selectParty = partyService.selectPeoplecntList(vo.getSeq());
-
-			count = payService.selectPeoplecnt(payVO.getSeq());
-
-			MemberVO mv = ms.selectMember(selectParty.getPartykingid());
-			model.addAttribute("selectParty", selectParty);
-			model.addAttribute("mv", mv);
-			model.addAttribute("seq", vo.getSeq());
-			model.addAttribute("PeopleList",count);
-//			while(selectPeoplecnt){
-//				
-//			}
+	public String PartyList(Model model, HttpSession session, int seq) {
+			GroupVO selectParty = partyService.selectPeoplecntList(seq);
+			if( session.getAttribute(LOGIN) != null) {
+				MemberVO login_member = (MemberVO) session.getAttribute(LOGIN);
+				PayVO pv = new PayVO();
+				pv.setSeq(seq);
+				pv.setUserid(login_member.getEmail());
+				List<PayVO> get_pv_list = payService.getuserpaidparty(pv);
+				MemberVO mv = ms.selectMember(selectParty.getPartykingid());
+				model.addAttribute("selectParty", selectParty);
+				model.addAttribute("mv", mv);
+				model.addAttribute("seq", seq);
+				for(PayVO get_pv : get_pv_list) {
+					if(seq==get_pv.getSeq()) {
+						model.addAttribute("pc", selectParty.getUserid());
+					}
+				}
+			}
 			return "/createparty/PartyList";
 	}
 

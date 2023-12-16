@@ -50,7 +50,6 @@ public class TopService {
         			.url(content.select("a").attr("abs:href"))
         			.build();
         	if(top.getImage() != "" && top.getSubject() != "" && top.getUrl() != "") {
-            	//top.setSubject(top.getSubject().substring(2,top.getSubject().indexOf("\\·")));
         		TopList.add(top);
         	}
         }

@@ -33,7 +33,7 @@
         function (rsp) {
           if(rsp.success){
 			  jQuery.ajax({
-			    url: "https://8406-123-142-55-115.ngrok-free.app/paywork?seq="+ seq + "&price="+Math.round(price)+"&email="+ email, 
+			    url: "https://8a90-123-142-55-115.ngrok-free.app/paywork?seq="+ seq + "&price="+Math.round(price)+"&email="+ email, 
 			    method: "POST",
 			    headers: { "Content-Type": "application/json; charset=utf-8" },
 			    data: JSON.stringify ({ 

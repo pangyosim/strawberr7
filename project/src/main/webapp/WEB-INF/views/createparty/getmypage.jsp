@@ -1,7 +1,7 @@
 <meta charset="UTF-8">
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -183,14 +183,13 @@
 			<a onclick="togglePartyContent('allGroups')">전체그룹</a>
 		</div>
 			<div id="joinList" class="party-content active">
-			<p>참여중인 파티</p>
 					<div class="swiper">
 						<div class="swiper-wrapper">
 							<table border="1">
 								<tbody>
 									<c:forEach var="group" items="${joinList}">
 									<div class="swiper-slide">
-									<div class="box">
+									<div class="box" onclick="location.href='PartyList?seq=${group.seq}'">
 									<!--  -->
 									<%-- 	<c:choose> --%>
 											<img
@@ -202,10 +201,11 @@
 								               style="width: 70px; height: 70px"/>
 											</c:otherwise>
 										</c:choose> --%>
+										<p> 공유한 아이디 : ${group.userid }</p>
 										<p> ${group.service}</p>
 										<p> ${group.peoplecnt} 명</p>
 										<p> ${group.partyday} 개월</p>
-										<p> ${group.partydate}~ ${group.enddate }</p>
+										<p> <fmt:formatDate value="${group.partydate}" pattern="yyyy년 MM월"/>~<fmt:formatDate value="${group.enddate}" pattern="yyyy년 MM월"/></p>
 									<!--  -->
 									</div>
 									</div>
@@ -218,7 +218,6 @@
 				</div>
 			</div>
 			<div id="createList" class="party-content">
-				<p>생성파티</p>
 				<div class="swiper">
 						<div class="swiper-wrapper">
 							<table border="1">
@@ -226,7 +225,7 @@
 									<c:forEach var="group" items="${mykinglist}">
 									<div class="swiper-slide">
 									<div class="box">
-									<img src="https://e7.pngegg.com/pngimages/55/143/png-clipart-crown-crown.png"
+									<img src="resources/assets/img/crown.png"
 										style="width:50px; padding-left: 10px;"/>
 										<img
 							               src="resources/assets/img/${group.service}.png"
@@ -234,7 +233,7 @@
 										<p> ${group.service}</p>
 										<p> ${group.peoplecnt} 명</p>
 										<p> ${group.partyday} 개월</p>
-										<p> ${group.partydate}~ ${group.enddate }</p>
+										<p> <fmt:formatDate value="${group.partydate}" pattern="yyyy년 MM월"/>~<fmt:formatDate value="${group.enddate}" pattern="yyyy년 MM월"/></p>
 									</div>
 									</div>
 									</c:forEach>
@@ -246,7 +245,6 @@
 				</div>
 			</div>
 			<div id="allGroups" class="party-content">
-				<p>전체파티</p>
 					<div class="swiper">
 						<div class="swiper-wrapper">
 							<table border="1">
@@ -259,8 +257,8 @@
 								               style="width: 70px; height: 70px"/>
 											<p> ${group.service}</p>
 											<p> ${group.peoplecnt} 명</p>
+											<p> <fmt:formatDate value="${group.partydate}" pattern="yyyy년 MM월"/>~<fmt:formatDate value="${group.enddate}" pattern="yyyy년 MM월"/></p>
 											<p> ${group.partyday} 개월</p>
-											<p> ${group.partydate}~ ${group.enddate }</p>
 										</div>
 									</div>
 									</c:forEach>
