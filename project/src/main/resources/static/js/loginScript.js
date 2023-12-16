@@ -1,7 +1,4 @@
 
-
-
-
 function userCheck(){
 
 	var IMP = window.IMP;
@@ -87,6 +84,7 @@ $(document).ready(function(){
 });
 // 회원가입 데이터 확인(아이디, 비밀번호, 비밀번호 확인, 이메일 입력 여부 확인)
 function memberJoinFormCheck() {
+<<<<<<< HEAD
 
     // 체크박스 요소를 가져옵니다.
     var agreeTerms = document.getElementById('agreeTerms');
@@ -98,6 +96,9 @@ function memberJoinFormCheck() {
         return false; // 함수 실행을 중지합니다.
     }
 
+=======
+    
+>>>>>>> branch 'updatemainpage/spg9468' of https://github.com/pangyosim/strawberr7.git
     // 아이디
     var loginId = document.getElementById('loginId');
     if(loginId.value == '') {
@@ -201,17 +202,26 @@ function memberJoinFormCheck() {
 		alert('이메일 인증 해주세요.')
 		return false;
 	}
+<<<<<<< HEAD
 
 
 
+=======
+	
+>>>>>>> branch 'updatemainpage/spg9468' of https://github.com/pangyosim/strawberr7.git
     // 모든 검증을 통과하면 form을 제출
     document.querySelector('form').submit();
+<<<<<<< HEAD
 }
 
 
 
+=======
+}    
+>>>>>>> branch 'updatemainpage/spg9468' of https://github.com/pangyosim/strawberr7.git
 // 회원 수정~~~~~~
 	function memberUpdateCheck() {
+<<<<<<< HEAD
 
     // 비밀번호
     var loginPw = document.getElementById('loginPw');
@@ -268,22 +278,91 @@ function memberJoinFormCheck() {
 	    address_1.focus();
 	    return false;
 	}
+=======
+	    
+	    // 비밀번호
+	    var loginPw = document.getElementById('loginPw');
+	    if(loginPw.value == '') {
+	        alert('비밀번호를 입력해주세요.');
+	        loginPw.focus();
+	        return false;
+	    }
+>>>>>>> branch 'updatemainpage/spg9468' of https://github.com/pangyosim/strawberr7.git
 	
-	// 전화번호
-	var tel = document.getElementById('tel');
-	if(tel.value == '') {
-	    alert('전화번호를 입력해주세요.');
-	    tel.focus();
-	    return false;
-	}
+	    // 비밀번호 확인
+	    var loginPwConfirm = document.getElementsByName('loginPwConfirm')[0];
+	    if(loginPwConfirm.value == '') {
+	        alert('비밀번호 확인을 입력해주세요.');
+	        loginPwConfirm.focus();
+	        return false;
+	    }
 	
-	// 전화번호 형식 확인
-	var telRegex = /^\d{2,3}-\d{3,4}-\d{4}$/;
-	if (!telRegex.test(tel.value)) {
-	    alert('전화번호 형식이 올바르지 않습니다.');
-	    tel.focus();
-	    return false;
+	    // 비밀번호 일치 확인
+	    if(loginPw.value != loginPwConfirm.value) {
+	        alert('비밀번호가 일치하지 않습니다.');
+	        loginPwConfirm.focus();
+	        return false;
+	    }
+	
+	    // 이름
+	    var nickname = document.getElementById('nickname');
+	    if(nickname.value == '') {
+	        alert('닉네임을 입력해주세요.');
+	        nickname.focus();
+	        return false;
+	    }
+	    // 생일 년
+		var birthYear = document.getElementById('birth-year');
+		if(birthYear.value == '' || birthYear.value == '출생 연도') {
+		    alert('출생 연도를 선택해주세요.');
+		    birthYear.focus();
+		    return false;
+		}
+	
+		// 생일 월
+		var birthMonth = document.getElementById('birth-month');
+		if(birthMonth.value == '' || birthMonth.value == '월') {
+		    alert('월을 선택해주세요.');
+		    birthMonth.focus();
+		    return false;
+		}
+	
+		// 생일 일
+		var birthDay = document.getElementById('birth-day');
+		if(birthDay.value == '' || birthDay.value == '일') {
+		    alert('일을 선택해주세요.');
+		    birthDay.focus();
+		    return false;
+		}
+	
+		// 우편번호
+		var address_1 = document.getElementById('address_1');
+		if(address_1.value == '') {
+		    alert('주소를 입력해주세요.');
+		    address_1.focus();
+		    return false;
+		}
+		
+		// 전화번호
+		var tel = document.getElementById('tel');
+		if(tel.value == '') {
+		    alert('전화번호를 입력해주세요.');
+		    tel.focus();
+		    return false;
+		}
+		
+		// 전화번호 형식 확인
+		var telRegex = /^\d{2,3}-\d{3,4}-\d{4}$/;
+		if (!telRegex.test(tel.value)) {
+		    alert('전화번호 형식이 올바르지 않습니다.');
+		    tel.focus();
+		    return false;
+		}
+	
+	    // 모든 검증을 통과하면 form을 제출
+	    document.querySelector('form').submit();
 	}
+<<<<<<< HEAD
 
     // 모든 검증을 통과하면 form을 제출
     document.querySelector('form').submit();
@@ -291,6 +370,10 @@ function memberJoinFormCheck() {
 }
 
 
+=======
+ 
+ 
+>>>>>>> branch 'updatemainpage/spg9468' of https://github.com/pangyosim/strawberr7.git
  function sendNumber(){
     		var mailf = document.getElementsByClassName('mail')[0];
     	    var maill= document.getElementsByClassName('domain')[0];
@@ -316,6 +399,7 @@ function memberJoinFormCheck() {
     		} else{
     			alert("이메일 형식이 올바르지 않습니다");
     	}
+<<<<<<< HEAD
 }
 
 function confirmNumber(){
@@ -329,3 +413,17 @@ function confirmNumber(){
 		alert("번호가 다릅니다")
 	}
 }
+=======
+    }
+    	function confirmNumber(){
+    		var number1 = $("#number").val();
+    		var number2 = $("#Confirm").val();
+    		
+    		if(number1 == number2){
+    			alert("인증되었습니다");
+    			isEmailCheck=true;
+    		} else{
+    			alert("번호가 다릅니다")
+    		}
+    	}
+>>>>>>> branch 'updatemainpage/spg9468' of https://github.com/pangyosim/strawberr7.git
