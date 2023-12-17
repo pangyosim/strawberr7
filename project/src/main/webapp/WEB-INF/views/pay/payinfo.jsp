@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,25 +34,11 @@
 	   			<th>서비스</th><th>기간</th><th>가격</th><th>수수료</th><th>합계</th>
 	   		</tr>
 	   		<tr style="height: 150px;">
-	   			<c:if test="${vo.service eq 'watcha' }">
-	   				<td><img src="resources/assets/img/watcha.png" width="130" height="100"/></td>
-	   			</c:if>
-	   			<c:if test="${vo.service eq 'youtube' }">
-	   				<td><img src="resources/assets/img/youtube.png" width="120" height="100"/></td>
-	   			</c:if>
-	   			<c:if test="${vo.service eq 'netflix' }">
-	   				<td><img src="resources/assets/img/netflix.png" width="100" height="100"/></td>
-	   			</c:if>
-	   			<c:if test="${vo.service eq 'tving' }">
-	   				<td><img src="resources/assets/img/tving.png" width="100" height="100"/></td>
-	   			</c:if>
-	   			<c:if test="${vo.service eq 'wavve' }">
-	   				<td><img src="resources/assets/img/wavve.png" width="100" height="100"/></td>
-	   			</c:if>
-	   			<td>${vo.partydate }~${vo.enddate } (${vo.partyday }개월)</td>
-	   			<td>${vo.price / vo.peoplecnt_max }</td>
-	   			<td>${(vo.price / vo.peoplecnt_max)*0.1 }</td>
-	   			<td>${(vo.price / vo.peoplecnt_max)*1.1 }</td>
+	   			<td><img src="resources/assets/img/${vo.service}.png" width="100" height="100"/></td>
+	   			<td><fmt:formatDate value="${vo.partydate }" pattern="yyyy년MM월dd일"/>~<fmt:formatDate value="${vo.enddate }" pattern="yyyy년MM월dd일"/>(${vo.partyday }개월)</td>
+	   			<td><fmt:formatNumber type="number" maxFractionDigits="0" value="${vo.price / vo.peoplecnt_max  }" /></td>
+	   			<td><fmt:formatNumber type="number" maxFractionDigits="0" value="${(vo.price / vo.peoplecnt_max)*0.1 }" /></td>
+	   			<td><fmt:formatNumber type="number" maxFractionDigits="0" value="${(vo.price / vo.peoplecnt_max)*1.1 }" />&nbsp;원</td>
 	   		</tr>
 	   	</table>
 	   	<table>
@@ -64,21 +51,19 @@
 	   					<img src="resources/assets/img/tosspay.png" width="100" height="50"/> &nbsp; <input type="radio" name="pg" value="tosspayments" checked/> <label>toss</label><br/>
 	   					<img src="resources/assets/img/kakaopay.png" width="100" height="50"/> &nbsp; <input type="radio" name="pg" value="kakaopay"/> <label>kakao</label><br/>
 	   					<img src="resources/assets/img/payco.png" width="100" height="50"/> &nbsp; <input type="radio" name="pg" value="payco"/> <label>payco</label><br/>
-	   					
-<!-- 	   					&nbsp; <img src="resources/assets/img/account_img.png" width="100" height="100"/> &nbsp; <input type="radio" name="pg" value="account"/> <label>계좌이체</label>
- -->	   			</td>
+ 	   			</td>
 	   		</tr>
 	   		<tr>
 	   			<td>이름</td><td>${mv.name }</td>
 	   		</tr>
 	   		<tr>
-	   			<td>참여 금액</td><td>${vo.price / vo.peoplecnt_max }</td>
+	   			<td>참여 금액</td><td><fmt:formatNumber type="number" maxFractionDigits="0" value="${vo.price / vo.peoplecnt_max }" />&nbsp;원</td>
 	   		</tr>
 	   		<tr>
-	   			<td>수수료 (10%)</td><td>${(vo.price / vo.peoplecnt_max)*0.1 }</td>
+	   			<td>수수료 (10%)</td><td><fmt:formatNumber type="number" maxFractionDigits="0" value="${(vo.price / vo.peoplecnt_max)*0.1 }" /></td>
 	   		</tr>
 	   		<tr>
-	   			<td>합계</td><td>${(vo.price / vo.peoplecnt_max)*1.1 }</td>
+	   			<td>합계</td><td><fmt:formatNumber type="number" maxFractionDigits="0" value="${(vo.price / vo.peoplecnt_max)*1.1 }" />&nbsp;원</td>
 	   		</tr>
 	   	</table>
 	   	<br/>

@@ -1,19 +1,12 @@
 package com.web.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.web.dao.GroupMapper;
 import com.web.vo.GroupVO;
-import com.web.vo.MemberVO;
-import com.web.vo.PartyMember;
-import com.web.vo.PayVO;
 
 @Service
 public class GroupServiceImpl implements GroupService{
@@ -48,7 +41,7 @@ public class GroupServiceImpl implements GroupService{
 //	}
 	//리스트테스트
 	@Override
-	public List<GroupVO> JoinList(int seq) {
+	public GroupVO JoinList(int seq) {
 		return groupMapper.JoinList(seq);
 	}
 

@@ -1,6 +1,8 @@
 package com.web.vo;
 
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -14,8 +16,8 @@ public class GroupVO {
 	private String partykingid; //파티장ID
 	private int partyday;		//파티기간
 	private int price;			//가입가격
-	private String partydate;   //생성일자
-	private String enddate;		//끝나는일자
+	private Date partydate;   //생성일자
+	private Date enddate;		//끝나는일자
 //LocalDateTime
 }
 	

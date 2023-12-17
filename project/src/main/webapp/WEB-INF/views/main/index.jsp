@@ -4,6 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
@@ -55,7 +56,7 @@
 	    right: 10px;
 	}
 	</style>
-	<style type="text/css">
+<style type="text/css">
 .searchBar{
 	position: relative;
 	width: 200px;
@@ -180,22 +181,22 @@ display: block; /* 마우스가 올라갔을 때 텍스트를 표시합니다. *
 		<input type="button" value="리뷰" onclick="location.href='reviewForm?page=1'"/>
 	</div>
 	<br /> -->
-	
    <!-- Masthead-->
-   <div class="" style="width: 70%; height: 85%; margin-top: 100px; margin-left: 14%; border: 1px solid black; border-radius: 15px">
-   		<h1 style="margin-left: 45%;">TOP10</h1>
+   <div class="" style=" height: 100%; margin-top: 100px; background-color: black; border: 2px solid #d3d3d3;">
+   		<br>
+   		<h1 style="margin-left: 47%; font-family: monospace; color: #fff;">TOP10</h1>
    		<div id="control">
 			<a href="#" onclick="currentSlide(1)">
-			<img src="https://images.ctfassets.net/4cd45et68cgf/Rx83JoRDMkYNlMC9MKzcB/2b14d5a59fc3937afd3f03191e19502d/Netflix-Symbol.png" 
+			<img src="resources/assets/img/netflix.png" 
 			alt="netflix"
-			style="height: 30px;width: 30px;"/>
-			<span>Netflix</span>
+			style="height: 30px; width: 30px;"/>
+			<span>netflix</span>
 			</a>
 			 <a href="#" onclick="currentSlide(2)">
-			 <img src="https://oopy.lazyrockets.com/api/rest/cdn/image/99453fde-4624-457f-8471-2393b96ccdbb.jpeg" 
-			 alt="disney"
-			 style="height: 30px;width: 30px;"/>
-	        <span>Watcha</span>
+			 <img src="resources/assets/img/watcha.png" 
+			 alt="watcha"
+			 style="height: 30px; width: 30px;"/>
+	        <span>watcha</span>
 	        </a>
 <!-- 	        <a href="#" onclick="currentSlide(3)">
 	        <img src="https://www.tving.com/img/tving-favicon-160@3x.png" 
@@ -210,19 +211,19 @@ display: block; /* 마우스가 올라갔을 때 텍스트를 표시합니다. *
 	        <span>Wavve</span>
 	        </a> -->
 		</div>
-		<div id="visual">
+		<div id="visual" >
 			<div id="pic">
-	   			<div class="top-list" style="margin-left: 35%;">
+	   			<div class="top-list" style="margin-left: 43%;">
 		   			<c:forEach var="netflix" items="${netflix_list}" varStatus="status">
 			   			<img src="${netflix.image}" style="width: 50px; height: 50px;">  			
-			   			<a href="${netflix.url }">${netflix.subject }</a>
+			   			<a style="text-decoration: none; font-family: sans-serif; font-weight: bold; color: #fff;" href="${netflix.url }">${netflix.subject }</a>
 			   			<br>
 			   		</c:forEach>
 		   		</div>
 	   			<div class="top-list" style="margin-left: 35%;">
 					<c:forEach var="whacha" items="${whacha_list}" varStatus="status">
 		   			<img src="${whacha.image}" style="width: 50px; height: 50px;">  			
-		   			<a href="${whacha.url }">${whacha.subject }</a>
+		   			<a style="text-decoration: none; font-family: sans-serif; font-weight: bold; color: #fff;" href="${whacha.url }">${whacha.subject }</a>
 		   			<br>
 		   			</c:forEach>
 				</div>
@@ -241,38 +242,41 @@ display: block; /* 마우스가 올라갔을 때 텍스트를 표시합니다. *
    
    
    <!-- Services-->
-   <div class="services_wrap" style="width: 75%; margin-left: 15%; margin-top: 50px;" >
+   <div class="services_wrap" style=" width: 75%; margin-left: 15%; margin-top: 50px; " >
     <div class="services_div">
     
-   	<h2>최근 만들어진 파티</h2>
-    <button id="prev-button" class="slider-button" onclick="slidePrev()">&#60;</button>
+   		<h2 style="font-family: monospace; font-weight: bold;"> &nbsp; &nbsp; 최근 만들어진 파티</h2>
 		<!-- 페이징 -->
-		<div id="slider-container">
+		<div style="float: left; width: 3%;">
+			<button type="button" tabindex="0" style="margin-top: 12vh; background-color:transparent; border: none; font-size: 50px; color: #d3d3d3;
+			" onclick="slidePrev()">&#60; &nbsp;</button>
+		</div>
+		<div id="slider-container" style="width: 87%;">
 			<div id="slider-content">
 				<table border="1">
 					<tbody>
 						<c:forEach var="group" items="${party}">
 							<c:if test="${group.peoplecnt < group.peoplecnt_max }">
-							<div class="slide">
+							<div class="slide" style="border: 1px solid #e9e9e9; border-radius: 10px; width: 200px; " onclick="location.href='PartyList?seq=${group.seq}'">
 								<c:choose>
 									<c:when test="${group.service != null}">
 										<img
 											src="resources/assets/img/${group.service }.png"
 											style="width: 80px; height: 80px"
-											onclick="location.href='PartyList?seq=${group.seq}'" />
+											/>
 									</c:when>
 									<c:otherwise>
 										<img
 											src="https://developer.apple.com/wwdc23/hero/endframes/p3-startframe-large_2x.jpg"
 											style="width: 80px; height: 80px"
-											onclick="location.href='PartyList?seq=${group.seq}'" />
+											/>
 									</c:otherwise>
 								</c:choose>
-									<P>[${group.service}]</P>
-									<p>${group.peoplecnt}명</p>
-									<p>${group.partydate}~</p>
-									<p>${group.enddate }</p>
-									<p>${group.partyday}개월</p>
+								<P style="font-family: monospace; font-weight: bold;">[${group.service}]</P>
+								<p style="font-family: monospace; font-weight: bold;">${group.peoplecnt}명</p>
+								<p style="font-family: monospace; font-weight: bold;"><fmt:formatDate value="${group.partydate}" pattern="yyyy년 MM월"/>~</p>
+								<p style="font-family: monospace; font-weight: bold;"><fmt:formatDate value="${group.enddate }" pattern="yyyy년 MM월"/></p>
+								<p style="font-family: monospace; font-weight: bold;">${group.partyday}개월</p>
 							</div>
 							</c:if>
 						</c:forEach>
@@ -280,13 +284,16 @@ display: block; /* 마우스가 올라갔을 때 텍스트를 표시합니다. *
 				</table>
 			</div>
 		</div>
-		<button id="next-button" class="slider-button" onclick="slideNext()">&#62;</button>
+		<div style="float: right; width: 9%;">
+			<button type="button" tabindex="0" style="margin-top: -22vh; background-color:transparent; border: none; font-size: 50px; color: #d3d3d3;
+			" onclick="slideNext()">&#62;</button>
+		</div>
 	</div>
 	</div>
 <br/>
 <br/>
      <!-- Team-->
-     <section class="page-section bg-light" id="team">
+     <section class="page-section bg-light" id="team" >
          <div class="container">
              <div class="text-center">
                  <h2 class="section-heading text-uppercase">Our Amazing Team</h2>

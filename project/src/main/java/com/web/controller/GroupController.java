@@ -1,5 +1,6 @@
 package com.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -77,12 +78,6 @@ public String KingModify() {
 public String getmypage(Model model,HttpSession session,
             @ModelAttribute("member") MemberVO memberVo) {
 
-//	//참여 joingroup
-//	PartyMember partymember = (PartyMember)session.getAttribute("accout");
-//	if(partymember !=null) {
-//	List<PartyMember> account = groupService.Account(partymember.getSeq());
-//	model.addAttribute("joinlist",account);	
-//	}
   //방장 Creategroup
   MemberVO memberVO = (MemberVO)session.getAttribute("member");
   List<GroupVO> mykinglist = groupService.MyKingList(memberVO.getEmail());
@@ -93,9 +88,14 @@ public String getmypage(Model model,HttpSession session,
   // 참여 joingroup
   PayVO pv = new PayVO();
   pv.setUserid(memberVO.getEmail());
-  PayVO pv_res = ps.getuserpaidparty(pv);
+  List<PayVO> pv_res = ps.getuserpaidparty(pv);
+  System.out.println(pv_res);
   if(pv_res != null) {
-	  List<GroupVO> joinList = groupService.JoinList(pv_res.getSeq());
+	  List<GroupVO> joinList = new ArrayList<>();
+	  for(PayVO pv_get : pv_res) {
+		  GroupVO group = groupService.JoinList(pv_get.getSeq());
+		  joinList.add(group);
+	  }
 	  model.addAttribute("joinList",joinList);
   }
   return "/createparty/getmypage";
