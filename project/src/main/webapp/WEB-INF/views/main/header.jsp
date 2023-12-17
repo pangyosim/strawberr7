@@ -21,16 +21,16 @@
                         	<input type="text" class="input" onclick="" style="border: none; background: transparent; color: white;"/>
                         </div> 
                        		
-                       		<li class="nav-item"><a class="nav-link" href="/" style="color: #CA226B;">홈</a></li>
+                       	<li class="nav-item"><a class="nav-link" href="/" style="color: #CA226B;">홈</a></li>
                         <c:choose>
 	                        <c:when test="${member == null }">
 	                		    <li class="nav-item"><a class="nav-link" href="login" style="color: #CA226B;">로그인</a></li>
         		    	        <li class="nav-item"><a class="nav-link" href="#" style="color: #CA226B;">About</a></li>	                        	
 	                        </c:when>
 	                        <c:otherwise>
-	                        	<li class="nav-item"><a class="nav-link" href="logout" style="color: #CA226B;">로그아웃</a></li> &nbsp;
-	                        	<li class="nav-item"><a class="nav-link" href="createparty?email=${member.email }" style="color: #CA226B;">파티만들기</a></li> &nbsp;
-	                        	<li class="nav-item"><a class="nav-link" href="getmypage" style="color: #CA226B;">마이페이지</a></li> &nbsp; 
+	                        	<li class="nav-item"><a class="nav-link" href="logout" style="color: #CA226B; width: 80px;">로그아웃</a></li> &nbsp;
+	                        	<li class="nav-item"><a class="nav-link" href="createparty?email=${member.email }" style="color: #CA226B; width: 90px;">파티만들기</a></li> &nbsp;
+	                        	<li class="nav-item"><a class="nav-link" href="getmypage" style="color: #CA226B; width: 90px;">마이페이지</a></li> &nbsp; 
 	                        	<!-- <div class="dropdown" style="right: 30px; top: 6.8px;">
 							      <span class="dropbtn" style="color: #CA226B;">마이페이지</span>
 							      <div class="dropdown-content">

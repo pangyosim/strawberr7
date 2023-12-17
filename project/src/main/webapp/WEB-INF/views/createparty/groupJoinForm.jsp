@@ -113,7 +113,7 @@ div {
 <link href="resources/css/styles.css" rel="stylesheet" />
 </head>
 <body>
-	<c:import url="../main/header.jsp" />
+<c:import url="../main/header.jsp" />
 	<!-- 이름 / 연락처 / 주민번호 / 출금계좌  -->
 	<form action="groupJoinResult" name="groupjoin" id="groupjoin" method="post"
 		onsubmit="return validateForm();">

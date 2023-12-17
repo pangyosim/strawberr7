@@ -1,125 +1,108 @@
 @charset "UTF-8";
 
-
-* {
-  margin: 0px;
-  padding: 0px;
-  text-decoration: none;
-  font-family:sans-serif;
-
+#memberjoinForm {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    padding: 20px;
+    margin: 0 auto;
+    border-radius: 5px;
+    width: 60%;
 }
 
-body {
-  background-image:#34495e;
+#memberjoinForm .textForm {
+    margin-bottom: 10px;
 }
 
-.joinForm {
-  position:absolute;
-  width:400px;
-  height:400px;
-  padding: 30px, 20px;
-  background-color:#FFFFFF;
-  text-align:center;
-  top:40%;
-  left:50%;
-  transform: translate(-50%,-50%);
-  border-radius: 15px;
+#memberjoinForm input[type=text],
+#memberjoinForm input[type=password] {
+    width: calc(100% - 20px); /* 버튼 너비를 뺀 나머지 사용 */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
-.joinForm h2 {
+#memberjoinForm input[type=button] {
+    padding: 10px 15px;
+    background-color: #888;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#memberjoinForm input[type=button]:hover {
+    background-color: #555;
+}
+
+#memberjoinForm .checkboxForm {
+    margin-bottom: 10px;
+}
+
+#memberjoinForm input[type=checkbox] {
+    margin-right: 5px;
+}
+
+#memberjoinForm input[type=submit] {
+    padding: 10px 20px;
+    background-color: #5c7cfa;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: not-allowed; /* 초기에는 비활성화 */
+}
+
+#message {
+    color: red;
+}
+.info#info
+
+.info#info__birth {
+  display: flex;
   text-align: center;
-  margin: 30px;
 }
 
-.textForm, .info {
-  border-bottom: 2px solid #adadad;
-  margin: 30px;
-  padding: 10px 10px;
+.info#info__birth select {
+  margin-left : 7px;
 }
 
-
-.id {
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
+.info#info__birth select:first-child {
+  margin-left : 0px;
+}
+.info#info__birth select::-webkit-scrollbar {
+  width: 10px;
 }
 
-.pw {
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
+.info#info__birth select::-webkit-scrollbar-thumb {
+  background-color: #b6b6b6;
+  border-radius: 3px;
 }
 
-.name {
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
+.info#info__birth select::-webkit-scrollbar-track {
+  background-color: #ebe9e9;
+  border-radius: 6px;
+}
+#memberjoinForm input[type=text].specific, 
+#memberjoinForm input[type=password].specific {
+    /* 원하는 사이즈로 재정의 */
+    width: 150px;
 }
 
-.email {
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
+input[type="text"].mail {
+  width: 200px; /* 너비 설정 */
+  height: 30px; /* 높이 설정 */
+  padding: 5px 10px; /* 내부 패딩으로 입력 텍스트와 테두리 사이 여백을 줍니다. */
+  font-size: 14px; /* 텍스트 크기 설정 */
+  border: 1px solid #ddd; /* 테두리 설정 */
+  border-radius: 4px; /* 테두리 모서리를 둥글게 만듭니다. */
+  box-sizing: border-box; /* box-sizing을 border-box로 설정해 width와 height가 padding과 border를 포함하도록 만듭니다. */
 }
 
-.nickname {
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
+input[type="text"].mail::placeholder {
+  color: #888; /* placeholder 텍스트 색상을 변경합니다. */
 }
 
-.cellphoneNo {
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
-}
-
-.info {
-	width: 160px; margin: 0 auto;
-}
-
-.btn {
-  position:relative;
-  left:40%;
-  transform: translateX(-50%);
-  margin-bottom: 40px;
-  width:80%;
-  height:40px;
-  background: linear-gradient(125deg,#81ecec,#6c5ce7,#81ecec);
-  background-position: left;
-  background-size: 200%;
-  color:white;
-  font-weight: bold;
-  border:none;
-  cursor:pointer;
-  transition: 0.4s;
-  display:inline;
-}
-
-.btn:hover {
-  background-position: right;
+input[type="text"].mail:focus {
+  border-color: #5c7cfa; /* 입력란에 포커스가 되면 테두리 색상을 변경합니다. */
+  outline: none; /* 브라우저 기본 아웃라인을 제거합니다. */
 }
