@@ -800,7 +800,7 @@ window.onload = function init() {
 		</div>
 
 		<form id="memberjoinForm" action="memberJoinResult" method="post">
-			<div class="textForm">
+			<div class="textForm" style="display: flex;">
 				<input type="text" placeholder="아이디" id="loginId" name="loginId"
 					maxlength="20"> <input type="button" value="중복체크"
 					id="checkBtn">
@@ -813,11 +813,12 @@ window.onload = function init() {
 					type="password" placeholder="비밀번호 확인" name="loginPwConfirm"
 					maxlength="20">
 			</div>
-			<div class="textForm">
+			<div class="textForm" style="display: flex;">
 				<input type="text" placeholder="이름" id="name" name="name"
 					maxlength="50">
-				<button type="button" id="check" onclick="userCheck()">본인인증</button>
-			</div>
+				 <input type="button" value="본인인증"	id="check" onclick="userCheck()">
+<!-- 				<button type="button" id="check" onclick="userCheck()">본인인증</button>
+ -->			</div>
 			<div class="info" id="info__birth">
 				<select class="box" id="birth-year" name="birth-year">
 					<option disabled selected>출생 연도</option>
@@ -828,10 +829,13 @@ window.onload = function init() {
 				</select>
 			</div>
 			<div class="textForm">
-				<input type="hidden" id="address_1" name="address_1"
-					placeholder="우편번호" readonly> <input type="text"
-					id="address_2" name="address_2" placeholder="주소" readonly>
-				<input type="button" onclick="checkAddress()" value="우편번호 찾기"><br>
+				<div style="display: flex;">
+					<input type="hidden" id="address_1" name="address_1"
+						placeholder="우편번호" readonly> <input type="text"
+						id="address_2" name="address_2" placeholder="주소" readonly>
+					<input type="button" onclick="checkAddress()" value="우편번호 찾기">				
+				</div>
+				<br>
 				<input type="text" id="address_3" name="address_3"
 					placeholder="상세주소"> <input type="text" id="address_4"
 					name="address_4" placeholder="">
@@ -851,8 +855,7 @@ window.onload = function init() {
 					<option value="daum.net">daum.net</option>
 					<option value="nate.com">nate.com</option>
 				</select>
-				<button type="button" id="sendBtn" name="sendBtn"
-					onclick="sendNumber()">인증번호</button>
+				<input type="button" id="sendBtn" onclick="sendNumber()" value="인증번호">				
 			</div>
 			<br />
 			<div id="mail_number" name="mail_number" style="display: none">

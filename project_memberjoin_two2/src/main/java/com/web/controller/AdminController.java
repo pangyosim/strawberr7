@@ -44,9 +44,9 @@ public class AdminController {
 	//멤버 리스트 
 	@GetMapping("admin/memberInfo")
 	public List<MemberVO> getMemberInfo(@RequestParam("page") int page) {
-		int pageStart = (page - 1) * 5 + 1;
-		int pageLast = page * 5;
-				
+		int pageCount = 5; // 페이지당 출력수		
+		int pageStart = (page - 1) * pageCount + 1;
+		int pageLast = page * pageCount;
 		List<MemberVO> list = adminService.getMemberList(pageStart, pageLast); 
 		return list;			
 	}
@@ -69,8 +69,9 @@ public class AdminController {
 	// 파티 리스트 
 	@GetMapping("admin/partyInfo")
 	public List<GroupVO> getPartyInfo(@RequestParam("page") int page) {
-		int pageStart = (page - 1) * 5 + 1;
-		int pageLast = page * 5;
+		int pageCount = 5; // 페이지당 출력수		
+		int pageStart = (page - 1) * pageCount + 1;
+		int pageLast = page * pageCount;
 		List<GroupVO> list = adminService.getPartyList(pageStart, pageLast);
 		return list;			
 	}	
@@ -94,8 +95,9 @@ public class AdminController {
 	// 계좌 리스트 
 	@GetMapping("admin/accountInfo")
 	public List<PartyMember> getAccountInfo(@RequestParam("page") int page) {
-		int pageStart = (page - 1) * 5 + 1;
-		int pageLast = page * 5;
+		int pageCount = 5; // 페이지당 출력수		
+		int pageStart = (page - 1) * pageCount + 1;
+		int pageLast = page * pageCount;
 		List<PartyMember> list = adminService.getAccountList(pageStart, pageLast);
 		return list;			
 	}	
@@ -118,8 +120,9 @@ public class AdminController {
 	// 결제 리스트 
 	@GetMapping("admin/payInfo")
 	public List<PayVO> getPayInfo(@RequestParam("page") int page) {
-		int pageStart = (page - 1) * 5 + 1;
-		int pageLast = page * 5;
+		int pageCount = 5; // 페이지당 출력수		
+		int pageStart = (page - 1) * pageCount + 1;
+		int pageLast = page * pageCount;
 		List<PayVO> list = adminService.getPayList(pageStart, pageLast);
 		return list;			
 	}	

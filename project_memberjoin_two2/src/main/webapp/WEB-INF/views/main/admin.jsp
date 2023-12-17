@@ -111,6 +111,13 @@ width: 50px;
 input[readonly] {
     background-color: #ccc; /* 회색 배경 */
 }
+
+.pageBut {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
 </style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -120,6 +127,20 @@ input[readonly] {
 var table = 99; // 테이블 확인 번호   
 
 var page = 1;  // 초기 페이지 번호
+function updatePageButtons(totalPages) {
+    var pageButtonsDiv = $('.pageBut');
+    pageButtonsDiv.empty(); // 기존의 버튼들을 삭제합니다.
+
+    for (var i = 1; i <= totalPages; i++) {
+        var button = $('<button class="btn-hover color">' + i + '</button>');
+        button.click(function() {
+            page = parseInt(this.textContent); // 클릭한 버튼의 숫자로 페이지를 설정합니다.
+            updatePageNumber();
+            loadMemberInfo();  // 페이지 데이터를 불러옵니다.
+        });
+        pageButtonsDiv.append(button);
+    }
+}
 function updatePageNumber() {
     document.getElementById('currentPage').textContent = page;
 }
@@ -236,7 +257,7 @@ function loadMemberInfo() {
             var memberInfoDiv = $('#memberInfo');
             memberInfoDiv.empty();          
             // 페이지 버튼 추가
-            var pageButtonsDiv = $('<div></div>');
+            var pageButtonsDiv = $('<div class="pageBut"></div>');
             pageButtonsDiv.append('<button class="btn-hover color" onclick="decreasePage()">페이지 감소</button>');
             pageButtonsDiv.append('<span id="currentPage">' + "[" + page + "]" +'</span>');
             pageButtonsDiv.append('<button class="btn-hover color" onclick="increasePage()">페이지 증가</button>');
@@ -346,7 +367,7 @@ function loadPartyInfo() {
             var partyInfoDiv = $('#partyInfo');
             partyInfoDiv.empty();            
         	// 페이지 버튼 추가
-            var pageButtonsDiv = $('<div></div>');
+            var pageButtonsDiv = $('<div class="pageBut"></div>');
             pageButtonsDiv.append('<button class="btn-hover color" onclick="decreasePage()">페이지 감소</button>');
             pageButtonsDiv.append('<span id="currentPage">' + "[" + page + "]" +'</span>');
             pageButtonsDiv.append('<button class="btn-hover color" onclick="increasePage()">페이지 증가</button>');
@@ -443,7 +464,7 @@ function loadAccountInfo() {
             accountInfoDiv.empty();
             var accountTable = $('<table></table>');
             // 페이지 버튼 추가
-            var pageButtonsDiv = $('<div></div>');
+            var pageButtonsDiv = $('<div class="pageBut"></div>');
             pageButtonsDiv.append('<button class="btn-hover color" onclick="decreasePage()">페이지 감소</button>');
             pageButtonsDiv.append('<span id="currentPage">' + "[" + page + "]" +'</span>');
             pageButtonsDiv.append('<button class="btn-hover color" onclick="increasePage()">페이지 증가</button>');
@@ -534,7 +555,7 @@ function loadPayInfo() {
             payInfoDiv.empty();
         	
             // 페이지 버튼 추가
-            var pageButtonsDiv = $('<div></div>');
+            var pageButtonsDiv = $('<div class="pageBut"></div>');
             pageButtonsDiv.append('<button class="btn-hover color" onclick="decreasePage()">페이지 감소</button>');
             pageButtonsDiv.append('<span id="currentPage">' + "[" + page + "]" +'</span>');
             pageButtonsDiv.append('<button class="btn-hover color" onclick="increasePage()">페이지 증가</button>');
@@ -563,50 +584,67 @@ function loadPayInfo() {
 
 </script>
 
+<!-- 테스트 -->
 
+
+<style type="text/css">
+body, table {
+  background-color: #f0f0f0;
+}
+
+.container {
+  display: flex;
+}
+
+.sidebar {
+  width: 100px;
+  height: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.sidebar button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.sidebar button:hover {
+  background-color: #45a049;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+
+
+
+
+</style>
 
 
 </head>
-<body style="text-align: center;">
-	<a href="/" style="text-decoration: none; color: black;">
+<body>
+	<a href="/" style="text-decoration: none; color: black; text-align: left;">
 		<img width="50px" src="https://i.pinimg.com/564x/3a/80/d0/3a80d08597eb583fc0784a694b56169a.jpg" style="no-repeat; opacity : 0.5;">
-	<br/>메인
+	<br/>Home
 	</a> 
-	<div style="border: 1px solid gray;">
-	    <h1 onclick="toggleVisibility('adminInfo')">어드민 정보</h1>
-	    <div id="adminInfo" class="hidden">
-	   		<table>
-	   			<thead>
-	   				<tr>
-	   					<th>이름</th>
-	   					<th>카카오ID</th>
-	   					<th>닉네임</th>
-	   					<th>권한</th>
-	   					<th>휴대폰</th>
-	   					<th>주소</th>
-	   					<th>생일</th>
-	   					<th>이메일</th>
-	   					<th>티어</th>		
-	   				</tr>
-	   			</thead>
-	   			<tbody>
-	   				<tr>
-	   					<td>${member.name }</td>
-	   					<td>${member.kakaoid }</td>
-	   					<td>${member.nickname }</td>
-	   					<td>${member.role }</td>
-	   					<td>${member.tel }</td>
-	   					<td>${member.addr }</td>
-	   					<td>${member.birth }</td>
-	   					<td>${member.email }</td>
-	   					<td>${member.tier }</td>
-	   				</tr>
-	   			</tbody>
-	   		</table>
-	    </div>	
-	</div>
-	
-	<div style="border: 1px solid gray; ">
+	<!-- <div style="border: 1px solid gray; ">
 	    <h1 onclick="toggleVisibility('memberInfo')">멤버 정보</h1>
 	    <div id="memberInfo" class="hidden">
     </div>
@@ -628,10 +666,29 @@ function loadPayInfo() {
 	    <h1 onclick="toggleVisibility('payInfo')">결제 정보</h1>
 		<div id="payInfo" class="hidden">
 		</div>
+	</div> -->
+	
+<div class="container">
+	 <div class="sidebar">
+		<button id="memberButton" onclick="toggleVisibility('memberInfo')">멤버</button>
+		<button id="partyButton" onclick="toggleVisibility('partyInfo')">파티</button>
+		<button id="accountButton" onclick="toggleVisibility('accountInfo')">계좌</button>
+		<button id="payButton" onclick="toggleVisibility('payInfo')">결제</button>
 	</div>
+  	<div class="content">
+		<div id="memberInfo" style="display: none;">멤버 정보</div>
+		<div id="partyInfo" style="display: none;">파티 정보</div>
+		<div id="accountInfo" style="display: none;">계좌 정보</div>
+		<div id="payInfo" style="display: none;">결제 정보</div>
+ 	</div>	
+</div>
+
+
+
+
 <script type="text/javascript">
 
-function toggleVisibility(id) {
+/* function toggleVisibility(id) {
     var element = document.getElementById(id);
     if (element.style.display === "none") {
         element.style.display = "block";
@@ -656,8 +713,37 @@ function toggleVisibility(id) {
     } else {
         element.style.display = "none";
     }
-}
+} */
 
+function toggleVisibility(id) {
+	  var ids = ['memberInfo', 'partyInfo', 'accountInfo', 'payInfo'];
+	  var buttons = ['memberButton', 'partyButton', 'accountButton', 'payButton'];
+	  for (var i = 0; i < ids.length; i++) {
+	    var element = document.getElementById(ids[i]);
+	    var button = document.getElementById(buttons[i]);
+	    if (ids[i] === id) {
+	      element.style.display = "block";
+	      button.style.backgroundColor = 'gray';
+	      // 각 섹션에 대한 정보를 불러옵니다.
+	      if (id === 'memberInfo') {
+	    		page = 1;
+	       		loadMemberInfo();
+	      } else if (id === 'partyInfo') {
+	    		page = 1;
+	       	 loadPartyInfo();
+	      } else if (id === 'accountInfo') {
+	    		page = 1;
+	        	loadAccountInfo();
+	      } else if (id === 'payInfo') {
+	    		page = 1;
+	        	loadPayInfo();
+	      }
+	    } else {
+	      element.style.display = "none";
+	      button.style.backgroundColor = '#4CAF50';
+	    }
+	  }
+	}
 
 
 </script>
