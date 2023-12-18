@@ -81,6 +81,8 @@ public class LoginController implements MemberSession{
 	public String getCheckUser(HttpSession session) {
 	    MemberVO memberVO = (MemberVO) session.getAttribute("member");
 	    if(memberVO != null && memberVO.getId() != null) {
+	    	
+	    	
 	        session.setAttribute("party", ps.selectPeoplecnt());
 	        return "forward:/";
 	    } else {
@@ -97,6 +99,7 @@ public class LoginController implements MemberSession{
 	        MemberVO VO = ms.kakaologinResult(kakaoid);
 	        if(VO != null && VO.getKakaoid() != null) {
 	            session.setAttribute("member", VO);
+	            
 	            return "redirect:checkUser";
 	        } else {
 	            session.setAttribute("kakaoid", kakaoid);
