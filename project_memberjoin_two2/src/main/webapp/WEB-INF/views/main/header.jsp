@@ -7,7 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>header</title>
+
 </head>
+
 <body>
 	<!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
@@ -15,12 +17,12 @@
                 <a class="navbar-brand" href="/" style="color: #CA226B;">팀 프로젝트명</a>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <!-- 검색창 -->
-                        <div class="searchBar">
-                        	<i class="fa-solid fa-magnifying-glass"></i>
-                        	<input type="text" class="input" onclick="" style="border: none; background: transparent; color: white;"/>
-                        </div> 
-                       		
+						<!-- 검색창 -->
+						<div class="searchBar">
+						  <i class="fa-solid fa-magnifying-glass"></i>
+						  <input type="text" id="searchInput" class="input" style="border: none; background: transparent; color: white;"/>
+						</div>
+						                       		
                        		<li class="nav-item"><a class="nav-link" href="/" style="color: #CA226B;">홈</a></li>
                         <c:choose>
 	                        <c:when test="${member == null }">

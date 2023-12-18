@@ -62,12 +62,15 @@ $(document).ready(function(){
             },
             success: function(data) {
                 if(data.isDuplicate) {
-                    loginId.css('backgroundColor', 'red');
                     isIdDuplicate = true;
-                    message.text("중복된 Id 입니다.");
+                    loginId.css('color', 'red');
+                    message.css('color', 'red')
+        			message.text("중복된 Id 입니다.");
+  			        loginId.focus();
+
                 } else {
-                    loginId.css('backgroundColor', 'green');
                     isIdDuplicate = false;
+                    message.css('color', 'black')
                     message.text("생성 가능한 Id 입니다.");
                 }
             }
@@ -76,8 +79,10 @@ $(document).ready(function(){
     });
     
     loginId.on('input', function() {
-        loginId.css('backgroundColor', '');
         isIdDuplicate = true;
+        loginId.css('backgroundColor', '');
+        loginId.css('color', '');
+        message.css('color', '')
         message.text("");  // 아이디 입력 필드의 내용이 변경되면 메시지 삭제
     });
     

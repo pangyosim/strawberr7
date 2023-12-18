@@ -799,13 +799,13 @@ window.onload = function init() {
 			</div>
 		</div>
 
-		<form id="memberjoinForm" action="memberJoinResult" method="post">
+		<form id="memberjoinForm" action="memberJoinResult" method="post" style="text-align: left;">
 			<div class="textForm" style="display: flex;">
 				<input type="text" placeholder="아이디" id="loginId" name="loginId"
 					maxlength="20"> <input type="button" value="중복체크"
 					id="checkBtn">
-				<p id="message"></p>
 			</div>
+				<p id="message" style="font-size: 13px; text-align: center; margin-bottom: 20px"></p>
 			<input type="hidden" id="kakaoid" name="kakaoid" value="${kakaoid }">
 			<div class="textForm">
 				<input type="password" placeholder="비밀번호" id="loginPw"
@@ -819,7 +819,7 @@ window.onload = function init() {
 				 <input type="button" value="본인인증"	id="check" onclick="userCheck()">
 <!-- 				<button type="button" id="check" onclick="userCheck()">본인인증</button>
  -->			</div>
-			<div class="info" id="info__birth">
+			<div class="info" id="info__birth" style="text-align: center;">
 				<select class="box" id="birth-year" name="birth-year">
 					<option disabled selected>출생 연도</option>
 				</select> <select class="box" id="birth-month" name="birth-month">
@@ -845,7 +845,7 @@ window.onload = function init() {
 					placeholder="전화번호" oninput="oninputPhone(this)" maxlength="13">
 			</div>
 			<div class="textForm" class="mail_input" id="mail_input"
-				name="mail_input">
+				name="mail_input" style="text-align: center;">
 				<input type="text" class="mail specific" name="mail" id="mail"
 					placeholder="이메일 입력" maxlength="20">@ <select
 					class="domain" id="domain" name="domain">

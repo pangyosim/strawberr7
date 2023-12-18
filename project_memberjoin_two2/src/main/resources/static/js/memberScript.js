@@ -26,12 +26,14 @@ btnCancelModal.onclick = function() {
 };
 
 spanClose.onclick = function() {
+	checkboxTerms.checked = false;
 	// 모달 창을 닫습니다.
 	modal.style.display = 'none';
 };
 
 window.onclick = function(event) {
 	if (event.target == modal) {
+		checkboxTerms.checked = false;
 		// 어디에나 클릭하면 모달 창을 닫습니다.
 		modal.style.display = 'none';
 	}
