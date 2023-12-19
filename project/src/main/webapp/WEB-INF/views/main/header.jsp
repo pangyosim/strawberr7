@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>header</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
 <body>
 	<!-- Navigation-->
@@ -21,28 +23,18 @@
                         	<input type="text" class="input" onclick="" style="border: none; background: transparent; color: white;"/>
                         </div> 
                        		
-                       	<li class="nav-item"><a class="nav-link" href="/" style="color: #CA226B;">홈</a></li>
+                       	<li class="nav-item"><a class="nav-link" href="/" style="color: #CA226B;  width: 60px;">홈</a></li>
                         <c:choose>
 	                        <c:when test="${member == null }">
-	                		    <li class="nav-item"><a class="nav-link" href="login" style="color: #CA226B;">로그인</a></li>
-        		    	        <li class="nav-item"><a class="nav-link" href="#" style="color: #CA226B;">About</a></li>	                        	
+	                		    <li class="nav-item"><a class="nav-link" href="login" style="color: #CA226B;  width: 80px;">로그인</a></li>
+        		    	        <li class="nav-item"><a class="nav-link" href="#" style="color: #CA226B;  width: 80px;">About</a></li>	                        	
 	                        </c:when>
 	                        <c:otherwise>
 	                        	<li class="nav-item"><a class="nav-link" href="logout" style="color: #CA226B; width: 80px;">로그아웃</a></li> &nbsp;
 	                        	<li class="nav-item"><a class="nav-link" href="createparty?email=${member.email }" style="color: #CA226B; width: 90px;">파티만들기</a></li> &nbsp;
 	                        	<li class="nav-item"><a class="nav-link" href="getmypage" style="color: #CA226B; width: 90px;">마이페이지</a></li> &nbsp; 
-	                        	<!-- <div class="dropdown" style="right: 30px; top: 6.8px;">
-							      <span class="dropbtn" style="color: #CA226B;">마이페이지</span>
-							      <div class="dropdown-content">
-							        <a href="memberUpdateForm">회원수정</a>
-							        <a href="memberDelete">회원탈퇴</a>
-							        <a href="partyUpdateForm">내파티보기</a>
-							        <a href="#">Q&A</a>
-							      </div>
-							    </div>  -->
 	                       	</c:otherwise>
                         </c:choose>
-                        <!-- mypage hidden -->
                     </ul>
                 </div>
             </div>

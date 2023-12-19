@@ -11,6 +11,7 @@
 		<result property="peoplecnt" column="peoplecnt"/>
 		<result property="peoplecnt_max" column="peoplecnt_max"/>
 		<result property="userid" column="userid"/>
+		<result property="userpw" column="userpw"/>
 		<result property="partykingid" column="partykingid"/>
 		<result property="partyday" column="partyday"/>
 		<result property="price" column="price"/>

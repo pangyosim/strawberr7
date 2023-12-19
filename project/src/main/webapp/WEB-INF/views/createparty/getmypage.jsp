@@ -1,7 +1,7 @@
-<meta charset="UTF-8">
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,7 +67,7 @@
         .party-box {
             width: 100%;
             max-width: 400px;
-            height: 495px;
+            height: 520px;
             margin-top: 20px;
         }
         .party-nav {
@@ -153,6 +153,11 @@
 		text-align: right;
 		}
 </style>
+
+<link href="resources/css/styles.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.7.1.js"
+	integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	crossorigin="anonymous"></script>
 <link href="resources/css/styles.css" rel="stylesheet" />
 </head>
 <body>
@@ -165,14 +170,13 @@
 	        <div>이름</div>	<nav>${member.name}</nav>
 	        <div>이메일</div>	<nav>${member.email}</nav>
 	        <div>닉네임</div>	<nav>${member.nickname}</nav>
-	        <div></div>
 	        <br/>
 	        <br/>
     </div>
-        
+        <br>
         <!-- 추가적인 내 정보 표시 -->
-        <input type="button" value="정보수정하기" onclick="location.href='memberUpdateForm'"/>
-		<input type="button" value="탈퇴하기" onclick="location.href='Memberdelete'"/>    
+        <input type="button" value="정보수정하기" onclick="location.href='memberUpdateForm'"/> &nbsp;
+		<input type="button" value="탈퇴하기" onclick="location.href='memberDelete'"/>    
     </div>
 
 	<!-- 파티목록 -->
@@ -185,24 +189,17 @@
 			<div id="joinList" class="party-content active">
 					<div class="swiper">
 						<div class="swiper-wrapper">
-							<table border="1">
+							<table>
 								<tbody>
 									<c:forEach var="group" items="${joinList}">
 									<div class="swiper-slide">
 									<div class="box" onclick="location.href='PartyList?seq=${group.seq}'">
-									<!--  -->
-									<%-- 	<c:choose> --%>
 											<img
 								               src="resources/assets/img/${group.service}.png"
 								               style="width: 70px; height: 70px"/>
-							<%-- 		<c:otherwise>
-											<img
-								               src="https://developer.apple.com/wwdc23/hero/endframes/p3-startframe-large_2x.jpg"
-								               style="width: 70px; height: 70px"/>
-											</c:otherwise>
-										</c:choose> --%>
 										<c:if test="${group.peoplecnt == group.peoplecnt_max }">
 											<p> 공유한 아이디 : ${group.userid }</p>
+											<p> 공유한 비밀번호 : ${group.userpw }</p>
 										</c:if>
 										<p> ${group.service}</p>
 										<p> ${group.peoplecnt} / ${group.peoplecnt_max } 명</p>
@@ -221,17 +218,18 @@
 			</div>
 			<div id="createList" class="party-content">
 				<div class="swiper">
+						<br><br>
 						<div class="swiper-wrapper">
-							<table border="1">
+							<table>
 								<tbody>
 									<c:forEach var="group" items="${mykinglist}">
 									<div class="swiper-slide">
-									<div class="box">
+									<div class="box" onclick="location.href='PartyList?seq=${group.seq}'">
 									<img src="resources/assets/img/crown.png"
 										style="width:50px; padding-left: 10px;"/>
 										<img
 							               src="resources/assets/img/${group.service}.png"
-							               style="width: 70px; height: 70px" onclick=""/>
+							               style="width: 70px; height: 70px"/>
 										<p> ${group.service}</p>
 										<p> ${group.peoplecnt} / ${group.peoplecnt_max } 명</p>
 										<p> ${group.partyday} 개월</p>
@@ -248,21 +246,24 @@
 			</div>
 			<div id="allGroups" class="party-content">
 					<div class="swiper">
+						<br><br>
 						<div class="swiper-wrapper">
-							<table border="1">
+							<table>
 								<tbody>
 									<c:forEach var="group" items="${groupList}">
-									<div class="swiper-slide">
-										<div class="box" onclick="location.href='PartyList?seq=${group.seq}'">
-											<img
-								               src="resources/assets/img/${group.service}.png"
-								               style="width: 70px; height: 70px"/>
-											<p> ${group.service}</p>
-											<p> ${group.peoplecnt} / ${group.peoplecnt_max } 명</p>
-											<p> <fmt:formatDate value="${group.partydate}" pattern="yyyy년 MM월"/>~<fmt:formatDate value="${group.enddate}" pattern="yyyy년 MM월"/></p>
-											<p> ${group.partyday} 개월</p>
-										</div>
-									</div>
+										<c:if test="${group.peoplecnt<group.peoplecnt_max}">
+											<div class="swiper-slide">
+												<div class="box" onclick="location.href='PartyList?seq=${group.seq}'">
+													<img
+										               src="resources/assets/img/${group.service}.png"
+										               style="width: 70px; height: 70px"/>
+													<p> ${group.service}</p>
+													<p> ${group.peoplecnt} / ${group.peoplecnt_max } 명</p>
+													<p> <fmt:formatDate value="${group.partydate}" pattern="yyyy년 MM월"/>~<fmt:formatDate value="${group.enddate}" pattern="yyyy년 MM월"/></p>
+													<p> ${group.partyday} 개월</p>
+												</div>
+											</div>
+										</c:if>
 									</c:forEach>
 								</tbody>
 							</table>
@@ -270,8 +271,7 @@
 					<div class="swiper-button-next"></div>
 				   	<div class="swiper-button-prev"></div>
 				</div>							
-		</div>
-	</div>
+			</div>
 	<script>
 	/* 숨기기 */
 	function togglePartyContent(contentId) {

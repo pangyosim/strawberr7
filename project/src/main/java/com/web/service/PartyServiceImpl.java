@@ -56,8 +56,6 @@ public class PartyServiceImpl implements PartyService {
 		return result;
 	}
 	
-	 
-	
 	
 	
 }

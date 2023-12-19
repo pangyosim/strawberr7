@@ -37,7 +37,7 @@ public class PayController {
 	
 	@GetMapping("/payinfo")
 	public String payinfo(Model model, int seq, HttpSession session) {
-		
+		// 로그인안되면 우회
         if(session.getAttribute("member") != null) {
         	// 이미 참여중인 파티 우회
     		MemberVO mv = (MemberVO) session.getAttribute("member");

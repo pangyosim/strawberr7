@@ -3,7 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.web.dao.GroupMapper">
 	<insert id="groupInsert"> INSERT INTO partytable
-		VALUES(partytable_seq.nextval,#{service},#{title},1,#{peoplecnt_max},#{userid},#{partykingid},#{partyday},#{price},SYSDATE,ADD_MONTHS(SYSDATE,#{partyday})) 
+		VALUES(partytable_seq.nextval,#{service},#{title},1,#{peoplecnt_max},#{userid},#{userpw},#{partykingid},#{partyday},#{price},SYSDATE,ADD_MONTHS(SYSDATE,#{partyday})) 
 	</insert>
 	
   	<!-- 파티 수정하기 -->
@@ -13,7 +13,7 @@
   	
   	<update id="groupUpdate" parameterType="com.web.vo.GroupVO">
   		UPDATE partytable set
-  		service=#{service},title=#{title},peoplecnt=#{peoplecnt},userid=#{userid},partyday=#{partyday},price=#{price},SYSDATE
+  		service=#{service},title=#{title},peoplecnt=#{peoplecnt},userid=#{userid},userpw=#{userpw},partyday=#{partyday},price=#{price},SYSDATE
   		WHERE groupid = #{groupid}
   	</update>
   	

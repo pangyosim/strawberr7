@@ -89,7 +89,6 @@ public String getmypage(Model model,HttpSession session,
   PayVO pv = new PayVO();
   pv.setUserid(memberVO.getEmail());
   List<PayVO> pv_res = ps.getuserpaidparty(pv);
-  System.out.println(pv_res);
   if(pv_res != null) {
 	  List<GroupVO> joinList = new ArrayList<>();
 	  for(PayVO pv_get : pv_res) {

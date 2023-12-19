@@ -7,6 +7,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html lang="en">
 <head>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
@@ -181,6 +182,55 @@ display: block; /* 마우스가 올라갔을 때 텍스트를 표시합니다. *
 		<input type="button" value="리뷰" onclick="location.href='reviewForm?page=1'"/>
 	</div>
 	<br /> -->
+	 <!-- Services-->
+   <div class="services_wrap" style=" width: 75%; margin-left: 15%; margin-top: 150px; " >
+    <div class="services_div">
+    
+   		<h2 style="font-family: monospace; font-weight: bold;"> &nbsp; &nbsp; 최근 만들어진 파티</h2>
+		<!-- 페이징 -->
+		<div style="float: left; width: 3%;">
+			<button type="button" tabindex="0" style="margin-top: 12vh; background-color:transparent; border: none; font-size: 50px; color: #d3d3d3;
+			" onclick="slidePrev()">&#60; &nbsp;</button>
+		</div>
+		<div id="slider-container" style="width: 87%;">
+			<div id="slider-content">
+				<table border="1">
+					<tbody>
+						<c:forEach var="group" items="${party}">
+							<c:if test="${group.peoplecnt < group.peoplecnt_max }">
+							<div class="slide" style="border: 1px solid #e9e9e9; border-radius: 10px; width: 200px; " onclick="location.href='PartyList?seq=${group.seq}'">
+								<c:choose>
+									<c:when test="${group.service != null}">
+										<img
+											src="resources/assets/img/${group.service }.png"
+											style="width: 80px; height: 80px"
+											/>
+									</c:when>
+									<c:otherwise>
+										<img
+											src="https://developer.apple.com/wwdc23/hero/endframes/p3-startframe-large_2x.jpg"
+											style="width: 80px; height: 80px"
+											/>
+									</c:otherwise>
+								</c:choose>
+								<P style="font-family: monospace; font-weight: bold;">[${group.service}]</P>
+								<p style="font-family: monospace; font-weight: bold;">${group.peoplecnt}명</p>
+								<p style="font-family: monospace; font-weight: bold;"><fmt:formatDate value="${group.partydate}" pattern="yyyy년 MM월"/>~</p>
+								<p style="font-family: monospace; font-weight: bold;"><fmt:formatDate value="${group.enddate }" pattern="yyyy년 MM월"/></p>
+								<p style="font-family: monospace; font-weight: bold;">${group.partyday}개월</p>
+							</div>
+							</c:if>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div style="float: right; width: 9%;">
+			<button type="button" tabindex="0" style="margin-top: -22vh; background-color:transparent; border: none; font-size: 50px; color: #d3d3d3;
+			" onclick="slideNext()">&#62;</button>
+		</div>
+	</div>
+	</div>
    <!-- Masthead-->
    <div class="" style=" height: 100%; margin-top: 100px; background-color: black; border: 2px solid #d3d3d3;">
    		<br>
@@ -241,55 +291,6 @@ display: block; /* 마우스가 올라갔을 때 텍스트를 표시합니다. *
    	</div>
    
    
-   <!-- Services-->
-   <div class="services_wrap" style=" width: 75%; margin-left: 15%; margin-top: 50px; " >
-    <div class="services_div">
-    
-   		<h2 style="font-family: monospace; font-weight: bold;"> &nbsp; &nbsp; 최근 만들어진 파티</h2>
-		<!-- 페이징 -->
-		<div style="float: left; width: 3%;">
-			<button type="button" tabindex="0" style="margin-top: 12vh; background-color:transparent; border: none; font-size: 50px; color: #d3d3d3;
-			" onclick="slidePrev()">&#60; &nbsp;</button>
-		</div>
-		<div id="slider-container" style="width: 87%;">
-			<div id="slider-content">
-				<table border="1">
-					<tbody>
-						<c:forEach var="group" items="${party}">
-							<c:if test="${group.peoplecnt < group.peoplecnt_max }">
-							<div class="slide" style="border: 1px solid #e9e9e9; border-radius: 10px; width: 200px; " onclick="location.href='PartyList?seq=${group.seq}'">
-								<c:choose>
-									<c:when test="${group.service != null}">
-										<img
-											src="resources/assets/img/${group.service }.png"
-											style="width: 80px; height: 80px"
-											/>
-									</c:when>
-									<c:otherwise>
-										<img
-											src="https://developer.apple.com/wwdc23/hero/endframes/p3-startframe-large_2x.jpg"
-											style="width: 80px; height: 80px"
-											/>
-									</c:otherwise>
-								</c:choose>
-								<P style="font-family: monospace; font-weight: bold;">[${group.service}]</P>
-								<p style="font-family: monospace; font-weight: bold;">${group.peoplecnt}명</p>
-								<p style="font-family: monospace; font-weight: bold;"><fmt:formatDate value="${group.partydate}" pattern="yyyy년 MM월"/>~</p>
-								<p style="font-family: monospace; font-weight: bold;"><fmt:formatDate value="${group.enddate }" pattern="yyyy년 MM월"/></p>
-								<p style="font-family: monospace; font-weight: bold;">${group.partyday}개월</p>
-							</div>
-							</c:if>
-						</c:forEach>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<div style="float: right; width: 9%;">
-			<button type="button" tabindex="0" style="margin-top: -22vh; background-color:transparent; border: none; font-size: 50px; color: #d3d3d3;
-			" onclick="slideNext()">&#62;</button>
-		</div>
-	</div>
-	</div>
 <br/>
 <br/>
      <!-- Team-->

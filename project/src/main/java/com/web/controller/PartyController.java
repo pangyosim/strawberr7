@@ -44,50 +44,28 @@ public class PartyController implements MemberSession {
 		partyService.groupjoin(partyMember);
 		MemberVO memebvo = (MemberVO) httpSession.getAttribute("member");
 		partyService.updatePartyKing(memebvo.getEmail());
-//			memebvo.getRole()=="PARTYKING";
-		return "/createparty/groupJoinForm";
-// 	public String result(PartyMember partyMember, String email) {
-// 		partyService.groupjoin(partyMember);
-// 		ms.updateRole(email);
-// 		return "redirect:/";
+		return "redirect:/";
 	}
-//  ==================================================================
-
-//  =================================================================
-
-//	// 이미지클릭시 해당파티 리스트로 이동
-//	@GetMapping("/youtubePartyList")
-//	public String youtubeParty(Model model, GroupVO vo, HttpSession session) {
-//			GroupVO selectPartylist = partyService.selectPeoplecntList(vo.getSeq());
-//			model.addAttribute("selectPartylist", selectPartylist);
-//			model.addAttribute("seq", vo.getSeq());
-//			return "/createparty/youtubePartyList";
-//	}
-//
-//	@GetMapping("youtubePartyselect")
-//	public String youtubePartyselect() {
-//		return "/createparty/youtubePartyselect";
-//	}
-//	
-//	
-//	==================================================================
+	
 	// main 파티 리스트
 	@GetMapping("/PartyList")
 	public String PartyList(Model model, HttpSession session, int seq) {
 			GroupVO selectParty = partyService.selectPeoplecntList(seq);
+			MemberVO mv = ms.selectMember(selectParty.getPartykingid());
+			model.addAttribute("selectParty", selectParty);
+			model.addAttribute("seq", seq);
+			model.addAttribute("mv", mv);
 			if( session.getAttribute(LOGIN) != null) {
 				MemberVO login_member = (MemberVO) session.getAttribute(LOGIN);
+				model.addAttribute("loginuser", login_member.getEmail());
 				PayVO pv = new PayVO();
 				pv.setSeq(seq);
 				pv.setUserid(login_member.getEmail());
 				List<PayVO> get_pv_list = payService.getuserpaidparty(pv);
-				MemberVO mv = ms.selectMember(selectParty.getPartykingid());
-				model.addAttribute("selectParty", selectParty);
-				model.addAttribute("mv", mv);
-				model.addAttribute("seq", seq);
 				for(PayVO get_pv : get_pv_list) {
 					if(seq==get_pv.getSeq()) {
 						model.addAttribute("pc", selectParty.getUserid());
+						model.addAttribute("pw", selectParty.getUserpw());
 					}
 				}
 			}
@@ -101,10 +79,10 @@ public class PartyController implements MemberSession {
 
 //	--------------------------------------------------------
 	// 파티 수정
-	@GetMapping("partyUpdateForm")
-	public String partyinfo(Model model, @ModelAttribute("member") MemberVO memberVO) {
+	@GetMapping("/partyUpdateForm")
+	public String partyinfo(Model model, @ModelAttribute("member") MemberVO memberVO, GroupVO vo) {
 		if (memberVO.getRole().equals("PARTYKING")) {
-			model.addAttribute("partylist", partyService.myparty(memberVO.getEmail()));
+			model.addAttribute("party", partyService.selectPeoplecntList(vo.getSeq()));
 			return "/createparty/partyUpdate";
 		} else {
 			return "redirect:/";
@@ -131,11 +109,11 @@ public class PartyController implements MemberSession {
 		return "/createparty/groupJoinForm";
 	}
 
-	// 유저가 만든 파티 업데이트
 	@PostMapping("Update")
-	public String partyUpdate(GroupVO groupVO) {
+	public String partyUpdate(GroupVO groupVO, Model model) {
+		GroupVO selectParty = partyService.selectPeoplecntList(groupVO.getSeq());
+		groupVO.setPartydate(selectParty.getPartydate());
 		int zu = partyService.partyUpdate(groupVO);
-		return "redirect:partyUpdateForm";
+		return "redirect:getmypage";
 	}
-	
 }

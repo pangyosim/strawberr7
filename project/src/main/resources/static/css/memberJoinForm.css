@@ -6,11 +6,13 @@
     padding: 20px;
     margin: 0 auto;
     border-radius: 5px;
-    width: 60%;
+    width: 40%;
 }
 
 #memberjoinForm .textForm {
+	margin-left: 80px;
     margin-bottom: 10px;
+    width: 80%;
 }
 
 #memberjoinForm input[type=text],

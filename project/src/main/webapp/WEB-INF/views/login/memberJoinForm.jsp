@@ -67,6 +67,10 @@
 	border: 1px solid #ddd; /* 테두리 설정 */
 	padding: 10px; /* 안쪽 여백 설정 */
 }
+li{
+	list-style-type: none;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -92,7 +96,6 @@ window.onload = function init() {
         }
     }
 };
-
 </script>
 <!-- j쿼리 -->
 <script
@@ -799,13 +802,13 @@ window.onload = function init() {
 			</div>
 		</div>
 
-		<form id="memberjoinForm" action="memberJoinResult" method="post">
-			<div class="textForm">
+		<form id="memberjoinForm" action="memberJoinResult" method="post" style="text-align: left;">
+			<div class="textForm" style="display: flex;">
 				<input type="text" placeholder="아이디" id="loginId" name="loginId"
-					maxlength="20"> <input type="button" value="중복체크"
+					maxlength="20"> <input type="button" value="중복체크" style=" height: 38px; margin-left: 30px;"
 					id="checkBtn">
-				<p id="message"></p>
 			</div>
+				<p id="message" style="font-size: 13px; text-align: center; margin-bottom: 20px"></p>
 			<input type="hidden" id="kakaoid" name="kakaoid" value="${kakaoid }">
 			<div class="textForm">
 				<input type="password" placeholder="비밀번호" id="loginPw"
@@ -813,12 +816,13 @@ window.onload = function init() {
 					type="password" placeholder="비밀번호 확인" name="loginPwConfirm"
 					maxlength="20">
 			</div>
-			<div class="textForm">
+			<div class="textForm" style="display: flex;">
 				<input type="text" placeholder="이름" id="name" name="name"
 					maxlength="50">
-				<button type="button" id="check" onclick="userCheck()">본인인증</button>
-			</div>
-			<div class="info" id="info__birth">
+				 <input type="button" value="본인인증"	id="check" onclick="userCheck()" style=" height: 38px; margin-left: 30px;" >
+<!-- 				<button type="button" id="check" onclick="userCheck()">본인인증</button>
+ -->			</div>
+			<div class="info" id="info__birth" style="text-align: center;">
 				<select class="box" id="birth-year" name="birth-year">
 					<option disabled selected>출생 연도</option>
 				</select> <select class="box" id="birth-month" name="birth-month">
@@ -828,10 +832,13 @@ window.onload = function init() {
 				</select>
 			</div>
 			<div class="textForm">
-				<input type="hidden" id="address_1" name="address_1"
-					placeholder="우편번호" readonly> <input type="text"
-					id="address_2" name="address_2" placeholder="주소" readonly>
-				<input type="button" onclick="checkAddress()" value="우편번호 찾기"><br>
+				<div style="display: flex;">
+					<input type="hidden" id="address_1" name="address_1"
+						placeholder="우편번호" readonly> <input type="text"
+						id="address_2" name="address_2" placeholder="주소" readonly>
+					<input type="button" onclick="checkAddress()" value="우편번호 찾기" style=" height: 38px; margin-left: 30px;">				
+				</div>
+				<br>
 				<input type="text" id="address_3" name="address_3"
 					placeholder="상세주소"> <input type="text" id="address_4"
 					name="address_4" placeholder="">
@@ -841,9 +848,9 @@ window.onload = function init() {
 					placeholder="전화번호" oninput="oninputPhone(this)" maxlength="13">
 			</div>
 			<div class="textForm" class="mail_input" id="mail_input"
-				name="mail_input">
+				name="mail_input" style="text-align: center;">
 				<input type="text" class="mail specific" name="mail" id="mail"
-					placeholder="이메일 입력" maxlength="20">@ <select
+					placeholder="이메일 입력" maxlength="20"/>@ <select
 					class="domain" id="domain" name="domain">
 					<option value="none">---이메일---</option>
 					<option value="naver.com">naver.com</option>
@@ -851,17 +858,16 @@ window.onload = function init() {
 					<option value="daum.net">daum.net</option>
 					<option value="nate.com">nate.com</option>
 				</select>
-				<button type="button" id="sendBtn" name="sendBtn"
-					onclick="sendNumber()">인증번호</button>
+				<input type="button" id="sendBtn" onclick="sendNumber()" value="인증번호" style=" height: 38px; margin-left: 30px;">
+				<input type="hidden" id="umail" name="umail" value=""/>			
 			</div>
 			<br />
 			<div id="mail_number" name="mail_number" style="display: none">
 				<input type="text" name="number" id="number" placeholder="인증번호 입력" />
-				<button type="button" name="confirmBtn" id="confirmBtn"
-					onclick="confirmNumber()">이메일 인증</button>
+				<input type="button" name="confirmBtn" id="confirmBtn" onclick="confirmNumber()" value="이메일 인증" style=" height: 38px; margin-left: 30px;">				
 			</div>
 			<br /> <input type="text" id="Confirm" name="Confirm"
-				style="display: none" value="" /> <input type="button" value="회원가입"
+				style="display: none" value="" /> <input type="button" value="회원가입" style="margin: 0 50%;"
 				onclick="memberJoinFormCheck()" />
 		</form>
 	</div>

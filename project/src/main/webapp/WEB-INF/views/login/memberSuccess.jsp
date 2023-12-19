@@ -8,6 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="resources/css/styles.css" rel="stylesheet" />
 <title>memberSuccess.jsp</title>
 <script type="text/javascript">
 /* 페이지 로딩 10초 후 자동으로 이동 */
@@ -16,13 +17,13 @@
     }, 3000);
 </script>
 </head>
-<body>
+<body >
 <c:import url="../main/header.jsp"/>
-<h3>${nickname} 님 환영합니다~</h3>
-<br>
-<p>3초 후 메인으로 이동 됩니다.</p>
-
-
+<div style="text-align: center; margin-top: 150px;">
+	<h3>${nickname} 님 환영합니다~</h3>
+	<br>
+	<p>3초 후 메인으로 이동 됩니다.</p>
+</div>
 
 </body>
 </html>

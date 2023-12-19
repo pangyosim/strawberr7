@@ -126,7 +126,7 @@ div {
 				<option value=3>새마을금고</option>
 				<option value=4>우리은행</option>
 				<option value=5>제주은행</option>
-			</select> <input type="text" id="acount" name="acount" placeholder="계좌번호">
+			</select> <input type="text" id="account" name="account" placeholder="계좌번호">
 		</div>
 		<div class=""></div>
 

@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>loginForm.jsp</title>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 <link href="resources/css/styles.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -61,17 +62,15 @@ $(document).ready(function() {
 });
 
 function kakaoUnlink() {
-    Kakao.API.request({
-        url: '/v1/user/unlink',
-        success: function(response) {
-            console.log(response);
-            alert('카카오 연결 해제가 완료되었습니다.');
-        },
-        fail: function(error) {
-            console.log(error);
-            alert('카카오 연결 해제에 실패하였습니다.');
-        },
-    });
+	Kakao.API.request({
+		  url: '/v1/user/unlink',
+		})
+		  .then(function(response) {
+		    console.log(response);
+		  })
+		  .catch(function(error) {
+		    console.log(error);
+		  });
 }
 </script>
 
@@ -118,6 +117,10 @@ body{
 	 border: none;
 }
 
+#kakao-login-btn:hover{
+	background-color: #e9ca3f;
+}
+
 #login-box {
 	width: 320px; 
 	height: 50px; 
@@ -126,6 +129,9 @@ body{
 	color: white; 
 	font-size: 15px;
 	border: none;
+}
+#login-box:hover {
+	background-color: #ae71dd;
 }
 
 </style>
@@ -144,10 +150,10 @@ body{
 	   		<span id="register_tag" onclick="location.href='register'">회원가입</span> &nbsp;
 	   		<span id="find_id" onclick="location.href='userSearch'">아이디 / 비밀번호 찾기</span>
 	  </form>
-	<div>
-		<button id="kakao-login-btn"><img alt="" src="resources/assets/img/kakaologin.png" style="width: 20px; height: 20px;"/>카카오 로그인</button>
+	<div style="margin-top: 8px;">
+		<button id="kakao-login-btn"><img alt="" src="resources/assets/img/kakaologin.png" style=" width: 20px; height: 20px;"/>카카오 로그인</button>
 	</div>
- 	<button id="kakao-unlink-btn">카카오 연결 해제</button>
+ 	<a id="kakao-unlink-btn">카카오 연결 해제</a>
  	
   
 </div>

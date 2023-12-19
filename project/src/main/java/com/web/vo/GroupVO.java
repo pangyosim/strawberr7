@@ -3,6 +3,7 @@ package com.web.vo;
 
 import java.util.Date;
 
+
 import lombok.Data;
 
 @Data
@@ -13,6 +14,7 @@ public class GroupVO {
 	private int peoplecnt;		//파티인원
 	private int peoplecnt_max;	//파티인원최대 
 	private String userid;		//공유할ID
+	private String userpw;		//공유할PW
 	private String partykingid; //파티장ID
 	private int partyday;		//파티기간
 	private int price;			//가입가격

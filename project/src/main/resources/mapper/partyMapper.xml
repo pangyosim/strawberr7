@@ -18,7 +18,7 @@
   	</select>	
   	
   	<update id="updatePartyKing">
-  		update member set role='PARTYKING' where id =#{id}
+  		update member set role='PARTYKING' where email=#{email}
   	</update>
   	
   	<!-- 로그인시 파티수정가능 내가만든 파티 들어가서 보기 -->
@@ -27,8 +27,8 @@
   	</select>
   	
   	<!-- 로그인시 내가만든 파티수정 -->
-  	 <update id="partyUpdate">
-  		update partytable set service=#{service},userid=#{userid},title=#{title},partyday=#{partyday},price=#{price} where seq=#{seq} and partykingid=#{partykingid}
+  	<update id="partyUpdate">
+  		update partytable set service=#{service},title=#{title},peoplecnt_max=#{peoplecnt_max},partyday=#{partyday},price=#{price}, enddate=ADD_MONTHS(partydate,#{partyday}) where seq=#{seq}
   	</update> 
   	
   </mapper>

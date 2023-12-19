@@ -8,69 +8,9 @@
 <head>
 <meta charset="UTF-8">
 <title>memberUpdateForm.jsp</title>
+
 <!-- j쿼리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-
-<!-- 카카오 로그인 스크립트 추가 -->
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script>
-Kakao.init('4a706abbdeb8e6daae8b9e423f1752fd');  // 카카오 개발자 사이트에서 받은 자바스크립트 키를 넣어주세요.
-
-function kakaoLogin() {
-    Kakao.Auth.login({
-        success: function(response) {
-            Kakao.API.request({
-                url: '/v2/user/me',
-                success: function(response) {
-                    var kakaoid = String(response.id);  // 카카오ID를 문자열로 변환
-                    $.ajax({
-                        url: '/checkUser',
-                        type: 'POST',
-                        data: JSON.stringify({
-                            kakaoid: kakaoid,
-                        }),
-                        contentType: 'application/json',
-                        success: function(data) {
-                        	
-                            location.href="#";
-                        },
-                        error: function(error) {
-                            console.log(error);
-                        },
-                    });
-                },
-                fail: function(error) {
-                    console.log(error);
-                },
-            });
-        },
-        fail: function(error) {
-            console.log(error);
-        },
-    });
-}
-
-// 카카오 로그인 버튼 클릭 이벤트 추가
-$(document).ready(function() {
-    $('#kakao-login-btn').click(kakaoLogin);
-    $('#kakao-unlink-btn').click(kakaoUnlink);
-});
-
-function kakaoUnlink() {
-    Kakao.API.request({
-        url: '/v1/user/unlink',
-        success: function(response) {
-            console.log(response);
-            alert('카카오 연결 해제가 완료되었습니다.');
-        },
-        fail: function(error) {
-            console.log(error);
-            alert('카카오 연결 해제에 실패하였습니다.');
-        },
-    });
-}
-</script>
 
 <!--  카카오 집주소API -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -79,95 +19,204 @@ function kakaoUnlink() {
 <script type="text/javascript" src="resources/js/loginScript.js?v=2"></script>
 
 <link href="resources/css/styles.css" rel="stylesheet" />
-
-</head>
 <link href="resources/css/memberJoinForm.css" rel="stylesheet" />
-<body style="text-align: center;">
-<c:import url="../main/header.jsp"/>
-<div class="" style="margin-top: 130px;">
-	<h2>회원수정</h2>
-	<!-- 카카오~ -->
-	<c:if test="${Member.kakaoid == null }">
-		<div>
-			<button id="kakao-login-btn">카카오 로그인</button>
-		</div>
-	</c:if>
-	<c:if test="${Member.kakaoid != null }">
- 		<button id="kakao-unlink-btn">카카오 연결 해제</button>	
-	</c:if>
+<style type="text/css">
+select{
+	width: 50px;
+}
+.info{
+	width: 500px;
+}
+.textForm {
+    border-radius: 40px 80px;
+    padding: 10px;
+    margin: 0 auto;
+    width: 625px;
+    height: auto;
+    background-color: #b7b7ff;
+}
+#memberUpdateForm{
+	margin: 0 500px;
+	padding-top: 250px;
+}
+.textForm label{
+    padding: 10px;
+    margin: 10px;
 	
+}
+.textForm input {
+    margin-bottom: 20px;
+}
+
+</style>
+</head>
+<body style="text-align: center; font-family: 'Orbit-Regular';">
+<c:import url="../main/header.jsp"/>
 	
 <form id="memberUpdateForm" action="memberUpdateResult" method="post">
+	<p>아이디/비밀번호</p>
     <div class="textForm">
-        ID : <input type="text" id="loginId" name="loginId" value="${member.id }" maxlength="20" readonly>
+		아 이 디 <input type="text" id="loginId" name="loginId" value="${member.id }" maxlength="20" readonly><br/>
+		비밀번호  <input type="password" placeholder="비밀번호" id="loginPw" name="loginPw" maxlength="20"><br>
+		비밀번호 확인<input type="password" placeholder="비밀번호 확인" name="loginPwConfirm" maxlength="20">     
     </div>
 	<input type="hidden" id="kakaoid" name="kakaoid" value="${member.kakaoid }">
+	<br/><br/>
+	<p>개인정보</p>
     <div class="textForm">
-    	<p>비밀번호</p>
-  		<input type="password" placeholder="비밀번호" id="loginPw" name="loginPw" maxlength="20"><br>
-        <input type="password" placeholder="비밀번호 확인" name="loginPwConfirm" maxlength="20">     
-    </div>
-    <div class="textForm">
-      	성  함 : <input type="text" placeholder="이름" id="name" name="name" value="${member.name }" maxlength="50" readonly>     
+      	이  름 : <input type="text" placeholder="이름" id="name" name="name" value="${member.name }" maxlength="50" readonly>     
         <br/>
         닉네임 : <input type="text" placeholder="닉네임" id="nickname" name="nickname" value="${member.nickname }" maxlength="50">     
-    </div>
-  	<p>생년월일</p>
-    <div class="info" id="info__birth">
-	    <select class="box" id="birth-year" name="birth-year">
-	      <option disabled selected></option>
-	    </select>
-	    <select class="box" id="birth-month" name="birth-month">
-	      <option disabled selected></option>
-	    </select>
-	    <select class="box" id="birth-day" name="birth-day">
-	      <option disabled selected></option>
-	    </select>
-    </div>
-    <p>주소</p>
-    <div class="textForm"> 
-        <input type="hidden" id="address_1" name="address_1" placeholder="우편번호" readonly>
+    	<div class="info" id="info__birth">
+    	<p>생년월일</p>
+	    	<select class="box" id="birth-year" name="birth-year">
+	      		<option disabled selected></option>
+	    	</select>
+	    	<select class="box" id="birth-month" name="birth-month">
+	      		<option disabled selected></option>
+	    	</select>
+	    	<select class="box" id="birth-day" name="birth-day">
+	     		<option disabled selected></option>
+	    	</select>
+    	</div>
+        주  소 : <input type="hidden" id="address_1" name="address_1" placeholder="우편번호" readonly>
         <input type="text" id="address_2" name="address_2" placeholder="주소" readonly>
         <input type="button" onclick="checkAddress()" value="우편번호 찾기"><br>
         <input type="text" id="address_3" name="address_3" placeholder="상세주소">
-        <input type="hidden" id="address_4" name="address_4" placeholder="동">
-    </div>    
-    <div class="textForm">
-    휴대폰 : <input type="text" class="form-control" id="tel" name="tel" value="${member.tel }" oninput="oninputPhone(this)" maxlength="13">
+        <input type="hidden" id="address_4" name="address_4" placeholder="동"><br/><br/>
+		휴대폰 : <input type="text" class="form-control" id="tel" name="tel" value="${member.tel }" oninput="oninputPhone(this)" maxlength="13"><br/>
+		이메일 : <input type="text" id="email" name="email" value="${member.email }" maxlength="50" readonly> 
     </div>
-    <div class="textForm"style="text-align: center;">
-        이메일 : <input type="text" id="email" name="email" value="${member.email }" maxlength="50" readonly> 
-    </div>  
-    <input type="button" value="수정완료" onclick="memberUpdateCheck()"/>
+    <button class="w-btn w-btn-gray" type="button" onclick="location.href='/'">취 소</button>
+    <button class="w-btn w-btn-gra3 w-btn-gra-anim" type="button" onclick="memberUpdateCheck()">정보 수정</button>
 </form>
-</div>
 <c:import url="../main/footer.jsp"/>
 </body>
 <style type="text/css">
 /* SECTION - BIRTH */
-.info#info__birth {
+.textForm.info#info__birth {
   display: flex;
 }
 
-.info#info__birth select {
+.textForm.info#info__birth select {
   margin-left : 7px;
 }
 
-.info#info__birth select:first-child {
+.textForm.info#info__birth select:first-child {
   margin-left : 0px;
 }
-.info#info__birth select::-webkit-scrollbar {
+.textForm.info#info__birth select::-webkit-scrollbar {
   width: 10px;
 }
 
-.info#info__birth select::-webkit-scrollbar-thumb {
+.textForm.info#info__birth select::-webkit-scrollbar-thumb {
   background-color: #b6b6b6;
   border-radius: 3px;
 }
 
-.info#info__birth select::-webkit-scrollbar-track {
+.textForm.info#info__birth select::-webkit-scrollbar-track {
   background-color: #ebe9e9;
   border-radius: 6px;
+}
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+
+button {
+    margin: 20px;
+}
+
+.w-btn {
+    position: relative;
+    border: none;
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 15px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+.w-btn:hover {
+    letter-spacing: 2px;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.w-btn-outline {
+    position: relative;
+    padding: 15px 30px;
+    border-radius: 15px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+.w-btn-gra3 {
+     background: linear-gradient(
+        45deg,
+        #ff0000,
+        #ff7300,
+        #fffb00,
+        #48ff00,
+        #00ffd5,
+        #002bff,
+        #7a00ff,
+        #ff00c8,
+        #ff0000
+    );
+    color: white;
+}
+.w-btn-gra-anim {
+    background-size: 400% 400%;
+    animation: gradient1 5s ease infinite;
+}
+@keyframes gradient1 {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes gradient2 {
+    0% {
+        background-position: 100% 50%;
+    }
+    50% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes ring {
+    0% {
+        width: 30px;
+        height: 30px;
+        opacity
+        }
+    }
+
+.w-btn-gray {
+    background-color: #a3a1a1;
+    color: #e3dede;
+}
+.w-btn-yellow {
+    background-color: yellow;
+    color: black;
+}
+@font-face {
+    font-family: 'Orbit-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/Orbit-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
 }
 </style>
 <script type="text/javascript">
