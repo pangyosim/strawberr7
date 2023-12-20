@@ -34,15 +34,28 @@ public class GroupServiceImpl implements GroupService{
 	public List<GroupVO> MyKingList(String partykingid) {
 		return groupMapper.MyKingList(partykingid);
 	}
-//	//참여리스트
-//	@Override
-//	public List<PartyMember> Account(int account) {
-//		return groupMapper.Account(account);
-//	}
 	//리스트테스트
 	@Override
 	public GroupVO JoinList(int seq) {
 		return groupMapper.JoinList(seq);
 	}
 
+	@Override
+	public void partyDelete(String partykingid) {
+		groupMapper.partyDelete(partykingid);
+	}
+	
+	//더보기검색기능
+	@Override
+	public List<GroupVO> searchAll(String keyword) {
+		return groupMapper.searchAll(keyword);
+	}
+
+	@Override
+	public List<GroupVO> searchByService(String keyword, String service) {
+		// TODO Auto-generated method stub
+		return groupMapper.searchByService(keyword, service);
+	}
+	
+	
 }

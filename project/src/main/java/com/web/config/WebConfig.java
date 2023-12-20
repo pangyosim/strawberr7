@@ -13,18 +13,17 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new SessionCheckInterceptor())
                 .order(2)
-                .addPathPatterns("memberJoinForm", "loginResult", "loginForm",
-                				 "memberUpdate", "memberUpdateForm", "memberUpdateNo",
-                				 "memberUpdateResult", "userSearch", "admin",
-                				 "getmypage", "groupInsert", "groupJoinForm",
-                				 "groupRegistrationForm", "imageban", "mygrouplist",
-                				 "MyKingList", "PartyList", "partyUpdate",
-                				 "youtubePartyList", "findparty", "partydetail",
-                				 "payinfo", "reviewContent", "reviewForm",
-                				 "reviewInsert"
-                															) //접근 금지 url
-                .excludePathPatterns("/resources/**", "/*.ico", "/error","/login"); // 예외 url	
+                .addPathPatterns("/memberJoinForm", "/loginResult", "/loginForm",
+                                 "/memberUpdate", "/memberUpdateForm", "/memberUpdateNo",
+                                 "/memberUpdateResult", "/userSearch", "/admin",
+                                 "/getmypage", "/groupInsert", "/groupJoinForm",
+                                 "/groupRegistrationForm", "/imageban", "/mygrouplist",
+                                 "/MyKingList", "/PartyList", "/partyUpdate",
+                                 "/youtubePartyList", "/findparty", "/partydetail",
+                                 "/payinfo", "/reviewContent", "/reviewForm",
+                                 "/reviewInsert") // 접근 금지 url
+                .excludePathPatterns("/resources/**", "/**/*.ico", "/error", "/login"); // 예외 url 
     }
-};
+}
 
 

@@ -17,22 +17,17 @@
                 <a class="navbar-brand" href="/" style="color: #CA226B;">팀 프로젝트명</a>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <!-- 검색창 -->
-                        <div class="searchBar">
-                        	<i class="fa-solid fa-magnifying-glass"></i>
-                        	<input type="text" class="input" onclick="" style="border: none; background: transparent; color: white;"/>
-                        </div> 
-                       		
-                       	<li class="nav-item"><a class="nav-link" href="/" style="color: #CA226B;  width: 60px;">홈</a></li>
+                       	<li class="nav-item"><a class="nav-link" href="/" style="color: #CA226B;  width: 50px;">홈</a></li>
                         <c:choose>
 	                        <c:when test="${member == null }">
 	                		    <li class="nav-item"><a class="nav-link" href="login" style="color: #CA226B;  width: 80px;">로그인</a></li>
-        		    	        <li class="nav-item"><a class="nav-link" href="#" style="color: #CA226B;  width: 80px;">About</a></li>	                        	
+        		    	        <li class="nav-item"><a class="nav-link" href="/reviewForm?page=1" style="color: #CA226B;  width: 80px;">Q&A</a></li>	                        	
 	                        </c:when>
 	                        <c:otherwise>
 	                        	<li class="nav-item"><a class="nav-link" href="logout" style="color: #CA226B; width: 80px;">로그아웃</a></li> &nbsp;
 	                        	<li class="nav-item"><a class="nav-link" href="createparty?email=${member.email }" style="color: #CA226B; width: 90px;">파티만들기</a></li> &nbsp;
-	                        	<li class="nav-item"><a class="nav-link" href="getmypage" style="color: #CA226B; width: 90px;">마이페이지</a></li> &nbsp; 
+	                        	<li class="nav-item"><a class="nav-link" href="getmypage" style="color: #CA226B; width: 90px;">마이페이지</a></li> &nbsp;
+	                        	<li class="nav-item"><a class="nav-link" href="/reviewForm?page=1" style="color: #CA226B;  width: 80px;">Q&A</a></li> 
 	                       	</c:otherwise>
                         </c:choose>
                     </ul>

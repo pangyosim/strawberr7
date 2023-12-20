@@ -4,101 +4,251 @@
 <!DOCTYPE html>
 <html>
 <script type="text/javascript">
-
+	
 </script>
 <style type="text/css">
-/* table, th, td {
-	border: 1px solid gray;
-	border-collapse: collapse;
-}
-
-td {
-	text-align: center;
-}
-
-.review_table {
-	margin: 0 auto;
-	width: 500px;
-} */
 body {
+	background-color: #f5f5f5;
 	font-family: Arial, sans-serif;
-	background-color: #f2f2f2;
 	margin: 0;
 	padding: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	/* min-height: 100vh; */
+	margin-top: 200px;
 }
 
 h2 {
 	text-align: center;
+	color: #333;
 }
 
 form {
-	margin: 200px;
-	padding: 40px;
-	background-color: #ffffff;
-	border-radius: 10px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	/*  display: flex;  */
-	border-radius: 50px;
-	align-items: center;
-}
-/* 테이블 크기 */
-.review_table {
 	width: 70%;
-	margin-top: 60px;
-	margin-left: 152px;
-	margin-bottom: 100px;
-	border-collapse: collapse;
-	text-align: center;
-	border-collapse: collapse;
+	margin-top: 100px;
+	background-color: #fff;
+	padding: 60px;
+	margin-bottom: 20px;
+	border-radius: 20px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-/* 테이블 선 */
+
+.review_table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 20px;
+}
+
 .review_table th, .review_table td {
-	padding: 20px;
-	border: 1px solid #d4d4d4;
+	padding: 10px;
+	border: 1px solid #ddd;
+	text-align: left;
 }
 
-.review_table th {
-	background-color: #f8f8f8; /* Adjust as needed */
+textarea {
+	width: 100%;
+	height: 350px;
+	resize: none;
+	border-radius: 5px;
 }
 
-.review_table tr:nth-child(even) {
-	background-color: #f9f9f9;
+h2 {
+	text-align: center;
+	color: #333;
 }
 
-.review_table tr:hover {
+#contentinsert {
+	width: 70%;
+	margin: 20px auto;
+	background-color: #fff;
+	padding: 60px;
+	border-radius: 50px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	margin-top: 250px;
+}
+
+table {
+	width: 100%;
+}
+
+/* 글쓴이 : 제목 : 색깔 ,글자 가운데 배치*/
+th {
+	background-color: #e0e0e0;
+	color: #fff;
+	padding: 10px;
+	text-align: center;
+	border-radius: 10px;
+}
+
+/* 글내용 tr 색깔 */
+tr:nth-child(even) {
 	background-color: #e0e0e0;
 }
 
+tr, td {
+	padding: 20px;
+	border-radius: 10px;
+}
+
+#content {
+	width: 100%;
+	border: none;
+}
+
 input[type="submit"] {
-	background-color: #4285f4; /* Adjust as needed */
-	color: #ffffff;
-	padding: 10px 20px;
+	background-color: #A374DB; /* 버튼색깔 파랑색 */
+	color: #fff;
+	padding: 10px;
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
 	margin-top: 10px;
 	margin-right: 10px;
-	align-self: flex-end; 
-	position: absolute; 
-	bottom: 320px;
-	right: 480px;
-}
-
-input[type="button"]{
-	background-color: #4285f4; 
-	color: #ffffff;
-	padding: 10px 20px;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-	margin-top: 10px;
-	margin-right: 10px;
-	align-self: flex-end; 
+	align-self: flex-end;
 	position: absolute;
-	bottom: 320px; 
-	right: 380px;
+	right: 300px;
 }
 
+#check {
+	ackground-color: #A374DB; /* 버튼색깔 파랑색 */
+	color: #fff;
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-top: 120px;
+	margin-right: -10px;
+	align-self: flex-end;
+	position: absolute;
+}
+#delete{
+	cursor: pointer;
+	padding: 10px 20px;
+	background-color: #A374DB;
+	color: white;
+	border: none;
+	border-radius: 3px;
+	font-size: 16px;
+	margin-top: 10px;
+}
+input[type="button"] {
+	background-color: #A374DB;
+	color: #fff;
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-top: 10px;
+	margin-right: 10px;
+	align-self: flex-end;
+	position: absolute;
+	/* bottom: 80px; */
+	right: 400px;
+}
+
+input[type="submit"] {
+	cursor: pointer;
+	padding: 10px 20px;
+	background-color: #A374DB;
+	color: white;
+	border: none;
+	border-radius: 3px;
+	font-size: 16px;
+	margin-top: -30px;
+}
+
+input[type="button"] {
+	cursor: pointer;
+	padding: 10px 20px;
+	background-color: #A374DB;
+	color: white;
+	border: none;
+	border-radius: 3px;
+	font-size: 16px;
+	margin-top: 10px;
+}
+/* textarea {
+
+/* width: 90%; */
+
+/* resize:none;
+
+border-radius:10px;
+
+} */
+
+/*
+
+input[type="submit"]:hover, input[type="button"]:hover {
+
+background-color: #45a049;
+
+}
+
+*/
+#naickname, #title {
+	border: none;
+	outline: none;
+}
+
+#naickname, #title {
+	padding: 4px;
+	margin: 4px;
+}
+
+#naickname {
+	margin-right: 180px;
+}
+
+#title {
+	margin-right: 20px;
+	width: 330px;
+}
+
+.comment-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.comment {
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+hr {
+	width: 100%;
+	margin: 5px 0;
+	border: 0.5px solid #ccc;
+}
+
+.delete-btn {
+	cursor: pointer;
+	padding: 5px 10px;
+	background-color: #f44336;
+	color: white;
+	border: none;
+	border-radius: 3px;
+}
+
+form textarea {
+	margin-bottom: 10px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+#clicke{
+	margin-top: 30px;
+}
+#reviewcomment{
+	height: 100px;
+}
+/* #deleteclick{
+	margin-bottom: -30px;
+	
+} */
 </style>
 <head>
 <meta charset="UTF-8">
@@ -109,32 +259,68 @@ input[type="button"]{
 	<c:import url="../main/header.jsp" />
 
 	<form action="deleteReview">
-		<h2>리뷰내용</h2>
-		<div>
-			<input type="hidden" value="${reviewContent.reviewid }"
-				name="reviewid" />
-			<table class="review_table">
-				<tr>
-					<th>글쓴이 :${reviewContent.userid }<input type="hidden"
-						value="${reviewContent.userid }" name="userid" readonly /></th>
-					<th>제목 :${reviewContent.title}<input type="hidden"
-						value="${reviewContent.title}" name="title" readonly /></th>
-				</tr>
-				<tr>
-					<th colspan="2">작성글</th>
-				</tr>
-				<tr>
-					<td colspan="2">${reviewContent.content}<input type="hidden"
-						value="${reviewContent.content}" name="content" readonly /></td>
-				</tr>
-			</table>
-		</div>
+		<h2>Q&A</h2>
+
+		<input type="hidden" value="${reviewContent.reviewid }"
+			name="reviewid" id="reviewid" />
+		<table class="review_table">
+			<tr>
+				<th>글쓴이 : <input type="text" name="nickname" id="naickname"
+					value="${reviewContent.nickname }" readonly /> 제목 :<input
+					type="text" name="title" id="title" value="${reviewContent.title}"
+					readonly />
+				</th>
+			</tr>
+			<tr>
+				<th colspan="2">작성글</th>
+			</tr>
+			<tr>
+				<td colspan="2"><textarea name="content" id="content" cols="60"
+						rows="10" readonly>${reviewContent.content}</textarea></td>
+			</tr>
+		</table>
+
 		<c:if test="${member.id eq reviewContent.userid}">
-			<input type="submit" value="글삭제" />
+			<input type="submit" value="글삭제" id="delete" />
 		</c:if>
 		<input type="button" value="글목록"
 			onclick="location.href='reviewForm?page=1'" />
 	</form>
+	
+	<c:forEach var="comment" items="${reviewco}" >
+		<form action="deleteComment" method="post" id="clicke">
+			<input type="hidden" value="${reviewContent.reviewid }"
+				name="reviewid" id="reviewid" />
+			</td>
+			<div>
+				<table>
+					<tr>
+						<td>관리자 답변 (${comment.commentdate})
+					</tr>
+					<tr>
+						<td>${comment.reviewcomment}</td>
+					</tr>
+						<td> <input type="hidden"
+							value="${comment.commentid }" name="commentid" id="commentid" /></td>
+					<hr>
+				</table>
+			</div>
+			<c:if test="${member.role =='ADMIN'}">
+			<input type="submit" value="삭제" id="deleteclick"/>
+			</c:if>
+		</form>
+	</c:forEach>
+	
+	<c:if test="${member.role =='ADMIN' }">
+	<form action="insertComment" method="POST">
+		<input type="hidden" value="${reviewContent.reviewid }"
+			name="reviewid" id="reviewid" />
+		<textarea name="reviewcomment" id="reviewcomment" rows="3" cols="30" placeholder="댓글을 입력하세요"></textarea>
+		<input type="submit" value="작성" id="check"> <br>
+	</form>
+	</c:if>
+	
+	
 	<!--onclick="location.href='deleteReview'"  -->
 	<c:import url="../main/footer.jsp" />
 </body>

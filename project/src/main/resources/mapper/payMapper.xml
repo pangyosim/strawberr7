@@ -65,5 +65,9 @@
 		select * from paytable where userid=#{userid} and result='paid'
 	</select>
 	
+	<delete id="payDelete">
+		DELETE FROM paytable WHERE userid=#{userid}
+	</delete>
+	
 </mapper>
 

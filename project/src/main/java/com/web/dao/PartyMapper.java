@@ -23,5 +23,6 @@ public interface PartyMapper {
 	public List<GroupVO> Findid(String partykingid);
 	//내파티 수정하기
 	public int partyUpdate(GroupVO groupVO);
-
+	
+	public void accountDelete(String email);
 }

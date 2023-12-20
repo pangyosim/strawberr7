@@ -174,7 +174,7 @@ a:hover {
 	      </label> <label for="userid">파티장 ID &nbsp;<input type="text"
 	         id="partykingid" name="partykingid" value="${member.email }" readonly><br />
 	      </label>
-	       <label for="partyday">파티 기간&nbsp; 
+	       <label for="partyday">파티 개월 수&nbsp; 
 	          <input type="text" id="partyday" name="partyday" onchange="calcprice()" required><br />
 	      </label> 
 	      <label for="price">

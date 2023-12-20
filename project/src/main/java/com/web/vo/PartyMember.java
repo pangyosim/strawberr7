@@ -9,6 +9,6 @@ public class PartyMember {
 	private String account;
 	private String bank;
 	private String name;
-	
+	private String email;
 
 }

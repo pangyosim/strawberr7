@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.web.service.GroupService;
 import com.web.service.MailService;
 import com.web.service.MemberService;
 import com.web.service.PartyService;
@@ -41,6 +42,9 @@ public class LoginController implements MemberSession{
 	
 	@Autowired
 	private PartyService ps;
+	
+	@Autowired
+	private GroupService gs;
 	
 	@GetMapping("login")
 	public String login() {
@@ -309,9 +313,10 @@ public class LoginController implements MemberSession{
 	    HttpSession session = request.getSession();
 	    MemberVO memberVO = (MemberVO) session.getAttribute("member");
 	    String email = memberVO.getEmail();
+	    session.invalidate();
 	    int su = ms.memberDelete(email);
-	    
-	    session.invalidate();  // 세션 종료
+	    ps.accountDelete(email);
+	    gs.partyDelete(email);
 	    return "redirect:/";
 	}
 	

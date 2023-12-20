@@ -21,4 +21,5 @@ public interface PartyService {
 	// 유저정보 업데이트 수정
 	public int partyUpdate(GroupVO groupVO);
 	
+	public void accountDelete(String email);
 }

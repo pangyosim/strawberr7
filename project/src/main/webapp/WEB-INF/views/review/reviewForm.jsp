@@ -46,7 +46,7 @@ body {
 }
 
 .review_table th {
-	background-color: #4285f4;
+	background-color: #A374DB;
 	color: #ffffff;
 }
 
@@ -76,7 +76,7 @@ a {
 }
 
 #paging_block a#currentPaging {
-	background-color: #4285f4;
+	background-color: #A374DB;
 	color: #ffffff;
 	border: 1px solid #4285f4;
 }
@@ -89,7 +89,7 @@ a {
 	position: absolute;
 	top: 70px; /* Adjust the value as needed */
 	right: 0;
-	margin-top: -60px;
+	margin-top: -75px;
 	margin-right: 20px;
 }
 
@@ -111,13 +111,13 @@ a {
 .review_table {
 	width: 100%;
 	border-collapse: collapse;
-	margin-top: 10px;
+	margin-top: 20px;
 }
 
 button {
 	margin-top: 10px;
 	margin-right: 10px;
-	background-color: #4285f4; /* Change to your preferred color */
+	background-color: #A374DB; /* Change to your preferred color */
 	color: #ffffff;
 	padding: 8px 16px;
 	border: none;
@@ -126,6 +126,35 @@ button {
 	margin-right: 10px;
 	cursor: pointer;
 }
+
+#searchForm {
+            display: inline;
+            justify-content: center;
+            align-items: center;
+            margin: 20px;
+           
+        }
+
+        #keyword {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+            width: 200px;
+        }
+
+        #searchForm input[type="submit"] {
+            background-color: #A374DB; /* 퍼플색 */
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+h3{
+	text-align: center;
+}        
 </style>
 <script>
 	function loginForm() {
@@ -158,23 +187,23 @@ button {
 
 
 	<div id="board_list">
+	<h3>Q&N CHECK</h3>
 		<form action="/reviewForm" method="get" id="searchForm"
 			name="search-form" onsubmit="return notSelect()">
-			<td colspan="2"><input type="text" name="keyword" id="keyword"
-				placeholder="검색어 입력"> <input type="hidden" name="page"
-				value="${param.page }"></td>
+			<td colspan="2"><input type="text" name="keyword" id="keyword" placeholder="검색어 입력"> 
+			 				<input type="hidden" name="page"value="${param.page }">
+			 </td>
 			<td><input type="submit" value="검색하기"></td>
 		</form>
 		<span class="right" id="wrapper" style="text-align: center;">
-			<h3>리뷰 게시판</h3>
-			<hr> <c:forEach var="list" items="${list}">
-				<c:if test="${list.userid == member.id}">
+			
+			<hr> 
+				<c:if test="${member !=null}">
 					<button type="button" onclick="reviewInsert()">글쓰기</button>
 				</c:if>
-				<c:if test="${list.userid != member.id}">
+				<c:if test="${member ==null}">
 					<button type="button" onclick="loginForm()">글쓰기</button>
 				</c:if>
-			</c:forEach>
 		</span>
 		<div class="container">
 			<table class="review_table">

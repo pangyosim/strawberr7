@@ -1,18 +1,12 @@
-<%@page import="com.web.service.PartyService"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.web.vo.GroupVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<html lang="en">
+<html>
 <head>
-<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="description" content="" />
-<meta name="author" content="" />
 <title>MAIN</title>
+
 <!-- 페이징 -->
 	<style type="text/css">
     #slider-container {
@@ -64,7 +58,6 @@
 	height: 30px;
 	margin: 10px auto;
 	padding: 5px;
-	
 }
 .fa-magnifying-glass{
 	position: absolute;
@@ -155,38 +148,122 @@ display: block; /* 마우스가 올라갔을 때 텍스트를 표시합니다. *
 }
 
 </style>
+
+<style>
+.slider_wrap .bx-wrapper {border:0; box-shadow:none;}
+
+ul.tabs{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+ul.tabs li{
+	background: none;
+	color: #222;
+	display: inline-block;
+	padding: 10px 15px;
+	cursor: pointer;
+}
+
+ul.tabs li.current{
+	color: #222;
+}
+.tab-content{
+	display: none;
+	padding: 15px;
+}
+
+.tab-content.current{
+	display: inherit;
+}
+</style>
 	<!-- 페이징 -->
 <!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-<!-- Font Awesome icons (free version)-->
-<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-<!-- Google fonts-->
+<!-- <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+ --><!-- Font Awesome icons (free version)-->
+<!-- <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+ --><!-- Google fonts-->
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
 <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="resources/css/styles.css" rel="stylesheet" />
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<!-- <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+ -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+ 
 </head>
-<body id="page-top">
+<body>
 	<c:import url="header.jsp" />
-	<!-- Services-->
-	<!--  
-	<div class="services" style="text-align: center;">
-		<h2>서비스</h2>
-		<input type="button" value="파티만들기 계좌등록" onclick="location.href='groupJoinForm'" /> &nbsp; &nbsp; 
-		<input type="button" value="파티찾기" onclick="document.getElementById('party-input').focus()" /> <br />
-		<input type="button" value="파티만들기폼" onclick="location.href='groupRegistrationForm'" /> 
-		<input type="button" value="개인정보수정" onclick="location.href='memberUpdate'" />
-		<input type="button" value="파티수정" onclick="location.href='partyUpdateForm'"/>
-		<input type="button" value="리뷰" onclick="location.href='reviewForm?page=1'"/>
+	
+	<!-- TOP10 -->
+	<div class="slider_wrap" style=" margin: 150px 17% auto;">
+			<ul class="tabs" style="width: 300px; position: relative;">
+				<li class="tab-link current" data-tab="tab-1">Netfilx Top10</li>
+				<li class="tab-link" data-tab="tab-2">Whacha Top10</li>
+			</ul>
+			<div class="tab-content current" id="tab-1">
+				<div class="slider">
+					<c:forEach var="netflix" items="${netflix_list}">
+			        		<div><a href="${netflix.url }"><img src="${netflix.image }" style="width: 100%;"></a></div>
+			       	</c:forEach>
+				</div>
+			</div>
+			<div class="tab-content" id="tab-2">
+				<div class="slider-next">
+					<c:forEach var="whacha" items="${whacha_list}">
+			        		<div><a href="${whacha.url }"><img src="${whacha.image }" style="width: 50%; margin-left: 25%;"></a></div>
+			       	</c:forEach>
+				</div>
+			</div>
 	</div>
-	<br /> -->
-	 <!-- Services-->
-   <div class="services_wrap" style=" width: 75%; margin-left: 15%; margin-top: 150px; " >
-    <div class="services_div">
-    
-   		<h2 style="font-family: monospace; font-weight: bold;"> &nbsp; &nbsp; 최근 만들어진 파티</h2>
+	<!-- TOP10 end -->
+	<script type="text/javascript">
+		$(document).ready(function(){
+			
+			$('ul.tabs li').click(function(){
+				var tab_id = $(this).attr('data-tab');
+	
+				$('ul.tabs li').removeClass('current');
+				$('.tab-content').removeClass('current');
+	
+				$(this).addClass('current');
+				$("#"+tab_id).addClass('current');
+				$(".slider-next").bxSlider({
+		         	 controls : true,
+		              mode: 'horizontal',
+		              auto: true,
+		              slideWidth: 600,
+		              slideHeight: 300,
+		              speed: 250,
+		              pager: true
+		         });
+			})
+	
+		})
+	</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+	<script>
+      $(document).ready(function(){
+   	  	$(".slider").bxSlider({
+         	 controls : true,
+              mode: 'horizontal',
+              auto: true,
+              slideWidth: 600,
+              slideHeight: 300,
+              speed: 250,
+              pager: true
+         });
+      });
+    </script>
+   <!-- Services-->
+   <div class="services_wrap" style=" width: 75%; margin-left: 13%; margin-top: 30px; " >
+    <div class="services_div" >
+    	<div style="margin-bottom: 10px;">
+   			<span><a style=" margin-left: 0px; font-family: monospace; font-size: 25px; font-weight: bold;"> &nbsp; &nbsp; 최근 만들어진 파티</a>
+   					<a href="groupview" style="text-decoration: none; color: gray; margin-left: 65%;">더보기 &#62;</a></span>
+   		</div>
 		<!-- 페이징 -->
 		<div style="float: left; width: 3%;">
 			<button type="button" tabindex="0" style="margin-top: 12vh; background-color:transparent; border: none; font-size: 50px; color: #d3d3d3;
@@ -194,11 +271,11 @@ display: block; /* 마우스가 올라갔을 때 텍스트를 표시합니다. *
 		</div>
 		<div id="slider-container" style="width: 87%;">
 			<div id="slider-content">
-				<table border="1">
+				<table>
 					<tbody>
 						<c:forEach var="group" items="${party}">
 							<c:if test="${group.peoplecnt < group.peoplecnt_max }">
-							<div class="slide" style="border: 1px solid #e9e9e9; border-radius: 10px; width: 200px; " onclick="location.href='PartyList?seq=${group.seq}'">
+							<div class="slide" style="border: 1px solid #e9e9e9; border-radius: 10px; width: 200px; height: 350px; padding: 20px;" onclick="location.href='PartyList?seq=${group.seq}'">
 								<c:choose>
 									<c:when test="${group.service != null}">
 										<img
@@ -214,10 +291,10 @@ display: block; /* 마우스가 올라갔을 때 텍스트를 표시합니다. *
 									</c:otherwise>
 								</c:choose>
 								<P style="font-family: monospace; font-weight: bold;">[${group.service}]</P>
-								<p style="font-family: monospace; font-weight: bold;">${group.peoplecnt}명</p>
-								<p style="font-family: monospace; font-weight: bold;"><fmt:formatDate value="${group.partydate}" pattern="yyyy년 MM월"/>~</p>
-								<p style="font-family: monospace; font-weight: bold;"><fmt:formatDate value="${group.enddate }" pattern="yyyy년 MM월"/></p>
-								<p style="font-family: monospace; font-weight: bold;">${group.partyday}개월</p>
+								<p style="font-family: monospace;">${group.peoplecnt}/${group.peoplecnt_max }명</p>
+								<p style="font-family: monospace;"><fmt:formatDate value="${group.partydate}" pattern="yyyy년 MM월"/>~</p>
+								<p style="font-family: monospace;"><fmt:formatDate value="${group.enddate }" pattern="yyyy년 MM월"/></p>
+								<p style="font-family: monospace;">${group.partyday}개월</p>
 							</div>
 							</c:if>
 						</c:forEach>
@@ -231,103 +308,6 @@ display: block; /* 마우스가 올라갔을 때 텍스트를 표시합니다. *
 		</div>
 	</div>
 	</div>
-   <!-- Masthead-->
-   <div class="" style=" height: 100%; margin-top: 100px; background-color: black; border: 2px solid #d3d3d3;">
-   		<br>
-   		<h1 style="margin-left: 47%; font-family: monospace; color: #fff;">TOP10</h1>
-   		<div id="control">
-			<a href="#" onclick="currentSlide(1)">
-			<img src="resources/assets/img/netflix.png" 
-			alt="netflix"
-			style="height: 30px; width: 30px;"/>
-			<span>netflix</span>
-			</a>
-			 <a href="#" onclick="currentSlide(2)">
-			 <img src="resources/assets/img/watcha.png" 
-			 alt="watcha"
-			 style="height: 30px; width: 30px;"/>
-	        <span>watcha</span>
-	        </a>
-<!-- 	        <a href="#" onclick="currentSlide(3)">
-	        <img src="https://www.tving.com/img/tving-favicon-160@3x.png" 
-	        alt="tiving"
-	        style="height: 30px;width: 30px;"/>
-	        <span>Tving</span>
-	        </a>
-	        <a href="#" onclick="currentSlide(4)">
-	        <img src="https://play-lh.googleusercontent.com/7cuI7bdCeZbmc9anRXqpmxZPH92t5NEEbhTnj5by6skhZK_dlUg9kx--gqtLf-8c2K12=w240-h480-rw" 
-	        alt="wavve"
-	        style="height: 30px;width: 30px;"/>
-	        <span>Wavve</span>
-	        </a> -->
-		</div>
-		<div id="visual" >
-			<div id="pic">
-	   			<div class="top-list" style="margin-left: 43%;">
-		   			<c:forEach var="netflix" items="${netflix_list}" varStatus="status">
-			   			<img src="${netflix.image}" style="width: 50px; height: 50px;">  			
-			   			<a style="text-decoration: none; font-family: sans-serif; font-weight: bold; color: #fff;" href="${netflix.url }">${netflix.subject }</a>
-			   			<br>
-			   		</c:forEach>
-		   		</div>
-	   			<div class="top-list" style="margin-left: 35%;">
-					<c:forEach var="whacha" items="${whacha_list}" varStatus="status">
-		   			<img src="${whacha.image}" style="width: 50px; height: 50px;">  			
-		   			<a style="text-decoration: none; font-family: sans-serif; font-weight: bold; color: #fff;" href="${whacha.url }">${whacha.subject }</a>
-		   			<br>
-		   			</c:forEach>
-				</div>
-<!-- 				<div>
-					<a href="#"> 
-					</a>
-				</div>
-				<div>
-					<a href="#"> 
-					</a>
-				</div> -->
-			</div>
-		</div>
-   		<br>
-   	</div>
-   
-   
-<br/>
-<br/>
-     <!-- Team-->
-     <section class="page-section bg-light" id="team" >
-         <div class="container">
-             <div class="text-center">
-                 <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
-                 <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-             </div>
-             <div class="row">
-                 <div class="col-lg-4">
-                     <div class="team-member">
-                         <h4>Parveen Anand</h4>
-                         <p class="text-muted">Lead Designer</p>
-                     </div>
-                 </div>
-
-             </div>
-             <div class="row">
-                 <div class="col-lg-8 mx-auto text-center"><p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p></div>
-             </div>
-         </div>
-     </section>
-        <c:import url="footer.jsp"></c:import>
-    </body>
-    
-    <!-- 회원탈퇴 자바스크립트  -->
-    <script type="text/javascript">
-				
-				function openConfirmWindow() {
-				    var confirmWindow = window.open("", "", "width=300,height=200"); // 새 창을 열고 창 객체를 변수에 저장
-				    confirmWindow.document.write("<p>정말 탈퇴하시겠습니까?</p>"); // 새 창에 메시지 출력
-				    confirmWindow.document.write("<button onclick='opener.location.href=\"memberDelete\"; window.close();'>예</button>"); // '예' 버튼 생성. 클릭 시 부모 창의 주소를 변경하고 새 창을 닫음
-				    confirmWindow.document.write("<button onclick='window.close();'>아니오</button>"); // '아니오' 버튼 생성. 클릭 시 새 창을 닫음
-				}
-				
-	</script>
 <!-- 메인리스트슬라이드 자바스크립트 -->
 <script type="text/javascript">
 	var slideIndex = 0;
@@ -411,6 +391,30 @@ display: block; /* 마우스가 올라갔을 때 텍스트를 표시합니다. *
 
     startAutoSlide();
 </script>
- <!-- 페이징 -->
+<!-- 페이징 -->
+<br/>
+<br/>
+     <!-- Team-->
+     <section class="page-section bg-light" id="team" >
+         <div class="container">
+             <div class="text-center">
+                 <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
+                 <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+             </div>
+             <div class="row">
+                 <div class="col-lg-4">
+                     <div class="team-member">
+                         <h4>Parveen Anand</h4>
+                         <p class="text-muted">Lead Designer</p>
+                     </div>
+                 </div>
 
+             </div>
+             <div class="row">
+                 <div class="col-lg-8 mx-auto text-center"><p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p></div>
+             </div>
+         </div>
+     </section>
+        <c:import url="footer.jsp"></c:import>
+    </body>
 </html>

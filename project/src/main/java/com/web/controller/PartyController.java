@@ -116,4 +116,5 @@ public class PartyController implements MemberSession {
 		int zu = partyService.partyUpdate(groupVO);
 		return "redirect:getmypage";
 	}
+	
 }

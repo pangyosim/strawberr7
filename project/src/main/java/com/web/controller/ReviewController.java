@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.dao.ReviewMapper;
+import com.web.service.MemberService;
+import com.web.service.ReviewCommentService;
 import com.web.service.ReviewService;
+import com.web.vo.ReviewCommentVO;
 import com.web.vo.ReviewVO;
 
 @Controller
@@ -25,6 +28,12 @@ public class ReviewController {
 //	
 	@Autowired
 	private ReviewService reviewService;
+	
+	@Autowired
+	private MemberService memberService;
+	
+	@Autowired
+	private ReviewCommentService reviewCommentService;
 	
 	@GetMapping("/reviewForm")
 	public String ReviewForm(Model model, ReviewVO reviewVO, int page, String keyword) {
@@ -55,7 +64,7 @@ public class ReviewController {
 		int endPage = startPage + block - 1; // 끝
 		if (endPage > totalPage)
 			endPage = totalPage;
-		System.out.println(list);
+		model.addAttribute("memberlist",memberService.doMemberList());
 		model.addAttribute("page", page);
 		model.addAttribute("list", list);
 		model.addAttribute("totalPage", totalPage);
@@ -69,6 +78,7 @@ public class ReviewController {
 	@GetMapping("reviewContent")
 	public String reviewContent(Model model, ReviewVO reviewVO,String reviewid) {
 		model.addAttribute("reviewContent", reviewService.getReviewByuserId(reviewVO,reviewid));
+		model.addAttribute("reviewco", reviewCommentService.getReviewComments(reviewVO.getReviewid()));
 		return "/review/reviewContent";
 	}
 	// 리뷰 글등록

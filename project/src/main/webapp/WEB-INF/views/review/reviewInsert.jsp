@@ -55,7 +55,7 @@ tr, td {
 }
 
 input[type="submit"] {
-	background-color: #4285f4; /* 버튼색깔 파랑색 */
+	background-color: #A374DB; /* 버튼색깔 파랑색 */
 	color: #fff;
 	padding: 10px;
 	border: none;
@@ -69,7 +69,7 @@ input[type="submit"] {
 	right: 350px;
 }
 input[type="button"]{
-	background-color: #4285f4; /* 버튼색깔 파랑색 */
+	background-color: #A374DB; /* 버튼색깔 파랑색 */
 	color: #fff;
 	padding: 10px;
 	border: none;
@@ -119,18 +119,19 @@ input[type="submit"]:hover, input[type="button"]:hover {
 	<form action="reviewInsertContent" method="post" id="contentinsert"
 		name="contentinsert" onsubmit="return validateForm()">
 	<h2>게시글 작성</h2>
-		<th><input type="hidden" name="userid" value="${member.id}" /></th>
+		<th>
+		<input type="hidden" name="userid" value="${member.id}" />
+		</th>
 		<table>
-
 			<tr>
-				<th>글쓴이 : <input type="text" name="nickname" id="naickname"
-					value="${member.nickname }" readonly />
+				<th>글쓴이 : <input type="text" name="nickname" id="naickname" 	value="${member.nickname }" readonly />
 				제목 :<input type="text" name="title" id="title" /></th>
 			</tr>
 			<tr>
-				<td colspan="2"><textarea name="content" id="content" cols="60"
-						rows="10" placeholder="내용을 작성하세요">
-					</textarea></td>
+				<td colspan="2">
+				<textarea name="content" id="content" cols="60" rows="10" placeholder="내용을 작성하세요">
+					</textarea>
+				</td>
 			</tr>
 		</table>
 		<input type="submit" value="글등록" />

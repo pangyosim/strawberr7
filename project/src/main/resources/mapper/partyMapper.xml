@@ -5,8 +5,12 @@
   <mapper namespace="com.web.dao.PartyMapper" >
 
   	<insert id="insertbyaccount">
-  		insert into account values(account_seq.NEXTVAL,#{name},#{bank},#{account})
+  		insert into account values(account_seq.NEXTVAL,#{name},#{bank},#{account},#{email})
   	</insert>
+  	
+  	<delete id="accountDelete">
+		DELETE FROM account WHERE email=#{email}
+	</delete>
   	
   	<select id="selectPeoplecntList" resultType="com.web.vo.GroupVO">
   		 <!--  SELECT * FROM partyinfo where userid =#{userid} -->

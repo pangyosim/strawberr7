@@ -55,6 +55,10 @@ public class PartyServiceImpl implements PartyService {
 		int result = partymapper.partyUpdate(groupVO);
 		return result;
 	}
+	@Override
+	public void accountDelete(String email) {
+		partymapper.accountDelete(email);
+	}
 	
 	
 	

@@ -21,74 +21,141 @@
 <link href="resources/css/styles.css" rel="stylesheet" />
 <link href="resources/css/memberJoinForm.css" rel="stylesheet" />
 <style type="text/css">
-select{
-	width: 50px;
+body{
+   width: 800px;
+   margin: 100px auto;
+   padding: 50px;
 }
-.info{
-	width: 500px;
+.idpw{
+   position: relative;
+   padding: 25px 40px;
+   border: solid 1px #cec8f1;
+   border-radius: 20px;
 }
-.textForm {
-    border-radius: 40px 80px;
-    padding: 10px;
-    margin: 0 auto;
-    width: 625px;
-    height: auto;
-    background-color: #b7b7ff;
+.textForm{
+   position: relative;
+   padding: 25px 40px;
+   border: solid 1px #cec8f1;
+   border-radius: 20px;
+   width: 700px;
+   margin: 0;
 }
-#memberUpdateForm{
-	margin: 0 500px;
-	padding-top: 250px;
+.idpw li{
+   position: relative;
+   padding: 2px 0 2px 120px;
+   list-style-type: none;
 }
-.textForm label{
-    padding: 10px;
-    margin: 10px;
-	
+.idpw input{
+   width: 287px;
+   height: 50px;
+   border-radius: 10px;
+   font-size: 16px;
+   margin-bottom: 10px;
+   border: 1px solid black;
 }
-.textForm input {
-    margin-bottom: 20px;
+.textForm li{
+   position: relative;
+   padding: 2px 0 2px 120px;
+   list-style-type: none;
 }
-
+.textForm #name, #nickname, #tel, #email{
+   width: 287px;
+   height: 50px;
+   border-radius: 10px;
+   font-size: 16px;
+   margin-bottom: 10px;
+   border: 1px solid black;
+   
+}
+.textForm #address_2{
+   width: 190px;
+   height: 50px;
+   border-radius: 10px;
+   font-size: 16px;
+   margin-bottom: 10px;
+   border: 1px solid black;
+}
+.textForm #address_3{
+   width: 287px;
+   height: 50px;
+   border-radius: 10px;
+   font-size: 16px;
+   margin-bottom: 10px;
+   border: 1px solid black;
+}
+.idpw .subject{
+   position: absolute;
+   padding: 15px;
+   left: 0;
+   display: inline-block;
+}
+.textForm .subject{
+   position: absolute;
+   padding: 15px;
+   left: 0;
+   display: inline-block;
+}
+.asd{
+   text-align: left;
+   maring: 
+}
+.memberUpdateForm{
+   text-align: center;
+}
+#info__birth{
+   width: 500px;
+}
 </style>
 </head>
-<body style="text-align: center; font-family: 'Orbit-Regular';">
+<body style='font-family: 'Orbit-Regular';">
 <c:import url="../main/header.jsp"/>
-	
-<form id="memberUpdateForm" action="memberUpdateResult" method="post">
-	<p>아이디/비밀번호</p>
-    <div class="textForm">
-		아 이 디 <input type="text" id="loginId" name="loginId" value="${member.id }" maxlength="20" readonly><br/>
-		비밀번호  <input type="password" placeholder="비밀번호" id="loginPw" name="loginPw" maxlength="20"><br>
-		비밀번호 확인<input type="password" placeholder="비밀번호 확인" name="loginPwConfirm" maxlength="20">     
-    </div>
-	<input type="hidden" id="kakaoid" name="kakaoid" value="${member.kakaoid }">
-	<br/><br/>
-	<p>개인정보</p>
-    <div class="textForm">
-      	이  름 : <input type="text" placeholder="이름" id="name" name="name" value="${member.name }" maxlength="50" readonly>     
-        <br/>
-        닉네임 : <input type="text" placeholder="닉네임" id="nickname" name="nickname" value="${member.nickname }" maxlength="50">     
-    	<div class="info" id="info__birth">
-    	<p>생년월일</p>
-	    	<select class="box" id="birth-year" name="birth-year">
-	      		<option disabled selected></option>
-	    	</select>
-	    	<select class="box" id="birth-month" name="birth-month">
-	      		<option disabled selected></option>
-	    	</select>
-	    	<select class="box" id="birth-day" name="birth-day">
-	     		<option disabled selected></option>
-	    	</select>
-    	</div>
-        주  소 : <input type="hidden" id="address_1" name="address_1" placeholder="우편번호" readonly>
-        <input type="text" id="address_2" name="address_2" placeholder="주소" readonly>
-        <input type="button" onclick="checkAddress()" value="우편번호 찾기"><br>
-        <input type="text" id="address_3" name="address_3" placeholder="상세주소">
-        <input type="hidden" id="address_4" name="address_4" placeholder="동"><br/><br/>
-		휴대폰 : <input type="text" class="form-control" id="tel" name="tel" value="${member.tel }" oninput="oninputPhone(this)" maxlength="13"><br/>
-		이메일 : <input type="text" id="email" name="email" value="${member.email }" maxlength="50" readonly> 
-    </div>
+   
+<form class="memberUpdateForm" id="memberUpdateForm" action="memberUpdateResult" method="post">
+   <p class="asd">아이디/비밀번호</p>
+    <ul class="idpw">
+       <li>
+         <span class="subject">아이디</span>
+         <input type="text" id="loginId" name="loginId" value="${member.id }" maxlength="20" readonly><br/>
+         <span class="subject">비밀번호</span>
+         <input type="password" placeholder="비밀번호" id="loginPw" name="loginPw" maxlength="20"><br>
+         <span class="subject">비밀번호 확인</span>
+         <input type="password" placeholder="비밀번호 확인" name="loginPwConfirm" maxlength="20">
+      </li>     
+    </ul>
+   <input type="hidden" id="kakaoid" name="kakaoid" value="${member.kakaoid }">
+   <br/>
+   <p class="asd">개인정보</p>
+    <ul class="textForm">
+         <li>
+            <span class="subject">이름 :</span><input type="text" placeholder="이름" id="name" name="name" value="${member.name }" maxlength="50" readonly>     
+           <br/>
+           <span class="subject">닉네임 :</span><input type="text" placeholder="닉네임" id="nickname" name="nickname" value="${member.nickname }" maxlength="50">     
+          <div class="info" id="info__birth">
+          	  	 <div style="display: flex; margin-left: -105px; margin-top: 10px;">
+      	  	           	  <span style="vertical-align: top;">생년월일 :</span><br>
+          	  	 
+		             <select class="box" id="birth-year" name="birth-year" style="height: 30px; vertical-align: middle;  margin-left: 150px; margin-bottom: 20px;">
+		                  <option disabled selected></option>
+		             </select>
+		             <select class="box" id="birth-month" name="birth-month" style="height: 30px; vertical-align: middle;  margin-bottom: 20px;">
+		                  <option disabled selected></option>
+		             </select>
+		             <select class="box" id="birth-day" name="birth-day" style="height: 30px; vertical-align: middle;  margin-bottom: 20px;">
+		                 <option disabled selected></option>
+		             </select>
+	             </div>
+          </div>
+           <span class="subject">주소 :</span><input type="hidden" id="address_1" name="address_1" placeholder="우편번호" readonly>
+           <input type="text" id="address_2" name="address_2" placeholder="주소" readonly>
+           <input type="button" onclick="checkAddress()" value="우편번호 찾기"><br>
+           <input type="text" id="address_3" name="address_3" placeholder="상세주소">
+           <input type="hidden" id="address_4" name="address_4" placeholder="동"><br/><br/>
+         <span class="subject">휴대폰 :</span><input type="text" class="form-control" id="tel" name="tel" value="${member.tel }" oninput="oninputPhone(this)" maxlength="13"><br/>
+         <span class="subject">이메일 :</span><input type="text" id="email" name="email" value="${member.email }" maxlength="50" readonly>
+         </li> 
+       </ul>
     <button class="w-btn w-btn-gray" type="button" onclick="location.href='/'">취 소</button>
-    <button class="w-btn w-btn-gra3 w-btn-gra-anim" type="button" onclick="memberUpdateCheck()">정보 수정</button>
+    <button class="w-btn w-btn-qwer" type="button" onclick="memberUpdateCheck()">정보 수정</button>
 </form>
 <c:import url="../main/footer.jsp"/>
 </body>
@@ -123,7 +190,6 @@ select{
 button {
     margin: 20px;
 }
-
 .w-btn {
     position: relative;
     border: none;
@@ -153,25 +219,7 @@ button {
     font-weight: 600;
     transition: 0.25s;
 }
-.w-btn-gra3 {
-     background: linear-gradient(
-        45deg,
-        #ff0000,
-        #ff7300,
-        #fffb00,
-        #48ff00,
-        #00ffd5,
-        #002bff,
-        #7a00ff,
-        #ff00c8,
-        #ff0000
-    );
-    color: white;
-}
-.w-btn-gra-anim {
-    background-size: 400% 400%;
-    animation: gradient1 5s ease infinite;
-}
+
 @keyframes gradient1 {
     0% {
         background-position: 0% 50%;
@@ -208,9 +256,9 @@ button {
     background-color: #a3a1a1;
     color: #e3dede;
 }
-.w-btn-yellow {
-    background-color: yellow;
-    color: black;
+.w-btn-qwer {
+    background-color: #c1aeee;
+    color: white;
 }
 @font-face {
     font-family: 'Orbit-Regular';

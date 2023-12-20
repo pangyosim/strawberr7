@@ -5,17 +5,16 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.web.service.GroupService;
-import com.web.service.PartyService;
 import com.web.service.PayService;
 import com.web.vo.GroupVO;
 import com.web.vo.MemberVO;
@@ -108,6 +107,36 @@ public String MyKingList(Model model, HttpSession session) {
   model.addAttribute("mykinglist",mykinglist);
   return "/createparty/MyKingList";
 }
+
+//더보기파티리스트
+
+	@GetMapping("groupview")
+	public String groupview(Model model) {
+		List<GroupVO> groupList = groupService.getGroupList();
+		model.addAttribute("groupList",groupList);
+		return"/createparty/groupview";
+	}
+	@GetMapping("groupviewhaed")
+	public String groupviewhaed(Model model) {
+		List<GroupVO> groupList = groupService.getGroupList();
+		model.addAttribute("groupList",groupList);
+		return"groupview";
+	}
+	//더보기파티리스트 검색기능
+	@PostMapping("/search")
+  public String searchGroups(@RequestParam String keyword,@RequestParam String servicesearch, Model model) {
+      List<GroupVO> groups;
+      
+      if ("allSearch".equals(servicesearch)) {
+          // 전체 서비스에서 검색
+          groups = groupService.searchAll(keyword);
+      } else {
+          // 특정 서비스에서 검색
+          groups = groupService.searchByService(keyword, servicesearch);
+      }
+      model.addAttribute("groupList", groups);
+     return "/createparty/groupview";   		
+  }
 
 }
 

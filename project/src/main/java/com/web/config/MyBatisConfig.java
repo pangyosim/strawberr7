@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Configuration;
 @MapperScan(value="com.web.dao",sqlSessionFactoryRef = "SqlSessionFactory")
 public class MyBatisConfig {
 	private static SqlSessionFactory factory = null;
-	
+
 	@Value("${mybatis.mapper-locations}")
 	String mPath;
 

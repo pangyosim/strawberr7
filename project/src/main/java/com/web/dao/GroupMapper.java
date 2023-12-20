@@ -14,7 +14,6 @@ public interface GroupMapper {
 	
 	public void groupInsert(GroupVO groupVO);
 	
-//	public String selectPeoplecnt(GroupVO groupVO);
 	
 	//수정
 	void groupUpdate(GroupVO groupVo);
@@ -27,9 +26,14 @@ public interface GroupMapper {
 	
 	//방장리스트
 	List<GroupVO> MyKingList(String partykingid);
-	//참여리스트
-//	GroupVO agetGroup(int seq,String userid);
 	//리스트테스트
 	GroupVO JoinList(int seq);
 	
+	void partyDelete(String email);
+	
+	//더보기검색기능
+	List<GroupVO> searchAll(String keyword);
+
+    List<GroupVO> searchByService(String keyword, String service);
+	    
 }

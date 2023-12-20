@@ -33,4 +33,17 @@
  		<!-- SELECT * FROM partyinfo WHERE seq IN(
  		SELECT seq FROM paytable where seq=#{seq} or userid=#{userid}) -->
  	</select>
+ 	
+ 	<delete id="partyDelete">
+		DELETE FROM partytable WHERE partykingid=#{partykingid} and peoplecnt <![CDATA[ < ]]> peoplecnt_max
+	</delete>
+	
+	<!-- 더보기검색기능 -->
+ 	<select id="searchAll" resultType="com.web.vo.GroupVO" parameterType="String">
+		SELECT * FROM partytable WHERE title LIKE '%' || #{keyword} || '%'
+	</select>
+	
+	<select id="searchByService" resultType="com.web.vo.GroupVO" parameterType="com.web.vo.GroupVO">
+	    SELECT * FROM partytable WHERE title LIKE '%' || #{keyword} || '%' and service = #{service}
+	</select>
 </mapper>
