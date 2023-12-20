@@ -197,13 +197,13 @@ ul.tabs li.current{
 	<c:import url="header.jsp" />
 	
 	<!-- TOP10 -->
-	<div class="slider_wrap" style=" margin: 120px 35%; height: 400px;">
+	<div class="slider_wrap" style=" margin: 120px 35%; height: 500px;">
 <!-- 			<h1 style="text-align: center; font-family:sans-serif; font-weight: bold;">Top10</h1>
--->			<ul class="tabs" style="position: relative;">
+-->			<ul class="tabs" style="position: relative; text-align: center;">
 				<li class="tab-link current" data-tab="tab-1" style="font-family: monospace; font-weight: bold; font-size: 15px; color: #e50a15;">Netflix Top10</li>
 				<li class="tab-link" data-tab="tab-2" style=" font-family: monospace; font-weight: bold; font-size: 15px; color: #f30958;">Watcha Top10</li>
 			</ul>
-			<div class="tab-content current" id="tab-1">
+			<div class="tab-content current" id="tab-1" style="margin: 0 10%;">
 				<div class="slider">
 					<c:forEach var="netflix" items="${netflix_list}">
 			        		<div><a href="${netflix.url }"><img src="${netflix.image }" style="width: 100%;"></a></div>
@@ -231,15 +231,6 @@ ul.tabs li.current{
 				$(this).addClass('current');
 				$("#"+tab_id).addClass('current');
 				$(".slider-next").bxSlider({
-		         	 controls : true,
-		              mode: 'horizontal',
-		              auto: true,
-		              slideWidth: 600,
-		              slideHeight: 300,
-		              speed: 250,
-		              pager: true
-		         });
-				$(".slider").bxSlider({
 		         	 controls : true,
 		              mode: 'horizontal',
 		              auto: true,
@@ -402,29 +393,6 @@ ul.tabs li.current{
     startAutoSlide();
 </script>
 <!-- 페이징 -->
-<br/>
-<br/>
-     <!-- Team-->
-     <section class="page-section bg-light" id="team" >
-         <div class="container">
-             <div class="text-center">
-                 <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
-                 <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-             </div>
-             <div class="row">
-                 <div class="col-lg-4">
-                     <div class="team-member">
-                         <h4>Parveen Anand</h4>
-                         <p class="text-muted">Lead Designer</p>
-                     </div>
-                 </div>
-
-             </div>
-             <div class="row">
-                 <div class="col-lg-8 mx-auto text-center"><p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p></div>
-             </div>
-         </div>
-     </section>
         <c:import url="footer.jsp"></c:import>
     </body>
 </html>

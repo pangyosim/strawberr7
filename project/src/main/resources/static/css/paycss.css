@@ -69,5 +69,10 @@
 	justify-content: center;
 }
 .input_area #pay {
-	background-color: #e5ddff; 
+	background-color: #ba77ea; 
+}
+
+#pay:hover {
+	background-color: #ae71dd;
+	cursor: pointer;
 }
