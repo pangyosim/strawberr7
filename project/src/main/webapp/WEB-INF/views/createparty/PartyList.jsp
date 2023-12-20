@@ -101,7 +101,7 @@ button {
 }
 
 .w-btn-per {
-	background-color: #b7b7ff;
+	background-color: #ae71dd;
 	color: white;
 }
 
@@ -418,12 +418,13 @@ body {
 			</tr>
 			<tr>
 				<th colspan="3">
-				<button class="w-btn w-btn-gray"type="button" onclick="location.href='/'" style="width: 150px;">목록</button>
+					<button class="w-btn w-btn-gray"type="button" onclick="location.href='/'" style="width: 150px;">목록</button>
 					<c:if test="${selectParty.partykingid ne loginuser}">
 						<button class="w-btn w-btn-per"type="button" name="pay" onclick="check_box()" style="width: 150px;">결제</button>
 					</c:if>
-					<c:if test="${selectParty.partykingid eq loginuser }">
+					<c:if test="${selectParty.partykingid eq loginuser && selectParty.peoplecnt == 1 }">
 						<button class="w-btn w-btn-per"type="button" name="update" onclick="openModal2('${group.seq}')" style="width: 150px;">수정</button>
+						<button class="w-btn w-btn-per"type="button" name="delete" onclick="location.href='deleteparty?partykingid=${selectParty.partykingid}&seq=${selectParty.seq}'" style="width: 150px;">삭제</button>
 					</c:if>
 				</th>
         	</tr>

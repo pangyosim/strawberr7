@@ -138,6 +138,12 @@ public String MyKingList(Model model, HttpSession session) {
      return "/createparty/groupview";   		
   }
 
+	@GetMapping("deleteparty")
+	public String partydelete(String partykingid,int seq) {
+		System.out.println(partykingid);
+		groupService.partyDelete(partykingid,seq);
+		return "redirect:getmypage";
+	}
 }
 
 

@@ -13,7 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new SessionCheckInterceptor())
                 .order(2)
-                .addPathPatterns("/memberJoinForm", "/loginResult", "/loginForm",
+                .addPathPatterns("/memberJoinForm", "loginResult", "/loginForm",
                                  "/memberUpdate", "/memberUpdateForm", "/memberUpdateNo",
                                  "/memberUpdateResult", "/userSearch", "/admin",
                                  "/getmypage", "/groupInsert", "/groupJoinForm",

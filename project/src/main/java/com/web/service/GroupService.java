@@ -27,7 +27,7 @@ public interface GroupService {
 //	//리스트테스트
 	GroupVO JoinList(int seq);
 //	
-	void partyDelete(String partykingid);
+	void partyDelete(String partykingid, int seq);
 	
 	//더보기검색기능
 	List<GroupVO> searchAll(String keyword);

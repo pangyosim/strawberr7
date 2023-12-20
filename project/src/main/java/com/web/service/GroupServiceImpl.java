@@ -41,8 +41,8 @@ public class GroupServiceImpl implements GroupService{
 	}
 
 	@Override
-	public void partyDelete(String partykingid) {
-		groupMapper.partyDelete(partykingid);
+	public void partyDelete(String partykingid, int seq) {
+		groupMapper.partyDelete(partykingid, seq);
 	}
 	
 	//더보기검색기능

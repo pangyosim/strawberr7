@@ -29,13 +29,10 @@
  	<!-- 참여리스트 -->
  	<select id="JoinList" resultType="com.web.vo.GroupVO">
 	 	SELECT * FROM partytable WHERE seq=#{seq}
-	 	
- 		<!-- SELECT * FROM partyinfo WHERE seq IN(
- 		SELECT seq FROM paytable where seq=#{seq} or userid=#{userid}) -->
  	</select>
  	
  	<delete id="partyDelete">
-		DELETE FROM partytable WHERE partykingid=#{partykingid} and peoplecnt <![CDATA[ < ]]> peoplecnt_max
+		DELETE FROM partytable WHERE partykingid=#{partykingid} and seq=#{seq} and peoplecnt=1
 	</delete>
 	
 	<!-- 더보기검색기능 -->

@@ -22,7 +22,7 @@
   	</select>	
   	
   	<update id="updatePartyKing">
-  		update member set role='PARTYKING' where email=#{email}
+  		update member set role='PARTYKING' where email=#{email} and role='USER'
   	</update>
   	
   	<!-- 로그인시 파티수정가능 내가만든 파티 들어가서 보기 -->

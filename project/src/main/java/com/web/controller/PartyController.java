@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.web.service.GroupService;
 import com.web.service.MemberService;
 import com.web.service.PartyService;
 import com.web.service.PayService;
@@ -102,7 +103,10 @@ public class PartyController implements MemberSession {
 	@GetMapping("createparty")
 	public String getpartyform(String email, HttpSession session) {
 		MemberVO mv = ms.selectMember(email);
-		if(mv.getRole().equals("PARTYKING")) {
+		if(mv.getRole().equals("PARTYKING")){
+			return "/createparty/groupInsert";
+		}
+		if(mv.getRole().equals("ADMIN")) {
 			return "/createparty/groupInsert";
 		}
 		session.setAttribute("email", email);
@@ -116,5 +120,6 @@ public class PartyController implements MemberSession {
 		int zu = partyService.partyUpdate(groupVO);
 		return "redirect:getmypage";
 	}
+	
 	
 }

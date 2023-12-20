@@ -119,6 +119,7 @@ body{
 
 #kakao-login-btn:hover{
 	background-color: #e9ca3f;
+	cursor: pointer;
 }
 
 #login-box {
@@ -132,6 +133,7 @@ body{
 }
 #login-box:hover {
 	background-color: #ae71dd;
+	cursor: pointer;
 }
 
 </style>

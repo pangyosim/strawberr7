@@ -197,10 +197,11 @@ ul.tabs li.current{
 	<c:import url="header.jsp" />
 	
 	<!-- TOP10 -->
-	<div class="slider_wrap" style=" margin: 150px 17% auto;">
-			<ul class="tabs" style="width: 300px; position: relative;">
-				<li class="tab-link current" data-tab="tab-1">Netfilx Top10</li>
-				<li class="tab-link" data-tab="tab-2">Whacha Top10</li>
+	<div class="slider_wrap" style=" margin: 120px 35%; height: 400px;">
+<!-- 			<h1 style="text-align: center; font-family:sans-serif; font-weight: bold;">Top10</h1>
+-->			<ul class="tabs" style="position: relative;">
+				<li class="tab-link current" data-tab="tab-1" style="font-family: monospace; font-weight: bold; font-size: 15px; color: #e50a15;">Netflix Top10</li>
+				<li class="tab-link" data-tab="tab-2" style=" font-family: monospace; font-weight: bold; font-size: 15px; color: #f30958;">Watcha Top10</li>
 			</ul>
 			<div class="tab-content current" id="tab-1">
 				<div class="slider">
@@ -209,10 +210,10 @@ ul.tabs li.current{
 			       	</c:forEach>
 				</div>
 			</div>
-			<div class="tab-content" id="tab-2">
+			<div class="tab-content" id="tab-2" style="margin: 0 25%;">
 				<div class="slider-next">
 					<c:forEach var="whacha" items="${whacha_list}">
-			        		<div><a href="${whacha.url }"><img src="${whacha.image }" style="width: 50%; margin-left: 25%;"></a></div>
+			        		<div><a href="${whacha.url }"><img src="${whacha.image }" style="width: 100%;"></a></div>
 			       	</c:forEach>
 				</div>
 			</div>
@@ -230,6 +231,15 @@ ul.tabs li.current{
 				$(this).addClass('current');
 				$("#"+tab_id).addClass('current');
 				$(".slider-next").bxSlider({
+		         	 controls : true,
+		              mode: 'horizontal',
+		              auto: true,
+		              slideWidth: 600,
+		              slideHeight: 300,
+		              speed: 250,
+		              pager: true
+		         });
+				$(".slider").bxSlider({
 		         	 controls : true,
 		              mode: 'horizontal',
 		              auto: true,
