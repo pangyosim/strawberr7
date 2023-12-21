@@ -35,6 +35,10 @@
 		DELETE FROM partytable WHERE partykingid=#{partykingid} and seq=#{seq} and peoplecnt=1
 	</delete>
 	
+	<delete id="partyAllDelete">
+		DELETE FROM partytable WHERE partykingid=#{partykingid} and peoplecnt=1
+	</delete>
+	
 	<!-- 더보기검색기능 -->
  	<select id="searchAll" resultType="com.web.vo.GroupVO" parameterType="String">
 		SELECT * FROM partytable WHERE title LIKE '%' || #{keyword} || '%'

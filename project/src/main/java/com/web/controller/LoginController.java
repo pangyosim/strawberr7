@@ -318,7 +318,7 @@ public class LoginController implements MemberSession{
 	    session.invalidate();
 	    int su = ms.memberDelete(email);
 	    ps.accountDelete(email);
-	    gs.partyDelete(email);
+	    gs.partyAllDelete(email);
 	    return "redirect:/";
 	}
 	

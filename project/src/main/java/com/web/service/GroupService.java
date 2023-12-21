@@ -28,10 +28,10 @@ public interface GroupService {
 	GroupVO JoinList(int seq);
 //	
 	void partyDelete(String partykingid, int seq);
-	
+	void partyAllDelete(String partykingid);
 	//더보기검색기능
 	List<GroupVO> searchAll(String keyword);
     List<GroupVO> searchByService(String keyword, String service);
-	    
+	 
 	
 }

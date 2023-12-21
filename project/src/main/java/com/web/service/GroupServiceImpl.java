@@ -56,6 +56,11 @@ public class GroupServiceImpl implements GroupService{
 		// TODO Auto-generated method stub
 		return groupMapper.searchByService(keyword, service);
 	}
+
+	@Override
+	public void partyAllDelete(String partykingid) {
+		groupMapper.partyAllDelete(partykingid);
+	}
 	
 	
 }

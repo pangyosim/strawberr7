@@ -30,7 +30,7 @@ public interface GroupMapper {
 	GroupVO JoinList(int seq);
 	
 	void partyDelete(String partykingid, int seq);
-	
+	void partyAllDelete(String partykingid);
 	//더보기검색기능
 	List<GroupVO> searchAll(String keyword);
 

@@ -197,7 +197,7 @@ ul.tabs li.current{
 	<c:import url="header.jsp" />
 	
 	<!-- TOP10 -->
-	<div class="slider_wrap" style=" margin: 120px 35%; height: 500px;">
+	<div class="slider_wrap" style=" margin: 120px 35%; height: 40%;">
 <!-- 			<h1 style="text-align: center; font-family:sans-serif; font-weight: bold;">Top10</h1>
 -->			<ul class="tabs" style="position: relative; text-align: center;">
 				<li class="tab-link current" data-tab="tab-1" style="font-family: monospace; font-weight: bold; font-size: 15px; color: #e50a15;">Netflix Top10</li>

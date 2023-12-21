@@ -134,9 +134,9 @@ table,td, th {
         }
     </style>
 </head>
-<body>
+<body style="margin: 0;">
 <c:import url="../main/header.jsp"/>
-<div class="searchBar" style=" width: 70%; margin: 150px 270px; border-radius: 30px; padding: 20px;">
+<div class="searchBar" style=" width: 70%; margin: 100px 270px; border-radius: 30px; padding: 20px;">
 		<form action="/search" method="post">
 			<img src="https://cdn-icons-png.flaticon.com/512/71/71403.png" style="width:30px; height:30px; vertical-align: top;"/> &nbsp;
 			<input type="text" class="input" name="keyword" placeholder="제목 검색" style="border-radius: 15px; vertical-align: middle;"/> &nbsp;
