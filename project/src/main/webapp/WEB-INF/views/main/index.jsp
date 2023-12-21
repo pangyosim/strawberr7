@@ -266,9 +266,13 @@ ul.tabs li.current{
    					<a href="groupview" style="text-decoration: none; color: gray; margin-left: 65%;">더보기 &#62;</a></span>
    		</div>
 		<!-- 페이징 -->
-		<div style="float: left; width: 3%;">
+		<div style="float: left; width: 3%; height: 350px;">
 			<button type="button" tabindex="0" style="margin-top: 12vh; background-color:transparent; border: none; font-size: 50px; color: #d3d3d3;
 			" onclick="slidePrev()">&#60; &nbsp;</button>
+		</div>
+		<div style="float: right; width: 9%; height: 350px;">
+			<button type="button" tabindex="0" style="margin-top: 12vh; background-color:transparent; border: none; font-size: 50px; color: #d3d3d3;
+			" onclick="slideNext()">&#62;</button>
 		</div>
 		<div id="slider-container" style="width: 87%;">
 			<div id="slider-content">
@@ -302,10 +306,6 @@ ul.tabs li.current{
 					</tbody>
 				</table>
 			</div>
-		</div>
-		<div style="float: right; width: 9%;">
-			<button type="button" tabindex="0" style="margin-top: -22vh; background-color:transparent; border: none; font-size: 50px; color: #d3d3d3;
-			" onclick="slideNext()">&#62;</button>
 		</div>
 	</div>
 	</div>
