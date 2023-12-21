@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<html>
+<!DOCTYPE html>
 <head>
 <meta charset="utf-8" />
 <title>MAIN</title>
@@ -251,8 +251,8 @@ ul.tabs li.current{
          	 controls : true,
               mode: 'horizontal',
               auto: true,
-              slideWidth: 600,
-              slideHeight: 300,
+              slideWidth: 800,
+              slideHeight: 800,
               speed: 250,
               pager: true
          });

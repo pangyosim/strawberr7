@@ -160,7 +160,7 @@ div#pwdShow1, div#pwdShow2{
    <div id="searchI">
       <div class="form-group">
          <div>
-            <input type="text" class="form-control" id="name" name="name" placeholder="NAME">
+            <input type="text" class="form-control" id="name" name="name" placeholder="이름 입력">
          </div>
       </div>
       <br/>
@@ -183,12 +183,12 @@ div#pwdShow1, div#pwdShow2{
    <div id="searchP" style="display: none;">
       <div class="idForm">
          <div>
-            <input type="text" class="form-control" id="id_val" name="id_val" placeholder="ID">
+            <input type="text" class="form-control" id="id_val" name="id_val" placeholder="ID 입력">
          </div>
       </div>
       <br/>
       <div class="mail_input" id="mail_input" name="mail_input">
-         <input type="text" class="mail" name="mail" id="mail" placeholder="Email" maxlength="20" />@ <select class="domain"
+         <input type="text" class="mail" name="mail" id="mail" placeholder="이메일 입력" maxlength="20" />@ <select class="domain"
             id="domain" name="domain">
             <option value="none">---이메일---</option>
             <option value="naver.com">naver.com</option>

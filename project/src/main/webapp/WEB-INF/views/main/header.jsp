@@ -25,7 +25,7 @@
 	                        </c:when>
 	                        <c:otherwise>
 	                        	<li class="nav-item"><a class="nav-link" href="logout" style="color: #ba77ea; width: 80px;">로그아웃</a></li> &nbsp;
-	                        	<li class="nav-item"><a class="nav-link" href="createparty?email=${member.email }" style="color: #CA226B; width: 90px;">파티만들기</a></li> &nbsp;
+	                        	<li class="nav-item"><a class="nav-link" href="createparty?email=${member.email }" style="color: #ba77ea; width: 90px;">파티만들기</a></li> &nbsp;
 	                        	<li class="nav-item"><a class="nav-link" href="getmypage" style="color: #ba77ea; width: 90px;">마이페이지</a></li> &nbsp;
 	                        	<li class="nav-item"><a class="nav-link" href="/reviewForm?page=1" style="color: #ba77ea;  width: 80px;">Q&A</a></li> 
 	                       	</c:otherwise>

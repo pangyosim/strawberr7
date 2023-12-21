@@ -13,6 +13,7 @@
 <style type="text/css">
 #board_list {
 	padding: 300px;
+	margin: 0 auto;
 }
 
 #paging_block {
@@ -152,7 +153,7 @@ button {
             cursor: pointer;
         }
         
-h3{
+h1{
 	text-align: center;
 }        
 </style>
@@ -187,7 +188,7 @@ h3{
 
 
 	<div id="board_list">
-	<h3>Q&N CHECK</h3>
+	<h1>Q&A</h1>
 		<form action="/reviewForm" method="get" id="searchForm"
 			name="search-form" onsubmit="return notSelect()">
 			<td colspan="2"><input type="text" name="keyword" id="keyword" placeholder="검색어 입력"> 

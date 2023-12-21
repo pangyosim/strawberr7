@@ -87,7 +87,7 @@ body{
 	margin-top: 13%;
 	border: none;
 }
-.login-box h2{
+.login-box h1{
 	text-align: center;
 	color: #ba77ea;
 }
@@ -141,7 +141,7 @@ body{
 <body >
 <div class="login-box">
 	  <form id="loginForm" action="loginResult" method="post" onsubmit="return loginCheck()">
-	  	<h2>팀프로젝트명</h2>
+	  	<h1 style="margin-left: 10px;">OYES</h1>
 	  	<div class="user-box">	
 	  		<label for="userId"></label>
 	  		<input type="text" name="userId" id="userId" required="" placeholder="ID"/>
@@ -155,7 +155,7 @@ body{
 	<div style="margin-top: 8px;">
 		<button id="kakao-login-btn"><img alt="" src="resources/assets/img/kakaologin.png" style=" width: 20px; height: 20px;"/>카카오 로그인</button>
 	</div>
- 	<a id="kakao-unlink-btn">카카오 연결 해제</a>
+ 	<!--  <a id="kakao-unlink-btn">카카오 연결 해제</a> -->
  	
   
 </div>

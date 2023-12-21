@@ -15,7 +15,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .order(2)
                 .addPathPatterns("/memberJoinForm", "loginResult", "/loginForm",
                                  "/memberUpdate", "/memberUpdateForm", "/memberUpdateNo",
-                                 "/memberUpdateResult", "/userSearch", "/admin",
+                                 "/memberUpdateResult", "userSearch", "/admin",
                                  "/getmypage", "/groupInsert", "/groupJoinForm",
                                  "/groupRegistrationForm", "/imageban", "/mygrouplist",
                                  "/MyKingList", "/PartyList", "/partyUpdate",
