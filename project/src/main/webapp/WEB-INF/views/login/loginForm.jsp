@@ -88,7 +88,6 @@ body{
 	border: none;
 }
 .login-box h1{
-	text-align: center;
 	color: #ba77ea;
 }
 .user-box input{
@@ -100,7 +99,7 @@ body{
 	border: 1px solid black;
 }
 #register_tag{
-	margin-left: 90px;
+	margin-left: 105px;
 	text-decoration: none;
 	color: black;
 }
@@ -140,8 +139,8 @@ body{
 </head>
 <body >
 <div class="login-box">
-	  <form id="loginForm" action="loginResult" method="post" onsubmit="return loginCheck()">
-	  	<h1 style="margin-left: 10px;">OYES</h1>
+	  <form id="loginForm" action="loginResult" method="post" onsubmit="return loginCheck()" style="width: 500px;">
+	  	<h1 style="margin-left: 100px;">OYES</h1>
 	  	<div class="user-box">	
 	  		<label for="userId"></label>
 	  		<input type="text" name="userId" id="userId" required="" placeholder="ID"/>
