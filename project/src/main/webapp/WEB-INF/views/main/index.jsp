@@ -150,8 +150,8 @@ display: block; /* 마우스가 올라갔을 때 텍스트를 표시합니다. *
 </style>
 
 <style>
-.slider_wrap .bx-wrapper {border:0; box-shadow:none;}
-
+.slider_wrap .bx-wrapper {border:0; box-shadow:none; border-radius: 50px;}
+.slider_wrap .bx-wrapper .bx-viewport{border-radius: 30px;}
 ul.tabs{
 	margin: 0px;
 	padding: 0px;
@@ -197,20 +197,20 @@ ul.tabs li.current{
 	<c:import url="header.jsp" />
 	
 	<!-- TOP10 -->
-	<div class="slider_wrap" style=" margin: 120px 35%; height: 40%;">
+	<div class="slider_wrap" style=" margin: 120px 18%; width: 100%; height: 650px;">
 <!-- 			<h1 style="text-align: center; font-family:sans-serif; font-weight: bold;">Top10</h1>
--->			<ul class="tabs" style="position: relative; text-align: center;">
+-->			<ul class="tabs" style="margin-left: 24%;">
 				<li class="tab-link current" data-tab="tab-1" style="font-family: monospace; font-weight: bold; font-size: 15px; color: #e50a15;">Netflix Top10</li>
 				<li class="tab-link" data-tab="tab-2" style=" font-family: monospace; font-weight: bold; font-size: 15px; color: #f30958;">Watcha Top10</li>
 			</ul>
-			<div class="tab-content current" id="tab-1" style="margin: 0 10%;">
+			<div class="tab-content current" id="tab-1" style="margin: 0 10%; width: 1000px;">
 				<div class="slider">
 					<c:forEach var="netflix" items="${netflix_list}">
 			        		<div><a href="${netflix.url }"><img src="${netflix.image }" style="width: 100%;"></a></div>
 			       	</c:forEach>
 				</div>
 			</div>
-			<div class="tab-content" id="tab-2" style="margin: 0 25%;">
+			<div class="tab-content" id="tab-2" style="margin: 0 18%; width: 500px;">
 				<div class="slider-next">
 					<c:forEach var="whacha" items="${whacha_list}">
 			        		<div><a href="${whacha.url }"><img src="${whacha.image }" style="width: 100%;"></a></div>
@@ -236,7 +236,7 @@ ul.tabs li.current{
 		              auto: true,
 		              slideWidth: 600,
 		              slideHeight: 300,
-		              speed: 250,
+		              speed: 230,
 		              pager: true
 		         });
 			})
@@ -253,13 +253,13 @@ ul.tabs li.current{
               auto: true,
               slideWidth: 800,
               slideHeight: 800,
-              speed: 250,
+              speed: 230,
               pager: true
          });
       });
     </script>
    <!-- Services-->
-   <div class="services_wrap" style=" width: 75%; margin-left: 13%; margin-top: 30px; " >
+   <div class="services_wrap" style=" width: 75%; margin-left: 13%; " >
     <div class="services_div" >
     	<div style="margin-bottom: 10px;">
    			<span><a style=" margin-left: 0px; font-family: monospace; font-size: 25px; font-weight: bold;"> &nbsp; &nbsp; 최근 만들어진 파티</a>
