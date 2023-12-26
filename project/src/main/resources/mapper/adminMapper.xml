@@ -31,7 +31,7 @@
                 SELECT /*+ INDEX(T1 PK1) */
                     ROWNUM AS RNUM, T1.*
                 FROM
-                    partyinfo T1
+                    partytable T1
                 WHERE
                     ROWNUM &lt;= #{pageLast}
             )
@@ -39,10 +39,10 @@
             #{pageStart} &lt;= RNUM
 	</select>
 	<update id="partyUpdate">
-  		update partyinfo set service=#{service},title=#{title},peoplecnt=#{peoplecnt},partyday=#{partyday},price=#{price} where seq=#{seq} and userid=#{userid}
+  		update partytable set service=#{service},title=#{title},peoplecnt=#{peoplecnt},peoplecnt_max=#{peoplecnt_max},partyday=#{partyday},price=#{price} where seq=#{seq} and userid=#{userid}
   	</update>
   	<delete id="partyDelete">
-  	  	delete from partyinfo where seq=#{seq}  	
+  	  	delete from partytable where seq=#{seq}  	
   	</delete>
   	
   	<select id="getAccountList" resultType="com.web.vo.PartyMember">
@@ -60,7 +60,7 @@
             #{pageStart} &lt;= RNUM
 	</select>
 	<update id="accountUpdate">
-  		update account set account=#{account}, bank=#{bank}, name=#{name} where seq=#{seq}
+  		update account set account=#{account}, bank=#{bank}, name=#{name}, email=#{email} where seq=#{seq}
   	</update>
   	<delete id="accountDelete">
   	  	delete from account where seq=#{seq}  	

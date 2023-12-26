@@ -153,6 +153,7 @@ table,td, th {
 			<br>
 			<div style="margin: 0 30px auto;">
 				<c:forEach var="allgroup" items="${groupList}" varStatus="vs">
+					<c:if test="${allgroup.peoplecnt < allgroup.peoplecnt_max }">
 					<div class="slide" style="border: 1px solid #e9e9e9; border-radius: 10px; width: 200px; height: 350px; text-align: center; display: inline-block;" onclick="location.href='PartyList?seq=${allgroup.seq}'">
 						<img
 							src="resources/assets/img/${allgroup.service }.png"
@@ -166,6 +167,7 @@ table,td, th {
 						    (${allgroup.partyday} 개월)</p>
 						<br/>	
 					</div>
+					</c:if>
 				</c:forEach>
 			</div>
 <br/>

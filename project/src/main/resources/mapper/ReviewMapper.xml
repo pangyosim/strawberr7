@@ -26,8 +26,7 @@
 	</select>
 
 	<select id="getListWithpaging" resultType="com.web.vo.ReviewVO">
-		select * from (select tt.* from (select rownum rn, rv.* from review rv
-		order by seq desc) tt where rn <![CDATA[ >= #{start} and rn <=]]>#{last})
+		SELECT * FROM (SELECT inner_query.*, ROWNUM rnum FROM (SELECT * FROM review ORDER BY seq DESC) inner_query WHERE ROWNUM <![CDATA[<= #{last}]]>) WHERE rnum <![CDATA[>=#{start}]]>
 	</select>
 	
 	<select id="getListWithpaging2" resultType="com.web.vo.ReviewVO">

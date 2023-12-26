@@ -36,42 +36,43 @@ public class ReviewController {
 	private ReviewCommentService reviewCommentService;
 	
 	@GetMapping("/reviewForm")
-	public String ReviewForm(Model model, ReviewVO reviewVO, int page, String keyword) {
-		
-		// 조회수
-		int article = 5; // 한페이지 글 목록수
-		int currentPage = page; // 현재 페이지 넘버
-		int start = (currentPage - 1) * article + 1; // 글 번호
-		int last = start + article - 1; // 마지막 글번호
-		int totalArticle = 0; // 전체 글수
-		List<ReviewVO> list = new ArrayList<>();
-		// 게시판 검색
-		if(keyword==null) {
-			// 키워드가 없을때
-			list = reviewService.getList(start, last);	
-			totalArticle = reviewService.getTotalArticle();
-		} else {
-			// 검색 했을때
-			list = reviewService.getListForKeyword(start,last,keyword);
-			totalArticle = reviewService.getTotalArticle2(keyword);
-		}
-		
-		// 페이징
-		int totalPage = (totalArticle - 1) / article + 1; // 전체 페이지 수
+	public String ReviewForm(Model model, ReviewVO reviewVO, @RequestParam(defaultValue = "1") int page, @RequestParam(required = false) String keyword) {
 
-		int block = 4; // 페이지 블록
-		int startPage = (currentPage - 1) / block * block + 1;
-		int endPage = startPage + block - 1; // 끝
-		if (endPage > totalPage)
-			endPage = totalPage;
-		model.addAttribute("memberlist",memberService.doMemberList());
-		model.addAttribute("page", page);
-		model.addAttribute("list", list);
-		model.addAttribute("totalPage", totalPage);
-		model.addAttribute("startPage", startPage);
-		model.addAttribute("endPage", endPage);
-		model.addAttribute("block", block);
-		return "/review/reviewForm";
+	    int article = 5; // 한 페이지당 게시글 수
+	    int currentPage = page; // 현재 페이지 번호
+	    int start = (currentPage - 1) * article + 1; // 시작 게시글 번호
+	    int last = start + article - 1; // 마지막 게시글 번호
+	    int totalArticle; // 전체 게시글 수
+	    List<ReviewVO> list = new ArrayList<>();
+
+	    // 게시판 검색
+	    if (keyword == null || keyword.trim().isEmpty()) {
+	        // 키워드가 없을 때
+	        list = reviewService.getList(start, last);
+	        totalArticle = reviewService.getTotalArticle();
+	    } else {
+	        // 검색했을 때
+	        list = reviewService.getListForKeyword(start, last, keyword);
+	        totalArticle = reviewService.getTotalArticle2(keyword);
+	    }
+
+	    // 페이징 처리
+	    int totalPage = (totalArticle - 1) / article + 1; // 전체 페이지 수
+	    int block = 4; // 페이지 블록 수
+	    int startPage = (currentPage - 1) / block * block + 1; // 시작 페이지 번호
+	    int endPage = startPage + block - 1; // 끝 페이지 번호
+	    if (endPage > totalPage) {
+	        endPage = totalPage;
+	    }
+
+	    model.addAttribute("memberlist", list);
+	    model.addAttribute("page", currentPage);
+	    model.addAttribute("totalPage", totalPage);
+	    model.addAttribute("startPage", startPage);
+	    model.addAttribute("endPage", endPage);
+	    model.addAttribute("block", block);
+
+	    return "/review/reviewForm";
 	}
 
 	// 리뷰 상세내용

@@ -187,7 +187,7 @@
 		</div>
 			<div id="joinList" class="party-content active">
 					<div class="swiper">
-						<div class="swiper-wrapper">
+						<div class="swiper-wrapper" style="padding-top: 50px;">
 							<table>
 								<tbody>
 									<c:forEach var="group" items="${joinList}">

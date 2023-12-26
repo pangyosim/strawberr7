@@ -387,7 +387,7 @@ function loadPartyInfo() {
                     + '<option value="Tving"' + (party.service === 'Tving' ? ' selected' : '') + '>Tving</option>'
                     + '</select>';
 
-                partyTable.append('<tbody><tr><td><input type="text" name="seq" value="' + party.seq + '" readonly></input></td><td>' + serviceSelect + '</td><td><input type="text" name="title" value="' + party.title + '" ></input></td><td><input type="text" name="peoplecnt" value="' + party.peoplecnt + '" ></input></td><td><input type="text" name="peoplemaxcount" value="' + party.peoplemaxcount + '" ></input></td><td><input type="text" name="userid" value="' + party.userid + '" ></input></td><td><input type="text" name="partyday" value="' + party.partyday + '" ></input></td><td><input type="text" name="price" value="' + party.price + '" ></input></td><td><input type="text" name="partydate" value="' + party.partydate + '" ></input></td><td><button type="button" class="btn-hover color-8 edit-button-party">수정</button><button type="button" class="btn-hover color-8 delete-button-party">삭제</button></td></tr></tbody>');
+                partyTable.append('<tbody><tr><td><input type="text" name="seq" value="' + party.seq + '" readonly></input></td><td>' + serviceSelect + '</td><td><input type="text" name="title" value="' + party.title + '" ></input></td><td><input type="text" name="peoplecnt" value="' + party.peoplecnt + '" ></input></td><td><input type="text" name="peoplecnt_max" value="' + party.peoplecnt_max + '" ></input></td><td><input type="text" name="userid" value="' + party.userid + '" ></input></td><td><input type="text" name="partyday" value="' + party.partyday + '" ></input></td><td><input type="text" name="price" value="' + party.price + '" ></input></td><td><input type="text" name="partydate" value="' + party.partydate + '" ></input></td><td><button type="button" class="btn-hover color-8 edit-button-party">수정</button><button type="button" class="btn-hover color-8 delete-button-party">삭제</button></td></tr></tbody>');
 
                 partyForm.append(partyTable);
                 partyInfoDiv.append(partyForm);
@@ -470,12 +470,12 @@ function loadAccountInfo() {
             pageButtonsDiv.append('<button class="btn-hover color" onclick="increasePage()">페이지 증가</button>');
             accountInfoDiv.append(pageButtonsDiv);
 
-            accountTable.append('<thead><tr><th>계좌 seq</th><th>계좌 name</th><th>계좌 bank</th><th>계좌 account</th></tr></thead>');
+            accountTable.append('<thead><tr><th>계좌 seq</th><th>계좌 name</th><th>계좌 bank</th><th>계좌 account</th><th>계좌 email</th></tr></thead>');
             $.each(data, function(index, account) {
                 var accountForm = $('<form class="account"></form>');
                 accountForm.data('account', account);
 
-                accountTable.append('<tbody><tr><td><input type="text" name="seq" value="' + account.seq + '" readonly></input></td><td><input type="text" name="name" value="' + account.name + '"></input></td><td><select name="bank"><option value="KB국민은행"' + (account.bank === 'KB국민은행' ? ' selected' : '') + '>KB국민은행</option><option value="신한은행"' + (account.bank === '신한은행' ? ' selected' : '') + '>신한은행</option><option value="우리은행"' + (account.bank === '우리은행' ? ' selected' : '') + '>우리은행</option><option value="하나은행"' + (account.bank === '하나은행' ? ' selected' : '') + '>하나은행</option><option value="KEB하나은행"' + (account.bank === 'KEB하나은행' ? ' selected' : '') + '>KEB하나은행</option><option value="NH농협은행"' + (account.bank === 'NH농협은행' ? ' selected' : '') + '>NH농협은행</option><option value="기업은행"' + (account.bank === '기업은행' ? ' selected' : '') + '>기업은행</option><option value="씨티은행"' + (account.bank === '씨티은행' ? ' selected' : '') + '>씨티은행</option><option value="카카오뱅크"' + (account.bank === '카카오뱅크' ? ' selected' : '') + '>카카오뱅크</option><option value="케이뱅크"' + (account.bank === '케이뱅크' ? ' selected' : '') + '>케이뱅크</option></select></td><td><input type="text" name="account" value="' + account.account + '"></input></td><td><button type="button" class="btn-hover color-8 edit-button-account">수정</button><button type="button" class="btn-hover color-8 delete-button-account">삭제</button></td></tr></tbody>');
+                accountTable.append('<tbody><tr><td><input type="text" name="seq" value="' + account.seq + '" readonly></input></td><td><input type="text" name="name" value="' + account.name + '"></input></td><td><select name="bank"><option value="KB국민은행"' + (account.bank === 'KB국민은행' ? ' selected' : '') + '>KB국민은행</option><option value="신한은행"' + (account.bank === '신한은행' ? ' selected' : '') + '>신한은행</option><option value="우리은행"' + (account.bank === '우리은행' ? ' selected' : '') + '>우리은행</option><option value="하나은행"' + (account.bank === '하나은행' ? ' selected' : '') + '>하나은행</option><option value="KEB하나은행"' + (account.bank === 'KEB하나은행' ? ' selected' : '') + '>KEB하나은행</option><option value="NH농협은행"' + (account.bank === 'NH농협은행' ? ' selected' : '') + '>NH농협은행</option><option value="기업은행"' + (account.bank === '기업은행' ? ' selected' : '') + '>기업은행</option><option value="씨티은행"' + (account.bank === '씨티은행' ? ' selected' : '') + '>씨티은행</option><option value="카카오뱅크"' + (account.bank === '카카오뱅크' ? ' selected' : '') + '>카카오뱅크</option><option value="케이뱅크"' + (account.bank === '케이뱅크' ? ' selected' : '') + '>케이뱅크</option></select></td><td><input type="text" name="account" value="' + account.account + '"></input></td><td><input type="text" name="email" value="' + account.email + '" readonly></input><td><button type="button" class="btn-hover color-8 edit-button-account">수정</button><button type="button" class="btn-hover color-8 delete-button-account">삭제</button></td></tr></tbody>');
 
                 accountForm.append(accountTable);
                 accountInfoDiv.append(accountForm);
@@ -561,14 +561,14 @@ function loadPayInfo() {
             pageButtonsDiv.append('<button class="btn-hover color" onclick="increasePage()">페이지 증가</button>');
             payInfoDiv.append(pageButtonsDiv);
         	
-            $.each(data, function(index, pay) {
-                var payForm = $('<form class="pay"></form>'); 
-                payForm.data('pay', pay);  
-           	
-                var payTable = $('<table></table>');
+       	
+            var payTable = $('<table></table>');
 
-                payTable.append('<thead><tr><th>결제 seq</th><th>결제 userid</th><th>결제 price</th><th>결제 paydate</th><th>결제 imp_uid</th><th>결제 merchant_uid</th><th>결제 result</th></tr></thead>');
-            	
+            payTable.append('<thead><tr><th>결제 seq</th><th>결제 userid</th><th>결제 price</th><th>결제 paydate</th><th>결제 imp_uid</th><th>결제 merchant_uid</th><th>결제 result</th></tr></thead>');
+        	
+            $.each(data, function(index, pay) {
+            	var payForm = $('<form class="pay"></form>'); 
+            	payForm.data('pay', pay);  
                 payTable.append('<tbody><tr><td><input type="text" name="seq" value="' + pay.seq + '" readonly></input></td><td><input type="text" name="userid" value="' + pay.userid + '" readonly></input></td><td><input type="text" name="price" value="' + pay.price + '" readonly></input></td><td><input type="text" name="paydate" value="' + pay.paydate + '" readonly></input></td><td><input type="text" name="imp_uid" value="' + pay.imp_uid + '" readonly></input></td><td><input type="text" name="merchant_uid" value="' + pay.merchant_uid + '" readonly></input></td><td><input type="text" name="result" value="' + pay.result + '" ></input></td><td><button type="button" class="btn-hover color-8 edit-button-pay">수정</button><button type="button" class="btn-hover color-8 delete-button-pay">삭제</button></td></tr></tbody>');
 
                 payForm.append(payTable);
@@ -641,8 +641,9 @@ body, table {
 </head>
 <body>
 	<a href="/" style="text-decoration: none; color: black; text-align: left;">
-		<img width="50px" src="https://i.pinimg.com/564x/3a/80/d0/3a80d08597eb583fc0784a694b56169a.jpg" style="no-repeat; opacity : 0.5;">
-	<br/>Home
+		<img width="50px" src="resources/assets/img/adminLogo.png" style="width: 105px;"/>
+	
+	<br/>
 	</a> 
 	<!-- <div style="border: 1px solid gray; ">
 	    <h1 onclick="toggleVisibility('memberInfo')">멤버 정보</h1>

@@ -150,8 +150,8 @@ display: block; /* 마우스가 올라갔을 때 텍스트를 표시합니다. *
 </style>
 
 <style>
-.slider_wrap .bx-wrapper {border:0; box-shadow:none; border-radius: 50px;}
-.slider_wrap .bx-wrapper .bx-viewport{border-radius: 30px;}
+.slider_wrap .bx-wrapper {border:0; box-shadow:none; border-radius: 50px; box-shadow: 5px 5px 5px 5px gray inset;}
+.slider_wrap .bx-wrapper .bx-viewport{border-radius: 30px; margin: 0; overflow: visible; max-width: none; width: auto;}
 ul.tabs{
 	margin: 0px;
 	padding: 0px;
@@ -197,20 +197,20 @@ ul.tabs li.current{
 	<c:import url="header.jsp" />
 	
 	<!-- TOP10 -->
-	<div class="slider_wrap" style=" margin: 120px 18%; width: 100%; height: 650px;">
+	<div class="slider_wrap" style=" margin: 120px 0; height: 600px;">
 <!-- 			<h1 style="text-align: center; font-family:sans-serif; font-weight: bold;">Top10</h1>
--->			<ul class="tabs" style="margin-left: 24%;">
+-->			<ul class="tabs" style="margin-left: 42%;">
 				<li class="tab-link current" data-tab="tab-1" style="font-family: monospace; font-weight: bold; font-size: 15px; color: #e50a15;">Netflix Top10</li>
 				<li class="tab-link" data-tab="tab-2" style=" font-family: monospace; font-weight: bold; font-size: 15px; color: #f30958;">Watcha Top10</li>
 			</ul>
-			<div class="tab-content current" id="tab-1" style="margin: 0 10%; width: 1000px;">
+			<div class="tab-content current" id="tab-1" style="margin: 40px 0;">
 				<div class="slider">
 					<c:forEach var="netflix" items="${netflix_list}">
 			        		<div><a href="${netflix.url }"><img src="${netflix.image }" style="width: 100%;"></a></div>
 			       	</c:forEach>
 				</div>
 			</div>
-			<div class="tab-content" id="tab-2" style="margin: 0 18%; width: 500px;">
+			<div class="tab-content" id="tab-2" style="margin: 15px 0;">
 				<div class="slider-next">
 					<c:forEach var="whacha" items="${whacha_list}">
 			        		<div><a href="${whacha.url }"><img src="${whacha.image }" style="width: 100%;"></a></div>
@@ -234,7 +234,10 @@ ul.tabs li.current{
 		         	 controls : true,
 		              mode: 'horizontal',
 		              auto: true,
-		              slideWidth: 600,
+		              minSlides: 6,
+		              maxSlides: 6,
+		              moveSlides: 1,
+		              slideWidth: 3000,
 		              slideHeight: 300,
 		              speed: 230,
 		              pager: true
@@ -251,7 +254,10 @@ ul.tabs li.current{
          	 controls : true,
               mode: 'horizontal',
               auto: true,
-              slideWidth: 800,
+              minSlides: 3,
+              maxSlides: 3,
+              moveSlides: 1,
+              slideWidth: 3000,
               slideHeight: 800,
               speed: 230,
               pager: true
@@ -393,6 +399,6 @@ ul.tabs li.current{
     startAutoSlide();
 </script>
 <!-- 페이징 -->
-        <c:import url="footer.jsp"></c:import>
-    </body>
+<c:import url="footer.jsp"></c:import>
+</body>
 </html>

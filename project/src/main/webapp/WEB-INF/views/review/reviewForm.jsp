@@ -218,7 +218,7 @@ h1{
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="reviewlist" items="${list}">
+					<c:forEach var="reviewlist" items="${memberlist}">
 						<tr>
 							<td style="width: 100px;">${reviewlist.seq}</td>
 							<td style="width: 150px;">${reviewlist.nickname}</td>
