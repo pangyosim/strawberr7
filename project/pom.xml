@@ -17,6 +17,7 @@
 	<properties>
 		<java.version>11</java.version>
 	</properties>
+	<packaging>war</packaging>
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->	
 		<dependency>
@@ -99,6 +100,14 @@
 		    <artifactId>jsoup</artifactId>
 		    <version>1.13.1</version>
 		</dependency>
+		
+		<!-- tomcat -->
+		<dependency>
+       		<groupId>org.springframework.boot</groupId>
+       		<artifactId>spring-boot-starter-tomcat</artifactId>
+    	    <scope>provided</scope>
+	    </dependency>
+		
 	</dependencies>
 
 	<build>

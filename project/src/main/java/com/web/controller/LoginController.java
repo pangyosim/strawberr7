@@ -1,7 +1,5 @@
 package com.web.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -121,10 +119,7 @@ public class LoginController implements MemberSession{
 	@PostMapping("loginResult")
 	public String loginResult(@RequestParam("userId") String id,
 	                          @RequestParam("password") String pw, HttpSession session) {
-		System.out.println(id);
-		System.out.println(pw);
 		MemberVO memberVO = ms.loginResult(id, pw);
-		System.out.println(memberVO);
 	    if(memberVO != null) {
 	        session.setAttribute("member", memberVO);
 	       //System.out.println(memberVO.getRole()); // 회원등급 확인

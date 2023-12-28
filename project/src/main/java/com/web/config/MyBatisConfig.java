@@ -27,7 +27,7 @@ public class MyBatisConfig {
 	public DataSource DataSource() {
 		return DataSourceBuilder.create().build();
 	}
-
+	
 	@Bean(name="SqlSessionFactory")
 	public SqlSessionFactory SqlSessionFactory(@Qualifier("dataSource") DataSource DataSource, ApplicationContext applicatiionContext) throws Exception{
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();

@@ -7,7 +7,6 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 public class SessionCheckInterceptor implements HandlerInterceptor {
 
     @Override

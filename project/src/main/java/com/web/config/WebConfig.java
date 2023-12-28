@@ -9,20 +9,20 @@ import com.web.session.SessionCheckInterceptor;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    @Override
+	@Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new SessionCheckInterceptor())
                 .order(2)
-                .addPathPatterns("/memberJoinForm", "loginResult", "/loginForm",
+                .addPathPatterns("/memberJoinForm", "/loginForm", "/createparty",
                                  "/memberUpdate", "/memberUpdateForm", "/memberUpdateNo",
-                                 "/memberUpdateResult", "userSearch", "/admin",
+                                 "/memberUpdateResult", "/reviewInsert", "/admin",
                                  "/getmypage", "/groupInsert", "/groupJoinForm",
                                  "/groupRegistrationForm", "/imageban", "/mygrouplist",
                                  "/MyKingList", "/PartyList", "/partyUpdate",
                                  "/youtubePartyList", "/findparty", "/partydetail",
-                                 "/payinfo", "/reviewContent", "/reviewForm",
-                                 "/reviewInsert") // 접근 금지 url
-                .excludePathPatterns("/resources/**", "/**/*.ico", "/error", "/login"); // 예외 url 
+                                 "/payinfo", "/reviewContent", "/reviewForm" ) // 접근 금지 url
+                .excludePathPatterns("/resources/**", "/**/*.ico", "/error", "/login", "/loginResult",
+                					 "/userSearch" ); // 예외 url 
     }
 }
 
