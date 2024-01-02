@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+  <mapper namespace="com.web.dao.AdminMapper" >
+
+	<select id="getMemberList" resultType="com.web.vo.MemberVO">
+        SELECT *
+        FROM
+            (
+                SELECT /*+ INDEX(T1 PK1) */
+                    ROWNUM AS RNUM, T1.*
+                FROM
+                    member T1
+                WHERE
+                    ROWNUM &lt;= #{pageLast}
+            )
+        WHERE
+            #{pageStart} &lt;= RNUM
+	</select>
+  	<update id="memberUpdate">
+  		update member set id=#{id},pw=#{pw},name=#{name},nickname=#{nickname},role=#{role},tel=#{tel},addr=#{addr},birth=#{birth},email=#{email},tier=#{tier} where seq=#{seq}
+  	</update>
+  	<delete id="memberDelete">
+  		delete from member where seq=#{seq}
+  	</delete>
+  
+  	<select id="getPartyList" resultType="com.web.vo.GroupVO">
+		SELECT *
+        FROM
+            (
+                SELECT /*+ INDEX(T1 PK1) */
+                    ROWNUM AS RNUM, T1.*
+                FROM
+                    partytable T1
+                WHERE
+                    ROWNUM &lt;= #{pageLast}
+            )
+        WHERE
+            #{pageStart} &lt;= RNUM
+	</select>
+	<update id="partyUpdate">
+  		update partytable set service=#{service},title=#{title},peoplecnt=#{peoplecnt},peoplecnt_max=#{peoplecnt_max},partyday=#{partyday},price=#{price} where seq=#{seq} and userid=#{userid}
+  	</update>
+  	<delete id="partyDelete">
+  	  	delete from partytable where seq=#{seq}  	
+  	</delete>
+  	
+  	<select id="getAccountList" resultType="com.web.vo.PartyMember">
+		SELECT *
+        FROM
+            (
+                SELECT /*+ INDEX(T1 PK1) */
+                    ROWNUM AS RNUM, T1.*
+                FROM
+                    account T1
+                WHERE
+                    ROWNUM &lt;= #{pageLast}
+            )
+        WHERE
+            #{pageStart} &lt;= RNUM
+	</select>
+	<update id="accountUpdate">
+  		update account set account=#{account}, bank=#{bank}, name=#{name}, email=#{email} where seq=#{seq}
+  	</update>
+  	<delete id="accountDelete">
+  	  	delete from account where seq=#{seq}  	
+  	</delete>
+  	
+  	<select id="getPayList" resultType="com.web.vo.PayVO">
+		SELECT *
+        FROM
+            (
+                SELECT /*+ INDEX(T1 PK1) */
+                    ROWNUM AS RNUM, T1.*
+                FROM
+                    paytable T1
+                WHERE
+                    ROWNUM &lt;= #{pageLast}
+            )
+        WHERE
+            #{pageStart} &lt;= RNUM
+	</select>
+	<update id="PayUpdate">
+  		update paytable set userid=#{userid}, imp_uid=#{imp_uid}, merchant_uid=#{merchant_uid}, result=#{result} where userid=#{userid} and seq=#{seq}
+  	</update>
+  	<delete id="PayDelete">
+  	  	delete from paytable where seq=#{seq}  	
+  	</delete>
+  	<select id="getCountTable" resultType="int">
+        SELECT COUNT(*)
+        FROM ${table}
+    </select>
+  	
+  </mapper>
+  
+  

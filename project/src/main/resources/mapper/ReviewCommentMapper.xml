@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.dao.ReviewCommentMapper">
+	<select id="getReviewComments" resultType="com.web.vo.ReviewCommentVO">
+		SELECT * FROM reviewcomment WHERE reviewid = #{reviewid}
+	</select>
+
+	<insert id="addReviewComment" parameterType="com.web.vo.ReviewCommentVO">
+		INSERT INTO reviewcomment (commentid,reviewid,reviewcomment, commentdate)
+		VALUES (reviewcomment_commentid.NEXTVAL,#{reviewid},#{reviewcomment},sysdate)
+	</insert>
+
+	<delete id="deleteReviewComment" >
+		DELETE FROM reviewcomment WHERE commentid = #{commentid}
+	</delete>
+</mapper>

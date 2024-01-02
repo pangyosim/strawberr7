@@ -1,0 +1,23 @@
+
+
+select * from tab;
+drop table account PURGE;
+
+
+--account table 생성
+create table account(
+seq number(30) not null,
+name varchar2(30) not null,
+bank varchar2(100) not null,
+account varchar(20) PRIMARY key
+);
+commit;
+
+--account 시퀀스 생성
+CREATE SEQUENCE account_seq
+START WITH 1
+INCREMENT BY 1;
+
+DROP SEQUENCE account_seq;
+select * from account;
+drop table account purge;

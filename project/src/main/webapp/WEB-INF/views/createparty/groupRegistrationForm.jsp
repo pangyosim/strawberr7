@@ -24,6 +24,7 @@
 			<p>- 출금 신청 시 입력 된 계좌로 출금되며, (사이트명)에서 인증 된 실명과 다를 경우 출금이 안됩니다.</p>
 			<p>- (사이트명) 통신판매 중개자이며, 통신판매 당사자가 아닙니다.</p>
 			<input type="checkbox" id="" name="" value="동의"> 서비스 제공자의 가입약관과 상기 정보제공에 동의합니다.
+			<input type="button" value="들어가기" onclick="location.href='groupInsert'"/>
 		</div>
 	</form>
 </body>

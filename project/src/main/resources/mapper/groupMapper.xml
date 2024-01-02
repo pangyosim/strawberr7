@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.dao.GroupMapper">
+	<insert id="groupInsert"> INSERT INTO partytable
+		VALUES(partytable_seq.nextval,#{service},#{title},1,#{peoplecnt_max},#{userid},#{userpw},#{partykingid},#{partyday},#{price},SYSDATE,ADD_MONTHS(SYSDATE,#{partyday})) 
+	</insert>
+	
+  	<!-- 파티 수정하기 -->
+  	<select id="getGroupById" resultType="com.web.vo.GroupVO">
+        SELECT * FROM partytable WHERE partykingid = #{partykingid}
+    </select>
+  	
+  	<update id="groupUpdate" parameterType="com.web.vo.GroupVO">
+  		UPDATE partytable set
+  		service=#{service},title=#{title},peoplecnt=#{peoplecnt},userid=#{userid},userpw=#{userpw},partyday=#{partyday},price=#{price},SYSDATE
+  		WHERE groupid = #{groupid}
+  	</update>
+  	
+  	<!-- 파티게시글 목록 -->
+  	<select id="getGroupList" resultType="com.web.vo.GroupVO">
+  		SELECT * FROM partytable
+  	</select>
+ 	
+ 	<!-- 방장리스트 -->
+ 	<select id="MyKingList" resultType="com.web.vo.GroupVO">
+ 		SELECT * FROM partytable where partykingid=#{partykingid}
+ 	</select>
+ 	<!-- 참여리스트 -->
+ 	<select id="JoinList" resultType="com.web.vo.GroupVO">
+	 	SELECT * FROM partytable WHERE seq=#{seq}
+ 	</select>
+ 	
+ 	<delete id="partyDelete">
+		DELETE FROM partytable WHERE partykingid=#{partykingid} and seq=#{seq} and peoplecnt=1
+	</delete>
+	
+	<delete id="partyAllDelete">
+		DELETE FROM partytable WHERE partykingid=#{partykingid} and peoplecnt=1
+	</delete>
+	
+	<!-- 더보기검색기능 -->
+ 	<select id="searchAll" resultType="com.web.vo.GroupVO" parameterType="String">
+		SELECT * FROM partytable WHERE title LIKE '%' || #{keyword} || '%'
+	</select>
+	
+	<select id="searchByService" resultType="com.web.vo.GroupVO" parameterType="com.web.vo.GroupVO">
+	    SELECT * FROM partytable WHERE title LIKE '%' || #{keyword} || '%' and service = #{service}
+	</select>
+</mapper>

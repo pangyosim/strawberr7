@@ -1,70 +1,404 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>MAIN</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="resources/css/styles.css" rel="stylesheet" />
-    </head>
-    <body id="page-top">
-    	<c:import url="header.jsp"/>
-        <!-- Masthead-->
-        <header class="masthead">
-            <div class="container">
-            
-            </div>
-        </header>
-        <!-- Services-->
-        <div class="services" style="text-align: center;">
-	      	<h2> 서비스</h2>
-			<input type="button" value="파티만들기" onclick="location.href='groupJoinForm'"/> &nbsp; &nbsp; <input type="button" value="파티찾기" onclick="document.getElementById('party-input').focus()"/>
-			<br/>
-   		</div>
-		<br/>
-        <!-- Party list-->
-        <section class="page-section bg-light" id="portfolio">
-                <div class="party-list" style="text-align: center;">
-                	<input type="hidden" id="party-input"/>
-                    <h2>파티 리스트</h2>
-                    <img src="data:image/png;base64,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" onclick="location.href='partydetail'"/>
-                    <c:forEach var="#" items="#">
-                    </c:forEach>
-                </div>
-        </section>
-       
-        <!-- Team-->
-        <section class="page-section bg-light" id="team">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="team-member">
-                            <h4>Parveen Anand</h4>
-                            <p class="text-muted">Lead Designer</p>
-                        </div>
-                    </div>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8" />
+<title>MAIN</title>
 
-                </div>
-                <div class="row">
-                    <div class="col-lg-8 mx-auto text-center"><p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p></div>
-                </div>
-            </div>
-        </section>
-        <c:import url="footer.jsp"></c:import>
-    </body>
+<!-- 페이징 -->
+	<style type="text/css">
+    #slider-container {
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    #slider-content {
+        display: inline-block;
+        transition: transform 0.5s ease;
+    }
+
+    .slide {
+	width: 150px; 
+	height: 300px;
+	margin-right: 10px;
+	display: inline-block;
+	background-color: white;
+	text-align: center;
+	line-height: 10px;
+    }
+    .slider-button {
+        margin-top:10px;
+        position: absolute;
+        top: 40%;
+        transform: translateY(-50%);
+        font-size: 18px;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        background-color: #87CEFA;
+        border-radius: 25px; /* 둥근 모양을 위해 추가한 속성 */
+    }
+
+	#prev-button {
+	    left: 10px;
+	}
+	
+	#next-button {
+	    right: 10px;
+	}
+	</style>
+<style type="text/css">
+.searchBar{
+	position: relative;
+	width: 200px;
+	height: 30px;
+	margin: 10px auto;
+	padding: 5px;
+}
+.fa-magnifying-glass{
+	position: absolute;
+	top: 8px;
+	left: 12px;
+}
+.searchBar input{
+	position: absolute;
+	top: 3px;
+	left: 30px;
+	width: 150px;
+	border: none;
+	padding: 4px;
+}
+
+/* mypage */
+.hidden_menu {
+    position: relative;
+    display: inline-block;
+}
+
+.hidden_menu .submenu {
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+
+.hidden_menu:hover .submenu {
+    display: block;
+}
+.hidden_menu .submenu li {
+    clear: both;
+    width: 100%;
+}
+
+.hidden_menu .submenu li:hover {
+    background-color: #f1f1f1;
+}
+.hidden_menu .submenu a {
+    color: gray;
+    font-size: 12px;
+}
+
+/* 리스트로고 */
+#control {
+    width: 100%;
+    bottom: 20px;
+    text-align: center;
+    border-redius: 50px;
+    padding:10px;
+}
+
+#control a {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin: 0 4px;
+    position: relative;
+    color: white;
+}
+
+#control a img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#control a span {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    display: none;
+    white-space: nowrap;
+    background-color: black;
+    padding: 5px;
+    border-radius: 5px;
+    z-index:1;
+	}
+
+#control a:hover span {
+display: block; /* 마우스가 올라갔을 때 텍스트를 표시합니다. */
+}
+
+#control a.on {
+    background-color: black;
+}
+
+</style>
+
+<style>
+.slider_wrap .bx-wrapper {border:0; box-shadow:none; border-radius: 50px; box-shadow: 5px 5px 5px 5px gray inset;}
+.slider_wrap .bx-wrapper .bx-viewport{border-radius: 30px; margin: 0; overflow: visible; max-width: none; width: auto;}
+ul.tabs{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+ul.tabs li{
+	background: none;
+	color: #222;
+	display: inline-block;
+	padding: 10px 15px;
+	cursor: pointer;
+}
+
+ul.tabs li.current{
+	color: #222;
+}
+.tab-content{
+	display: none;
+	padding: 15px;
+}
+
+.tab-content.current{
+	display: inherit;
+}
+</style>
+	<!-- 페이징 -->
+<!-- Favicon-->
+<!-- <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+ --><!-- Font Awesome icons (free version)-->
+<!-- <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+ --><!-- Google fonts-->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="resources/css/styles.css" rel="stylesheet" />
+<!-- <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+ -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+ 
+</head>
+<body>
+	<c:import url="header.jsp" />
+	
+	<!-- TOP10 -->
+	<div class="slider_wrap" style=" margin: 120px 0; height: 600px;">
+<!-- 			<h1 style="text-align: center; font-family:sans-serif; font-weight: bold;">Top10</h1>
+-->			<ul class="tabs" style="margin-left: 42%;">
+				<li class="tab-link current" data-tab="tab-1" style="font-family: monospace; font-weight: bold; font-size: 15px; color: #e50a15;">Netflix Top10</li>
+				<li class="tab-link" data-tab="tab-2" style=" font-family: monospace; font-weight: bold; font-size: 15px; color: #f30958;">Watcha Top10</li>
+			</ul>
+			<div class="tab-content current" id="tab-1" style="margin: 40px 0;">
+				<div class="slider">
+					<c:forEach var="netflix" items="${netflix_list}">
+			        		<div><a href="${netflix.url }"><img src="${netflix.image }" style="width: 100%;"></a></div>
+			       	</c:forEach>
+				</div>
+			</div>
+			<div class="tab-content" id="tab-2" style="margin: 15px 0;">
+				<div class="slider-next">
+					<c:forEach var="whacha" items="${whacha_list}">
+			        		<div><a href="${whacha.url }"><img src="${whacha.image }" style="width: 100%;"></a></div>
+			       	</c:forEach>
+				</div>
+			</div>
+	</div>
+	<!-- TOP10 end -->
+	<script type="text/javascript">
+		$(document).ready(function(){
+			
+			$('ul.tabs li').click(function(){
+				var tab_id = $(this).attr('data-tab');
+	
+				$('ul.tabs li').removeClass('current');
+				$('.tab-content').removeClass('current');
+	
+				$(this).addClass('current');
+				$("#"+tab_id).addClass('current');
+				$(".slider-next").bxSlider({
+		         	 controls : true,
+		              mode: 'horizontal',
+		              auto: true,
+		              minSlides: 6,
+		              maxSlides: 6,
+		              moveSlides: 1,
+		              slideWidth: 3000,
+		              slideHeight: 300,
+		              speed: 230,
+		              pager: true
+		         });
+			})
+	
+		})
+	</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+	<script>
+      $(document).ready(function(){
+   	  	$(".slider").bxSlider({
+         	 controls : true,
+              mode: 'horizontal',
+              auto: true,
+              minSlides: 3,
+              maxSlides: 3,
+              moveSlides: 1,
+              slideWidth: 3000,
+              slideHeight: 800,
+              speed: 230,
+              pager: true
+         });
+      });
+    </script>
+   <!-- Services-->
+   <div class="services_wrap" style=" width: 75%; margin-left: 13%; " >
+    <div class="services_div" >
+    	<div style="margin-bottom: 10px;">
+   			<span><a style=" margin-left: 0px; font-family: monospace; font-size: 25px; font-weight: bold;"> &nbsp; &nbsp; 최근 만들어진 파티</a>
+   					<a href="groupview" style="text-decoration: none; color: gray; margin-left: 65%;">더보기 &#62;</a></span>
+   		</div>
+		<!-- 페이징 -->
+		<div style="float: left; width: 3%; height: 350px;">
+			<button type="button" tabindex="0" style="margin-top: 12vh; background-color:transparent; border: none; font-size: 50px; color: #d3d3d3;
+			" onclick="slidePrev()">&#60; &nbsp;</button>
+		</div>
+		<div style="float: right; width: 9%; height: 350px;">
+			<button type="button" tabindex="0" style="margin-top: 12vh; background-color:transparent; border: none; font-size: 50px; color: #d3d3d3;
+			" onclick="slideNext()">&#62;</button>
+		</div>
+		<div id="slider-container" style="width: 87%;">
+			<div id="slider-content">
+				<table>
+					<tbody>
+						<c:forEach var="group" items="${party}">
+							<c:if test="${group.peoplecnt < group.peoplecnt_max }">
+							<div class="slide" style="border: 1px solid #e9e9e9; border-radius: 10px; width: 200px; height: 350px; padding: 20px;" onclick="location.href='PartyList?seq=${group.seq}'">
+								<c:choose>
+									<c:when test="${group.service != null}">
+										<img
+											src="resources/assets/img/${group.service }.png"
+											style="width: 80px; height: 80px"
+											/>
+									</c:when>
+									<c:otherwise>
+										<img
+											src="https://developer.apple.com/wwdc23/hero/endframes/p3-startframe-large_2x.jpg"
+											style="width: 80px; height: 80px"
+											/>
+									</c:otherwise>
+								</c:choose>
+								<P style="font-family: monospace; font-weight: bold;">[${group.service}]</P>
+								<p style="font-family: monospace;">${group.peoplecnt}/${group.peoplecnt_max }명</p>
+								<p style="font-family: monospace;"><fmt:formatDate value="${group.partydate}" pattern="yyyy년 MM월"/>~</p>
+								<p style="font-family: monospace;"><fmt:formatDate value="${group.enddate }" pattern="yyyy년 MM월"/></p>
+								<p style="font-family: monospace;">${group.partyday}개월</p>
+							</div>
+							</c:if>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	</div>
+<!-- 메인리스트슬라이드 자바스크립트 -->
+<script type="text/javascript">
+	var slideIndex = 0;
+	var slideInterval = 7000; //7cho
+	var intervalId;
+
+	function showSlides() {
+		var i;
+		var slides = document.getElementById("pic").getElementsByTagName("div");
+		var dots = document.getElementById("control").getElementsByTagName("a");
+
+		for (i = 0; i < slides.length; i++) {
+			slides[i].style.display = "none";
+			dots[i].className = dots[i].className.replace(" on", "");
+		}
+
+		slideIndex++;
+
+		if (slideIndex > slides.length) {
+			slideIndex = 1;
+		}
+
+		slides[slideIndex - 1].style.display = "block";
+		dots[slideIndex - 1].className += " on";
+	}
+
+	function currentSlide(n) {
+		clearInterval(intervalId); 
+		slideIndex = n - 1;
+		showSlides();
+		intervalId = setInterval(showSlides, slideInterval); 
+	}
+	// 페이지 로드 시 슬라이드 시작
+	window.onload = function() {
+		intervalId = setInterval(showSlides, slideInterval);
+		currentSlide(1);
+	};
+
+	//로고글씨들
+	function showText(platform) {
+		var textElement = document.getElementById(platform.toLowerCase()
+				+ 'Text');
+		textElement.style.display = 'inline';
+	}
+
+	function hideText() {
+		var textElements = document.querySelectorAll('#control span');
+		textElements.forEach(function(element) {
+			element.style.display = 'none';
+		});
+
+	}
+</script>
+<!-- 페이징 -->
+<script>
+    var sliderContent = document.getElementById('slider-content');
+    var slideWidth = document.querySelector('.slide').offsetWidth;
+    var currentIndex = 0;
+
+    function slideNext() {
+        currentIndex = (currentIndex + 3) % sliderContent.children.length;
+        updateSlider();
+    }
+
+    function slidePrev() {
+        currentIndex = (currentIndex - 5 + sliderContent.children.length) % sliderContent.children.length;
+        updateSlider();
+    }
+
+    function updateSlider() {
+        var transformValue = -1 * currentIndex * slideWidth + 'px';
+        sliderContent.style.transform = 'translateX(' + transformValue + ')';
+    }
+    function startAutoSlide() {
+        intervalId = setInterval(slideNext, 5000);//5초
+    }
+
+    function stopAutoSlide() {
+        clearInterval(intervalId);
+    }
+
+    startAutoSlide();
+</script>
+<!-- 페이징 -->
+<c:import url="footer.jsp"></c:import>
+</body>
 </html>
