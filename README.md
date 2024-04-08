@@ -1,5 +1,5 @@
 
-> 프로젝트 URL : &nbsp; http://site.oyes.o-r.kr/
+> 프로젝트 URL : &nbsp; http://site.oyes.o-r.kr/ >> 배포준비중...
 ---
 # 1.&nbsp;프로젝트 개요
 
