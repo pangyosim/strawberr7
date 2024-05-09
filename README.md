@@ -1,6 +1,6 @@
 
-> 프로젝트 URL : &nbsp; http://site.oyes.o-r.kr/ >> 배포준비중...
----
+<!-- > 프로젝트 URL : &nbsp; http://site.oyes.o-r.kr/ >> 배포준비중...
+--- -->
 # 1.&nbsp;프로젝트 개요
 
 ### 1-1 프로젝트 기획 및 분석
@@ -8,7 +8,7 @@
 
 
 ### 1-2 프로젝트 개발환경 및 기술스택
-> ** apache-tomcat 9.0.84 | Spring Boot 4 (STS4) | Java 11 | Oracle DataBase 11g **
+> apache-tomcat 9.0.84 / Spring Boot 4 (STS4) / Java 11 / Oracle DataBase 11g
 
 ![](https://velog.velcdn.com/images/spg9468/post/1e69ca75-59c3-41ac-8f1a-7f55be5c4047/image.png)
 
@@ -49,8 +49,8 @@
 ### 3-2 Springboot Controller
 
 #### ✅ &nbsp; Mybatis-Config
-- ** SqlSessionFactory 생성 시 Reference로 DataSource Bean 수정 및 생성**
-```
+-  SqlSessionFactory 생성 시 Reference로 DataSource Bean 수정 및 생성
+```java
 package com.web.config;
 
 import javax.sql.DataSource;
@@ -97,8 +97,8 @@ public class MyBatisConfig {
 ```
 
 #### ✅ &nbsp; Interceptor-Config
-- ** 로그인 안되어있을 때 Interceptor로 접근 금지 URL 관리 **
-```
+- 로그인 안되어있을 때 Interceptor로 접근 금지 URL 관리
+```java
 package com.web.config;
 
 import org.springframework.context.annotation.Configuration;
@@ -129,7 +129,7 @@ public class WebConfig implements WebMvcConfigurer {
 
 ```
 - ** HandlerInterceptor 부분 **
-```
+```java
 package com.web.session;
 
 import javax.servlet.http.HttpServletRequest;
@@ -165,7 +165,7 @@ public class SessionCheckInterceptor implements HandlerInterceptor {
 
 #### ✅ &nbsp; TopService
 
-```
+```java
 package com.web.service;
 
 import java.io.IOException;
