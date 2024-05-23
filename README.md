@@ -128,7 +128,7 @@ public class WebConfig implements WebMvcConfigurer {
 }
 
 ```
-- ** HandlerInterceptor 부분 **
+- HandlerInterceptor 부분
 ```java
 package com.web.session;
 
